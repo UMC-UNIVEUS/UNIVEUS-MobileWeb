@@ -1,0 +1,36 @@
+:root {
+	// COLOR
+	--white-color: #ffffff;
+	--black-color: #020617;
+	--red-color: #fd6262;
+	--orange-color: #f1754d;
+	--yellow-color: #ffc727;
+	--skyblue-color: #599fff;
+	// 투명도 10% / 100%
+	--blue-color: #6e7dff;
+	--deep-blue-color: #2f3db8;
+	--white-gray-color: #e2e8f0;
+	--light-gray-color: #cbd5e1;
+	--gray-color: #64748b;
+	--deep-gray-color: #334155;
+
+	// BOLD
+	--regular-bold: 400;
+	--medium-bold: 500;
+	--semi-bold: 600;
+	--bold: 700;
+
+	// SIZE
+	--tiny-font: 10px;
+	--small-font: 12px;
+	--default-font: 14px;
+	--medium-font: 16px;
+	--large-font: 24px;
+}
+
+.App {
+	font-size: var(--default-font);
+	font-weight: var(--regular-bold);
+	font-family: 'Pretendard';
+	margin: 0 20px;
+}
