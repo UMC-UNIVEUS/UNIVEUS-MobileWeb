@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Modal from './Modal';
+import Button from './Button';
 
 export default function ModalTest() {
 	// modal창 여닫기
@@ -8,9 +9,8 @@ export default function ModalTest() {
 	const closeModal = () => setIsModalOpen(false);
 	return (
 		<>
-			<button className="secession-btn" onClick={openModal}>
-				모달 오픈 버튼
-			</button>
+			<Button className="secession-btn" onClick={openModal} content={'모달 오픈'} />
+
 			<Modal
 				isOpen={isModalOpen}
 				closeModal={closeModal}

@@ -1,24 +1,31 @@
-import './NavBar.scss';
+// a 링크 사용시 나타나는 줄 거슬려서 잠깐 작성한 코드(react-router-dom 사용하면서 제거하기)
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
-import Home from '../assets/images/earth.svg';
-import Search from '../assets/images/search.svg';
-import MyPage from '../assets/images/person.svg';
+import './NavBar.scss';
+import { ReactComponent as Home } from '../assets/images/earth.svg';
+import { ReactComponent as Search } from '../assets/images/rocket.svg';
+import { ReactComponent as MyPage } from '../assets/images/person.svg';
+// import { Link } from 'react-router-dom';
+
+// 나중에 react-router-dom으로 연결
 
 export default function NavBar() {
 	return (
 		<div className="nav-bar">
-			<div className="nb-home">
-				<img className="nb-btn-img" src={Home} alt="홈 버튼 이미지" />
+			<a className="nb-link nb-home" href="#">
+				<Home className="nb-btn-img" />
 				<span className="nb-btn-text">홈</span>
-			</div>
-			<div className="nb-search">
-				<img className="nb-btn-img" src={Search} alt="검색 버튼 이미지" />
+			</a>
+			<a className="nb-link nb-search" href="#">
+				<Search className="nb-btn-img" />
+				{/* <img className="nb-btn-img" src={Search} alt="검색 버튼 이미지" /> */}
 				<span className="nb-btn-text">검색</span>
-			</div>
-			<div className="nb-mypage">
-				<img className="nb-btn-img" src={MyPage} alt="마이페이지 버튼 이미지" />
+			</a>
+			<a className="nb-link nb-mypage" href="#">
+				<MyPage className="nb-btn-img" />
+				{/* <img className="nb-btn-img" src={MyPage} alt="마이페이지 버튼 이미지" /> */}
 				<span className="nb-btn-text">마이페이지</span>
-			</div>
+			</a>
 		</div>
 	);
 }

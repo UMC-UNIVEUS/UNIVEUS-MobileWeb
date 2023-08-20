@@ -1,14 +1,14 @@
 import { Reset } from 'styled-reset';
-import ModalTest from './components/ModalTest';
-import Button from './components/Button';
 import './App.scss';
+import Test from './pages/Test';
+import NavBar from './components/NavBar';
 
 function App() {
 	return (
 		<div className="App">
 			<Reset />
-			<ModalTest />
-			<Button type={'floating'} content={'스터디'} />
+			<Test />
+			<NavBar />
 		</div>
 	);
 }

@@ -1,0 +1,46 @@
+.nav-bar {
+	position: fixed;
+	width: 100%;
+	height: 51px;
+	bottom: 0;
+	background-color: var(--white-color);
+	font-weight: 400;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	.nb-link {
+		text-decoration: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		&:visited {
+			.nb-btn-text {
+				color: var(--light-gray-color);
+			}
+		}
+		&:hover,
+		:active {
+			.nb-btn-img {
+				path {
+					fill: #334155;
+				}
+			}
+			.nb-btn-text {
+				color: #334155;
+			}
+		}
+		.nb-btn-img {
+			// filter: invert(89%) sepia(18%) saturate(147%) hue-rotate(173deg) brightness(95%) contrast(88%);
+			path {
+				fill: var(--light-gray-color);
+			}
+			width: 26px;
+			height: 26px;
+		}
+		.nb-btn-text {
+			color: var(--light-gray-color);
+			font-size: var(--small-font);
+		}
+	}
+}
