@@ -1,5 +1,6 @@
 import { Reset } from 'styled-reset';
 import ModalTest from './components/ModalTest';
+import Button from './components/Button';
 import './App.scss';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 		<div className="App">
 			<Reset />
 			<ModalTest />
+			<Button type={'floating'} content={'스터디'} />
 		</div>
 	);
 }
