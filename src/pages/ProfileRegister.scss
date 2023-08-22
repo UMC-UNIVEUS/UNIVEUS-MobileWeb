@@ -1,0 +1,61 @@
+.ProfileRegister {
+    .profileregisterbody {
+        margin: 0 20px;
+        padding-top: 52px;
+        .inputtitle {
+            font-size: var(--default-font);
+            font-weight: var(--medium-bold);
+            margin-bottom: 7px;
+        }
+        .inputcontainer {
+            display: flex;
+            flex-direction: row;
+        }
+        .nicknameinputcontainer {
+            margin-top: 38px;
+            .nicknameinput {
+                width: 198px;
+                height: 32px;
+                border: 2px solid var(--light-gray-color);
+                border-radius: 5px;
+                font-size: 14px;
+                touch-action: manipulation;
+                padding: 0;
+                padding-left: 12px;
+                margin-right: 9px;
+            }
+            .overlapresulttext {
+                height: 14px;
+                padding-left: 2px;
+                margin-top: 8px;
+                font-size: var(--small-font);
+            }
+        }
+        .genderinputcontainer {
+            margin-top: 23px;
+            .checkboxcontainer {
+                display: flex;
+                flex-direction: row;
+                margin-top: 12px;
+                .malecheckbox {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-right: 25px;
+                    column-gap: 8px;
+                }
+                .femalecheckbox {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    column-gap: 8px;
+                }
+                .gendertype {
+                    font-size: var(--medium-font);
+                    font-weight: var(--regular-bold);
+                    color: var(--gray-color);
+                }
+            }
+        }
+    }
+}
