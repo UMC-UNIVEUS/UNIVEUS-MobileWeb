@@ -53,6 +53,7 @@ const ProfileRegister = () => {
         setClassof(e.target.value);
     };
 
+    // 헤더에 액세스 토큰 추가하는 부분 추후 구현 필요
     const handleClickStartButton = () => {
         axios({
             method: "post",
