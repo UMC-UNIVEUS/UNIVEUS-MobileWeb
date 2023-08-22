@@ -57,7 +57,7 @@ const Verification = () => {
 
     return (
         <div className="Verification">
-            <SubHeader headertext={'프로필 등록'}/>
+            <SubHeader headertext={'본인인증'}/>
 			<div className="verificationbody">
                 <div className="verifytext">
                     <p className="verifytitletext">휴대폰 본인인증</p>
