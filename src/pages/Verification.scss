@@ -1,0 +1,66 @@
+.Verification {
+    .verificationbody {
+        margin: 0 20px;
+        padding-top: 52px;
+        .verifytext {
+            margin-top: 49px;
+            .verifytitletext {
+                font-size: var(--large-font);
+                font-weight: var(--semi-bold);
+            }
+            .verifysubtext {
+                margin-top: 9px;
+                font-size: var(--default-font);
+                font-weight: var(--regular-bold);
+                color: var(--gray-color);
+                line-height: 17px;
+            }
+        }
+        .inputtitle {
+            font-size: var(--default-font);
+            font-weight: var(--medium-bold);
+            margin-bottom: 7px;
+        }
+        .inputcontainer {
+            display: flex;
+            flex-direction: row;
+        }
+        .phonenuminputcontainer {
+            margin-top: 50px;
+            .phonenuminput {
+                width: 198px;
+                height: 32px;
+                border: 2px solid var(--light-gray-color);
+                border-radius: 5px;
+                font-size: 14px;
+                touch-action: manipulation;
+                padding: 0;
+                padding-left: 12px;
+                margin-right: 9px;
+            }
+        }
+        .verifyinputcontainer {
+            margin-top: 25px;
+            .verifyinput {
+                width: 198px;
+                height: 32px;
+                border: 2px solid var(--light-gray-color);
+                border-radius: 5px;
+                font-size: 14px;
+                touch-action: manipulation;
+                padding: 0;
+                padding-left: 12px;
+                margin-right: 9px;
+            }
+            .verifyresulttext {
+                height: 14px;
+                padding-left: 2px;
+                margin-top: 8px;
+                font-size: var(--small-font);
+            }
+        }
+        .nextbutton {
+            margin-top: 150px;
+        }
+    }
+}
