@@ -3,7 +3,7 @@ import { SubHeader } from '../components/Header'
 
 import { ReactComponent as GoogleIcon } from '../assets/images/google.svg';
 
-import {GoogleLogin, useGoogleLogin} from "@react-oauth/google";
+import {useGoogleLogin} from "@react-oauth/google";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import { clientId } from '../utils/GoogleLoginData';
 
