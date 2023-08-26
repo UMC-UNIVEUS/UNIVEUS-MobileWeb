@@ -3,7 +3,19 @@ import { SubHeader } from '../components/Header'
 
 import { ReactComponent as GoogleIcon } from '../assets/images/google.svg';
 
+import {GoogleLogin, useGoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthProvider} from "@react-oauth/google";
+import { clientId } from '../utils/GoogleLoginData';
+
 const LandingPage = () => {
+
+    const googleSocialLogin = useGoogleLogin({
+        onSuccess: (codeResponse) => console.log(codeResponse),
+        flow: 'auth-code',
+    });
+
+    // 서버에 인가 코드 보내는 부분 구현 필요
+
     return (
         <div className="LandingPage">
             <SubHeader headertext={"회원가입•간편로그인"}/>
@@ -29,10 +41,12 @@ const LandingPage = () => {
                     <p className='titletext'>우리 학교 <span style={{color: 'var(--deep-blue-color)', fontWeight: 'var(--bold)'}}>MATE</span>가 필요할 때</p>
                     <p className='univeustext'>UNIVE.US</p>
                 </div>
-                <div className='loginbutton'>
-                    <GoogleIcon className='googleicon'/>
-                    <p>구글 소셜로그인</p>
-                </div>
+                <GoogleOAuthProvider clientId={clientId} className='googlelogin'>
+                    <div className='loginbutton' onClick={googleSocialLogin}>
+                        <GoogleIcon className='googleicon'/>
+                        <p>구글 소셜로그인</p>
+                    </div>
+                </GoogleOAuthProvider>
             </div>
         </div>
     )
