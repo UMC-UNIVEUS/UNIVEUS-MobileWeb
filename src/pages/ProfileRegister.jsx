@@ -2,6 +2,7 @@ import Button from "../components/Button";
 import { SubHeader } from "../components/Header";
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import '../pages/ProfileRegister.scss';
 
@@ -53,18 +54,25 @@ const ProfileRegister = () => {
         setClassof(e.target.value);
     };
 
-    // 헤더에 액세스 토큰 추가하는 부분 추후 구현 필요
+    const jwtToken = useSelector(state => state.jwtToken);
+
+    // 헤더에 액세스 토큰 추가하는 부분 구현
     const handleClickStartButton = () => {
         axios({
+            headers: {
+                "x-access-token": jwtToken
+            },
             method: "post",
             url: "https://univeus.site/user/start/univeus",
-            data: { 
+            data: {
+                "phone" : "01045323490", 
                 "nickname" : nickname,
-                "gender" : gender, // 1 : man 2: woman
+                "gender" : gender, // 1 : man 2 : woman
                 "major" : major,
                 "studentId" : classof
             },
         }).then((res) => {
+            console.log(jwtToken);
             console.log(res);
         });
     }
