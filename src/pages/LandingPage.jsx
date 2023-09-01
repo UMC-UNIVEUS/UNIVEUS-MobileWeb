@@ -1,56 +1,52 @@
 import '../pages/LandingPage.scss';
 import { SubHeader } from '../components/Header'
-
 import { ReactComponent as GoogleIcon } from '../assets/images/google.svg';
-
-import {useGoogleLogin} from "@react-oauth/google";
-
-import { useDispatch } from 'react-redux';
 
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const LandingPage = () => {
 
     const navigate = useNavigate();
-    
+
+    const [accessToken, setAccessToken] = useState("");
 
     // 소셜로그인 코드
 
-    const googleSocialLogin = useGoogleLogin({
-        onSuccess: (codeResponse) => {
+    useEffect(() => {
+        const parsedHash = new URLSearchParams(window.location.hash.substring(1));
+        const access_Token = parsedHash.get("access_token");
+        setAccessToken(access_Token);
+        if (accessToken !== null) {
             axios({
-                method: "post",
-                url: "https://univeus.site/user/nickname/login",
-                data: { 
-                    accessToken: codeResponse.code
-                },
-            })
-            .then(function (response) {
+                method: 'post',
+                url: 'https://univeus.site/user/login',
+                data: {
+                    accessToken: accessToken
+                }
+            }).then((response) => {
                 console.log(response);
-                if (response.isSuccess === true) {
-                    dispatch(updateToken(response.result.accessToken));
+                if (response.data.isSuccess === true) {
+                    sessionStorage.setItem('accessToken', response.data.result.accessToken);
+                    console.log("case 1");
+                    navigate('/home');
+                } else if (response.data.code === 2009) {
+                    sessionStorage.setItem('accessToken', response.data.result.accessToken);
                     navigate('/verification');
                 }
             })
-        },
-        flow: 'auth-code',
-    });
+        }
+    }, [accessToken]);
 
-    // const googleSocialLogin = useGoogleLogin({
-    //     onSuccess: (codeResponse) => console.log(codeResponse),
-    //     flow: 'auth-code'
-    // });
-
-    const updateToken = (jwtToken) => {
-        return {
-          type: 'UPDATE_TOKEN',
-          jwtToken
-        };
+    const googleSocialLogin = () => {
+        window.location.href ="https://accounts.google.com/o/oauth2/auth?" +
+        "client_id=504260283020-p48do7rb07ciu16pfek4c768mmug0khi.apps.googleusercontent.com&"+
+        "redirect_uri=http://localhost:3000/&"+
+        "response_type=token&"+
+        "scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
     };
-
-    const dispatch = useDispatch();
 
     return (
         <div className="LandingPage">
@@ -77,10 +73,10 @@ const LandingPage = () => {
                     <p className='titletext'>우리 학교 <span style={{color: 'var(--deep-blue-color)', fontWeight: 'var(--bold)'}}>MATE</span>가 필요할 때</p>
                     <p className='univeustext'>UNIVE.US</p>
                 </div>
-                    <div className='loginbutton' onClick={googleSocialLogin}>
-                        <GoogleIcon className='googleicon'/>
-                        <p>구글 소셜로그인</p>
-                    </div>
+                <div className='loginbutton' onClick={googleSocialLogin}>
+                    <GoogleIcon className='googleicon'/>
+                    <p>구글 소셜로그인</p>
+                </div>
             </div>
         </div>
     )
