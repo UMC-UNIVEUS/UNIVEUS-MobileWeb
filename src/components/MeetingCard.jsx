@@ -8,28 +8,28 @@ import DefaultProfileImg from '../assets/images/default_profile.svg';
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
 
-const MeetingCard = ({ meetingimg, gender, partnergender, nowpeople, limitpeople, profileimg, meetingtitle, meetingtime, meetingplace }) => {
+const MeetingCard = ({ main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location }) => {
 
     const maxLength = 26;
-    const truncatedTitle = meetingtitle.length > maxLength ? meetingtitle.substring(0, maxLength) + '...' : meetingtitle;
+    const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
     return (
         <div className="MeetingCard">
             <div className='profileimage' style={{border: `1px solid var(${borderColor})`}}>
-                {profileimg ? 
-                <img src={profileimg} alt="" className='userprofileimage'/> :
+                {profile_img ? 
+                <img src={profile_img} alt="" className='userprofileimage'/> :
                 <img src={DefaultProfileImg} alt="" className='defaultprofileimage'/>
                 }
             </div>
             <div className='meetingcardimagecontainer'>
-                <img src={meetingimg} alt="" className='meetingimage'/>
-                {partnergender === 1 ? <GenderSticker img={MaleIcon} color={'--purple-color'}/>
-                : partnergender === 2 ? <GenderSticker img={FemaleIcon} color={'--pink-color'}/>
+                <img src={main_img} alt="" className='meetingimage'/>
+                {limit_gender === 1 ? <GenderSticker img={MaleIcon} color={'--purple-color'}/>
+                : limit_gender === 2 ? <GenderSticker img={FemaleIcon} color={'--pink-color'}/>
                 : <></>}
                 <div className='participant'>
                     <img src={PeopleIcon} alt="" className='peopleicon' />
-                    <p>{nowpeople}/{limitpeople}</p>
+                    <p>{current_people}/{limit_people}</p>
                 </div>
             </div>
             <div className='meetingcardinfocontainer'>
@@ -37,11 +37,11 @@ const MeetingCard = ({ meetingimg, gender, partnergender, nowpeople, limitpeople
                 <div className='meetinginfo'>
                     <div className='meetingtime'>
                         <Calendar />
-                        <p className='infotext'>{meetingtime}</p>
+                        <p className='infotext'>{meeting_date}</p>
                     </div>
                     <div className='meetingplace'>
                         <Map />
-                        <p className='infotext'>{meetingplace}</p>
+                        <p className='infotext'>{location}</p>
                     </div>
                 </div>
             </div>
