@@ -56,7 +56,7 @@ export default function CreateDetail() {
 						<input type="text" placeholder="모임 할 장소를 정해 주세요" />
 					</div>
 					<div className="cd-contact">
-						<div className="cc-title"></div>
+						<div className="cc-title">연락 수단</div>
 						<input type="text" placeholder="오픈채팅방을 개설한 뒤 링크를 붙여넣어 주세요" />
 					</div>
 				</div>
