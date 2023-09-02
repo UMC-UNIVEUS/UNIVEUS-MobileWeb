@@ -9,7 +9,7 @@ import '../pages/Verification.scss'
 
 const Verification = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [isVerified, setIsVerified] = useState(0); // 초기 상태 0, 인증 성공 1, 인증 실패 2
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -52,8 +52,8 @@ const Verification = () => {
     };
 
     const handleClickNextButton = () => {
-        // navigate('')
-    }    
+        navigate('/register');
+    };
 
     return (
         <div className="Verification">
