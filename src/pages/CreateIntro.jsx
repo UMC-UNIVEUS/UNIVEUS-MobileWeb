@@ -5,9 +5,22 @@ import NavBar from '../components/NavBar';
 import DeleteBtn from '../assets/images/delete.svg';
 import PlusBtn from '../assets/images/plus.svg';
 import axios from 'axios';
-import { useState, useSelector } from 'react';
+import { useState, useSelector, useRef } from 'react';
 
 export default function CreateIntro() {
+	const [imgFile, setImgFile] = useState('');
+	const imgRef = useRef();
+
+	// 이미지 업로드 input의 onChange
+	const saveImgFile = () => {
+		const file = imgRef.current.files[0];
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setImgFile(reader.result);
+		};
+	};
+
 	// const jwtToken = useSelector((state) => state.jwtToken);
 
 	// const handlePosting = () => {
@@ -61,19 +74,58 @@ export default function CreateIntro() {
 					<div className="ciu-title">이미지</div>
 					{/* 이미지들을 배열로 담아서 배열[0], 배열[1] 로 출력하기 */}
 					<div className="ciu-img-group">
-						<div className="ciu-img rep">
-							{/* 업로드된 이미지가 있는가 ? 업로드된 이미지가 있다면 이미지와 삭제 버튼 추가 : 없다면 삭제버튼 안보이게, 플러스 버튼(디폴트)  */}
-							<img className="ciu-del" src={DeleteBtn} alt="삭제 버튼" />
-							<img src="https://src.hidoc.co.kr/image/lib/2022/5/12/1652337370806_0.jpg" alt="이미지1" />
+						{/* 업로드된 이미지가 있는가 ? 업로드된 이미지가 있다면 이미지와 삭제 버튼 추가 : 없다면 삭제버튼 안보이게, 플러스 버튼(디폴트)  */}
+						<div className="ciu-img">
+							<label htmlFor="ciu-img-upload">
+								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지1" />
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								id="ciu-img-upload"
+								onChange={saveImgFile}
+								ref={imgRef}
+								style={{ display: 'none' }}
+							/>
 						</div>
 						<div className="ciu-img">
-							<img src={PlusBtn} alt="이미지 추가하기" />
+							<label htmlFor="ciu-img-upload">
+								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지2" />
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								id="ciu-img-upload"
+								onChange={saveImgFile}
+								ref={imgRef}
+								style={{ display: 'none' }}
+							/>
 						</div>
 						<div className="ciu-img">
-							<img src="" alt="이미지3" />
+							<label htmlFor="ciu-img-upload">
+								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지3" />
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								id="ciu-img-upload"
+								onChange={saveImgFile}
+								ref={imgRef}
+								style={{ display: 'none' }}
+							/>
 						</div>
 						<div className="ciu-img">
-							<img src="" alt="이미지4" />
+							<label htmlFor="ciu-img-upload">
+								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지4" />
+							</label>
+							<input
+								type="file"
+								accept="image/*"
+								id="ciu-img-upload"
+								onChange={saveImgFile}
+								ref={imgRef}
+								style={{ display: 'none' }}
+							/>
 						</div>
 					</div>
 				</div>
@@ -91,6 +143,12 @@ export default function CreateIntro() {
             - 자신의 경험 사항(프로젝트, 공모전, 대외활동 등)&#13;&#10;
             - 모임의 목표&#13;&#10;"
 					></textarea>
+				</div>
+				<div className="ci-friend-invite">
+					<div className="cfi-title">친구 초대</div>
+					{/* limitPeople의 갯수만큼 추가하기 */}
+					<input type="text" className="cfi-input" placeholder="친구의 닉네임을 입력해주세요" required />
+					<input type="text" className="cfi-input" placeholder="친구의 닉네임을 입력해주세요" required />
 				</div>
 				{/* {meetingDate !== '' &&
 				meetingTime !== '' &&

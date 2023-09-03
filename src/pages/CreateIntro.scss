@@ -43,6 +43,7 @@
 		}
 	}
 	.ci-img-upload {
+		margin-bottom: 27px;
 		.ciu-title {
 			font-weight: var(--bold);
 			margin-bottom: 8px;
@@ -55,11 +56,24 @@
 				height: 72px;
 				background-color: var(--white-purple-color);
 				border-radius: 20px;
-				img {
-					width: 72px;
-					height: 72px;
+				text-align: center;
+				margin: 0 auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+				.ciu-img-file {
+					width: 100%;
 					border-radius: 20px;
+					object-fit: cover;
+					// width: 22px;
+					// height: 22px;
 				}
+				// img {
+				// 	width: 72px;
+				// 	height: 72px;
+				// 	border-radius: 20px;
+				// }
 			}
 		}
 	}
@@ -77,6 +91,27 @@
 			height: 293px;
 			padding: 11px;
 			outline-color: var(--deep-blue-color);
+			&::placeholder {
+				color: #bfc3d4;
+			}
+		}
+	}
+	.ci-friend-invite {
+		display: flex;
+		flex-direction: column;
+		margin-top: 21px;
+		.cfi-title {
+			font-weight: var(--bold);
+			margin-bottom: 16px;
+		}
+		.cfi-input {
+			border-radius: 5px;
+			border: 2px solid var(--light-gray-color);
+			background: var(--white-color);
+			padding: 11px;
+			width: 94%;
+			outline-color: var(--deep-blue-color);
+			margin-bottom: 15px;
 			&::placeholder {
 				color: #bfc3d4;
 			}
