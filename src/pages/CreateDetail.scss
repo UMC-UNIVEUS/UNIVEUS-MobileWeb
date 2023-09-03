@@ -91,6 +91,7 @@
 					font-size: 14px;
 					font-weight: 400;
 					color: var(--black-color);
+					outline-color: var(--deep-blue-color);
 					&::before {
 						content: attr(date-placeholder);
 						color: #bfc3d4;
@@ -114,6 +115,7 @@
 					font-size: 14px;
 					font-weight: 400;
 					padding: 8px;
+					outline-color: var(--deep-blue-color);
 					&::before {
 						content: attr(date-placeholder);
 						color: #bfc3d4;
@@ -144,6 +146,7 @@
 				background: var(--white-color);
 				width: 85vw;
 				padding: 8px;
+				outline-color: var(--deep-blue-color);
 				&::placeholder {
 					color: #bfc3d4;
 				}
@@ -160,6 +163,7 @@
 				background: var(--white-color);
 				width: 85vw;
 				padding: 8px;
+				outline-color: var(--deep-blue-color);
 				&::placeholder {
 					color: #bfc3d4;
 				}
