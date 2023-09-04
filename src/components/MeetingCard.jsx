@@ -10,7 +10,7 @@ import { ReactComponent as Map } from '../assets/images/map.svg';
 
 const MeetingCard = ({ main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location }) => {
 
-    const maxLength = 26;
+    const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
