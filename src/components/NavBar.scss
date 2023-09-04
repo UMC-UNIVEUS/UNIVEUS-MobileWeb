@@ -7,14 +7,21 @@
 	font-weight: 400;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
 	z-index: 9999;
+	// justify-content: space-evenly;
+	justify-content: center;
 	.nb-link {
 		text-decoration: none;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		&.nb-home {
+			margin-right: 96px;
+		}
+		&.nb-search {
+			margin-right: 80px;
+		}
 		&:visited {
 			.nb-btn-text {
 				color: var(--light-gray-color);
