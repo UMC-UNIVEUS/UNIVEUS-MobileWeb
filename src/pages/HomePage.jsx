@@ -12,7 +12,9 @@ const HomePage = () => {
 
     const [meetingList, setMeetingList] = useState([]);
 
-    const jwtToken = sessionStorage.getItem('accessToken');
+    // const jwtToken = sessionStorage.getItem('accessToken');
+    const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODE1NTU4LCJleHAiOjE3MDI0NTU1NTgsImlzcyI6InVuaXZldXMifQ.ehV1pXMk7sEF1B5NYKROnMAUMqiM5oG-O3G2O3VP9U8";
+
 
     useEffect(() => {
         axios({
@@ -23,7 +25,6 @@ const HomePage = () => {
             url: 'https://univeus.site'
         })
         .then((response) => {
-            console.log(jwtToken);
             setMeetingList(response.data.result.postPageResult);
         })
         .catch(function (error) {
