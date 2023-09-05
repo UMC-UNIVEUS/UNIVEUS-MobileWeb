@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useState, useSelector, useRef } from 'react';
 
 export default function CreateIntro() {
-	const [imgFile, setImgFile] = useState('');
+	const [imgFile, setImgFile] = useState([]);
 	const imgRef = useRef();
 
 	// 이미지 업로드 input의 onChange
@@ -77,7 +77,7 @@ export default function CreateIntro() {
 						{/* 업로드된 이미지가 있는가 ? 업로드된 이미지가 있다면 이미지와 삭제 버튼 추가 : 없다면 삭제버튼 안보이게, 플러스 버튼(디폴트)  */}
 						<div className="ciu-img">
 							<label htmlFor="ciu-img-upload">
-								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지1" />
+								<img className="ciu-img-file" src={imgFile[0] ? imgFile : PlusBtn} alt="이미지1" />
 							</label>
 							<input
 								type="file"

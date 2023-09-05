@@ -10,7 +10,7 @@ export default function MyFeed() {
 	const [meetingList, setMeetingList] = useState([]);
 
 	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODE1NTU4LCJleHAiOjE3MDI0NTU1NTgsImlzcyI6InVuaXZldXMifQ.ehV1pXMk7sEF1B5NYKROnMAUMqiM5oG-O3G2O3VP9U8';
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODcyNzY0LCJleHAiOjE3MDI1MTI3NjQsImlzcyI6InVuaXZldXMifQ.gD56s72ZAYPtx670bLQbfeu0B6328STagBvJ50hDgbE';
 
 	useEffect(() => {
 		axios({
