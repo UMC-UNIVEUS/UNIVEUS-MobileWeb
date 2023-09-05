@@ -1,0 +1,28 @@
+.mf-feed {
+	margin-bottom: 70px;
+	.mf-body {
+		margin: 0 20px;
+		margin-top: 74px;
+		.mf-page {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			margin-bottom: 23px;
+			.page-tap {
+				display: inline-flex;
+				height: 27px;
+				flex-direction: column;
+				justify-content: flex-end;
+				align-items: center;
+				gap: 7px;
+				font-size: var(--medium-font);
+				font-weight: var(--medium-bold);
+				.page-hr {
+					background-color: var(--deep-blue-color);
+					height: 1px;
+					width: 45vw;
+				}
+			}
+		}
+	}
+}
