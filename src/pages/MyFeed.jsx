@@ -17,8 +17,8 @@ export default function MyFeed() {
 			headers: {
 				'x-access-token': jwtToken,
 			},
-			method: 'get',
-			url: 'https://univeus.site/mypage/profile/participate',
+			method: 'GET',
+			url: 'https://univeus.site/profile/participate',
 		})
 			.then((response) => {
 				setMeetingList(response.data.result);
@@ -53,9 +53,7 @@ export default function MyFeed() {
 					</div>
 				</div>
 				<div className="mf-card-list">
-					{meetingList.map((meeting) => (
-						<MeetingCard {...meeting} />
-					))}
+					{meetingList.length && meetingList.map((meeting) => <MeetingCard {...meeting} />)}
 				</div>
 			</div>
 			<NavBar />
