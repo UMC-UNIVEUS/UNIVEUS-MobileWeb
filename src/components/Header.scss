@@ -14,22 +14,19 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding-left: 25px;
-        .univeus {
-            font-size: 20px;
-            font-weight: var(--regular-bold);
-        }
-        .graybar {
-            width: 2px;
-            height: 18px;
-            margin-left: 3px;
-            margin-right: 4px;
-            background-color: var(--light-gray-color);
-        }
-        .kgu {
-            font-size: 20px;
-            font-weight: var(--semi-bold);
-            color: var(--deep-blue-color);
+        padding-left: 6px;
+        .headertext {
+            .univeus {
+                color: var(--purple-color);
+                font-size: var(--tiny-font);
+                font-weight: var(--bold);
+            }
+            .kgu {
+                margin-top: 3px;
+                font-size: 8px;
+                font-weight: var(--medium-bold);
+                color: var(--black-color);
+            }
         }
     }
     .header-right {

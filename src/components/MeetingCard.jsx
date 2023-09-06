@@ -4,6 +4,7 @@ import MaleIcon from '../assets/images/male.svg';
 import FemaleIcon from '../assets/images/female.svg';
 import PeopleIcon from '../assets/images/people_black.svg'
 import DefaultProfileImg from '../assets/images/default_profile.svg';
+import DefaultBackgroundImg from '../assets/images/default_image.png';
 
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
@@ -14,6 +15,8 @@ const MeetingCard = ({ main_img, gender, limit_gender, current_people, limit_peo
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
+    console.log(main_img);
+
     return (
         <div className="MeetingCard">
             <div className='profileimage' style={{border: `1px solid var(${borderColor})`}}>
@@ -23,7 +26,10 @@ const MeetingCard = ({ main_img, gender, limit_gender, current_people, limit_peo
                 }
             </div>
             <div className='meetingcardimagecontainer'>
+                {main_img === "0" ? 
+                <img src={DefaultBackgroundImg} alt="" className='meetingimage'/>:
                 <img src={main_img} alt="" className='meetingimage'/>
+                }
                 {limit_gender === 1 ? <GenderSticker img={MaleIcon} color={'--purple-color'}/>
                 : limit_gender === 2 ? <GenderSticker img={FemaleIcon} color={'--pink-color'}/>
                 : <></>}
