@@ -27,20 +27,20 @@ export default function CreateIntro() {
 
 	const handleInvitee = (e) => {
 		// setInvitee([...invitee, key, inviteeText]);
-		let temp = invitee.map((k) => {
-			if (k.inviteeRef === e.inviteeRef) {
-				return {
-					// setInvitee();
-				};
+		invitee.map((k) => {
+			if (k.key === e.key) {
+				console.log('yee');
+				return setInvitee(...k, { key: inviteeRef, value: inviteeText });
+			} else {
+				return k;
 			}
 		});
-		setInvitee(temp);
-		// setInvitee([{ inviteeRef, inviteeText }, ...invitee]);
+		setInvitee([{ key: inviteeRef, value: inviteeText }]);
 	};
 
 	const handleInviteeText = (e) => {
 		setInviteeText(e.target.value);
-		console.log(inviteeRef);
+		// console.log(inviteeRef);
 	};
 	console.log(invitee);
 
@@ -86,7 +86,7 @@ export default function CreateIntro() {
 				type: 'application/json',
 			})
 		);
-		console.log(formData);
+		// console.log(formData);
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
@@ -100,7 +100,8 @@ export default function CreateIntro() {
 		});
 	};
 	const createDetailData = JSON.parse(localStorage.getItem('watched'));
-	// console.log(createDetailData);
+	createDetailData['limit_people'] = 6;
+	// console.log((createDetailData['limit_people'] = 6));
 
 	// const jwtToken = useSelector((state) => state.jwtToken);
 
