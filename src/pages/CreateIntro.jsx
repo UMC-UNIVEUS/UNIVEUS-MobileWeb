@@ -15,7 +15,6 @@ export default function CreateIntro() {
 	const [content, setContent] = useState('');
 	const [invitee, setInvitee] = useState([]);
 	const [inviteeText, setInviteeText] = useState('');
-	const inviteeRef = useRef();
 
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
@@ -26,22 +25,13 @@ export default function CreateIntro() {
 	};
 
 	const handleInvitee = (e) => {
-		// setInvitee([...invitee, key, inviteeText]);
-		invitee.map((k) => {
-			if (k.key === e.key) {
-				console.log('yee');
-				return setInvitee(...k, { key: inviteeRef, value: inviteeText });
-			} else {
-				return k;
-			}
-		});
-		setInvitee([{ key: inviteeRef, value: inviteeText }]);
+		setInvitee({ ...invitee, [e.target.id]: inviteeText });
 	};
 
 	const handleInviteeText = (e) => {
 		setInviteeText(e.target.value);
-		// console.log(inviteeRef);
 	};
+	// console.log(Object.values(invitee));
 	console.log(invitee);
 
 	function repeatInvitee(limit_people) {
@@ -57,7 +47,6 @@ export default function CreateIntro() {
 					onChange={handleInviteeText}
 					onBlur={handleInvitee}
 					key={i}
-					ref={inviteeRef}
 				/>
 			);
 		}
@@ -80,12 +69,7 @@ export default function CreateIntro() {
 
 		//File 추가
 		//객체를 Json타입으로 파싱하여 Blob객체 생성, type에 json 타입 지정
-		formData.append(
-			'image',
-			new Blob([JSON.stringify(file)], {
-				type: 'application/json',
-			})
-		);
+		formData.append('image', file);
 		// console.log(formData);
 		axios({
 			headers: {
@@ -122,7 +106,7 @@ export default function CreateIntro() {
 				end_date: createDetailData['end_date'],
 				title: title,
 				content: content,
-				participant_userNickNames: invitee,
+				participant_userNickNames: Object.values(invitee),
 			},
 		}).then((res) => {
 			console.log(res);
