@@ -8,13 +8,14 @@ import axios from 'axios';
 import { useState, useSelector, useRef } from 'react';
 
 export default function CreateIntro() {
-	const [imgFile, setImgFile] = useState([]);
+	const [imgFile, setImgFile] = useState('');
 	const imgRef = useRef();
 
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [invitee, setInvitee] = useState([]);
 	const [inviteeText, setInviteeText] = useState('');
+	const inviteeRef = useRef();
 
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
@@ -25,23 +26,23 @@ export default function CreateIntro() {
 	};
 
 	const handleInvitee = (e) => {
-		setInvitee([...invitee, inviteeText]);
+		// setInvitee([...invitee, key, inviteeText]);
+		let temp = invitee.map((k) => {
+			if (k.inviteeRef === e.inviteeRef) {
+				return {
+					// setInvitee();
+				};
+			}
+		});
+		setInvitee(temp);
+		// setInvitee([{ inviteeRef, inviteeText }, ...invitee]);
 	};
-	console.log(invitee);
 
 	const handleInviteeText = (e) => {
 		setInviteeText(e.target.value);
+		console.log(inviteeRef);
 	};
-
-	// 이미지 업로드 input의 onChange
-	const saveImgFile = () => {
-		const file = imgRef.current.files[0];
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onloadend = () => {
-			setImgFile(reader.result);
-		};
-	};
+	console.log(invitee);
 
 	function repeatInvitee(limit_people) {
 		let arr = [];
@@ -50,45 +51,83 @@ export default function CreateIntro() {
 				<input
 					type="text"
 					className="cfi-input"
+					id={i}
 					placeholder="친구의 닉네임을 입력해주세요"
 					required
 					onChange={handleInviteeText}
 					onBlur={handleInvitee}
+					key={i}
+					ref={inviteeRef}
 				/>
 			);
 		}
 		return arr;
 	}
 
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODcyNzY0LCJleHAiOjE3MDI1MTI3NjQsImlzcyI6InVuaXZldXMifQ.gD56s72ZAYPtx670bLQbfeu0B6328STagBvJ50hDgbE';
+	// 이미지 업로드 input의 onChange
+	const saveImgFile = (e) => {
+		const file = imgRef.current.files[0];
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			setImgFile(reader.result);
+		};
+		e.preventDefault();
+		//FormData 객체선언
+		const formData = new FormData();
+
+		//File 추가
+		//객체를 Json타입으로 파싱하여 Blob객체 생성, type에 json 타입 지정
+		formData.append(
+			'image',
+			new Blob([JSON.stringify(file)], {
+				type: 'application/json',
+			})
+		);
+		console.log(formData);
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+				'Content-Type': 'multipart/form-data',
+			},
+			method: 'post',
+			url: 'https://univeus.site/post/image/upload',
+			data: formData,
+		}).then((res) => {
+			console.log(res);
+		});
+	};
 	const createDetailData = JSON.parse(localStorage.getItem('watched'));
 	// console.log(createDetailData);
 
 	// const jwtToken = useSelector((state) => state.jwtToken);
 
-	// const handlePosting = () => {
-	// 	axios({
-	// 		headers: {
-	// 			'x-access-token': jwtToken,
-	// 		},
-	// 		method: 'post',
-	// 		url: 'https://univeus.site/post',
-	// 		data: {
-	// 			category: createDetailData['category'],
-	// 			limit_people: createDetailData['limit_people'],
-	// 			limit_gender: createDetailData['limit_gender'],
-	// 			location: createDetailData['location'],
-	// 			meeting_date: createDetailData['meeting_date'],
-	// 			openchat: createDetailData['openchat'],
-	// 			end_date: createDetailData['end_date'],
-	// 			title: title,
-	// 			content: content,
-	// 			participant_userNickNames: invitee,
-	// 		},
-	// 	}).then((res) => {
-	// 		console.log(res);
-	// 		console.log(jwtToken);
-	// 	});
-	// };
+	const handlePosting = () => {
+		axios({
+			// headers: {
+			// 	'x-access-token': jwtToken,
+			// },
+			method: 'post',
+			url: 'https://univeus.site/post',
+			data: {
+				category: createDetailData['category'],
+				limit_people: createDetailData['limit_people'],
+				limit_gender: createDetailData['limit_gender'],
+				location: createDetailData['location'],
+				meeting_date: createDetailData['meeting_date'],
+				openchat: createDetailData['openchat'],
+				end_date: createDetailData['end_date'],
+				title: title,
+				content: content,
+				participant_userNickNames: invitee,
+			},
+		}).then((res) => {
+			console.log(res);
+			// console.log(jwtToken);
+		});
+	};
 	return (
 		<div className="create-intro">
 			<SubHeader headertext={'유니버스 생성'} />
@@ -132,7 +171,7 @@ export default function CreateIntro() {
 								style={{ display: 'none' }}
 							/>
 						</div>
-						<div className="ciu-img">
+						{/* <div className="ciu-img">
 							<label htmlFor="ciu-img-upload">
 								<img className="ciu-img-file" src={imgFile ? imgFile : PlusBtn} alt="이미지2" />
 							</label>
@@ -170,7 +209,7 @@ export default function CreateIntro() {
 								ref={imgRef}
 								style={{ display: 'none' }}
 							/>
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className="ci-content">
