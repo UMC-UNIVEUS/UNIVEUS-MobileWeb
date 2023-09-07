@@ -10,8 +10,8 @@ export default function Test() {
 			{/* <ModalTest />
 			<Button type={'floating'} content={'스터디'} /> */}
 			{/* <CreateDetail /> */}
-			{/* <CreateIntro /> */}
-			<MyFeed />
+			<CreateIntro />
+			{/* <MyFeed /> */}
 		</div>
 	);
 }

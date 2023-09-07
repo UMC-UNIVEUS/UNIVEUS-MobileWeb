@@ -11,6 +11,28 @@ export default function CreateIntro() {
 	const [imgFile, setImgFile] = useState([]);
 	const imgRef = useRef();
 
+	const [title, setTitle] = useState('');
+	const [content, setContent] = useState('');
+	const [invitee, setInvitee] = useState([]);
+	const [inviteeText, setInviteeText] = useState('');
+
+	const handleTitle = (e) => {
+		setTitle(e.target.value);
+	};
+
+	const handleContent = (e) => {
+		setContent(e.target.value);
+	};
+
+	const handleInvitee = (e) => {
+		setInvitee([...invitee, inviteeText]);
+	};
+	console.log(invitee);
+
+	const handleInviteeText = (e) => {
+		setInviteeText(e.target.value);
+	};
+
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = () => {
 		const file = imgRef.current.files[0];
@@ -20,6 +42,26 @@ export default function CreateIntro() {
 			setImgFile(reader.result);
 		};
 	};
+
+	function repeatInvitee(limit_people) {
+		let arr = [];
+		for (let i = 0; i < limit_people / 2 - 1; i++) {
+			arr.push(
+				<input
+					type="text"
+					className="cfi-input"
+					placeholder="친구의 닉네임을 입력해주세요"
+					required
+					onChange={handleInviteeText}
+					onBlur={handleInvitee}
+				/>
+			);
+		}
+		return arr;
+	}
+
+	const createDetailData = JSON.parse(localStorage.getItem('watched'));
+	// console.log(createDetailData);
 
 	// const jwtToken = useSelector((state) => state.jwtToken);
 
@@ -31,15 +73,16 @@ export default function CreateIntro() {
 	// 		method: 'post',
 	// 		url: 'https://univeus.site/post',
 	// 		data: {
-	// 			category: 4,
-	// 			limit_people: 6,
-	// 			limit_gender: 0,
-	// 			location: 'new',
-	// 			meeting_date: '1111-01-22 00:00:12',
-	// 			openchat: 'new',
-	// 			end_date: '1111-01-22 00:00:12',
-	// 			title: 'new',
-	// 			content: 'new',
+	// 			category: createDetailData['category'],
+	// 			limit_people: createDetailData['limit_people'],
+	// 			limit_gender: createDetailData['limit_gender'],
+	// 			location: createDetailData['location'],
+	// 			meeting_date: createDetailData['meeting_date'],
+	// 			openchat: createDetailData['openchat'],
+	// 			end_date: createDetailData['end_date'],
+	// 			title: title,
+	// 			content: content,
+	// 			participant_userNickNames: invitee,
 	// 		},
 	// 	}).then((res) => {
 	// 		console.log(res);
@@ -68,6 +111,7 @@ export default function CreateIntro() {
 						maxLength="48"
 						placeholder="센스있는 제목으로 이목을 끌어보아요 :)"
 						required
+						onChange={handleTitle}
 					/>
 				</div>
 				<div className="ci-img-upload">
@@ -142,13 +186,29 @@ export default function CreateIntro() {
             - 원하는 과, 단과대&#13;&#10;
             - 자신의 경험 사항(프로젝트, 공모전, 대외활동 등)&#13;&#10;
             - 모임의 목표&#13;&#10;"
+						onChange={handleContent}
 					></textarea>
 				</div>
 				<div className="ci-friend-invite">
 					<div className="cfi-title">친구 초대</div>
 					{/* limitPeople의 갯수만큼 추가하기 */}
-					<input type="text" className="cfi-input" placeholder="친구의 닉네임을 입력해주세요" required />
-					<input type="text" className="cfi-input" placeholder="친구의 닉네임을 입력해주세요" required />
+					{repeatInvitee(createDetailData['limit_people'])}
+					{/* <input
+						type="text"
+						className="cfi-input"
+						placeholder="친구의 닉네임을 입력해주세요"
+						required
+						onChange={handleInviteeText}
+						onBlur={handleInvitee}
+					/>
+					<input
+						type="text"
+						className="cfi-input"
+						placeholder="친구의 닉네임을 입력해주세요"
+						required
+						onChange={handleInviteeText}
+						onBlur={handleInvitee}
+					/> */}
 				</div>
 				{/* {meetingDate !== '' &&
 				meetingTime !== '' &&
