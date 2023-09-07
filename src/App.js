@@ -5,22 +5,23 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Verification from './pages/Verification';
 import ProfileRegister from './pages/ProfileRegister';
 import LandingPage from './pages/LandingPage';
-import SearchPage from './pages/SearchPage';
-
+// import SearchPage from './pages/SearchPage';
+import Test from './pages/Test';
 
 function App() {
 	return (
 		<div className="App">
-			<BrowserRouter>
+			{/* <BrowserRouter>
 				<Routes>
-					<Route path='/' element={<LandingPage />}/>
-					<Route path='/verification' element={<Verification />}/>
-					<Route path='/register' element={<ProfileRegister />}/>
-					<Route path='/home' element={<HomePage />}/>
+					<Route path="/" element={<LandingPage />} />
+					<Route path="/verification" element={<Verification />} />
+					<Route path="/register" element={<ProfileRegister />} />
+					<Route path="/home" element={<HomePage />} />
 					<Route path='/search' element={<SearchPage />}/>
 				</Routes>
-			</BrowserRouter>
+			</BrowserRouter> */}
 			<Reset />
+			<Test />
 		</div>
 	);
 }
