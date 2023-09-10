@@ -13,7 +13,7 @@ import test from '../assets/images/default_image.png'
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const PostPage = () => {
@@ -54,10 +54,22 @@ const PostPage = () => {
         Participant: []
     });
 
+    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
-  
+    const [isModalOpen2, setIsModalOpen2] = useState(false);
+    const [isModalOpen3, setIsModalOpen3] = useState(false);
+
+    const participantUserIds = postData ? postData.Participant.map(entry => entry.user_id) : [];
+
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
+    const openModal2 = () => setIsModalOpen2(true);
+    const closeModal2 = () => setIsModalOpen2(false);
+
+    const openModal3 = () => setIsModalOpen3(true);
+    const closeModal3 = () => setIsModalOpen3(false);
 
     const [invitee, setInvitee] = useState([]);
 	const [inviteeText, setInviteeText] = useState('');
@@ -72,6 +84,8 @@ const PostPage = () => {
 
     const { id } = useParams();
 
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         axios({
@@ -81,6 +95,9 @@ const PostPage = () => {
             method: 'get',
             url: `https://univeus.site/post/${id}`,
         }).then((response) => {
+            if (response.data.code === 3000) {
+                navigate('/home');
+            }
             setPostData(response.data.result);
         })
     }, []);
@@ -112,12 +129,16 @@ const PostPage = () => {
                 "x-access-token": jwtToken
             },
             method: 'post',
-            url: 'https://univeus.site/user/login',
+            url: `https://univeus.site/post/${postData.Post.post_id}/participant`,
             data: {
-                
+                user_id : postData.Post.user_id,
+                participant_userIDsFromDB: participantUserIds,
+                invited_userNickNamesFromAPI: invitee
             }
         }).then((response) => {
-        
+            console.log(response);
+            closeModal();
+            openModal2();
         })
     };
 
@@ -151,8 +172,8 @@ const PostPage = () => {
                 </div>
                 <div className="horizontal_bar"></div>
                 <div className="postcontentcontainer">
-                    <p className="posttitle">{postData.Post.title}</p>
-                    <p className="postcontent">{postData.Post.content}</p>
+                    <p className="posttitle">{postData ? postData.Post.title : ""}</p>
+                    <p className="postcontent">{postData ? postData.Post.content : ""}</p>
                 </div>
                 <div className="schedulecontainer">
                     <p className="scheduletitle">일정</p>
@@ -175,34 +196,54 @@ const PostPage = () => {
                         </div>
                         <div className="textbox">
                             <p>모임장소</p>
-                            <p className="meetingplace">{postData.Post.location}</p>
+                            <p className="meetingplace">{postData ? postData.Post.location : ""}</p>
                         </div>
                         <div className="textbox">
                             <p>참여인원</p>
-                            <p className="meetinglimit">{postData.Post.current_people}/<p style={{fontWeight: "var(--semi-bold)"}}>{postData.Post.limit_people}</p></p>
+                            <p className="meetinglimit">{postData ? postData.Post.current_people : ""}/<p style={{fontWeight: "var(--semi-bold)"}}>{postData ? postData.Post.limit_people : ""}</p></p>
                         </div>
                     </div>
                 </div>
                 <div className="postpageimagecontainer">
-                    {postData.PostImages.map((it) => (
+                    {postData ? postData.PostImages.map((it) => (
                         <PostImage imgsrc={it.img_url}/>
-                    ))}
+                    )) : <></>}
                 </div>
                 <div className="horizontal_bar"></div>
                 <div className="participantscontainer">
                     <p className="participantcontainertitle">참여 친구</p>
                     <div className="participantlist">
-                        {postData.Participant.map((it, idx) => (
+                        {postData ? postData.Participant.map((it, idx) => (
                             <ParticiPant {...it} key={idx}/>
-                        ))} 
+                        )) : <></>} 
                     </div>
                 </div>
                 <Button type={'floating'} content={'참여하기'} onClick={openModal}/>
                 <Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
                     <div className="inviteelist">
-                        {repeatInvitee(limit_people)}
+                        {repeatInvitee(postData ? postData.Post.limit_people : 0)}
                     </div>
-                    <Button content={"초대하기"} />
+                    <Button content={"초대하기"} onClick={handleClickInviteButton}/>
+                </Modal>
+                <Modal isOpen={isModalOpen2} closeModal={closeModal2} title={"참가 신청이 완료되었어요 :)"}>
+                    <div className="completecontainer">
+                        <p>모임 소통을 위해 오픈채팅방에 꼭 입장해 주세요.</p>
+                        <p style={{fontWeight: "600", marginTop: "3px"}}>문자로 모임내용이 발송되니 꼭 확인해주세요!</p>
+                    </div>
+                    <div className="modalbuttoncontainer">
+                        <button className="laterbutton" onClick={closeModal2}><span>나중에 할게요.</span></button>
+                        <Button content={"지금 입장할래요!"} onClick={() => {window.location.href = postData ? postData.Post.openchat : ""}}/>
+                    </div>
+                </Modal>
+                <Modal isOpen={isModalOpen3} closeModal={closeModal3} title={"참여를 취소하시겠습니까?"}>
+                    <div className="completecontainer">
+                        <p>잦은 참여 취소는 패널티의 원인이 될 수 있어요 :(</p>
+                        <p style={{fontWeight: "600", marginTop: "3px"}}>모임 리더에게 취소 의사를 명확하게 말씀해 주세요!</p>
+                    </div>
+                    <div className="modalbuttoncontainer">
+                        <button className="yesnobutton" onClick={closeModal3}><span>아니오</span></button>
+                        <button className="yesnobutton" style={{background: "var(--deep-blue-color)", color: "white"}}><span>네</span></button>
+                    </div>
                 </Modal>
             </div>
         </div>
@@ -234,7 +275,6 @@ export const ParticiPant = ({profile_img, gender, nickname, class_of}) => {
                 <div className="participantinfo">
                     <p className="participantnickname">{nickname}</p>
                     <p className="participantclass">{classNum}학번</p>
-                    <p></p>
                 </div>
             </div>
             <div className="flex-right">
