@@ -8,17 +8,26 @@ import DefaultBackgroundImg from '../assets/images/default_image.png';
 
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const MeetingCard = ({ main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location }) => {
+const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location }) => {
 
     const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
-    console.log(main_img);
+    
+    const navigate = useNavigate();
+
+    const jwtToken = sessionStorage.getItem('accessToken');
+
+    const handleClickMeetingCard = () => {
+        navigate(`/post/${post_id}`);
+    }
 
     return (
-        <div className="MeetingCard">
+        <div className="MeetingCard" onClick={handleClickMeetingCard}>
             <div className='profileimage' style={{border: `1px solid var(${borderColor})`}}>
                 {profile_img ? 
                 <img src={profile_img} alt="" className='userprofileimage'/> :
