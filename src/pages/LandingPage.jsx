@@ -32,7 +32,7 @@ const LandingPage = () => {
                     sessionStorage.setItem('accessToken', response.data.result.accessToken);
                     console.log("case 1");
                     navigate('/home');
-                } else if (response.data.code === 2009) {
+                } else if (response.data.code === 2009 || response.data.code === 2020) {
                     sessionStorage.setItem('accessToken', response.data.result.accessToken);
                     navigate('/verification');
                 }
