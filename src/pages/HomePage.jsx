@@ -7,13 +7,14 @@ import SlideBanner from '../components/SlideBanner';
 
 import '../pages/HomePage.scss';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 	const [meetingList, setMeetingList] = useState([]);
 
-	// const jwtToken = sessionStorage.getItem('accessToken');
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODE1NTU4LCJleHAiOjE3MDI0NTU1NTgsImlzcyI6InVuaXZldXMifQ.ehV1pXMk7sEF1B5NYKROnMAUMqiM5oG-O3G2O3VP9U8';
+	const jwtToken = sessionStorage.getItem('accessToken');
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		axios({
@@ -24,7 +25,12 @@ const HomePage = () => {
 			url: 'https://univeus.site',
 		})
 			.then((response) => {
-				setMeetingList(response.data.result.postPageResult);
+				console.log(response);
+				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+					navigate('/');
+				} else {
+					setMeetingList(response.data.result.postPageResult);
+				}
 			})
 			.catch(function (error) {
 				console.log(error);

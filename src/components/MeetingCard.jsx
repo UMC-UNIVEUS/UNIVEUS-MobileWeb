@@ -35,7 +35,7 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
                 }
             </div>
             <div className='meetingcardimagecontainer'>
-                {main_img === "0" ? 
+                {main_img === null ? 
                 <img src={DefaultBackgroundImg} alt="" className='meetingimage'/>:
                 <img src={main_img} alt="" className='meetingimage'/>
                 }

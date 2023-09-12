@@ -9,11 +9,13 @@ import { GenderSticker } from "../components/MeetingCard";
 import MaleIcon from '../assets/images/male.svg';
 import FemaleIcon from '../assets/images/female.svg';
 
-import test from '../assets/images/default_image.png'
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+
+import x_button from '../assets/images/x_button.svg'
+import NavBar from "../components/NavBar";
 
 
 const PostPage = () => {
@@ -21,8 +23,6 @@ const PostPage = () => {
     const gender = 2;
 
     const profile_img = undefined;
-
-    const limit_gender = 2;
 
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
@@ -51,7 +51,14 @@ const PostPage = () => {
             "hidden": ""
         },
         PostImages: [],
-        Participant: []
+        Participant: [],
+        connectedUser: {
+            "user_id": "",
+            "isParticipate": ""
+        },
+        Writer: {
+            "user_id": "",
+        }
     });
 
     
@@ -59,6 +66,7 @@ const PostPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalOpen2, setIsModalOpen2] = useState(false);
     const [isModalOpen3, setIsModalOpen3] = useState(false);
+    const [isModalOpen4, setIsModalOpen4] = useState(false);
 
     const participantUserIds = postData ? postData.Participant.map(entry => entry.user_id) : [];
 
@@ -68,8 +76,13 @@ const PostPage = () => {
     const openModal2 = () => setIsModalOpen2(true);
     const closeModal2 = () => setIsModalOpen2(false);
 
+    // 취소하기
     const openModal3 = () => setIsModalOpen3(true);
     const closeModal3 = () => setIsModalOpen3(false);
+
+    // 관리하기
+    const openModal4 = () => setIsModalOpen4(true);
+    const closeModal4 = () => setIsModalOpen4(false);
 
     const [invitee, setInvitee] = useState([]);
 	const [inviteeText, setInviteeText] = useState('');
@@ -86,7 +99,6 @@ const PostPage = () => {
 
     const navigate = useNavigate();
 
-
     useEffect(() => {
         axios({
             headers: {
@@ -95,14 +107,16 @@ const PostPage = () => {
             method: 'get',
             url: `https://univeus.site/post/${id}`,
         }).then((response) => {
-            if (response.data.code === 3000) {
+            console.log(response);
+            if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else if (response.data.code === 3000) {
                 navigate('/home');
+            } else {
+                setPostData(response.data.result);
             }
-            setPostData(response.data.result);
         })
     }, []);
-
-    const limit_people = 6;
 
     function repeatInvitee(limit_people) {
 		let arr = [];
@@ -136,12 +150,14 @@ const PostPage = () => {
                 invited_userNickNamesFromAPI: invitee
             }
         }).then((response) => {
-            console.log(response);
             closeModal();
-            openModal2();
+            if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else {
+                openModal2();
+            }
         })
     };
-
 
     return (
         <div className="PostPage">
@@ -157,18 +173,18 @@ const PostPage = () => {
                         </div>
                         <div className="writerinfo">
                             <div className="writer_nickname_and_grade">
-                                <p className="nickname">닉네임</p>
+                                <p className="nickname">{postData ? postData.Writer.nickname : ""}</p>
                                 <div className="vertical_bar"></div>
-                                <p className="grade">17학번</p>
+                                <p className="grade">{postData ? postData.Writer.class_of : ""}</p>
                             </div>
                             <div className="posttime">
                                 <p className="">09/27 12:13</p>
                             </div>
                         </div>
                     </div>
-                    {limit_gender === 1 ? <GenderSticker img={MaleIcon} color={'--purple-color'}/>
-                    : limit_gender === 2 ? <GenderSticker img={FemaleIcon} color={'--pink-color'}/>
-                    : <></>}
+                    {postData ? postData.Post.limit_gender === 1 ? <GenderSticker img={MaleIcon} color={'--purple-color'}/>
+                    : postData.Post.limit_gender === 2 ? <GenderSticker img={FemaleIcon} color={'--pink-color'}/>
+                    : <></> : <></>}
                 </div>
                 <div className="horizontal_bar"></div>
                 <div className="postcontentcontainer">
@@ -181,17 +197,17 @@ const PostPage = () => {
                         <div className="datebox">
                             <p>마감일시</p>  
                             <div className="dateinfo">
-                                <p className="date">09/26</p>
+                                <p className="date">{postData ? postData.Post.end_month : ""}/{postData ? postData.Post.end_date : ""}</p>
                                 <div className="small_vertical_bar"></div>
-                                <p className="time">15:00</p>
+                                <p className="time">{postData ? postData.Post.end_time : ""}</p>
                             </div>
                         </div>
                         <div className="datebox">
                             <p>모임일시</p>  
                             <div className="dateinfo">
-                                <p className="date">09/27</p>
+                                <p className="date">{postData ? postData.Post.meeting_month : ""}/{postData ? postData.Post.meeting_date : ""}</p>
                                 <div className="small_vertical_bar"></div>
-                                <p className="time">15:00</p>
+                                <p className="time">{postData ? postData.Post.meeting_time : ""}</p>
                             </div>
                         </div>
                         <div className="textbox">
@@ -218,7 +234,10 @@ const PostPage = () => {
                         )) : <></>} 
                     </div>
                 </div>
-                <Button type={'floating'} content={'참여하기'} onClick={openModal}/>
+                {postData.connectedUser.user_id === postData.Writer.user_id ?  
+                <Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4}/> : 
+                postData.connectedUser.isParticipate === 1 ? <Button type={'floating disabled'} content={'참여 완료'} /> :
+                <Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal3} />}
                 <Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
                     <div className="inviteelist">
                         {repeatInvitee(postData ? postData.Post.limit_people : 0)}
@@ -245,7 +264,15 @@ const PostPage = () => {
                         <button className="yesnobutton" style={{background: "var(--deep-blue-color)", color: "white"}}><span>네</span></button>
                     </div>
                 </Modal>
+                <Modal isOpen={isModalOpen4} closeModal={closeModal4} title={"유니버스 관리"}>
+                    <img src={x_button} alt="" className="x_button" onClick={closeModal4}/>
+                    <div className="managebuttoncontainer">
+                        <button className="managebutton" style={{backgroundColor: "var(--deep-blue-color)"}}>수정하기</button>
+                        <button className="managebutton" style={{backgroundColor: "var(--light-gray-color)"}}>삭제하기</button>
+                    </div>
+                </Modal>
             </div>
+            <NavBar />
         </div>
     );
 };

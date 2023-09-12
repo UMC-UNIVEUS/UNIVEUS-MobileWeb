@@ -268,9 +268,9 @@
     }
 }
 
-.button-body {
-    margin-top: 5px;
-}
+// .button-body {
+//     margin-top: 5px;
+// }
 
 .modalbuttoncontainer {
         width: 100%;
@@ -315,4 +315,28 @@
 
 .completecontainer {
     margin-top: 10px;
+}
+
+.x_button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.managebuttoncontainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 7px;
+    .managebutton {
+        width: 220px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        font-size: var(--default-font);
+        font-weight: var(--bold);
+        color: var(--white-color);
+    }
 }

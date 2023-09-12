@@ -36,6 +36,7 @@ const Verification = () => {
             setIsChecked2(true);
             setIsChecked3(true);
         }
+        
     };
 
     const handleCheck1 = () => {
@@ -99,8 +100,10 @@ const Verification = () => {
                 phoneNumber: phoneNumber,
                 number : parseInt(verifyNumber)
             },
-        }).then((res) => {
-            if (res.data.isSuccess === true) {
+        }).then((response) => {
+            if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else if (response.data.code === 2012) {
                 setIsVerified(1);
             } else {
                 setIsVerified(2);
@@ -109,7 +112,22 @@ const Verification = () => {
     };
 
     const handleClickNextButton = () => {
-        navigate('/register');
+        axios({
+            header: {
+                "x-access-token": jwtToken
+            },
+            method: 'post',
+            url: 'https://univeus.site/user/agreement',
+            data: {
+                userAgreement: [1, 1, 1]
+            }
+        }).then((response) => {
+            if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else {
+                navigate('/register');
+            }
+        })
     };
 
     return (
