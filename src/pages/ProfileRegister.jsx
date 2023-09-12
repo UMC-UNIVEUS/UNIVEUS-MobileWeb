@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import '../pages/ProfileRegister.scss';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileRegister = () => {
 	const regex = /^\d{9}$/;
@@ -15,6 +16,8 @@ const ProfileRegister = () => {
 	const [majorFontColor, setMajorFontColor] = useState('--select-default-color');
 	const [major, setMajor] = useState('');
 	const [classof, setClassof] = useState('');
+
+	const navigate = useNavigate();
 
 	const handleChangeNickname = (e) => {
 		setNickname(e.target.value);
@@ -53,9 +56,9 @@ const ProfileRegister = () => {
 		setClassof(e.target.value);
 	};
 
-	const jwtToken = useSelector((state) => state.jwtToken);
+	const jwtToken = sessionStorage.getItem('accessToken');
 
-	// 헤더에 액세스 토큰 추가하는 부분 구현
+	// 헤더에 액세스 토큰 추가하는 부분 구현 완료
 	const handleClickStartButton = () => {
 		axios({
 			headers: {
@@ -64,15 +67,18 @@ const ProfileRegister = () => {
 			method: 'post',
 			url: 'https://univeus.site/user/start/univeus',
 			data: {
-				phone: '01045323490',
 				nickname: nickname,
 				gender: gender, // 1 : man 2 : woman
 				major: major,
 				studentId: classof,
 			},
-		}).then((res) => {
-			console.log(jwtToken);
-			console.log(res);
+		}).then((response) => {
+			console.log(response);
+			if (response.data.code === 1000) {
+				navigate('/home');
+			} else {
+				navigate('/');
+			}
 		});
 	};
 

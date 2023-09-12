@@ -1,6 +1,7 @@
 import '../pages/LandingPage.scss';
 import { SubHeader } from '../components/Header'
 import { ReactComponent as GoogleIcon } from '../assets/images/google.svg';
+import backgroundlogo from '../assets/images/landingpage_logo.svg';
 
 import axios from 'axios';
 
@@ -28,13 +29,15 @@ const LandingPage = () => {
                 }
             }).then((response) => {
                 console.log(response);
-                if (response.data.isSuccess === true) {
+                if (response.data.code === 1000) {
                     sessionStorage.setItem('accessToken', response.data.result.accessToken);
-                    console.log("case 1");
                     navigate('/home');
-                } else if (response.data.code === 2009) {
+    
+                } else if (response.data.code === 2019 || response.data.code === 2020) {
                     sessionStorage.setItem('accessToken', response.data.result.accessToken);
                     navigate('/verification');
+                } else {
+                    navigate('/');
                 }
             })
         }
@@ -51,6 +54,9 @@ const LandingPage = () => {
     return (
         <div className="LandingPage">
             <SubHeader headertext={"회원가입•간편로그인"}/>
+            <div className='imagecontainer'>
+                <img src={backgroundlogo} alt="" className='backgroundlogo'/>
+            </div>
             <div className='landingpagebody'>
                 <div className='bannercontainer'>
                     <div className='bannerfirstrow'>

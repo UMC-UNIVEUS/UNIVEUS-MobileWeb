@@ -7,11 +7,14 @@ import { useState } from 'react';
 import MeetingCard from '../components/MeetingCard';
 import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
 
     const [searchedData, setSearchedData] = useState([]);
     const [searchWord, setSearchWord] = useState([]);
+
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setSearchWord(event.target.value);
@@ -27,8 +30,11 @@ const SearchPage = () => {
             method: 'get',
             url: `https://univeus.site/search?keyword=${searchWord}`
         }).then((response) => {
-            console.log(jwtToken);
-            setSearchedData(response.data.result);
+            if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else {
+                setSearchedData(response.data.result);
+            }
         })
     }
 
