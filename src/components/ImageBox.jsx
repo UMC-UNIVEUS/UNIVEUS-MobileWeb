@@ -13,7 +13,8 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 		// console.log('post', imgFile);
 	}, [postImg]);
 
-	const jwtToken = sessionStorage.getItem('accessToken');
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkbGFjb2R1czA0MDdAa3lvbmdnaS5hYy5rciIsImlhdCI6MTY5MzUwMjE1NCwiZXhwIjoxNzAyMTQyMTU0LCJpc3MiOiJ1bml2ZXVzIn0.I2bppL98omYb4GxMXbooPiLg7XSzADwhBU1D5BPj-Jk';
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
 		console.log(e);
@@ -37,7 +38,7 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 				'Content-Type': 'multipart/form-data',
 			},
 			method: 'post',
-			url: '/post/image/upload',
+			url: 'https://univeus.site/post/image/upload',
 			data: formData,
 		}).then((res) => {
 			console.log(res);

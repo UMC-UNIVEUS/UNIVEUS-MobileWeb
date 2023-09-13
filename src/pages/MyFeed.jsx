@@ -22,7 +22,7 @@ export default function MyFeed() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: '/profile/myunive',
+			url: 'https://univeus.site/profile/myunive',
 		})
 			.then((response) => {
 				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
@@ -43,7 +43,7 @@ export default function MyFeed() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: '/profile',
+			url: 'https://univeus.site/profile',
 		})
 			.then((response) => {
 				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
@@ -64,7 +64,7 @@ export default function MyFeed() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: '/profile/myunive',
+			url: 'https://univeus.site/profile/myunive',
 		})
 			.then((response) => {
 				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
@@ -85,7 +85,7 @@ export default function MyFeed() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: '/profile/participate',
+			url: 'https://univeus.site/profile/participate',
 		})
 			.then((response) => {
 				if (response.data.result.code === 5000 || response.data.result.code === 5001) {

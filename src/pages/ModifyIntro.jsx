@@ -58,7 +58,7 @@ export default function CreateIntro() {
 				'x-access-token': jwtToken,
 			},
 			method: 'patch',
-			url: `/${post_id}`,
+			url: `https://univeus.site/${post_id}`,
 			data: {
 				category: modifyDetailData['category'],
 				limit_people: modifyDetailData['limit_people'],

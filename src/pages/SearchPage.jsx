@@ -27,7 +27,7 @@ const SearchPage = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: `/search?keyword=${searchWord}`,
+			url: `https://univeus.site/search?keyword=${searchWord}`,
 		}).then((response) => {
 			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
 				navigate('/');

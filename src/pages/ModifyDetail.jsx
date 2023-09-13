@@ -74,7 +74,7 @@ export default function ModifyDetail() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: `/post/${post_id}`,
+			url: `https://univeus.site/post/${post_id}`,
 		})
 			.then((res) => {
 				console.log('res', res.data.result);

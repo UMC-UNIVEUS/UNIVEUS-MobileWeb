@@ -77,7 +77,7 @@ const Verification = () => {
 	const handleSendVerifyCode = () => {
 		axios({
 			method: 'post',
-			url: '/user/send/number',
+			url: 'https://univeus.site/user/send/number',
 			data: {
 				phoneNumber: phoneNumber,
 			},
@@ -92,7 +92,7 @@ const Verification = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'post',
-			url: '/user/auth/number',
+			url: 'https://univeus.site/user/auth/number',
 			data: {
 				phoneNumber: phoneNumber,
 				number: parseInt(verifyNumber),
@@ -114,7 +114,7 @@ const Verification = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'post',
-			url: '/user/agreement',
+			url: 'https://univeus.site/user/agreement',
 			data: {
 				userAgreement: [1, 1, 1],
 			},
