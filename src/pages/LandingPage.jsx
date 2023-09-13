@@ -23,7 +23,7 @@ const LandingPage = () => {
 		if (accessToken !== null) {
 			axios({
 				method: 'post',
-				url: '/user/login',
+				url: 'https://univeus.site/user/login',
 				data: {
 					accessToken: accessToken,
 				},
