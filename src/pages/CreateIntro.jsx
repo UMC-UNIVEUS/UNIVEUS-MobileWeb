@@ -108,9 +108,10 @@ export default function CreateIntro() {
 				navigate('/');
 			} else if (res.data.message !== '성공') {
 				setErrorMessage(res.data.message);
-			} else {
+			} else if (res.data.result.code === 1000) {
 				setErrorMessage('');
 				localStorage.clear();
+				navigate('/profile/myunive');
 			}
 			// console.log(jwtToken);
 		});

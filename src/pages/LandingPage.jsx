@@ -20,7 +20,7 @@ const LandingPage = () => {
 		const access_Token = parsedHash.get('access_token');
 		setAccessToken(access_Token);
 
-		if (access_Token !== null) {
+		if (accessToken !== null) {
 			axios({
 				method: 'post',
 				url: '/user/login',

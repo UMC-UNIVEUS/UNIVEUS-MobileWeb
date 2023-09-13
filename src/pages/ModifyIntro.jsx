@@ -76,8 +76,9 @@ export default function CreateIntro() {
 			console.log(res);
 			if (res.data.result.code === 5000 || res.data.result.code === 5001) {
 				navigate('/');
-			} else if (res.data.message === '성공') {
+			} else if (res.data.result.code === 1000) {
 				localStorage.clear();
+				navigate(`/${post_id}`);
 			}
 			// console.log(jwtToken);
 		});
