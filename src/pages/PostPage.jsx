@@ -105,7 +105,7 @@ const PostPage = () => {
                 "x-access-token": jwtToken
             },
             method: 'get',
-            url: `https://univeus.site/post/${id}`,
+            url: `http://localhost:4000/post/${id}`,
         }).then((response) => {
             console.log(response);
             if (response.data.result.code === 5000 || response.data.result.code === 5001) {
@@ -143,7 +143,7 @@ const PostPage = () => {
                 "x-access-token": jwtToken
             },
             method: 'post',
-            url: `https://univeus.site/post/${postData.Post.post_id}/participant`,
+            url: `http://localhost:4000/post/${postData.Post.post_id}/participant`,
             data: {
                 user_id : postData.Post.user_id,
                 participant_userIDsFromDB: participantUserIds,

@@ -9,9 +9,8 @@ import DefaultBackgroundImg from '../assets/images/default_image.png';
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
-const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location }) => {
+const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, meeting_month, meeting_time, location }) => {
 
     const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
@@ -52,7 +51,7 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
                 <div className='meetinginfo'>
                     <div className='meetingtime'>
                         <Calendar />
-                        <p className='infotext'>{meeting_date}</p>
+                        <p className='infotext'>{meeting_month}/{meeting_date} {meeting_time}</p>
                     </div>
                     <div className='meetingplace'>
                         <Map />

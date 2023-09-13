@@ -53,8 +53,7 @@ export default function CreateIntro() {
 		return arr;
 	}
 
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODcyNzY0LCJleHAiOjE3MDI1MTI3NjQsImlzcyI6InVuaXZldXMifQ.gD56s72ZAYPtx670bLQbfeu0B6328STagBvJ50hDgbE';
+	const jwtToken = sessionStorage.getItem('accessToken');
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
 		const file = imgRef.current.files[0];
@@ -77,7 +76,7 @@ export default function CreateIntro() {
 				'Content-Type': 'multipart/form-data',
 			},
 			method: 'post',
-			url: 'https://univeus.site/post/image/upload',
+			url: 'http://localhost:4000//post/image/upload',
 			data: formData,
 		}).then((res) => {
 			console.log(res);
@@ -95,7 +94,7 @@ export default function CreateIntro() {
 			// 	'x-access-token': jwtToken,
 			// },
 			method: 'post',
-			url: 'https://univeus.site/post',
+			url: 'http://localhost:4000/post',
 			data: {
 				category: createDetailData['category'],
 				limit_people: createDetailData['limit_people'],
