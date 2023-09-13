@@ -26,7 +26,7 @@ const ProfileRegister = () => {
 	const handleClickOverlapButton = () => {
 		axios({
 			method: 'post',
-			url: 'http://localhost:4000/user/nickname/check',
+			url: '/user/nickname/check',
 			data: {
 				nickname: nickname,
 			},
@@ -65,7 +65,7 @@ const ProfileRegister = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'post',
-			url: 'http://localhost:4000/user/start/univeus',
+			url: '/user/start/univeus',
 			data: {
 				nickname: nickname,
 				gender: gender, // 1 : man 2 : woman
@@ -74,8 +74,8 @@ const ProfileRegister = () => {
 			},
 		}).then((response) => {
 			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
-                navigate('/');
-            } else if (response.data.code === 1000) {
+				navigate('/');
+			} else if (response.data.code === 1000) {
 				navigate('/home');
 			} else {
 				navigate('/');

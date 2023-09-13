@@ -22,7 +22,7 @@ const HomePage = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: 'http://localhost:4000/',
+			url: '/',
 		})
 			.then((response) => {
 				console.log(response);

@@ -66,8 +66,7 @@ export default function ModifyDetail() {
 		setOpenChat(e.target.value);
 	};
 
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODcyNzY0LCJleHAiOjE3MDI1MTI3NjQsImlzcyI6InVuaXZldXMifQ.gD56s72ZAYPtx670bLQbfeu0B6328STagBvJ50hDgbE';
+	const jwtToken = sessionStorage.getItem('accessToken');
 
 	useEffect(() => {
 		axios({
@@ -75,7 +74,7 @@ export default function ModifyDetail() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: `http://localhost:4000/post/${post_id}`,
+			url: `/post/${post_id}`,
 		})
 			.then((res) => {
 				console.log('res', res.data.result);

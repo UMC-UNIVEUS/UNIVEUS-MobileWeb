@@ -38,8 +38,7 @@ export default function CreateIntro() {
 		return arr;
 	}
 	// console.log(localStorage.getItem('images'));
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkbGFjb2R1czA0MDdAa3lvbmdnaS5hYy5rciIsImlhdCI6MTY5MzUwMjE1NCwiZXhwIjoxNzAyMTQyMTU0LCJpc3MiOiJ1bml2ZXVzIn0.I2bppL98omYb4GxMXbooPiLg7XSzADwhBU1D5BPj-Jk';
+	const jwtToken = sessionStorage.getItem('accessToken');
 
 	const modifyDetailData = JSON.parse(localStorage.getItem('modify'));
 	useEffect(() => {
@@ -59,7 +58,7 @@ export default function CreateIntro() {
 				'x-access-token': jwtToken,
 			},
 			method: 'patch',
-			url: `https://univeus.site/post/${post_id}`,
+			url: `/${post_id}`,
 			data: {
 				category: modifyDetailData['category'],
 				limit_people: modifyDetailData['limit_people'],
@@ -75,7 +74,7 @@ export default function CreateIntro() {
 			},
 		}).then((res) => {
 			console.log(res);
-			if (res.data.code === 5000 || res.data.code === 5001) {
+			if (res.data.result.code === 5000 || res.data.result.code === 5001) {
 				navigate('/');
 			} else if (res.data.message === '성공') {
 				localStorage.clear();
