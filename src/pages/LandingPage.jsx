@@ -36,7 +36,9 @@ const LandingPage = () => {
 					sessionStorage.setItem('accessToken', response.data.result.accessToken);
 					navigate('/verification');
 				}
-			});
+			}).catch((error) => {
+                console.error('axios error:', error);
+            });
 		}
 	}, [accessToken]);
 
