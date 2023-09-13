@@ -15,8 +15,10 @@
 			.mu-user-img {
 				width: 53px;
 				height: 53px;
-				border-radius: 25.5px;
+				border-radius: 26.5px;
 				margin-right: 11px;
+				border: 2px solid;
+				background: var(--purple-of-10, rgba(110, 125, 255, 0.1));
 			}
 			.mu-text {
 				.mu-name {
@@ -43,8 +45,19 @@
 				gap: 7px;
 				font-size: var(--medium-font);
 				font-weight: var(--medium-bold);
+				color: var(--light-gray-color);
+				&.clicked {
+					span {
+						color: var(--black-color);
+					}
+					.page-hr {
+						background-color: var(--light-gray-color);
+						background-color: var(--deep-blue-color);
+					}
+				}
+
 				.page-hr {
-					background-color: var(--deep-blue-color);
+					background-color: var(--light-gray-color);
 					height: 1px;
 					width: 45vw;
 				}

@@ -73,8 +73,9 @@ const ProfileRegister = () => {
 				studentId: classof,
 			},
 		}).then((response) => {
-			console.log(response);
-			if (response.data.code === 1000) {
+			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+                navigate('/');
+            } else if (response.data.code === 1000) {
 				navigate('/home');
 			} else {
 				navigate('/');
