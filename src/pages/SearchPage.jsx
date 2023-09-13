@@ -31,7 +31,7 @@ const SearchPage = () => {
 		}).then((response) => {
 			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
 				navigate('/');
-			} else if (response.data.code === 7000) {
+			} else if (response.data.result.code === 7000) {
                 navigate('/search')
 			} else {
                 setSearchedData(response.data.result);
