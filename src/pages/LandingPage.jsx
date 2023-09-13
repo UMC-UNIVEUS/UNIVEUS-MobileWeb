@@ -20,7 +20,7 @@ const LandingPage = () => {
 		const access_Token = parsedHash.get('access_token');
 		setAccessToken(access_Token);
 
-		if (accessToken !== null) {
+		if (accessToken !== null && accessToken !== "") {
 			axios({
 				method: 'post',
 				url: 'https://univeus.site/user/login',
