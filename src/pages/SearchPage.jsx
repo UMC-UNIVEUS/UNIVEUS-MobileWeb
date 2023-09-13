@@ -29,9 +29,9 @@ const SearchPage = () => {
 			method: 'get',
 			url: `https://univeus.site/search?keyword=${searchWord}`,
 		}).then((response) => {
-			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
-			} else if (response.data.result.code === 7000) {
+			} else if (response.data.code === 7000) {
                 navigate('/search')
 			} else {
                 setSearchedData(response.data.result);

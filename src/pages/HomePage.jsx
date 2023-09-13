@@ -26,7 +26,7 @@ const HomePage = () => {
 		})
 			.then((response) => {
 				console.log(response);
-				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
 					setMeetingList(response.data.result.postPageResult);

@@ -74,9 +74,9 @@ export default function CreateIntro() {
 			},
 		}).then((res) => {
 			console.log(res);
-			if (res.data.result.code === 5000 || res.data.result.code === 5001) {
+			if (res.data.code === 5000 || res.data.code === 5001) {
 				navigate('/');
-			} else if (res.data.result.code === 1000) {
+			} else if (res.data.code === 1000) {
 				localStorage.clear();
 				navigate(`/${post_id}`);
 			}

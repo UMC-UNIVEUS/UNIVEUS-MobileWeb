@@ -78,7 +78,7 @@ export default function ModifyDetail() {
 		})
 			.then((res) => {
 				console.log('res', res.data.result);
-				if (res.data.result.code === 5000 || res.data.result.code === 5001) {
+				if (res.data.code === 5000 || res.data.code === 5001) {
 					navigate('/');
 				} else {
 					setGetPost(res.data.result.Post);

@@ -25,7 +25,7 @@ export default function MyFeed() {
 			url: 'https://univeus.site/profile/myunive',
 		})
 			.then((response) => {
-				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
 					setMeetingList(response.data.result);
@@ -46,7 +46,7 @@ export default function MyFeed() {
 			url: 'https://univeus.site/profile',
 		})
 			.then((response) => {
-				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
 					setUserInfo(response.data.result);
@@ -67,7 +67,7 @@ export default function MyFeed() {
 			url: 'https://univeus.site/profile/myunive',
 		})
 			.then((response) => {
-				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
 					setMeetingList(response.data.result);
@@ -88,7 +88,7 @@ export default function MyFeed() {
 			url: 'https://univeus.site/profile/participate',
 		})
 			.then((response) => {
-				if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
 					setMeetingList(response.data.result);

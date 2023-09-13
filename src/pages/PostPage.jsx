@@ -104,7 +104,7 @@ const PostPage = () => {
 			url: `https://univeus.site/post/${id}`,
 		}).then((response) => {
 			console.log(response);
-			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else if (response.data.code === 3000) {
 				navigate('/home');
@@ -147,7 +147,7 @@ const PostPage = () => {
 			},
 		}).then((response) => {
 			closeModal();
-			if (response.data.result.code === 5000 || response.data.result.code === 5001) {
+			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
 				openModal2();
