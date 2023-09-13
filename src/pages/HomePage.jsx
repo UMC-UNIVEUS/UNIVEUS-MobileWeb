@@ -44,9 +44,9 @@ const HomePage = () => {
 			<div className="homepagebody">
 				<div className="matesticker">우리의 축제 MATE🔥</div>
 				<div className="meetingcardcontainer">
-					{meetingList.map((meeting) => (
+					{meetingList ? meetingList.map((meeting) => (
 						<MeetingCard {...meeting} />
-					))}
+					)) : <div>로딩중</div>}
 				</div>
 				<Button className="startbutton" content={'유니버스 생성하기'} type={'floating'} />
 			</div>
