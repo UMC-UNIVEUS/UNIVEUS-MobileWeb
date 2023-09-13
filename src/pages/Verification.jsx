@@ -120,6 +120,7 @@ const Verification = () => {
 				userAgreement: [1, 1, 1],
 			},
 		}).then((response) => {
+            console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
