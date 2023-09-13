@@ -3,7 +3,6 @@ import DeleteBtn from '../assets/images/delete.svg';
 import PlusBtn from '../assets/images/plus.svg';
 import axios from 'axios';
 import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default function ImageBox({ numbering, getImage, postImg }) {
 	const [imgFile, setImgFile] = useState('');
@@ -11,19 +10,14 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 
 	useEffect(() => {
 		setImgFile(postImg);
-		console.log('post', imgFile);
-	}, []);
+		// console.log('post', imgFile);
+	}, [postImg]);
 
-    const navigate = useNavigate();
-
-	// console.log(postImg);
-
-	// console.log(imgFile);
-	const jwtToken = sessionStorage.getItem('accessToken');
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkbGFjb2R1czA0MDdAa3lvbmdnaS5hYy5rciIsImlhdCI6MTY5MzUwMjE1NCwiZXhwIjoxNzAyMTQyMTU0LCJpc3MiOiJ1bml2ZXVzIn0.I2bppL98omYb4GxMXbooPiLg7XSzADwhBU1D5BPj-Jk';
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
 		console.log(e);
-		// console.log('num', numbering);
 		const file = imgRef.current.files[0];
 		// const reader = new FileReader();
 		// reader.readAsDataURL(file);
@@ -44,17 +38,15 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 				'Content-Type': 'multipart/form-data',
 			},
 			method: 'post',
-			url: 'https://univeus.site/post/image/upload',
+			url: 'http://localhost:4000/post/image/upload',
 			data: formData,
 		}).then((res) => {
 			console.log(res);
-            if (res.data.result.code === 5000 || res.data.result.code === 5001) {
-                navigate('/');
-            } else {
-                setImgFile(JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, ''));
-                // key:value 형태로 넘겨주기
-                getImage(JSON.stringify({ [numbering]: res.data.result[0]['pic_url'].replace(/"/g, '') }));
-            }
+			setImgFile(JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, ''));
+			// key:value 형태로 넘겨주기
+			// console.log(typeof numbering);
+			getImage(JSON.stringify({ [numbering]: res.data.result[0]['pic_url'].replace(/"/g, '') }));
+			// console.log(JSON.stringify({ [numbering]: res.data.result[0]['pic_url'].replace(/"/g, '') }));
 		});
 	};
 	return (

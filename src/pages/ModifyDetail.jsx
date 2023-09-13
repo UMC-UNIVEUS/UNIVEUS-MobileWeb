@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 export default function ModifyDetail() {
 	const [getPost, setGetPost] = useState([]);
 	const [getImage, setGetImage] = useState([]);
+	const [getParticipant, setGetParticipant] = useState([]);
 	const imgUrlList = [];
 
 	const navigate = useNavigate();
@@ -65,7 +66,8 @@ export default function ModifyDetail() {
 		setOpenChat(e.target.value);
 	};
 
-	const jwtToken = sessionStorage.getItem('accessToken');
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJqdW5nd29vMzQ5MEBreW9uZ2dpLmFjLmtyIiwiaWF0IjoxNjkzODcyNzY0LCJleHAiOjE3MDI1MTI3NjQsImlzcyI6InVuaXZldXMifQ.gD56s72ZAYPtx670bLQbfeu0B6328STagBvJ50hDgbE';
 
 	useEffect(() => {
 		axios({
@@ -73,7 +75,7 @@ export default function ModifyDetail() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: `https://univeus.site/post/${post_id}`,
+			url: `http://localhost:4000/post/${post_id}`,
 		})
 			.then((res) => {
 				console.log('res', res.data.result);
@@ -82,6 +84,7 @@ export default function ModifyDetail() {
 				} else {
 					setGetPost(res.data.result.Post);
 					setGetImage(res.data.result.PostImages);
+					setGetParticipant(res.data.result.Participant['post_id']);
 					setLimitGender(res.data.result.Post['limit_gender']);
 					setLocation(res.data.result.Post['location']);
 					setOpenChat(res.data.result.Post['openchat']);
@@ -119,7 +122,7 @@ export default function ModifyDetail() {
 		title: getPost['title'],
 		content: getPost['content'],
 		images: imgUrlList,
-		// invited_userNickNames: getPost[]
+		invited_userNickNames: getParticipant,
 	};
 	console.log(CreateDetailData);
 

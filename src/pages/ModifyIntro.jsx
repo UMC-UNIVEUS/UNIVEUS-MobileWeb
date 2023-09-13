@@ -17,12 +17,11 @@ export default function CreateIntro() {
 	const { post_id } = useParams;
 
 	const getImage = (img) => {
-		setImage({ ...image, [Object.keys(JSON.parse(img))[0]]: Object.values(JSON.parse(img))[0] });
-		// console.log('img', Object.values(JSON.parse(img))[0]);
+		let newImg = image;
+		newImg[Number(Object.keys(JSON.parse(img))[0]) - 1] = Object.values(JSON.parse(img))[0];
+		setImage(newImg);
 	};
 
-	// console.log('image', image);
-	// console.log('image', Object.values(image));
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
 	};
@@ -39,7 +38,8 @@ export default function CreateIntro() {
 		return arr;
 	}
 	// console.log(localStorage.getItem('images'));
-	const jwtToken = sessionStorage.getItem('accessToken');
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRW1haWwiOiJkbGFjb2R1czA0MDdAa3lvbmdnaS5hYy5rciIsImlhdCI6MTY5MzUwMjE1NCwiZXhwIjoxNzAyMTQyMTU0LCJpc3MiOiJ1bml2ZXVzIn0.I2bppL98omYb4GxMXbooPiLg7XSzADwhBU1D5BPj-Jk';
 
 	const modifyDetailData = JSON.parse(localStorage.getItem('modify'));
 	useEffect(() => {
@@ -71,11 +71,11 @@ export default function CreateIntro() {
 				title: title,
 				content: content,
 				images: Object.values(image),
-				// invited_userNickNames: modifyDetailData[''],
+				invited_userNickNames: modifyDetailData['invited_userNickNames'],
 			},
 		}).then((res) => {
 			console.log(res);
-			if (res.data.result.code === 5000 || res.data.result.code === 5001) {
+			if (res.data.code === 5000 || res.data.code === 5001) {
 				navigate('/');
 			} else if (res.data.message === '성공') {
 				localStorage.clear();
