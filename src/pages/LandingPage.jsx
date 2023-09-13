@@ -35,8 +35,6 @@ const LandingPage = () => {
 				} else if (response.data.code === 2019 || response.data.code === 2020) {
 					sessionStorage.setItem('accessToken', response.data.result.accessToken);
 					navigate('/verification');
-				} else {
-					navigate('/');
 				}
 			});
 		}
