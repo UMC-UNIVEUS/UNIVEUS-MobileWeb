@@ -111,7 +111,7 @@ const Verification = () => {
 
 	const handleClickNextButton = () => {
 		axios({
-			header: {
+			headers: {
 				'x-access-token': jwtToken,
 			},
 			method: 'post',
