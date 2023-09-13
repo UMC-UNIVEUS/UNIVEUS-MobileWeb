@@ -22,7 +22,7 @@ const HomePage = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: '/',
+			url: 'https://univeus.site/',
 		})
 			.then((response) => {
 				console.log(response);
