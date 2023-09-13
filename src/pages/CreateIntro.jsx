@@ -76,7 +76,7 @@ export default function CreateIntro() {
 				'Content-Type': 'multipart/form-data',
 			},
 			method: 'post',
-			url: 'http://localhost:4000//post/image/upload',
+			url: 'http://localhost:4000/post/image/upload',
 			data: formData,
 		}).then((res) => {
 			console.log(res);
