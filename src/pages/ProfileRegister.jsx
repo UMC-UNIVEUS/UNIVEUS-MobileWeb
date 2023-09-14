@@ -2,10 +2,10 @@ import Button from '../components/Button';
 import { SubHeader } from '../components/Header';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import '../pages/ProfileRegister.scss';
-import { useNavigate } from 'react-router-dom';
 
 const ProfileRegister = () => {
 	const regex = /^\d{9}$/;
@@ -18,6 +18,10 @@ const ProfileRegister = () => {
 	const [classof, setClassof] = useState('');
 
 	const navigate = useNavigate();
+
+	window.addEventListener('popstate', function(event) {
+		navigate('/register');
+	});
 
 	const handleChangeNickname = (e) => {
 		setNickname(e.target.value);
