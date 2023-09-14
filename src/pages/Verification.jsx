@@ -108,7 +108,7 @@ const Verification = () => {
             console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
-			} else if (response.data.code === 2012 && response.data.code === 2027) {
+			} else if (response.data.code === 2012 || response.data.code === 2027) {
 				setIsVerified(1);
 			} else {
 				setIsVerified(2);
