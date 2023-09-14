@@ -155,7 +155,9 @@ export default function CreateIntro() {
 					{/* limitPeople의 갯수만큼 추가하기 */}
 					{repeatInvitee(createDetailData['limit_people'])}
 				</div>
-				{title !== '' && content !== '' && Object.values(invitee).filter((item) => item !== '').length === 2 ? (
+				{title !== '' &&
+				content !== '' &&
+				Object.values(invitee).filter((item) => item !== '').length === createDetailData['limit_people'] / 2 - 1 ? (
 					<Button type={'floating'} content={'유니버스 생성하기'} onClick={handlePosting} />
 				) : (
 					<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
