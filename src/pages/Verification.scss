@@ -24,6 +24,17 @@
         .inputcontainer {
             display: flex;
             flex-direction: row;
+            .unactive {
+                display: inline-flex;
+                height: 36px;
+                padding: 8px 16px;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                border-radius: 5px;
+                background: var(--light-gray-color);
+                box-sizing: border-box;
+            }
         }
         .phonenuminputcontainer {
             margin-top: 50px;

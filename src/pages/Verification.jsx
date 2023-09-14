@@ -14,9 +14,14 @@ const Verification = () => {
 
 	const jwtToken = sessionStorage.getItem('accessToken');
 
+	const phoneNumberPattern = /^010-\d{4}-\d{4}$/;
+	const verifyNumberPattern = /^\d{6}$/;
+
+
 	const [isVerified, setIsVerified] = useState(0); // 초기 상태 0, 인증 성공 1, 인증 실패 2
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [verifyNumber, setVerifyNumber] = useState('');
+	const [isSendedMessage, setIsSendedMessage] = useState(false);
 
 	const [isCheckedAll, setIsCheckedAll] = useState(false);
 	const [isChecked1, setIsChecked1] = useState(false);
@@ -82,6 +87,7 @@ const Verification = () => {
 				phoneNumber: phoneNumber,
 			},
 		}).then((res) => {
+			setIsSendedMessage(true);
 			console.log(res.message);
 		});
 	};
@@ -150,7 +156,11 @@ const Verification = () => {
 							value={phoneNumber}
 							onChange={handleChangePhoneNumber}
 						/>
+						{phoneNumberPattern.test(phoneNumber) === true ? (
 						<Button content={'인증번호 받기'} onClick={handleSendVerifyCode} />
+					) : (
+						<button className='unactive'>인증번호 받기</button>
+					)}
 					</div>
 				</div>
 				<div className="verifyinputcontainer">
@@ -163,7 +173,12 @@ const Verification = () => {
 							value={verifyNumber}
 							onChange={handleChangeVerifyNumber}
 						/>
+						{verifyNumberPattern.test(verifyNumber) === true && isSendedMessage === true ? (
 						<Button content={'확인'} onClick={handleClickVerifyButton} />
+					) : (
+						<button className='unactive'>확인</button>
+					)}
+						
 					</div>
 					{isVerified === 1 ? (
 						<p className="verifyresulttext" style={{ color: `var(--deep-blue-color)` }}>
