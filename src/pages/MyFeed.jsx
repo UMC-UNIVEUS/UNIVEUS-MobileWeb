@@ -107,7 +107,7 @@ export default function MyFeed() {
 				<div className="mf-user">
 					<div
 						className="mu-user-img-box"
-						style={{ borderColor: userInfo['gender'] === 1 ? 'var(—purple-color)' : 'var(—red-color)' }}
+						style={{ borderColor: userInfo['gender'] === 1 ? 'var(--purple-color)' : 'var(--red-color)' }}
 					>
 						<img
 							className="mu-user-img"
