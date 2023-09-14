@@ -46,8 +46,8 @@ const HomePage = () => {
 				<div className="matesticker">우리의 축제 MATE🔥</div>
 				<div className="meetingcardcontainer">
 					{meetingList ? meetingList.map((meeting) => <MeetingCard {...meeting} />) : <div>로딩중</div>}
-					<Footer />
 				</div>
+				<Footer />
 				<Button
 					className="startbutton"
 					content={'유니버스 생성하기'}
