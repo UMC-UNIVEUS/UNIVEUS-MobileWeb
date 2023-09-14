@@ -247,7 +247,7 @@ const PostPage = () => {
 				) : postData.connectedUser.isParticipate === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
 				) : (
-					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal3} />
+					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
 				)}
 				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
 					<div className="inviteelist">{repeatInvitee(postData ? postData.Post.limit_people : 0)}</div>
