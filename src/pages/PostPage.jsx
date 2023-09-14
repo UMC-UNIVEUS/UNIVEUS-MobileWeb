@@ -165,8 +165,12 @@ const PostPage = () => {
 			}
 		})
 		.then(function (response) {
-			navigate('/home');
-		console.log('DELETE 요청 성공:', response.data);
+			if (response.data.code === 5000 || response.data.code === 5001) {
+				navigate('/'); 
+			} else { 
+				navigate('/home');
+				console.log('DELETE 요청 성공:', response.data);
+			}
   		})
 	};
 
