@@ -12,13 +12,22 @@
 			flex-direction: row;
 			align-items: center;
 			margin-bottom: 28px;
-			.mu-user-img {
+			.mu-user-img-box {
 				width: 53px;
 				height: 53px;
 				border-radius: 26.5px;
 				margin-right: 11px;
 				border: 2px solid;
 				background: var(--purple-of-10, rgba(110, 125, 255, 0.1));
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.mu-user-img {
+					border-radius: 26.5px;
+					overflow: hidden;
+					width: 54px;
+					height: 54px;
+				}
 			}
 			.mu-text {
 				.mu-name {

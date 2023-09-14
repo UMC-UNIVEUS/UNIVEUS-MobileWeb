@@ -1,6 +1,7 @@
 import './MyFeed.scss';
 import Button from '../components/Button';
 import MeetingCard from '../components/MeetingCard';
+import DefaultImg from '../assets/images/default_profile.svg';
 import { MainHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import { useState, useEffect, useRef } from 'react';
@@ -104,12 +105,17 @@ export default function MyFeed() {
 			<MainHeader />
 			<div className="mf-body">
 				<div className="mf-user">
-					<img
-						className="mu-user-img"
-						src={userInfo['profile_img']}
-						alt="유저 프로필 이미지"
-						style={{ borderColor: userInfo['gender'] === 1 ? 'var(--purple-color)' : 'var(--red-color)' }}
-					/>
+					<div
+						className="mu-user-img-box"
+						style={{ borderColor: userInfo['gender'] === 1 ? 'var(—purple-color)' : 'var(—red-color)' }}
+					>
+						<img
+							className="mu-user-img"
+							src={userInfo['profile_img'] ? userInfo['profile_img'] : DefaultImg}
+							alt="유저 프로필 이미지"
+							style={{ width: userInfo['profile_img'] ? '53px' : '30px' }}
+						/>
+					</div>
 					<div className="mu-text">
 						<div className="mu-name">{userInfo['nickname']}</div>
 						<div className="mu-classof">{userInfo['class_of']}</div>
