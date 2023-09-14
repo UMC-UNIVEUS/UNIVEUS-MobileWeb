@@ -18,7 +18,6 @@ import x_button from '../assets/images/x_button.svg';
 import NavBar from '../components/NavBar';
 
 const PostPage = () => {
-
 	const profile_img = undefined;
 
 	const jwtToken = sessionStorage.getItem('accessToken');
@@ -92,11 +91,11 @@ const PostPage = () => {
 
 	const navigate = useNavigate();
 
-    const gender = postData ? postData.Writer.gender : 0;
+	const gender = postData ? postData.Writer.gender : 0;
 
 	console.log(gender);
 
-    const borderColor = gender  === 1 ? '--purple-color' : '--pink-color';
+	const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
 	useEffect(() => {
 		axios({
@@ -159,19 +158,20 @@ const PostPage = () => {
 	};
 
 	const handleClickDeleteButton = () => {
-		axios.delete(`https://univeus.site/post/${id}`, {
-			headers: {
-				'x-access-token': jwtToken,
-			}
-		})
-		.then(function (response) {
-			if (response.data.code === 5000 || response.data.code === 5001) {
-				navigate('/'); 
-			} else { 
-				navigate('/home');
-				console.log('DELETE 요청 성공:', response.data);
-			}
-  		})
+		axios
+			.delete(`https://univeus.site/post/${id}`, {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			})
+			.then(function (response) {
+				if (response.data.code === 5000 || response.data.code === 5001) {
+					navigate('/');
+				} else {
+					navigate('/home');
+					console.log('DELETE 요청 성공:', response.data);
+				}
+			});
 	};
 
 	return (
@@ -263,9 +263,9 @@ const PostPage = () => {
 				</div>
 				{postData.connectedUser.user_id === postData.Writer.user_id ? (
 					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
-				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? 
-                (<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'}/>) :
-                    postData.connectedUser.isParticipate === 1 ? (
+				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
+					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
+				) : postData.connectedUser.isParticipate === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
 				) : (
 					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
@@ -280,10 +280,13 @@ const PostPage = () => {
 						<p style={{ fontWeight: '600', marginTop: '3px' }}>문자로 모임내용이 발송되니 꼭 확인해주세요!</p>
 					</div>
 					<div className="modalbuttoncontainer">
-						<button className="laterbutton" onClick={() => {
-							closeModal2();
-							navigate('/home')
-						}}>
+						<button
+							className="laterbutton"
+							onClick={() => {
+								closeModal2();
+								navigate('/home');
+							}}
+						>
 							<span>나중에 할게요.</span>
 						</button>
 						<Button
@@ -315,12 +318,16 @@ const PostPage = () => {
 							className="managebutton"
 							style={{ backgroundColor: 'var(-x`-deep-blue-color)' }}
 							onClick={() => {
-								navigate(`/modify/${id}`);
+								navigate(`/modify/detail/${id}`);
 							}}
 						>
 							수정하기
 						</button>
-						<button className="managebutton" style={{ backgroundColor: 'var(--light-gray-color)' }} onClick={handleClickDeleteButton}>
+						<button
+							className="managebutton"
+							style={{ backgroundColor: 'var(--light-gray-color)' }}
+							onClick={handleClickDeleteButton}
+						>
 							삭제하기
 						</button>
 					</div>
