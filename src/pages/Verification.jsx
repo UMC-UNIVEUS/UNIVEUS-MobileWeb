@@ -14,7 +14,7 @@ const Verification = () => {
 
 	const jwtToken = sessionStorage.getItem('accessToken');
 
-	const phoneNumberPattern = /^010-\d{4}-\d{4}$/;
+	const phoneNumberPattern = /^010\d{8}$/;
 	const verifyNumberPattern = /^\d{6}$/;
 
 
