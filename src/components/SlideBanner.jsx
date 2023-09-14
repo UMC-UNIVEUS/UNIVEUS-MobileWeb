@@ -30,7 +30,7 @@ const SlideBanner = () => {
 						src={Use}
 						alt="이용약관 배너 이미지"
 						onClick={() => {
-							window.location.href = 'https://univeus.oopy.io/c9401d02-7c38-41f5-ba28-8bcf1d857d8a';
+							window.location = 'https://univeus.oopy.io/c9401d02-7c38-41f5-ba28-8bcf1d857d8a';
 						}}
 					/>
 				</SwiperSlide>
