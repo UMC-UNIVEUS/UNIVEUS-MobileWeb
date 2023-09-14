@@ -28,6 +28,7 @@ const Verification = () => {
 	const [isChecked2, setIsChecked2] = useState(false);
 	const [isChecked3, setIsChecked3] = useState(false);
 
+
 	const handleCheckAll = () => {
 		setIsCheckedAll(!isCheckedAll);
 		if (isCheckedAll === true) {
@@ -107,7 +108,7 @@ const Verification = () => {
             console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
-			} else if (response.data.code === 2012) {
+			} else if (response.data.code === 2012 && response.data.code === 2027) {
 				setIsVerified(1);
 			} else {
 				setIsVerified(2);
