@@ -287,7 +287,13 @@ const PostPage = () => {
 				<Modal isOpen={isModalOpen4} closeModal={closeModal4} title={'유니버스 관리'}>
 					<img src={x_button} alt="" className="x_button" onClick={closeModal4} />
 					<div className="managebuttoncontainer">
-						<button className="managebutton" style={{ backgroundColor: 'var(--deep-blue-color)' }}>
+						<button
+							className="managebutton"
+							style={{ backgroundColor: 'var(--deep-blue-color)' }}
+							onClick={() => {
+								navigate(`/modify/${id}`);
+							}}
+						>
 							수정하기
 						</button>
 						<button className="managebutton" style={{ backgroundColor: 'var(--light-gray-color)' }}>

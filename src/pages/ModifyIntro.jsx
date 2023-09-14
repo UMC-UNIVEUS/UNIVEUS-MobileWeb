@@ -14,7 +14,7 @@ export default function CreateIntro() {
 
 	const navigate = useNavigate();
 
-	const { post_id } = useParams;
+	const { id } = useParams;
 
 	const getImage = (img) => {
 		let newImg = image;
@@ -37,7 +37,7 @@ export default function CreateIntro() {
 		}
 		return arr;
 	}
-	// console.log(localStorage.getItem('images'));
+
 	const jwtToken = sessionStorage.getItem('accessToken');
 
 	const modifyDetailData = JSON.parse(localStorage.getItem('modify'));
@@ -47,18 +47,13 @@ export default function CreateIntro() {
 		setImage(modifyDetailData['images']);
 	}, []);
 
-	// const imageBox = JSON.parse(localStorage.getItem('images'));
-	// console.log('imageBox', imageBox);
-
-	// const jwtToken = useSelector((state) => state.jwtToken);
-
 	const handlePosting = () => {
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
 			},
 			method: 'patch',
-			url: `https://univeus.site/${post_id}`,
+			url: `https://univeus.site/${id}`,
 			data: {
 				category: modifyDetailData['category'],
 				limit_people: modifyDetailData['limit_people'],
@@ -78,9 +73,8 @@ export default function CreateIntro() {
 				navigate('/');
 			} else if (res.data.code === 1000) {
 				localStorage.clear();
-				navigate(`/${post_id}`);
+				navigate(`post/${id}`);
 			}
-			// console.log(jwtToken);
 		});
 	};
 	return (

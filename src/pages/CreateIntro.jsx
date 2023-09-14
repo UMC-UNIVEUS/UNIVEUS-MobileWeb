@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar';
 import axios from 'axios';
 import { useState } from 'react';
 import ImageBox from '../components/ImageBox';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function CreateIntro() {
 	const [title, setTitle] = useState('');
@@ -15,18 +15,12 @@ export default function CreateIntro() {
 	const [image, setImage] = useState([]);
 	const [errorMessage, setErrorMessage] = useState('');
 	const navigate = useNavigate();
+	const { id } = useParams();
 
 	const getImage = (img) => {
-		// const newImage = image
-		// newImage[i] = img
-		// setImage(newImage);
-		// 해당 형태로 넣어줘보기
 		setImage({ ...image, [Object.keys(JSON.parse(img))[0]]: Object.values(JSON.parse(img))[0] });
-		// console.log('img', Object.values(JSON.parse(img))[0]);
 	};
 
-	// console.log('image', image);
-	// console.log('image', Object.values(image));
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
 	};
@@ -37,9 +31,7 @@ export default function CreateIntro() {
 
 	const handleInvitee = (e) => {
 		setInvitee({ ...invitee, [e.target.id]: inviteeText });
-		// invitee.filter(() => inviteeText !== '');
 	};
-	// console.log(invitee);
 
 	const handleInviteeText = (e) => {
 		setInviteeText(e.target.value);
@@ -71,17 +63,11 @@ export default function CreateIntro() {
 		}
 		return arr;
 	}
-	// console.log(localStorage.getItem('images'));
+
 	const jwtToken = sessionStorage.getItem('accessToken');
 
 	const createDetailData = JSON.parse(localStorage.getItem('create'));
-	console.log(createDetailData);
 
-	// const imageBox = JSON.parse(localStorage.getItem('images'));
-	// console.log('imageBox', imageBox);
-
-	// const jwtToken = useSelector((state) => state.jwtToken);
-	console.log(Object.values(invitee));
 	const handlePosting = () => {
 		axios({
 			headers: {
@@ -111,9 +97,8 @@ export default function CreateIntro() {
 			} else if (res.data.code === 1000) {
 				setErrorMessage('');
 				localStorage.clear();
-				navigate('/profile/myunive');
+				navigate(`/post/${id}`);
 			}
-			// console.log(jwtToken);
 		});
 	};
 	return (

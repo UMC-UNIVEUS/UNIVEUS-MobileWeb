@@ -4,6 +4,7 @@ import { MainHeader } from '../components/Header';
 import MeetingCard from '../components/MeetingCard';
 import NavBar from '../components/NavBar';
 import SlideBanner from '../components/SlideBanner';
+import Footer from '../components/Footer';
 
 import '../pages/HomePage.scss';
 import { useEffect, useState } from 'react';
@@ -44,11 +45,17 @@ const HomePage = () => {
 			<div className="homepagebody">
 				<div className="matesticker">우리의 축제 MATE🔥</div>
 				<div className="meetingcardcontainer">
-					{meetingList ? meetingList.map((meeting) => (
-						<MeetingCard {...meeting} />
-					)) : <div>로딩중</div>}
+					{meetingList ? meetingList.map((meeting) => <MeetingCard {...meeting} />) : <div>로딩중</div>}
+					<Footer />
 				</div>
-				<Button className="startbutton" content={'유니버스 생성하기'} type={'floating'} />
+				<Button
+					className="startbutton"
+					content={'유니버스 생성하기'}
+					type={'floating'}
+					onClick={() => {
+						navigate('/create/detail');
+					}}
+				/>
 			</div>
 			<NavBar />
 		</div>

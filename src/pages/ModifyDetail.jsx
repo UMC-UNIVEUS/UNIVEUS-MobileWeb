@@ -15,10 +15,8 @@ export default function ModifyDetail() {
 	const navigate = useNavigate();
 
 	for (let i = 0; i < getImage.length; i++) {
-		// console.log(getImage[i]['img_url']);
 		imgUrlList.push(getImage[i]['img_url']);
 	}
-	// console.log('Image', imgUrlList);
 
 	const [limitGender, setLimitGender] = useState(); // 0 or 1 or 2
 	const [location, setLocation] = useState('');
@@ -28,7 +26,7 @@ export default function ModifyDetail() {
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
 
-	const { post_id } = useParams;
+	const { id } = useParams;
 
 	const handleClickNoGenderInput = () => {
 		setLimitGender(0);
@@ -74,7 +72,7 @@ export default function ModifyDetail() {
 				'x-access-token': jwtToken,
 			},
 			method: 'GET',
-			url: `https://univeus.site/post/${post_id}`,
+			url: `https://univeus.site/post/${id}`,
 		})
 			.then((res) => {
 				console.log('res', res.data.result);
@@ -128,6 +126,7 @@ export default function ModifyDetail() {
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
 		localStorage.setItem('modify', JSON.stringify(CreateDetailData));
+		navigate(`/modify/intro/${id}`);
 	};
 
 	return (

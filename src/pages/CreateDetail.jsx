@@ -4,8 +4,8 @@ import Minus from '../assets/images/minus_blue.svg';
 import Plus from '../assets/images/plus_blue.svg';
 import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
-import axios from 'axios';
-import { useState, useSelector } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateDetail() {
 	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
@@ -16,6 +16,8 @@ export default function CreateDetail() {
 	const [endDate, setEndDate] = useState('');
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
+
+	const navigate = useNavigate();
 
 	const handleClickNoGenderInput = () => {
 		setLimitGender(0);
@@ -75,6 +77,7 @@ export default function CreateDetail() {
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
 		localStorage.setItem('create', JSON.stringify(CreateDetailData));
+		navigate('/create/intro');
 	};
 
 	return (

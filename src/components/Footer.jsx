@@ -4,9 +4,13 @@ import Insta from '../assets/images/Insta.svg';
 export default function Footer() {
 	return (
 		<div className="footer">
-			<a href="https://www.instagram.com/unive.us/?igshid=MzMyNGUyNmU2YQ%3D%3D" className="a-link">
-				<img src={Insta} alt="인스타그램 아이콘" />
-			</a>
+			<img
+				src={Insta}
+				alt="인스타그램 아이콘"
+				onClick={() => {
+					window.location.href = 'https://www.instagram.com/unive.us/?igshid=MzMyNGUyNmU2YQ%3D%3D';
+				}}
+			/>
 			<div className="f-text">
 				<div>UNIVE.US </div>
 				<div>대학생활의 로망을 실현하고 싶은 사람들의 행성</div>
