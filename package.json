@@ -2,7 +2,7 @@
 	"name": "univeus-mw",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "https://univeus.com/",
+	"proxy": "https://univeus.com",
 	"dependencies": {
 		"@react-oauth/google": "^0.11.1",
 		"@testing-library/jest-dom": "^5.17.0",
