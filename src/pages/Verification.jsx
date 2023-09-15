@@ -88,8 +88,8 @@ const Verification = () => {
 			},
 		}).then((res) => {
 			setIsSendedMessage(true);
-			setSendMessage(res.message);
-			console.log(res.message);
+			setSendMessage(res.data.message);
+			console.log(res.data.message);
 		});
 	};
 
