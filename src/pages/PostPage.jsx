@@ -148,7 +148,7 @@ const PostPage = () => {
 				invited_userNickNamesFromAPI: invitee,
 			},
 		}).then((response) => {
-			closeModal();
+			closeModal4();
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
