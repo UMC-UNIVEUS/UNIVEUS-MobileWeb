@@ -148,7 +148,7 @@ const PostPage = () => {
 			data: {
 				user_id: postData.Post.user_id,
 				participant_userIDsFromDB: participantUserIds,
-				invited_userNickNamesFromAPI: invitee,
+				invited_userNickNamesFromAPI: invitee.filter((item) => item !== ''),
 			},
 		}).then((response) => {
 			closeModal4();
