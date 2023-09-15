@@ -18,9 +18,7 @@ export default function CreateIntro() {
 	const { id } = useParams();
 
 	const getImage = (img) => {
-		if (Object.values(JSON.parse(img))[0] !== '') {
-			setImage({ ...image, [Object.keys(JSON.parse(img))[0]]: Object.values(JSON.parse(img))[0] });
-		}
+		setImage({ ...image, [Object.keys(JSON.parse(img))[0]]: Object.values(JSON.parse(img))[0] });
 	};
 
 	const handleTitle = (e) => {
@@ -87,7 +85,7 @@ export default function CreateIntro() {
 				end_date: createDetailData['end_date'],
 				title: title,
 				content: content,
-				images: Object.values(image),
+				images: Object.values(image).filter((item) => item !== ''),
 				invited_userNickNames: Object.values(invitee),
 			},
 		}).then((res) => {
