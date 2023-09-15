@@ -55,6 +55,7 @@ export default function CreateIntro() {
 			method: 'patch',
 			url: `https://univeus.site/post/${id}`,
 			data: {
+				user_id: modifyDetailData['user_id'],
 				category: modifyDetailData['category'],
 				limit_people: modifyDetailData['limit_people'],
 				limit_gender: modifyDetailData['limit_gender'],

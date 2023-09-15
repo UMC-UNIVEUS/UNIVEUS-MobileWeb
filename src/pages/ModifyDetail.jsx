@@ -109,6 +109,7 @@ export default function ModifyDetail() {
 	}, []);
 
 	const CreateDetailData = {
+		user_id: getPost['user_id'],
 		category: getPost['category'],
 		limit_people: getPost['limit_people'],
 		limit_gender: limitGender,
