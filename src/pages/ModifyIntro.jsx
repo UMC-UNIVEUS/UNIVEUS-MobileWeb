@@ -74,7 +74,7 @@ export default function CreateIntro() {
 				navigate('/');
 			} else if (res.data.code === 1000) {
 				localStorage.clear();
-				navigate(`post/${id}`);
+				navigate(`/post/${id}`);
 			}
 		});
 	};
