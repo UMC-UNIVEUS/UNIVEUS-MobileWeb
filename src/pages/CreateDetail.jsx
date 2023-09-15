@@ -107,7 +107,7 @@ export default function CreateDetail() {
 					</div>
 					<div className="cd-person-number">
 						<img className="pn-minus" src={Minus} alt="마이너스 버튼" onClick={handleClickPeopleMinus} />
-						<div className="pn-input">{limitPeople}</div>
+						<div className="pn-input">{limitPeople ? limitPeople : CreateDetailData['limit_people']}</div>
 						<img className="pn-plus" src={Plus} alt="플러스 버튼" onClick={handleClickPeoplePlus} />
 					</div>
 					<div className="cd-meet-date">
