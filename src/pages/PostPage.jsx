@@ -227,7 +227,9 @@ const PostPage = () => {
 				</div>
 				<div className="horizontal_bar"></div>
 				<div className="postcontentcontainer">
-					<p className="posttitle">{postData ? postData.Post.title : ''}</p>
+					<p className="posttitle" style={{ whiteSpace: 'pre' }}>
+						{postData ? postData.Post.title : ''}
+					</p>
 					<p className="postcontent">{postData ? postData.Post.content : ''}</p>
 				</div>
 				<div className="schedulecontainer">
