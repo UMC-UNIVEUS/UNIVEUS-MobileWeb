@@ -53,7 +53,7 @@ export default function CreateIntro() {
 				'x-access-token': jwtToken,
 			},
 			method: 'patch',
-			url: `https://univeus.site/${id}`,
+			url: `https://univeus.site/post/${id}`,
 			data: {
 				category: modifyDetailData['category'],
 				limit_people: modifyDetailData['limit_people'],
@@ -125,6 +125,7 @@ export default function CreateIntro() {
             - 모임의 목표&#13;&#10;"
 						onChange={handleContent}
 						value={content}
+						style={{ marginBottom: '30px' }}
 					></textarea>
 				</div>
 				{title !== '' && content !== '' ? (
