@@ -17,10 +17,36 @@
 		justify-content: center;
 		align-items: center;
 		&.nb-home {
-			margin-right: 96px;
+			// margin-right: 96px;
+			.nb-btn-img {
+				path {
+					fill: #334155;
+				}
+			}
+			.nb-btn-text {
+				color: #334155;
+			}
 		}
 		&.nb-search {
-			margin-right: 80px;
+			// margin-right: 80px;
+			.nb-btn-img {
+				path {
+					fill: #334155;
+				}
+			}
+			.nb-btn-text {
+				color: #334155;
+			}
+		}
+		&.nb-search {
+			.nb-btn-img {
+				path {
+					fill: #334155;
+				}
+			}
+			.nb-btn-text {
+				color: #334155;
+			}
 		}
 		&:visited {
 			.nb-btn-text {
