@@ -17,6 +17,10 @@ const HomePage = () => {
 
 	const navigate = useNavigate();
 
+	window.addEventListener('popstate', function (event) {
+		navigate('/home');
+	});
+
 	useEffect(() => {
 		axios({
 			headers: {
@@ -38,7 +42,7 @@ const HomePage = () => {
 			});
 	}, []);
 
-	window.addEventListener('popstate', function(event) {
+	window.addEventListener('popstate', function (event) {
 		navigate('/home');
 	});
 
