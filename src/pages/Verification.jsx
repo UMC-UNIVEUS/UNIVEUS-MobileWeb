@@ -160,7 +160,8 @@ const Verification = () => {
 						{phoneNumberPattern.test(phoneNumber) === true ? (
 							<Button content={'인증번호 받기'} onClick={handleSendVerifyCode} />
 						) : (
-							<button className="unactive">인증번호 받기</button>
+							<Button type={'disabled'} content={'인증번호 받기'} />
+							// <button className="unactive">인증번호 받기</button>
 						)}
 					</div>
 					{sendMessage === '인증번호 문자 전송이 완료되었습니다.' ? (

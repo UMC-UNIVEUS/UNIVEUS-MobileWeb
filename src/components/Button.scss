@@ -43,4 +43,10 @@
 			}
 		}
 	}
+	&.disabled {
+		background: var(--light-gray-color);
+		.btn-content {
+			color: var(--white-color);
+		}
+	}
 }

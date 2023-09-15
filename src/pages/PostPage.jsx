@@ -303,14 +303,7 @@ const PostPage = () => {
 				) : (
 					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
 				)}
-				<Modal
-					isOpen={isModalOpen}
-					closeModal={closeModal}
-					title={'함께 하는 친구를 초대해 주세요!'}
-					onClick={() => {
-						setInviteeErrorMessage('');
-					}}
-				>
+				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
 					<div className="inviteelist">{repeatInvitee(postData ? postData.Post.limit_people : 0)}</div>
 					<p
 						className="inviteeErrorMessage"
