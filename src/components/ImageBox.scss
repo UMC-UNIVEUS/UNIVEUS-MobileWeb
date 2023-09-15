@@ -1,0 +1,23 @@
+.ciu-img {
+	position: relative;
+	.ciu-img-delete {
+		position: absolute;
+		top: -6px;
+		right: -6px;
+	}
+	width: 72px;
+	height: 72px;
+	background-color: var(--white-purple-color);
+	border-radius: 20px;
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	// overflow: hidden;
+	.ciu-img-file {
+		width: 100%;
+		border-radius: 20px;
+		object-fit: cover;
+	}
+}

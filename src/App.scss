@@ -6,8 +6,8 @@
 	--orange-color: #f1754d;
 	--yellow-color: #ffc727;
 	--skyblue-color: #599fff;
-	// 투명도 10% / 100%
-	--blue-color: #6e7dff;
+	--purple-color: #6e7dff;
+	--white-purple-color: #f0f2ff;
 	--deep-blue-color: #2f3db8;
 	--white-gray-color: #e2e8f0;
 	--light-gray-color: #cbd5e1;
@@ -32,5 +32,6 @@
 	font-size: var(--default-font);
 	font-weight: var(--regular-bold);
 	font-family: 'Pretendard';
-	margin: 0 20px;
+	font-weight: var(--regular-bold);
+	color: var(--black-color);
 }

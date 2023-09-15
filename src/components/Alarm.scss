@@ -1,0 +1,10 @@
+.Alarm {
+    .alarmtext {
+        padding: 10px 14px;
+        border-radius: 110px;
+        background-color: rgba(110, 125, 255, 0.1);
+        display: inline-block;
+        font-size: var(--small-font);
+        font-weight: var(--regular-bold);
+    }
+}

@@ -1,0 +1,83 @@
+.LandingPage {
+    .imagecontainer {
+        width: 100%;
+        position: absolute;
+        top: 264px;
+        z-index: -1;
+        display: flex;
+        justify-content: center;
+    }
+    .landingpagebody {
+        margin: 0 20px;
+        padding-top: 52px;
+        .bannercontainer {
+            width: 100%;
+            margin-top: 73px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 13px;
+            .bannerfirstrow {
+                margin-left: 9px;
+                display: flex;
+                flex-direction: row;
+                column-gap: 15px;
+            }
+            .bannersecondrow {
+                margin-left: 54px;
+                display: flex;
+                flex-direction: row;
+                column-gap: 15px;
+            }
+            .bannerthirdrow {
+                margin-left: 17px;
+                display: flex;
+                flex-direction: row;
+                column-gap: 15px;
+            }
+        }
+        .titlecontainer {
+            width: 100%;
+            text-align: center;
+            margin-top: 105px;
+            .titletext {
+                font-size: var(--large-font);
+                font-weight: var(--semi-bold);
+            }
+            .univeustext {
+                margin-top: 5px;
+                font-size: var(--large-font);
+                font-weight: var(--bold);
+            }
+        }
+        .loginbutton {
+            width: 100%;
+            height: 47px;
+            border-radius: 30px;
+            margin-top: 126px;
+            box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: var(--medium-font);
+            font-weight: var(--regular-bold);
+            position: relative;
+            .googleicon {
+                position: absolute;
+                z-index: 999;
+                left: 15px;
+            }
+        }
+    }
+}
+
+.LandingPageBanner {
+    .bannertext {
+        box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25);
+        padding: 10px 17px;
+        border-radius: 999px;
+        background-color: var(--white-color);
+        display: inline-block;
+        font-size: var(--default-font);
+        font-weight: var(--regular-bold);
+    }
+}

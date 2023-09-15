@@ -1,0 +1,343 @@
+.PostPage {
+    --pink-color: #ff8a8a;
+    .postpagebody {
+        margin: 0 20px;
+        padding-top: 52px;
+        padding-bottom: 115px;
+        .postpageheader {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: 15px;
+            padding-bottom: 10px;
+            .writerinfocontainer {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .profileimage {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 999px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                    margin-left: 3px;
+                    .defaultprofileimage {
+                        width: 19.48px;
+                        height: 19.48px;
+                    }
+                    .userprofileimage {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .writerinfo {
+                    margin-left: 9px;
+                    .writer_nickname_and_grade {
+                        display: flex;
+                        flex-direction: row;
+                        margin-bottom: 7px;
+                        .nickname {
+                            font-size: var(--default-font);
+                            font-weight: var(--semi-bold);
+                        }
+                        .vertical_bar {
+                            width: 1.5px;
+                            height: auto;
+                            background-color: var(--gray-color);
+                            margin: 0 7px;
+                        }
+                        .grade {
+                            font-size: var(--default-font);
+                            font-weight: var(--regular-bold);
+                        }
+                    }
+                    .posttime {
+                        p {
+                            font-size: var(--tiny-font);
+                            font-weight: var(--regular-bold);
+                            color: var(--gray-color);
+                        }
+                    }
+                }
+            }
+            .GenderSticker {
+                position: static;
+                margin-top: 5px;
+                width: 64px;
+                height: 20px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                column-gap: 2px;
+                img {
+                    width: 12px;
+                    height: 12px;
+                }
+                .onlytext {
+                    font-size: 12px;
+                    font-weight: var(--semi-bold);
+                    color: var(--white-color);
+                }
+            }
+        }
+        .horizontal_bar {
+            width: 100%;
+            height: 1px;
+            background-color: #e1edff;
+        }
+        .postcontentcontainer {
+            padding-top: 15px;
+            padding-bottom: 26px;
+            .posttitle {
+                font-size: var(--medium-font);
+                font-weight: var(--semi-bold);
+            }
+            .postcontent {
+                margin-top: 20px;
+                font-size: var(--default-font);
+                font-weight: var(--regular-bold);
+                line-height: 18px;
+            }
+        }
+        .schedulecontainer {
+            width: (100% - 26)px;
+            height: 86px;
+            border: 1px solid var(--light-gray-color);
+            border-radius: 10px;
+            padding: 9px 13px;
+            .scheduletitle {
+                font-size: var(--default-font);
+                font-weight: var(--semi-bold);
+            }
+            .scheduleinfocontainer {
+                margin-top: 4px;
+                .datebox, .textbox  {
+                    display: flex;
+                    flex-direction: row;
+                    font-size: var(--small-font);
+                    align-items: center;
+                    line-height: 18px;
+                    .dateinfo {
+                        font-size: 12px;
+                        display: flex;
+                        font-weight: var(--semi-bold);
+                        align-items: center;
+                        line-height: 12px;
+                        margin-left: 10px;
+                        .date {
+                            width: 35px;
+                        } 
+                        .small_vertical_bar {
+                            width: 1.5px;
+                            height: 12px;
+                            background-color: var(--light-gray-color);
+                            margin: 0 5px;
+                        }
+                    }
+                    .meetingplace {
+                        font-size: 12px;
+                        font-weight: var(--semi-bold);
+                        margin-left: 10px;
+                    }
+                    .meetinglimit {
+                        font-size: 12px;
+                        margin-left: 10px;
+                        display: flex;
+                        flex-direction: row;
+                    }
+                }
+            }
+        }
+        .postpageimagecontainer {
+            width: 100%;
+            margin-top: 14px;
+            margin-bottom: 20px;
+            overflow: auto;
+            white-space: nowrap;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .PostImage {
+                width: 185px;
+                height: 185px;
+                display: inline-block;
+                border-radius: 10px;
+                margin-right: 10px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: inherit;
+                    object-fit: cover;
+                }
+            }
+        }
+        .participantscontainer {
+            margin-top: 24px;
+            .participantcontainertitle {
+                font-size: var(--default-font);
+                font-weight: var(--semi-bold);
+            }
+            .participantlist {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+                .Participant {
+                    width: 100%;
+                    height: 62px;
+                    border-radius: 5px;
+                    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    .flex-left {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        .participantprofileimage {
+                            width: 38px;
+                            height: 38px;
+                            border-radius: 999px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            overflow: hidden;
+                            margin-left: 8px;
+                            .defaultprofileimage {
+                                width: 19.48px;
+                                height: 19.48px;
+                            }
+                            .userprofileimage {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                        .participantinfo {
+                            margin-left: 10px;
+                            .participantnickname {
+                                font-size: var(--default-font);
+                                font-weight: var(--semi-bold);
+                                margin-bottom: 5px;
+                            }
+                            .participantclass {
+                                font-size: var(--tiny-font);
+                                font-weight: var(--regular-bold);
+                            }
+                        }
+                    }
+                    .flex-right {
+                        display: flex;
+                        align-items: center;
+                        margin-right: 20px;
+                        p {
+                            font-size: var(--default-font);
+                            font-weight: var(--semi-bold);
+                            color: var(--gray-color);
+                        }
+                    }
+                }
+            }
+        }
+        .floating {
+            margin-top: 35px;
+        }
+    }
+}
+
+.inviteelist {
+    margin-top: 17px;
+    .cfi-input {
+        border-radius: 5px;
+        border: 2px solid var(--light-gray-color);
+        background: var(--white-color);
+        padding: 11px;
+        width: 85%;
+        outline-color: var(--deep-blue-color);
+        margin-bottom: 7px;
+        &::placeholder {
+            color: #bfc3d4;
+        }
+    }
+}
+
+// .button-body {
+//     margin-top: 5px;
+// }
+
+.modalbuttoncontainer {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        column-gap: 15px;
+        margin-top: 14px;
+        .laterbutton {
+            display: inline-flex;
+            height: 36px;
+            padding: 8px 16px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border-radius: 5px;
+            background: #e7e7e7;
+            box-sizing: border-box;
+            border: none;
+            margin-top: 5px;
+            span {
+                margin-top: 3px;
+            }
+        }
+        .yesnobutton {
+            display: inline-flex;
+            height: 36px;
+            width: 100px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border-radius: 5px;
+            background: #e7e7e7;
+            box-sizing: border-box;
+            border: none;
+            margin-top: 5px;
+            span {
+                margin-top: 3px;
+            }
+        }
+}
+
+.completecontainer {
+    margin-top: 10px;
+}
+
+.x_button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.managebuttoncontainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 7px;
+    .managebutton {
+        width: 220px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        font-size: var(--default-font);
+        font-weight: var(--bold);
+        color: var(--white-color);
+    }
+}
