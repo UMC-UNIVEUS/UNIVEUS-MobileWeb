@@ -80,6 +80,9 @@ export default function CreateDetail() {
 		navigate('/create/intro');
 	};
 
+	const localStorageData = JSON.parse(localStorage.getItem('create'));
+	console.log(localStorageData);
+
 	return (
 		<div className="create-detail">
 			<SubHeader headertext={'유니버스 생성'} />
@@ -107,7 +110,7 @@ export default function CreateDetail() {
 					</div>
 					<div className="cd-person-number">
 						<img className="pn-minus" src={Minus} alt="마이너스 버튼" onClick={handleClickPeopleMinus} />
-						<div className="pn-input">{limitPeople ? limitPeople : CreateDetailData['limit_people']}</div>
+						<div className="pn-input">{localStorageData ? localStorageData['limit_people'] : limitPeople}</div>
 						<img className="pn-plus" src={Plus} alt="플러스 버튼" onClick={handleClickPeoplePlus} />
 					</div>
 					<div className="cd-meet-date">
