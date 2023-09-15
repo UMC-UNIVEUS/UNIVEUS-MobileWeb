@@ -65,7 +65,7 @@ export default function CreateIntro() {
 				end_date: modifyDetailData['end_date'],
 				title: title,
 				content: content,
-				images: Object.values(image),
+				images: Object.values(image).filter((item) => item !== ''),
 				invited_userNickNames: modifyDetailData['invited_userNickNames'],
 			},
 		}).then((res) => {
