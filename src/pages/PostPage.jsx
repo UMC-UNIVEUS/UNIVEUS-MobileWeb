@@ -338,7 +338,7 @@ const PostPage = () => {
 					<div className="managebuttoncontainer">
 						<button
 							className="managebutton"
-							style={{ backgroundColor: 'var(-x`-deep-blue-color)' }}
+							style={{ backgroundColor: 'var(--deep-blue-color)' }}
 							onClick={() => {
 								navigate(`/modify/detail/${id}`);
 							}}
