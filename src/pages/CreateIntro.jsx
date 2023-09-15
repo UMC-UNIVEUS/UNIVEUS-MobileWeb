@@ -106,7 +106,12 @@ export default function CreateIntro() {
 			<SubHeader headertext={'유니버스 생성'} />
 			<div className="ci-body">
 				<div className="ci-page">
-					<div className="page-tap">
+					<div
+						className="page-tap"
+						onClick={() => {
+							navigate('/create/detail');
+						}}
+					>
 						<span style={{ color: 'var(--light-gray-color)' }}>1. 상세 정보 입력</span>
 						<div className="page-hr" style={{ backgroundColor: 'var(--light-gray-color)' }}></div>
 					</div>

@@ -139,7 +139,7 @@ export default function ModifyDetail() {
 						<span>1. 상세 정보 입력</span>
 						<div className="page-hr"></div>
 					</div>
-					<div className="page-tap">
+					<div className="page-tap" onClick={handleClickNextPage}>
 						<span style={{ color: 'var(--light-gray-color)' }}>2. 소개글 글쓰기</span>
 						<div className="page-hr" style={{ backgroundColor: 'var(--light-gray-color)' }}></div>
 					</div>
