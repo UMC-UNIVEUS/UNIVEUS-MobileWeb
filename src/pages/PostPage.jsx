@@ -30,7 +30,9 @@ const PostPage = () => {
 			category: '',
 			limit_gender: '',
 			content: '',
-			created_at: '',
+			created_month: '',
+			created_date: '',
+			created_time: '',
 			updated_at: '',
 			scrapes: '',
 			location: '',
@@ -209,7 +211,10 @@ const PostPage = () => {
 								<p className="grade">{postData ? postData.Writer.class_of : ''}</p>
 							</div>
 							<div className="posttime">
-								<p className="">09/27 12:13</p>
+								<p>
+									{postData ? postData.Post.created_month : ''}/{postData ? postData.Post.created_date : ''}{' '}
+									{postData ? postData.Post.created_time : ''}
+								</p>
 							</div>
 						</div>
 					</div>
