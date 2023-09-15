@@ -65,7 +65,7 @@ const HomePage = () => {
 					}}
 				/>
 			</div>
-			<NavBar />
+			<NavBar present={'home'} />
 		</div>
 	);
 };

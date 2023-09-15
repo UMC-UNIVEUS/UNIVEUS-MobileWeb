@@ -135,7 +135,7 @@ export default function MyFeed() {
 					{meetingList.length && meetingList.map((meeting) => <MeetingCard {...meeting} />)}
 				</div>
 			</div>
-			<NavBar />
+			<NavBar present={'mypage'} />
 		</div>
 	);
 }

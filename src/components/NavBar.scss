@@ -28,7 +28,8 @@
 			}
 		}
 		&:hover,
-		:active {
+		:active,
+		&.present {
 			.nb-btn-img {
 				path {
 					fill: #334155;

@@ -32,10 +32,10 @@ const SearchPage = () => {
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else if (response.data.code === 7000) {
-                navigate('/search')
+				navigate('/search');
 			} else {
-                setSearchedData(response.data.result);
-            }
+				setSearchedData(response.data.result);
+			}
 		});
 	};
 
@@ -68,7 +68,7 @@ const SearchPage = () => {
 					<p className="nodatatext">찾으시는 검색 결과가 없습니다.</p>
 				)}
 			</div>
-			<NavBar />
+			<NavBar present={'search'} />
 		</div>
 	);
 };

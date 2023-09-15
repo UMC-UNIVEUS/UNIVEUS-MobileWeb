@@ -3,18 +3,18 @@ import { ReactComponent as Home } from '../assets/images/earth.svg';
 import { ReactComponent as Search } from '../assets/images/rocket.svg';
 import { ReactComponent as MyPage } from '../assets/images/person.svg';
 
-export default function NavBar() {
+export default function NavBar(present) {
 	return (
 		<div className="nav-bar">
-			<a className="nb-link nb-home" href="/home">
+			<a className={present ? 'nb-link nb-home present' : 'nb-link nb-home'} href="/home">
 				<Home className="nb-btn-img" />
 				<span className="nb-btn-text">홈</span>
 			</a>
-			<a className="nb-link nb-search" href="/search">
+			<a className={present ? 'nb-link nb-search present' : 'nb-link nb-home'} href="/search">
 				<Search className="nb-btn-img" />
 				<span className="nb-btn-text">검색</span>
 			</a>
-			<a className="nb-link nb-mypage" href="/myunive">
+			<a className={present ? 'nb-link nb-mypage present' : 'nb-link nb-home'} href="/myunive">
 				<MyPage className="nb-btn-img" />
 				<span className="nb-btn-text">마이페이지</span>
 			</a>
