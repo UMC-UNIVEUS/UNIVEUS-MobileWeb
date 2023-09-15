@@ -129,7 +129,7 @@ export default function CreateIntro() {
 					></textarea>
 				</div>
 				{title !== '' && content !== '' ? (
-					<Button type={'floating'} content={'유니버스 생성하기'} onClick={handlePosting} />
+					<Button type={'floating'} content={'유니버스 수정하기'} onClick={handlePosting} />
 				) : (
 					<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
 				)}

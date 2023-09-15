@@ -33,7 +33,7 @@ const LandingPage = () => {
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');
-					} else if (response.data.code === 2019 || response.data.code === 2020) {
+					} else if (response.data.code === 2019) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/verification');
 					} else if (response.data.code === 2020) {
