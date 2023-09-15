@@ -20,25 +20,30 @@ const LandingPage = () => {
 		const access_Token = parsedHash.get('access_token');
 		setAccessToken(access_Token);
 
-		if (accessToken !== null && accessToken !== "") {
+		if (accessToken !== null && accessToken !== '') {
 			axios({
 				method: 'post',
 				url: 'https://univeus.site/user/login',
 				data: {
 					accessToken: accessToken,
 				},
-			}).then((response) => {
-				console.log(response);
-				if (response.data.code === 1000) {
-					sessionStorage.setItem('accessToken', response.data.result.accessToken);
-					navigate('/home');
-				} else if (response.data.code === 2019 || response.data.code === 2020) {
-					sessionStorage.setItem('accessToken', response.data.result.accessToken);
-					navigate('/verification');
-				}
-			}).catch((error) => {
-                console.error('axios error:', error);
-            });
+			})
+				.then((response) => {
+					console.log(response);
+					if (response.data.code === 1000) {
+						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						navigate('/home');
+					} else if (response.data.code === 2019 || response.data.code === 2020) {
+						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						navigate('/verification');
+					} else if (response.data.code === 2020) {
+						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						navigate('/register');
+					}
+				})
+				.catch((error) => {
+					console.error('axios error:', error);
+				});
 		}
 	}, [accessToken]);
 

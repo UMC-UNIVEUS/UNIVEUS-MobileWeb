@@ -14,7 +14,7 @@ export default function CreateIntro() {
 
 	const navigate = useNavigate();
 
-	const { id } = useParams;
+	const { id } = useParams();
 
 	const getImage = (img) => {
 		let newImg = image;
@@ -79,7 +79,7 @@ export default function CreateIntro() {
 	};
 	return (
 		<div className="create-intro">
-			<SubHeader headertext={'유니버스 생성'} />
+			<SubHeader headertext={'유니버스 수정'} />
 			<div className="ci-body">
 				<div className="ci-page">
 					<div className="page-tap">

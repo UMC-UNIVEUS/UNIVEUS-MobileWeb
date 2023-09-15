@@ -26,7 +26,7 @@ export default function ModifyDetail() {
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
 
-	const { id } = useParams;
+	const { id } = useParams();
 
 	const handleClickNoGenderInput = () => {
 		setLimitGender(0);
@@ -131,7 +131,7 @@ export default function ModifyDetail() {
 
 	return (
 		<div className="create-detail">
-			<SubHeader headertext={'유니버스 생성'} />
+			<SubHeader headertext={'유니버스 수정'} />
 			<div className="cd-body">
 				<div className="cd-page">
 					<div className="page-tap">
