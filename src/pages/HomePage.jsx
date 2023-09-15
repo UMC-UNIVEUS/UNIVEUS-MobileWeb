@@ -38,6 +38,10 @@ const HomePage = () => {
 			});
 	}, []);
 
+	window.addEventListener('popstate', function(event) {
+		navigate('/home');
+	});
+
 	return (
 		<div className="HomePage">
 			<MainHeader />
