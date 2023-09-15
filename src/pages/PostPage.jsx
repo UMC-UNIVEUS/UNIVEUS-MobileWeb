@@ -82,7 +82,7 @@ const PostPage = () => {
 	const [inviteeText, setInviteeText] = useState('');
 
 	const handleInvitee = (e) => {
-		setInvitee([...invitee, inviteeText]);
+		setInvitee({ ...invitee, [e.target.id]: inviteeText });
 	};
 
 	const handleInviteeText = (e) => {
@@ -148,7 +148,7 @@ const PostPage = () => {
 			data: {
 				user_id: postData.Post.user_id,
 				participant_userIDsFromDB: participantUserIds,
-				invited_userNickNamesFromAPI: invitee.filter((item) => item !== ''),
+				invited_userNickNamesFromAPI: Object.values(invitee).filter((item) => item !== ''),
 			},
 		}).then((response) => {
 			closeModal4();
