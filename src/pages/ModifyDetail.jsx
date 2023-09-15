@@ -149,7 +149,7 @@ export default function ModifyDetail() {
 							location !== '' &&
 							openChat !== ''
 								? handleClickNextPage
-								: ''
+								: () => {}
 						}
 					>
 						<span style={{ color: 'var(--light-gray-color)' }}>2. 소개글 글쓰기</span>
