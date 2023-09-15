@@ -137,6 +137,7 @@ const PostPage = () => {
 		return arr;
 	}
 
+	const [inviteeErrorMessage, setInviteeErrorMessage] = useState('');
 	const handleClickInviteButton = () => {
 		axios({
 			headers: {
@@ -153,6 +154,16 @@ const PostPage = () => {
 			closeModal4();
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
+			} else if (response.data.code === 3000) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3007) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3019) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3009) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3008) {
+				setInviteeErrorMessage(response.data.message);
 			} else {
 				openModal2();
 			}
@@ -294,6 +305,12 @@ const PostPage = () => {
 				)}
 				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
 					<div className="inviteelist">{repeatInvitee(postData ? postData.Post.limit_people : 0)}</div>
+					<p
+						className="inviteeErrorMessage"
+						style={{ marginTop: '8px', marginBottom: '10px', color: 'var(--orange-color)' }}
+					>
+						{inviteeErrorMessage}
+					</p>
 					<Button content={'초대하기'} onClick={handleClickInviteButton} />
 				</Modal>
 				<Modal isOpen={isModalOpen2} closeModal={closeModal2} title={'참가 신청이 완료되었어요 :)'}>
