@@ -31,7 +31,6 @@ const SlideBanner = () => {
 						alt="이용약관 배너 이미지"
 						onClick={() => {
 							window.open('https://univeus.oopy.io/c9401d02-7c38-41f5-ba28-8bcf1d857d8a', '_blank');
-							window.location = 'https://univeus.oopy.io/c9401d02-7c38-41f5-ba28-8bcf1d857d8a';
 						}}
 					/>
 				</SwiperSlide>
