@@ -186,7 +186,7 @@ const PostPage = () => {
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
-				navigate('home');
+				navigate('/home');
 			}
 		});
 	};
