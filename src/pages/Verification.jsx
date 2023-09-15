@@ -17,17 +17,16 @@ const Verification = () => {
 	const phoneNumberPattern = /^010\d{8}$/;
 	const verifyNumberPattern = /^\d{6}$/;
 
-
 	const [isVerified, setIsVerified] = useState(0); // 초기 상태 0, 인증 성공 1, 인증 실패 2
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [verifyNumber, setVerifyNumber] = useState('');
 	const [isSendedMessage, setIsSendedMessage] = useState(false);
+	const [sendMessage, setSendMessage] = useState('');
 
 	const [isCheckedAll, setIsCheckedAll] = useState(false);
 	const [isChecked1, setIsChecked1] = useState(false);
 	const [isChecked2, setIsChecked2] = useState(false);
 	const [isChecked3, setIsChecked3] = useState(false);
-
 
 	const handleCheckAll = () => {
 		setIsCheckedAll(!isCheckedAll);
@@ -89,6 +88,7 @@ const Verification = () => {
 			},
 		}).then((res) => {
 			setIsSendedMessage(true);
+			setSendMessage(res.message);
 			console.log(res.message);
 		});
 	};
@@ -105,7 +105,7 @@ const Verification = () => {
 				number: parseInt(verifyNumber),
 			},
 		}).then((response) => {
-            console.log(response);
+			console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else if (response.data.code === 2012 || response.data.code === 2027) {
@@ -127,7 +127,7 @@ const Verification = () => {
 				userAgreement: [1, 1, 1],
 			},
 		}).then((response) => {
-            console.log(response);
+			console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
@@ -158,11 +158,12 @@ const Verification = () => {
 							onChange={handleChangePhoneNumber}
 						/>
 						{phoneNumberPattern.test(phoneNumber) === true ? (
-						<Button content={'인증번호 받기'} onClick={handleSendVerifyCode} />
-					) : (
-						<button className='unactive'>인증번호 받기</button>
-					)}
+							<Button content={'인증번호 받기'} onClick={handleSendVerifyCode} />
+						) : (
+							<button className="unactive">인증번호 받기</button>
+						)}
 					</div>
+					<p style={{ color: 'var(--orange-color)', fontSize: 'var(--small-font)', marginTop: '5px' }}>{sendMessage}</p>
 				</div>
 				<div className="verifyinputcontainer">
 					<p className="inputtitle">인증번호</p>
@@ -175,11 +176,10 @@ const Verification = () => {
 							onChange={handleChangeVerifyNumber}
 						/>
 						{verifyNumberPattern.test(verifyNumber) === true && isSendedMessage === true ? (
-						<Button content={'확인'} onClick={handleClickVerifyButton} />
-					) : (
-						<button className='unactive'>확인</button>
-					)}
-						
+							<Button content={'확인'} onClick={handleClickVerifyButton} />
+						) : (
+							<button className="unactive">확인</button>
+						)}
 					</div>
 					{isVerified === 1 ? (
 						<p className="verifyresulttext" style={{ color: `var(--deep-blue-color)` }}>
