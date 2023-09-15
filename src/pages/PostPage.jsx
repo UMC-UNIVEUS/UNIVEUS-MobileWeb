@@ -50,7 +50,7 @@ const PostPage = () => {
 		Participant: [],
 		connectedUser: {
 			user_id: '',
-			isParticipate: '',
+			isParticipateThisPost: '',
 		},
 		Writer: {
 			user_id: '',
@@ -298,7 +298,7 @@ const PostPage = () => {
 					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
 				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
 					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
-				) : postData.connectedUser.isParticipate === 1 ? (
+				) : postData.connectedUser.isParticipateThisPost === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
 				) : (
 					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
