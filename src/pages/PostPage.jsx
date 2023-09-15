@@ -166,6 +166,18 @@ const PostPage = () => {
 				setInviteeErrorMessage(response.data.message);
 			} else if (response.data.code === 3020) {
 				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3021) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3022) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2000) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2001) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2002) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2005) {
+				setInviteeErrorMessage(response.data.message);
 			} else {
 				openModal2();
 			}
