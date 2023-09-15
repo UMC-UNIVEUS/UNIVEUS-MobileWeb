@@ -163,7 +163,16 @@ const Verification = () => {
 							<button className="unactive">인증번호 받기</button>
 						)}
 					</div>
-					<p style={{ color: 'var(--orange-color)', fontSize: 'var(--small-font)', marginTop: '5px' }}>{sendMessage}</p>
+					{sendMessage === '인증번호 문자 전송이 완료되었습니다.' ? (
+						<p style={{ color: 'var(--deep-blue-color)', fontSize: 'var(--small-font)', marginTop: '5px' }}>
+							{sendMessage}
+						</p>
+					) : (
+						<p style={{ color: 'var(--orange-color)', fontSize: 'var(--small-font)', marginTop: '5px' }}>
+							{sendMessage}
+						</p>
+					)}
+					{/* <p style={{ color: 'var(--deep-blue-color)', fontSize: 'var(--small-font)', marginTop: '5px' }}>{sendMessage}</p> */}
 				</div>
 				<div className="verifyinputcontainer">
 					<p className="inputtitle">인증번호</p>
