@@ -6,6 +6,7 @@ import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function CreateDetail() {
 	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
@@ -16,6 +17,7 @@ export default function CreateDetail() {
 	const [endDate, setEndDate] = useState('');
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
+	const [openChatMessage, setOpenChatMessage] = useState('');
 
 	const navigate = useNavigate();
 
@@ -63,7 +65,8 @@ export default function CreateDetail() {
 		setOpenChat(e.target.value);
 	};
 
-	console.log(meetingTime);
+	const jwtToken = sessionStorage.getItem('accessToken');
+
 	const CreateDetailData = {
 		category: 4,
 		limit_people: limitPeople,
@@ -76,8 +79,25 @@ export default function CreateDetail() {
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('create', JSON.stringify(CreateDetailData));
-		navigate('/create/intro');
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'post',
+			url: 'https://univeus.site/post/validate/chat-link',
+			data: {
+				openChaturi: openChat,
+			},
+		}).then((res) => {
+			if (res.data.code === 3024) {
+				setOpenChatMessage(res.data.message);
+			} else {
+				localStorage.setItem('create', JSON.stringify(CreateDetailData));
+				navigate('/create/intro');
+			}
+		});
+		// localStorage.setItem('create', JSON.stringify(CreateDetailData));
+		// navigate('/create/intro');
 	};
 
 	// const localStorageData = JSON.parse(localStorage.getItem('create'));
@@ -197,6 +217,7 @@ export default function CreateDetail() {
 							onChange={handleOpenChat}
 							required
 						/>
+						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
 				{meetingDate !== '' &&
