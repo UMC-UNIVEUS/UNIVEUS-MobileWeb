@@ -13,6 +13,10 @@ const LandingPage = () => {
 
 	const [accessToken, setAccessToken] = useState('');
 
+	useEffect(() => {
+		console.log('xxx');
+	}, []);
+
 	// 소셜로그인 코드
 
 	useEffect(() => {
