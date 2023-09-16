@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 	const [meetingList, setMeetingList] = useState([]);
+	const [isParticipate, setIsParticipate] = useState(0);
 
 	const jwtToken = sessionStorage.getItem('accessToken');
 
@@ -34,6 +35,7 @@ const HomePage = () => {
 				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
+					setIsParticipate(response.data.result.isParticipateOtherPost);
 					setMeetingList(response.data.result.postPageResult);
 				}
 			})
@@ -56,6 +58,13 @@ const HomePage = () => {
 					{meetingList ? meetingList.map((meeting) => <MeetingCard {...meeting} />) : <div>로딩중</div>}
 				</div>
 				<Footer />
+				{isParticipate === 1 ? 
+				<Button 
+					className="startbutton"
+					content={'모임 참여 완료'}
+					type={'floating disabled'}
+				/> 
+				:
 				<Button
 					className="startbutton"
 					content={'유니버스 생성하기'}
@@ -64,6 +73,7 @@ const HomePage = () => {
 						navigate('/create/detail');
 					}}
 				/>
+				}
 			</div>
 			<NavBar present={'home'} />
 		</div>
