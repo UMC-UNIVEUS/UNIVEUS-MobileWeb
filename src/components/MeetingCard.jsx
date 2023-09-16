@@ -11,7 +11,7 @@ import { ReactComponent as Map } from '../assets/images/map.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location, post_status }) => {
+const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_month, meeting_date, meeting_time, location, post_status }) => {
 
     const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
@@ -54,7 +54,7 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
                 <div className='meetinginfo'>
                     <div className='meetingtime'>
                         <Calendar />
-                        <p className='infotext'>{meeting_date}</p>
+                        <p className='infotext'>{meeting_month}월 {meeting_date}일 {meeting_time}</p>
                     </div>
                     <div className='meetingplace'>
                         <Map />
