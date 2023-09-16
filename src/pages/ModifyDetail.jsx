@@ -25,6 +25,7 @@ export default function ModifyDetail() {
 	const [endDate, setEndDate] = useState('');
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
+	const [openChatMessage, setOpenChatMessage] = useState('');
 
 	const { id } = useParams();
 
@@ -126,8 +127,23 @@ export default function ModifyDetail() {
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('modify', JSON.stringify(CreateDetailData));
-		navigate(`/modify/intro/${id}`);
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'post',
+			url: 'https://univeus.site/post/validate/chat-link',
+			data: {
+				openChaturi: openChat,
+			},
+		}).then((res) => {
+			if (res.data.code === 3024) {
+				setOpenChatMessage(res.data.message);
+			} else {
+				localStorage.setItem('modify', JSON.stringify(CreateDetailData));
+				navigate(`/modify/intro/${id}`);
+			}
+		});
 	};
 
 	return (
@@ -265,6 +281,7 @@ export default function ModifyDetail() {
 							value={openChat}
 							required
 						/>
+						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
 				{meetingDate !== '' &&

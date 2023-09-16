@@ -168,6 +168,12 @@
 					color: #bfc3d4;
 				}
 			}
+			.cc-error-message {
+				font-size: var(--small-font);
+				color: var(--orange-color);
+				font-weight: var(--medium-bold);
+				margin-top: 10px;
+			}
 		}
 	}
 	.button-body {
