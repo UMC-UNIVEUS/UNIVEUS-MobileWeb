@@ -187,21 +187,6 @@ const PostPage = () => {
 	};
 
 	const handleClickDeleteButton = () => {
-		// axios
-		// 	.delete(`https://univeus.site/post/${id}`, {
-		// 		headers: {
-		// 			'x-access-token': jwtToken,
-		// 		},
-		// 	})
-		// 	.then(function (response) {
-		// 		if (response.data.code === 5000 || response.data.code === 5001) {
-		// 			navigate('/');
-		// 		} else {
-		// 			navigate('/home');
-		// 			console.log('DELETE 요청 성공:', response.data);
-		// 		}
-		// 	});
-
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
@@ -213,7 +198,7 @@ const PostPage = () => {
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
-				navigate('/myunive');
+				navigate('/home');
 			}
 		});
 	};
