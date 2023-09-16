@@ -178,6 +178,8 @@ const PostPage = () => {
 				setInviteeErrorMessage(response.data.message);
 			} else if (response.data.code === 2005) {
 				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3023) {
+				setInviteeErrorMessage(response.data.message);
 			} else {
 				openModal2();
 			}
