@@ -96,8 +96,6 @@ export default function CreateDetail() {
 				navigate('/create/intro');
 			}
 		});
-		// localStorage.setItem('create', JSON.stringify(CreateDetailData));
-		// navigate('/create/intro');
 	};
 
 	// const localStorageData = JSON.parse(localStorage.getItem('create'));
