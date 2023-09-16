@@ -324,15 +324,13 @@ const PostPage = () => {
 						<p style={{ fontWeight: '600', marginTop: '3px' }}>문자로 모임내용이 발송되니 꼭 확인해주세요!</p>
 					</div>
 					<div className="modalbuttoncontainer">
-						<button
-							className="laterbutton"
+						<Button
+							content={'나중에 할게요.'}
 							onClick={() => {
 								closeModal2();
 								navigate('/home');
 							}}
-						>
-							<span>나중에 할게요.</span>
-						</button>
+						/>
 						<Button
 							content={'지금 입장할래요!'}
 							onClick={() => {
