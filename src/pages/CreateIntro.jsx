@@ -98,6 +98,8 @@ export default function CreateIntro() {
 				setErrorMessage('');
 				localStorage.clear();
 				navigate(`/post/${id}`);
+			} else if (res.data.code === 3023) {
+				setErrorMessage(res.data.message);
 			}
 		});
 	};
