@@ -9,13 +9,14 @@ import DefaultBackgroundImg from '../assets/images/default_image.png';
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, location, post_status }) => {
 
     const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
-    const cardColor = post_status === "end" ? "rgba(0, 0, 0, 0.4)" : "";
+    const isEnd = post_status === "end" ? "block" : "none";
 
     
     const navigate = useNavigate();
@@ -27,7 +28,8 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
     }
 
     return (
-        <div className="MeetingCard" onClick={handleClickMeetingCard} style={{backgroundColor: cardColor}}>
+        <div className="MeetingCard" onClick={handleClickMeetingCard}>
+            <div className='meetingend' style={{display: isEnd}}></div>
             <div className='profileimage' style={{border: `1px solid var(${borderColor})`}}>
                 {profile_img ? 
                 <img src={profile_img} alt="" className='userprofileimage'/> :
