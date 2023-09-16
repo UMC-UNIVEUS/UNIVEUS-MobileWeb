@@ -301,6 +301,8 @@ const PostPage = () => {
 					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
 				) : postData.connectedUser.isParticipateThisPost === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
+				) : postData.connectedUser.isParticipateOtherPost === 1 ? (
+					<Button type={'floating disabled'} content={'다른 모임에 이미 참여했습니다.'} />
 				) : postData.Post.current_people === postData.Post.limit_people ? (
 					<Button type={'floating disabled'} content={'모집 마감'} />
 				) : (
