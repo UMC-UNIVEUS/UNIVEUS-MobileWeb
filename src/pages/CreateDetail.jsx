@@ -4,18 +4,20 @@ import Minus from '../assets/images/minus_blue.svg';
 import Plus from '../assets/images/plus_blue.svg';
 import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function CreateDetail() {
 	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
 	const [limitGender, setLimitGender] = useState(0); // 0 or 1 or 2
 	const [location, setLocation] = useState('');
-	const [meetingDate, setMeetingDate] = useState('');
+	// const [meetingDate, setMeetingDate] = useState('');
 	const [meetingTime, setMeetingTime] = useState('');
-	const [endDate, setEndDate] = useState('');
+	// const [endDate, setEndDate] = useState('');
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
+	const [openChatMessage, setOpenChatMessage] = useState('');
 
 	const navigate = useNavigate();
 
@@ -39,17 +41,17 @@ export default function CreateDetail() {
 		setLimitPeople(6);
 	};
 
-	const handleMeetingDate = (e) => {
-		setMeetingDate(e.target.value);
-	};
+	// const handleMeetingDate = (e) => {
+	// 	setMeetingDate(e.target.value);
+	// };
 
 	const handleMeetingTime = (e) => {
 		setMeetingTime(e.target.value);
 	};
 
-	const handleEndDate = (e) => {
-		setEndDate(e.target.value);
-	};
+	// const handleEndDate = (e) => {
+	// 	setEndDate(e.target.value);
+	// };
 
 	const handleEndTime = (e) => {
 		setEndTime(e.target.value);
@@ -63,22 +65,73 @@ export default function CreateDetail() {
 		setOpenChat(e.target.value);
 	};
 
-	console.log(meetingTime);
+	const today = new Date();
+	// 현재 시간
+	const presentHours = today.getHours();
+	// 년.월.일.
+	// const presentDate = today.toLocaleDateString();
+	// 년
+	const presentYear = today.getFullYear();
+	// 월
+	const presentMonth = today.getMonth() + 1;
+	//일
+	const [presentDay, setpresentDay] = useState(today.getDate());
+
+	useEffect(() => {
+		function changeDay() {
+			let day = today.getDate();
+			new Promise((resolve, reject) => {
+				if (presentHours === 22 || presentHours === 23) {
+					resolve((day += 1));
+				} else {
+					resolve(day);
+				}
+			}).then((result) => {
+				setpresentDay(result);
+			});
+		}
+		changeDay();
+	}, []);
+
+	const date = presentYear + '-' + presentMonth + '-' + presentDay;
+
+	const jwtToken = sessionStorage.getItem('accessToken');
+
 	const CreateDetailData = {
 		category: 4,
 		limit_people: limitPeople,
 		limit_gender: limitGender,
 		location: location,
-		meeting_date: meetingDate + ' ' + meetingTime,
+		// meeting_date: meetingDate + ' ' + meetingTime,
+		meeting_date: date + ' ' + meetingTime,
 		openchat: openChat,
-		end_date: endDate + ' ' + endTime,
+		// end_date: endDate + ' ' + endTime,
+		end_date: date + ' ' + endTime,
 	};
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('create', JSON.stringify(CreateDetailData));
-		navigate('/create/intro');
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'post',
+			url: 'https://univeus.site/post/validate/chat-link',
+			data: {
+				openChaturi: openChat,
+			},
+		}).then((res) => {
+			if (res.data.code === 3024) {
+				setOpenChatMessage(res.data.message);
+			} else {
+				localStorage.setItem('create', JSON.stringify(CreateDetailData));
+				navigate('/create/intro');
+			}
+		});
 	};
+
+	// const localStorageData = JSON.parse(localStorage.getItem('create'));
+	// console.log(localStorageData);
 
 	return (
 		<div className="create-detail">
@@ -89,7 +142,19 @@ export default function CreateDetail() {
 						<span>1. 상세 정보 입력</span>
 						<div className="page-hr"></div>
 					</div>
-					<div className="page-tap">
+					<div
+						className="page-tap"
+						onClick={
+							// meetingDate !== '' &&
+							meetingTime !== '' &&
+							// endDate !== '' &&
+							endTime !== '' &&
+							location !== '' &&
+							openChat !== ''
+								? handleClickNextPage
+								: () => {}
+						}
+					>
 						<span style={{ color: 'var(--light-gray-color)' }}>2. 소개글 글쓰기</span>
 						<div className="page-hr" style={{ backgroundColor: 'var(--light-gray-color)' }}></div>
 					</div>
@@ -116,14 +181,15 @@ export default function CreateDetail() {
 							<label className="md-date-label" htmlFor="md-start-date">
 								모임일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-start-date"
 								date-placeholder="yyyy/mm/dd"
 								required
 								onChange={handleMeetingDate}
-							/>
+							/> */}
+							<div className="md-date-input">{date}</div>
 							<label className="md-time-label" htmlFor="md-start-time">
 								시간
 							</label>
@@ -140,14 +206,15 @@ export default function CreateDetail() {
 							<label className="md-date-label" htmlFor="md-end-date">
 								마감일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-end-date"
 								date-placeholder="yyyy/mm/dd"
 								required
 								onChange={handleEndDate}
-							/>
+							/> */}
+							<div className="md-date-input">{date}</div>
 							<label className="md-time-label" htmlFor="md-end-time">
 								시간
 							</label>
@@ -182,18 +249,21 @@ export default function CreateDetail() {
 							onChange={handleOpenChat}
 							required
 						/>
+						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
-				{meetingDate !== '' &&
-				meetingTime !== '' &&
-				endDate !== '' &&
-				endTime !== '' &&
-				location !== '' &&
-				openChat !== '' ? (
-					<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
-				) : (
-					<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
-				)}
+				{
+					// meetingDate !== '' &&
+					meetingTime !== '' &&
+					// endDate !== '' &&
+					endTime !== '' &&
+					location !== '' &&
+					openChat !== '' ? (
+						<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
+					) : (
+						<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
+					)
+				}
 			</div>
 			<NavBar />
 		</div>

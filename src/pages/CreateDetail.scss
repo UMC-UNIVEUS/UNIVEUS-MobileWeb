@@ -92,6 +92,8 @@
 					font-weight: 400;
 					color: var(--black-color);
 					outline-color: var(--deep-blue-color);
+					// 축제에만 사용할 padding
+					padding: 8px;
 					&::before {
 						content: attr(date-placeholder);
 						color: #bfc3d4;
@@ -167,6 +169,12 @@
 				&::placeholder {
 					color: #bfc3d4;
 				}
+			}
+			.cc-error-message {
+				font-size: var(--small-font);
+				color: var(--orange-color);
+				font-weight: var(--medium-bold);
+				margin-top: 10px;
 			}
 		}
 	}

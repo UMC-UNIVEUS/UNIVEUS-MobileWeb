@@ -50,7 +50,7 @@ const PostPage = () => {
 		Participant: [],
 		connectedUser: {
 			user_id: '',
-			isParticipate: '',
+			isParticipateThisPost: '',
 		},
 		Writer: {
 			user_id: '',
@@ -82,7 +82,7 @@ const PostPage = () => {
 	const [inviteeText, setInviteeText] = useState('');
 
 	const handleInvitee = (e) => {
-		setInvitee([...invitee, inviteeText]);
+		setInvitee({ ...invitee, [e.target.id]: inviteeText });
 	};
 
 	const handleInviteeText = (e) => {
@@ -148,7 +148,7 @@ const PostPage = () => {
 			data: {
 				user_id: postData.Post.user_id,
 				participant_userIDsFromDB: participantUserIds,
-				invited_userNickNamesFromAPI: invitee,
+				invited_userNickNamesFromAPI: Object.values(invitee).filter((item) => item !== ''),
 			},
 		}).then((response) => {
 			closeModal4();
@@ -164,6 +164,22 @@ const PostPage = () => {
 				setInviteeErrorMessage(response.data.message);
 			} else if (response.data.code === 3008) {
 				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3020) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3021) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3022) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2000) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2001) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2002) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 2005) {
+				setInviteeErrorMessage(response.data.message);
+			} else if (response.data.code === 3023) {
+				setInviteeErrorMessage(response.data.message);
 			} else {
 				openModal2();
 			}
@@ -171,21 +187,6 @@ const PostPage = () => {
 	};
 
 	const handleClickDeleteButton = () => {
-		// axios
-		// 	.delete(`https://univeus.site/post/${id}`, {
-		// 		headers: {
-		// 			'x-access-token': jwtToken,
-		// 		},
-		// 	})
-		// 	.then(function (response) {
-		// 		if (response.data.code === 5000 || response.data.code === 5001) {
-		// 			navigate('/');
-		// 		} else {
-		// 			navigate('/home');
-		// 			console.log('DELETE 요청 성공:', response.data);
-		// 		}
-		// 	});
-
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
@@ -197,7 +198,7 @@ const PostPage = () => {
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {
-				navigate('/myunive');
+				navigate('/home');
 			}
 		});
 	};
@@ -298,8 +299,12 @@ const PostPage = () => {
 					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
 				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
 					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
-				) : postData.connectedUser.isParticipate === 1 ? (
+				) : postData.connectedUser.isParticipateThisPost === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
+				) : postData.connectedUser.isParticipateOtherPost === 1 ? (
+					<Button type={'floating disabled'} content={'다른 모임에 이미 참여했습니다.'} />
+				) : postData.Post.current_people === postData.Post.limit_people ? (
+					<Button type={'floating disabled'} content={'모집 마감'} />
 				) : (
 					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
 				)}
@@ -319,15 +324,13 @@ const PostPage = () => {
 						<p style={{ fontWeight: '600', marginTop: '3px' }}>문자로 모임내용이 발송되니 꼭 확인해주세요!</p>
 					</div>
 					<div className="modalbuttoncontainer">
-						<button
-							className="laterbutton"
+						<Button
+							content={'나중에 할게요.'}
 							onClick={() => {
 								closeModal2();
 								navigate('/home');
 							}}
-						>
-							<span>나중에 할게요.</span>
-						</button>
+						/>
 						<Button
 							content={'지금 입장할래요!'}
 							onClick={() => {

@@ -25,6 +25,7 @@ export default function ModifyDetail() {
 	const [endDate, setEndDate] = useState('');
 	const [endTime, setEndTime] = useState('');
 	const [openChat, setOpenChat] = useState('');
+	const [openChatMessage, setOpenChatMessage] = useState('');
 
 	const { id } = useParams();
 
@@ -40,17 +41,17 @@ export default function ModifyDetail() {
 		setLimitGender(2);
 	};
 
-	const handleMeetingDate = (e) => {
-		setMeetingDate(e.target.value);
-	};
+	// const handleMeetingDate = (e) => {
+	// 	setMeetingDate(e.target.value);
+	// };
 
 	const handleMeetingTime = (e) => {
 		setMeetingTime(e.target.value);
 	};
 
-	const handleEndDate = (e) => {
-		setEndDate(e.target.value);
-	};
+	// const handleEndDate = (e) => {
+	// 	setEndDate(e.target.value);
+	// };
 
 	const handleEndTime = (e) => {
 		setEndTime(e.target.value);
@@ -126,8 +127,23 @@ export default function ModifyDetail() {
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('modify', JSON.stringify(CreateDetailData));
-		navigate(`/modify/intro/${id}`);
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'post',
+			url: 'https://univeus.site/post/validate/chat-link',
+			data: {
+				openChaturi: openChat,
+			},
+		}).then((res) => {
+			if (res.data.code === 3024) {
+				setOpenChatMessage(res.data.message);
+			} else {
+				localStorage.setItem('modify', JSON.stringify(CreateDetailData));
+				navigate(`/modify/intro/${id}`);
+			}
+		});
 	};
 
 	return (
@@ -139,7 +155,19 @@ export default function ModifyDetail() {
 						<span>1. 상세 정보 입력</span>
 						<div className="page-hr"></div>
 					</div>
-					<div className="page-tap">
+					<div
+						className="page-tap"
+						onClick={
+							meetingDate !== '' &&
+							meetingTime !== '' &&
+							endDate !== '' &&
+							endTime !== '' &&
+							location !== '' &&
+							openChat !== ''
+								? handleClickNextPage
+								: () => {}
+						}
+					>
 						<span style={{ color: 'var(--light-gray-color)' }}>2. 소개글 글쓰기</span>
 						<div className="page-hr" style={{ backgroundColor: 'var(--light-gray-color)' }}></div>
 					</div>
@@ -181,7 +209,7 @@ export default function ModifyDetail() {
 							<label className="md-date-label" htmlFor="md-start-date">
 								모임일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-start-date"
@@ -189,7 +217,8 @@ export default function ModifyDetail() {
 								required
 								onChange={handleMeetingDate}
 								value={meetingDate}
-							/>
+							/> */}
+							<div className="md-date-input">{meetingDate}</div>
 							<label className="md-time-label" htmlFor="md-start-time">
 								시간
 							</label>
@@ -207,7 +236,7 @@ export default function ModifyDetail() {
 							<label className="md-date-label" htmlFor="md-end-date">
 								마감일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-end-date"
@@ -215,7 +244,8 @@ export default function ModifyDetail() {
 								required
 								onChange={handleEndDate}
 								value={endDate}
-							/>
+							/> */}
+							<div className="md-date-input">{endDate}</div>
 							<label className="md-time-label" htmlFor="md-end-time">
 								시간
 							</label>
@@ -253,6 +283,7 @@ export default function ModifyDetail() {
 							value={openChat}
 							required
 						/>
+						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
 				{meetingDate !== '' &&
