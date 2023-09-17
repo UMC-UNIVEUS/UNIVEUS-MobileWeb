@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
 	const [meetingList, setMeetingList] = useState([]);
-	const [isParticipate, setIsParticipate] = useState(0);
+	const [isParticipateAvailable, setIsParticipateAvailable] = useState(0);
 
 	const jwtToken = sessionStorage.getItem('accessToken');
 
@@ -31,11 +31,11 @@ const HomePage = () => {
 			url: 'https://univeus.site/',
 		})
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
-					setIsParticipate(response.data.result.isParticipateOtherPost);
+					setIsParticipateAvailable(response.data.result.participate_available);
 					setMeetingList(response.data.result.postPageResult);
 				}
 			})
@@ -58,22 +58,18 @@ const HomePage = () => {
 					{meetingList ? meetingList.map((meeting) => <MeetingCard {...meeting} />) : <div>로딩중</div>}
 				</div>
 				<Footer />
-				{isParticipate === 1 ? 
-				<Button 
-					className="startbutton"
-					content={'모임 참여 완료'}
-					type={'floating disabled'}
-				/> 
-				:
-				<Button
-					className="startbutton"
-					content={'유니버스 생성하기'}
-					type={'floating'}
-					onClick={() => {
-						navigate('/create/detail');
-					}}
-				/>
-				}
+				{isParticipateAvailable === 0 ? (
+					<Button className="startbutton" content={'모임 참여 완료'} type={'floating disabled'} />
+				) : (
+					<Button
+						className="startbutton"
+						content={'유니버스 생성하기'}
+						type={'floating'}
+						onClick={() => {
+							navigate('/create/detail');
+						}}
+					/>
+				)}
 			</div>
 			<NavBar present={'home'} />
 		</div>

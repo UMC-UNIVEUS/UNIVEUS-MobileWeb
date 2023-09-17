@@ -89,7 +89,7 @@ export default function CreateIntro() {
 				invited_userNickNames: Object.values(invitee),
 			},
 		}).then((res) => {
-			console.log(res);
+			// console.log(res);
 			if (res.data.code === 5000 || res.data.code === 5001) {
 				navigate('/');
 			} else if (res.data.message !== '성공') {

@@ -76,7 +76,7 @@ export default function ModifyDetail() {
 			url: `https://univeus.site/post/${id}`,
 		})
 			.then((res) => {
-				console.log('res', res.data.result);
+				// console.log('res', res.data.result);
 				if (res.data.code === 5000 || res.data.code === 5001) {
 					navigate('/');
 				} else {
@@ -115,15 +115,15 @@ export default function ModifyDetail() {
 		limit_people: getPost['limit_people'],
 		limit_gender: limitGender,
 		location: location,
-		meeting_date: meetingDate,
+		meeting_date: meetingDate + ' ' + meetingTime,
 		openchat: openChat,
-		end_date: endDate,
+		end_date: endDate + ' ' + endTime,
 		title: getPost['title'],
 		content: getPost['content'],
 		images: imgUrlList,
 		invited_userNickNames: getParticipant,
 	};
-	console.log(CreateDetailData);
+	// console.log(CreateDetailData);
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
