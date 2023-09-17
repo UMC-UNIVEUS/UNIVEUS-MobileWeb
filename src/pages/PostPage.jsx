@@ -96,7 +96,7 @@ const PostPage = () => {
 
 	const gender = postData ? postData.Writer.gender : 0;
 
-	console.log(gender);
+	// console.log(gender);
 
 	const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
 
@@ -108,7 +108,7 @@ const PostPage = () => {
 			method: 'get',
 			url: `https://univeus.site/post/${id}`,
 		}).then((response) => {
-			console.log(response);
+			// console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else if (response.data.code === 3000) {

@@ -76,7 +76,7 @@ export default function ModifyDetail() {
 			url: `https://univeus.site/post/${id}`,
 		})
 			.then((res) => {
-				console.log('res', res.data.result);
+				// console.log('res', res.data.result);
 				if (res.data.code === 5000 || res.data.code === 5001) {
 					navigate('/');
 				} else {
@@ -123,7 +123,7 @@ export default function ModifyDetail() {
 		images: imgUrlList,
 		invited_userNickNames: getParticipant,
 	};
-	console.log(CreateDetailData);
+	// console.log(CreateDetailData);
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {

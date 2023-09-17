@@ -13,10 +13,6 @@ const LandingPage = () => {
 
 	const [accessToken, setAccessToken] = useState('');
 
-	useEffect(() => {
-		console.log('xxx');
-	}, []);
-
 	// 소셜로그인 코드
 
 	useEffect(() => {
@@ -33,7 +29,7 @@ const LandingPage = () => {
 				},
 			})
 				.then((response) => {
-					console.log(response);
+					// console.log(response);
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');

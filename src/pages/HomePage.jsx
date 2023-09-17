@@ -31,7 +31,7 @@ const HomePage = () => {
 			url: 'https://univeus.site/',
 		})
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 				if (response.data.code === 5000 || response.data.code === 5001) {
 					navigate('/');
 				} else {
@@ -58,22 +58,18 @@ const HomePage = () => {
 					{meetingList ? meetingList.map((meeting) => <MeetingCard {...meeting} />) : <div>로딩중</div>}
 				</div>
 				<Footer />
-				{isParticipateAvailable === 0 ? 
-				<Button 
-					className="startbutton"
-					content={'모임 참여 완료'}
-					type={'floating disabled'}
-				/> 
-				:
-				<Button
-					className="startbutton"
-					content={'유니버스 생성하기'}
-					type={'floating'}
-					onClick={() => {
-						navigate('/create/detail');
-					}}
-				/>
-				}
+				{isParticipateAvailable === 0 ? (
+					<Button className="startbutton" content={'모임 참여 완료'} type={'floating disabled'} />
+				) : (
+					<Button
+						className="startbutton"
+						content={'유니버스 생성하기'}
+						type={'floating'}
+						onClick={() => {
+							navigate('/create/detail');
+						}}
+					/>
+				)}
 			</div>
 			<NavBar present={'home'} />
 		</div>

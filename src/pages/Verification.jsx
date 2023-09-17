@@ -89,7 +89,7 @@ const Verification = () => {
 		}).then((res) => {
 			setIsSendedMessage(true);
 			setSendMessage(res.data.message);
-			console.log(res.data.message);
+			// console.log(res.data.message);
 		});
 	};
 
@@ -105,7 +105,7 @@ const Verification = () => {
 				number: parseInt(verifyNumber),
 			},
 		}).then((response) => {
-			console.log(response);
+			// console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else if (response.data.code === 2012 || response.data.code === 2027) {
@@ -127,7 +127,7 @@ const Verification = () => {
 				userAgreement: [1, 1, 1],
 			},
 		}).then((response) => {
-			console.log(response);
+			// console.log(response);
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
 			} else {

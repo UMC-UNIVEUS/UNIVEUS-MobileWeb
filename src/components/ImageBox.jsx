@@ -16,7 +16,7 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
-		console.log(e);
+		// console.log(e);
 		const file = imgRef.current.files[0];
 
 		e.preventDefault();
@@ -36,7 +36,7 @@ export default function ImageBox({ numbering, getImage, postImg }) {
 			url: 'https://univeus.site/post/image/upload',
 			data: formData,
 		}).then((res) => {
-			console.log(res);
+			// console.log(res);
 			setImgFile(JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, ''));
 			// key:value 형태로 넘겨주기
 			getImage(JSON.stringify({ [numbering]: res.data.result[0]['pic_url'].replace(/"/g, '') }));

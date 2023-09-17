@@ -69,7 +69,7 @@ export default function CreateIntro() {
 				invited_userNickNames: modifyDetailData['invited_userNickNames'],
 			},
 		}).then((res) => {
-			console.log(res);
+			// console.log(res);
 			if (res.data.code === 5000 || res.data.code === 5001) {
 				navigate('/');
 			} else if (res.data.code === 1000) {
