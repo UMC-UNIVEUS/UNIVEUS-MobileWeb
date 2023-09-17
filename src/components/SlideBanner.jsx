@@ -35,7 +35,14 @@ const SlideBanner = () => {
 					/>
 				</SwiperSlide>
 				<SwiperSlide className="slide">
-					<img className="slideimage" src={Univeus} alt="유니버스 설명 배너 이미지" />
+					<img
+						className="slideimage"
+						src={Univeus}
+						alt="유니버스 설명 배너 이미지"
+						onClick={() => {
+							window.open('https://univeus.oopy.io/0c56334b-c527-49ed-92a4-8f95d8c19dd6', '_blank');
+						}}
+					/>
 				</SwiperSlide>
 				<SwiperSlide className="slide">
 					<img className="slideimage" src={Booth} alt="부스 소개 배너 이미지" />
