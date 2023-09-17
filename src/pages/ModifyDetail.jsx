@@ -41,17 +41,17 @@ export default function ModifyDetail() {
 		setLimitGender(2);
 	};
 
-	const handleMeetingDate = (e) => {
-		setMeetingDate(e.target.value);
-	};
+	// const handleMeetingDate = (e) => {
+	// 	setMeetingDate(e.target.value);
+	// };
 
 	const handleMeetingTime = (e) => {
 		setMeetingTime(e.target.value);
 	};
 
-	const handleEndDate = (e) => {
-		setEndDate(e.target.value);
-	};
+	// const handleEndDate = (e) => {
+	// 	setEndDate(e.target.value);
+	// };
 
 	const handleEndTime = (e) => {
 		setEndTime(e.target.value);
@@ -209,7 +209,7 @@ export default function ModifyDetail() {
 							<label className="md-date-label" htmlFor="md-start-date">
 								모임일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-start-date"
@@ -217,7 +217,8 @@ export default function ModifyDetail() {
 								required
 								onChange={handleMeetingDate}
 								value={meetingDate}
-							/>
+							/> */}
+							<div className="md-date-input">{meetingDate}</div>
 							<label className="md-time-label" htmlFor="md-start-time">
 								시간
 							</label>
@@ -235,7 +236,7 @@ export default function ModifyDetail() {
 							<label className="md-date-label" htmlFor="md-end-date">
 								마감일자
 							</label>
-							<input
+							{/* <input
 								className="md-date-input"
 								type="date"
 								id="md-end-date"
@@ -243,7 +244,8 @@ export default function ModifyDetail() {
 								required
 								onChange={handleEndDate}
 								value={endDate}
-							/>
+							/> */}
+							<div className="md-date-input">{endDate}</div>
 							<label className="md-time-label" htmlFor="md-end-time">
 								시간
 							</label>
