@@ -81,7 +81,7 @@ export default function CreateDetail() {
 		function changeDay() {
 			let day = today.getDate();
 			new Promise((resolve, reject) => {
-				if (presentHours === 22 || presentHours === 23) {
+				if (presentHours === 18 || presentHours === 23) {
 					resolve((day += 1));
 				} else {
 					resolve(day);
