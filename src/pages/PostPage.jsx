@@ -51,6 +51,7 @@ const PostPage = () => {
 		connectedUser: {
 			user_id: '',
 			isParticipateThisPost: '',
+			participate_available: 1,
 		},
 		Writer: {
 			user_id: '',
@@ -154,6 +155,8 @@ const PostPage = () => {
 			closeModal4();
 			if (response.data.code === 5000 || response.data.code === 5001) {
 				navigate('/');
+			} else if (response.data.code === 2028) {
+				setInviteeErrorMessage(response.data.message);
 			} else if (response.data.code === 3000) {
 				setInviteeErrorMessage(response.data.message);
 			} else if (response.data.code === 3007) {
@@ -301,7 +304,7 @@ const PostPage = () => {
 					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
 				) : postData.connectedUser.isParticipateThisPost === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
-				) : postData.connectedUser.isParticipateOtherPost === 1 ? (
+				) : postData.connectedUser.participate_available === 1 ? (
 					<Button type={'floating disabled'} content={'다른 모임에 이미 참여했습니다.'} />
 				) : postData.Post.current_people === postData.Post.limit_people ? (
 					<Button type={'floating disabled'} content={'모집 마감'} />
