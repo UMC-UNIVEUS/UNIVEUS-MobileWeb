@@ -9,12 +9,14 @@ import DefaultBackgroundImg from '../assets/images/default_image.png';
 import { ReactComponent as Calendar } from '../assets/images/calendar.svg';
 import { ReactComponent as Map } from '../assets/images/map.svg';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_date, meeting_month, meeting_time, location }) => {
+const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, limit_people, profile_img, title, meeting_month, meeting_date, meeting_time, location, post_status }) => {
 
     const maxLength = 24;
     const truncatedTitle = title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
     const borderColor = gender === 1 ? '--purple-color' : '--pink-color';
+    const isEnd = post_status === "end" ? "block" : "none";
 
     
     const navigate = useNavigate();
@@ -27,6 +29,7 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
 
     return (
         <div className="MeetingCard" onClick={handleClickMeetingCard}>
+            <div className='meetingend' style={{display: isEnd}}></div>
             <div className='profileimage' style={{border: `1px solid var(${borderColor})`}}>
                 {profile_img ? 
                 <img src={profile_img} alt="" className='userprofileimage'/> :
@@ -51,7 +54,7 @@ const MeetingCard = ({ post_id, main_img, gender, limit_gender, current_people, 
                 <div className='meetinginfo'>
                     <div className='meetingtime'>
                         <Calendar />
-                        <p className='infotext'>{meeting_month}/{meeting_date} {meeting_time}</p>
+                        <p className='infotext'>{meeting_month}월 {meeting_date}일 {meeting_time}</p>
                     </div>
                     <div className='meetingplace'>
                         <Map />

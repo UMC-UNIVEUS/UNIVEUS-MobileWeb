@@ -5,13 +5,23 @@
 	box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	position: relative;
+	.meetingend {
+		width: 100%;
+		height: 100%;
+		border-radius: inherit;
+		background-color: rgba(0, 0, 0, 0.25);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
 	.profileimage {
 		width: 36px;
 		height: 36px;
 		background-color: rgb(244, 244, 249);
 		border-radius: 999px;
 		position: absolute;
-		z-index: 999;
+		z-index: 666;
 		left: 7px;
 		top: 69px;
 		display: flex;
