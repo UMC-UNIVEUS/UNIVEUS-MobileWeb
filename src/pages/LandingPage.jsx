@@ -40,7 +40,7 @@ const LandingPage = () => {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');
 					} else if (response.data.code === 2004) {
-						isModalOpen5();
+						openModal5();
 					}
 					else if (response.data.code === 2019) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
