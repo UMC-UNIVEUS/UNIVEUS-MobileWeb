@@ -93,3 +93,16 @@
 		font-weight: var(--regular-bold);
 	}
 }
+
+.wrongemailcontainer {
+	margin-top: 10px;
+}
+
+.modalbuttoncontainer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	column-gap: 15px;
+	margin-top: 14px;
+}
