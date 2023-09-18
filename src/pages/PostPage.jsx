@@ -300,10 +300,10 @@ const PostPage = () => {
 				</div>
 				{postData.Post.post_status === 'end' ? (
 					<Button type={'floating disabled'} content={'모집이 마감되었습니다'} />
-				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
-					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
 				) : postData.connectedUser.user_id === postData.Writer.user_id ? (
 					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
+				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
+					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
 				) : postData.connectedUser.isParticipateThisPost === 1 ? (
 					<Button type={'floating disabled'} content={'참여 완료'} />
 				) : postData.connectedUser.participate_available === 0 ? (
