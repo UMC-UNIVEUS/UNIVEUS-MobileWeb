@@ -7,11 +7,17 @@ import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Modal from '../components/Modal';
+import Button from '../components/Button';
 
 const LandingPage = () => {
 	const navigate = useNavigate();
 
 	const [accessToken, setAccessToken] = useState('');
+	const [isModalOpen5, setIsModalOpen5] = useState(false);
+
+	const openModal5 = () => setIsModalOpen5(true);
+	const closeModal5 = () => setIsModalOpen5(false);
 
 	// 소셜로그인 코드
 
@@ -33,7 +39,10 @@ const LandingPage = () => {
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');
-					} else if (response.data.code === 2019) {
+					} else if (response.data.code === 2004) {
+						isModalOpen5();
+					}
+					else if (response.data.code === 2019) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/verification');
 					} else if (response.data.code === 2020) {
@@ -91,6 +100,23 @@ const LandingPage = () => {
 					<GoogleIcon className="googleicon" />
 					<p>구글 소셜로그인</p>
 				</div>
+				<Modal isOpen={isModalOpen5} closeModal={closeModal5} title={"경기대학교 메일만 사용가능합니다."}>
+					<div className='wrongemailcontainer'>
+						<p>유니버스 KGU는 경기대학교 이메일만</p>
+						<p style={{ marginTop: '3px' }}> 사용이 가능합니다 :(</p>
+						<p style={{ marginTop: '3px' }}>경기대학교 메일로 재시도 해주세요.</p>
+					</div>
+					<div className="modalbuttoncontainer">
+						<Button
+							content={'확인'}
+							onClick={() => {
+								closeModal5();
+								navigate('/');
+							}}
+						/>
+					</div>
+				</Modal>
+				
 			</div>
 		</div>
 	);
