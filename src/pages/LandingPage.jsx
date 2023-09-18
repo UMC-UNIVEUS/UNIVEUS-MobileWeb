@@ -87,6 +87,7 @@ const LandingPage = () => {
 					</p>
 					<p className="univeustext">UNIVE.US</p>
 				</div>
+				<div className="notice-text">크롬, 사파리, 삼성인터넷으로 접속해주세요! :)</div>
 				<div className="loginbutton" onClick={googleSocialLogin}>
 					<GoogleIcon className="googleicon" />
 					<p>구글 소셜로그인</p>
