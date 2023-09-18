@@ -298,7 +298,9 @@ const PostPage = () => {
 						{postData ? postData.Participant.map((it, idx) => <ParticiPant {...it} key={idx} />) : <></>}
 					</div>
 				</div>
-				{postData.connectedUser.user_id === postData.Writer.user_id ? (
+				{postData.Post.post_status === 'end' ? (
+					<Button type={'floating disabled'} content={'모집이 마감되었습니다'} />
+				) : postData.connectedUser.user_id === postData.Writer.user_id ? (
 					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
 				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
 					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
@@ -306,11 +308,22 @@ const PostPage = () => {
 					<Button type={'floating disabled'} content={'참여 완료'} />
 				) : postData.connectedUser.participate_available === 0 ? (
 					<Button type={'floating disabled'} content={'다른 모임에 이미 참여했습니다'} />
-				) : postData.Post.post_status === "end" ? (
-					<Button type={'floating disabled'} content={'모집이 마감되었습니다'} />
 				) : (
 					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
 				)}
+				{/* {postData.Post.post_status === "end" ? (
+					<Button type={'floating disabled'} content={'모집이 마감되었습니다'} />
+				) : postData.connectedUser.gender + postData.Post.limit_gender === 3 ? (
+					<Button type={'floating disabled'} content={'참여 가능한 성별이 아닙니다'} />
+				) : postData.connectedUser.isParticipateThisPost === 1 ? (
+					<Button type={'floating disabled'} content={'참여 완료'} />
+				) : postData.connectedUser.participate_available === 0 ? (
+					<Button type={'floating disabled'} content={'다른 모임에 이미 참여했습니다'} />
+				) : postData.connectedUser.user_id === postData.Writer.user_id ? (
+					<Button type={'floating'} content={'유니버스 관리하기'} onClick={openModal4} />
+				) : (
+					<Button type={'floating'} content={'유니버스 참여하기'} onClick={openModal} />
+				)} */}
 				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'함께 하는 친구를 초대해 주세요!'}>
 					<div className="inviteelist">{repeatInvitee(postData ? postData.Post.limit_people : 0)}</div>
 					<p

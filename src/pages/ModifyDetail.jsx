@@ -201,6 +201,16 @@ export default function ModifyDetail() {
 						/>
 						<label htmlFor="female">여자만</label>
 					</div>
+					<div
+						style={{
+							marginTop: '8px',
+							fontSize: 'var(--tiny-font)',
+							color: 'var(--orange-color)',
+							fontWeight: 'var(--semi-bold)',
+						}}
+					>
+						모집하고 싶은 상대방의 성별을 선택하세요!
+					</div>
 					<div className="cd-meet-date">
 						<div className="md-title" style={{ marginTop: '20px' }}>
 							모임 날짜
