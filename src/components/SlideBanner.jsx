@@ -22,8 +22,8 @@ const SlideBanner = () => {
 				loop
 				autoplay={{ delay: 5000, disableOnInteraction: false }}
 				pagination={{ clickable: 'true' }}
-				onSwiper={(swiper) => console.log(swiper)}
-				onSlideChange={() => console.log('slide change')}
+				// onSwiper={(swiper) => console.log(swiper)}
+				// onSlideChange={() => console.log('slide change')}
 			>
 				<SwiperSlide className="slide">
 					<img
