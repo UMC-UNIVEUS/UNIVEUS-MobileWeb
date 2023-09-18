@@ -170,10 +170,30 @@ export default function CreateDetail() {
 						<input type="radio" name="gender" id="female" onClick={handleClickFemaleInput} />
 						<label htmlFor="female">여자만</label>
 					</div>
+					<div
+						style={{
+							marginTop: '8px',
+							fontSize: 'var(--tiny-font)',
+							color: 'var(--orange-color)',
+							fontWeight: 'var(--semi-bold)',
+						}}
+					>
+						모집하고 싶은 상대방의 성별을 선택하세요!
+					</div>
 					<div className="cd-person-number">
 						<img className="pn-minus" src={Minus} alt="마이너스 버튼" onClick={handleClickPeopleMinus} />
 						<div className="pn-input">{limitPeople}</div>
 						<img className="pn-plus" src={Plus} alt="플러스 버튼" onClick={handleClickPeoplePlus} />
+					</div>
+					<div
+						style={{
+							marginBottom: '10px',
+							fontSize: 'var(--tiny-font)',
+							color: 'var(--orange-color)',
+							fontWeight: 'var(--semi-bold)',
+						}}
+					>
+						2:2는 4명선택, 3:3은 6명을 선택해주세요!
 					</div>
 					<div className="cd-meet-date">
 						<div className="md-title">모임 날짜</div>
