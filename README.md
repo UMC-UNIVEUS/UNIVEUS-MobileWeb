@@ -31,3 +31,7 @@
   <img src="https://github.com/UMC-UNIVEUS/UNIVEUS-MobileWeb/assets/77609591/3999870d-5329-46ca-b54c-71567647272e" alt="마이페이지 화면" height="400px">
   <img src="https://github.com/UMC-UNIVEUS/UNIVEUS-MobileWeb/assets/77609591/2c241f1e-9238-49d6-bad2-a5fde58243de" alt="검색 화면" height="400px">
 </p>
+
+## 회원가입 유저수
+
+<img src="https://github.com/soi-ha/soi-ha.github.io/assets/77609591/4f3fa254-81c7-47fa-9705-3d9be67661b7" alt="유니버스 유저수" height="400px">
