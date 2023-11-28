@@ -1,8 +1,14 @@
 .my-feed {
 	margin-bottom: 70px;
 	.mf-body {
-		margin: 0 20px;
+		// margin: 0 20px;
+		// margin-top: 74px;
+		width: 100%;
+		height: 100%;
 		margin-top: 74px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		.mf-user {
 			border-radius: 10px;
 			background: var(--white-color);
@@ -12,6 +18,7 @@
 			flex-direction: row;
 			align-items: center;
 			margin-bottom: 28px;
+			width: 80%;
 			.mu-user-img-box {
 				width: 53px;
 				height: 53px;
