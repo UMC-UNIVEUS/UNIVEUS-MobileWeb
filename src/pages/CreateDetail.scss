@@ -2,7 +2,11 @@
 	margin-bottom: 70px;
 }
 .cd-body {
-	margin: 0 20px;
+	// margin: 0 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 	margin-top: 74px;
 	.cd-page {
 		display: flex;
@@ -26,6 +30,7 @@
 		}
 	}
 	.cd-form {
+		width: 90%;
 		.cd-person-choice {
 			display: flex;
 			flex-direction: row;
@@ -181,6 +186,7 @@
 		}
 	}
 	.button-body {
+		width: 90%;
 		margin-top: 55px;
 	}
 }

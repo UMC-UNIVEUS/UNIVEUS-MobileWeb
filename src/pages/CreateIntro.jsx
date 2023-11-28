@@ -122,45 +122,47 @@ export default function CreateIntro() {
 						<div className="page-hr"></div>
 					</div>
 				</div>
-				<div className="ci-title">
-					<div className="ct-title">제목</div>
-					<input
-						type="text"
-						className="ct-input"
-						maxLength="48"
-						placeholder="센스있는 제목으로 이목을 끌어보아요 :)"
-						required
-						onChange={handleTitle}
-					/>
-				</div>
-				<div className="ci-img-upload">
-					<div className="ciu-title">이미지</div>
-					<div className="ciu-img-group">
-						{/* 이미지 넣는 박스 */}
-						{repeatImageBox(4)}
+				<div className="ci-form">
+					<div className="ci-title">
+						<div className="ct-title">제목</div>
+						<input
+							type="text"
+							className="ct-input"
+							maxLength="48"
+							placeholder="센스있는 제목으로 이목을 끌어보아요 :)"
+							required
+							onChange={handleTitle}
+						/>
 					</div>
-				</div>
-				<div className="ci-content">
-					<div className="cct-title">소개글 작성</div>
-					<textarea
-						className="cct-textarea"
-						maxLength="500"
-						required
-						placeholder="어떤 모임을 진행할 예정인가요? 간단하게 작성해 보아요 :) &#13;&#10; &#13;&#10;
+					<div className="ci-img-upload">
+						<div className="ciu-title">이미지</div>
+						<div className="ciu-img-group">
+							{/* 이미지 넣는 박스 */}
+							{repeatImageBox(4)}
+						</div>
+					</div>
+					<div className="ci-content">
+						<div className="cct-title">소개글 작성</div>
+						<textarea
+							className="cct-textarea"
+							maxLength="500"
+							required
+							placeholder="어떤 모임을 진행할 예정인가요? 간단하게 작성해 보아요 :) &#13;&#10; &#13;&#10;
             EX)&#13;&#10;
             - 모임 주제 (바른 프로젝트 팀원을 구합니다.)&#13;&#10;
             - 원하는 분위기나, 성격&#13;&#10;
             - 원하는 과, 단과대&#13;&#10;
             - 자신의 경험 사항(프로젝트, 공모전, 대외활동 등)&#13;&#10;
             - 모임의 목표&#13;&#10;"
-						onChange={handleContent}
-					></textarea>
-				</div>
-				<div className="ci-friend-invite">
-					<div className="cfi-title">친구 초대</div>
-					<div className="cfi-error-message">{errorMessage}</div>
-					{/* limitPeople의 갯수만큼 추가하기 */}
-					{repeatInvitee(createDetailData['limit_people'])}
+							onChange={handleContent}
+						></textarea>
+					</div>
+					<div className="ci-friend-invite">
+						<div className="cfi-title">친구 초대</div>
+						<div className="cfi-error-message">{errorMessage}</div>
+						{/* limitPeople의 갯수만큼 추가하기 */}
+						{repeatInvitee(createDetailData['limit_people'])}
+					</div>
 				</div>
 				{title !== '' &&
 				content !== '' &&
