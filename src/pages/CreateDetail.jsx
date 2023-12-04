@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CreateDetail() {
+	const [category, setCategory] = useState(0);
 	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
 	const [limitGender, setLimitGender] = useState(0); // 0 or 1 or 2
 	const [location, setLocation] = useState('');
@@ -98,7 +99,7 @@ export default function CreateDetail() {
 	const jwtToken = sessionStorage.getItem('accessToken');
 
 	const CreateDetailData = {
-		category: 4,
+		category: category,
 		limit_people: limitPeople,
 		limit_gender: limitGender,
 		location: location,
@@ -160,7 +161,60 @@ export default function CreateDetail() {
 					</div>
 				</div>
 				<div className="cd-form">
-					{/* <div className="cd-category">카테고리</div> */}
+					<div className="cd-category">
+						<div className="ca-title">카테고리</div>
+						<div className="ca-btns">
+							<Button
+								type={'small'}
+								content={'우주공강'}
+								onClick={() => {
+									setCategory(0);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'스펙쌓기'}
+								onClick={() => {
+									setCategory(1);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'취미/문화'}
+								onClick={() => {
+									setCategory(2);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'습관형성'}
+								onClick={() => {
+									setCategory(3);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'맛집탐방'}
+								onClick={() => {
+									setCategory(4);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'취업활동'}
+								onClick={() => {
+									setCategory(5);
+								}}
+							/>
+							<Button
+								type={'small'}
+								content={'기타모임'}
+								onClick={() => {
+									setCategory(6);
+								}}
+							/>
+						</div>
+					</div>
 					<div className="cd-person-choice">
 						<div className="pc-title">인원선택</div>
 						<input type="radio" name="gender" id="nogender" onClick={handleClickNoGenderInput} defaultChecked />
@@ -272,18 +326,20 @@ export default function CreateDetail() {
 						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
-				{
-					// meetingDate !== '' &&
-					meetingTime !== '' &&
-					// endDate !== '' &&
-					endTime !== '' &&
-					location !== '' &&
-					openChat !== '' ? (
-						<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
-					) : (
-						<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
-					)
-				}
+				<div className="next-btn">
+					{
+						// meetingDate !== '' &&
+						meetingTime !== '' &&
+						// endDate !== '' &&
+						endTime !== '' &&
+						location !== '' &&
+						openChat !== '' ? (
+							<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
+						) : (
+							<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
+						)
+					}
+				</div>
 			</div>
 			<NavBar />
 		</div>

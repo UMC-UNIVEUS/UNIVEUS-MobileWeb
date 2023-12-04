@@ -31,6 +31,19 @@
 	}
 	.cd-form {
 		width: 90%;
+		.cd-category {
+			margin-bottom: 20px;
+			.ca-title {
+				font-weight: var(--bold);
+				margin-bottom: 8px;
+			}
+			.ca-btns {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 8px;
+			}
+		}
 		.cd-person-choice {
 			display: flex;
 			flex-direction: row;
@@ -185,7 +198,7 @@
 			}
 		}
 	}
-	.button-body {
+	.next-btn {
 		width: 90%;
 		margin-top: 55px;
 	}
