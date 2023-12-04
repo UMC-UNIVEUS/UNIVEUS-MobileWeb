@@ -216,7 +216,7 @@ export default function CreateDetail() {
 						</div>
 					</div>
 					<div className="cd-person-choice">
-						<div className="pc-title">인원선택</div>
+						<div className="pc-title">모집인원</div>
 						<input type="radio" name="gender" id="nogender" onClick={handleClickNoGenderInput} defaultChecked />
 						<label htmlFor="nogender">성별무관</label>
 						<input type="radio" name="gender" id="male" onClick={handleClickMaleInput} />
@@ -224,7 +224,7 @@ export default function CreateDetail() {
 						<input type="radio" name="gender" id="female" onClick={handleClickFemaleInput} />
 						<label htmlFor="female">여자만</label>
 					</div>
-					<div
+					{/* <div
 						style={{
 							marginTop: '8px',
 							fontSize: 'var(--tiny-font)',
@@ -233,13 +233,57 @@ export default function CreateDetail() {
 						}}
 					>
 						모집하고 싶은 상대방의 성별을 선택하세요!
-					</div>
+					</div> */}
 					<div className="cd-person-number">
+						<div className="pn-btn-group">
+							<div
+								className="pn-btn"
+								onClick={() => {
+									setLimitPeople(1);
+								}}
+							>
+								1
+							</div>
+							<div
+								className="pn-btn"
+								onClick={() => {
+									setLimitPeople(2);
+								}}
+							>
+								2
+							</div>
+							<div
+								className="pn-btn"
+								onClick={() => {
+									setLimitPeople(3);
+								}}
+							>
+								3
+							</div>
+							<div
+								className="pn-btn"
+								onClick={() => {
+									setLimitPeople(4);
+								}}
+							>
+								4
+							</div>
+							<div
+								className="pn-btn"
+								onClick={() => {
+									setLimitPeople(5);
+								}}
+							>
+								5
+							</div>
+						</div>
+					</div>
+					{/* <div className="cd-person-number">
 						<img className="pn-minus" src={Minus} alt="마이너스 버튼" onClick={handleClickPeopleMinus} />
 						<div className="pn-input">{limitPeople}</div>
 						<img className="pn-plus" src={Plus} alt="플러스 버튼" onClick={handleClickPeoplePlus} />
-					</div>
-					<div
+					</div> */}
+					{/* <div
 						style={{
 							marginBottom: '10px',
 							fontSize: 'var(--tiny-font)',
@@ -248,7 +292,7 @@ export default function CreateDetail() {
 						}}
 					>
 						2:2는 4명선택, 3:3은 6명을 선택해주세요!
-					</div>
+					</div> */}
 					<div className="cd-meet-date">
 						<div className="md-title">모임 날짜</div>
 						<div className="md-row">

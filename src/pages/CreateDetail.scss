@@ -76,6 +76,22 @@
 			// margin-bottom: 23px;
 			margin-bottom: 10px;
 			margin-left: 8px;
+			.pn-btn-group {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				.pn-btn {
+					padding: 10px 16px;
+					border-radius: 9999px;
+					border: 3px solid var(--white-purple-color);
+					background: var(--white-color);
+					font-size: var(--medium-font);
+					&:hover,
+					&:active {
+						border: 3px solid var(--purple-color);
+					}
+				}
+			}
 			img {
 				cursor: pointer;
 			}
