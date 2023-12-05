@@ -87,7 +87,8 @@
 					background: var(--white-color);
 					font-size: var(--medium-font);
 					&:hover,
-					&:active {
+					&:active,
+					&.checked {
 						border: 3px solid var(--purple-color);
 					}
 				}
@@ -103,11 +104,47 @@
 				background: var(--white-color);
 			}
 		}
+		.cd-participate-method {
+			margin-bottom: 22px;
+			.pm-title {
+				font-weight: var(--bold);
+				margin-bottom: 6px;
+			}
+			.pm-btn-group {
+				display: flex;
+				flex-direction: row;
+				gap: 18px;
+				.pm-btns {
+					display: flex;
+					flex-direction: column;
+					.button-body {
+						background-color: var(--white-purple-color);
+						.btn-content {
+							color: var(--black-color);
+							font-weight: var(--medium-bold);
+						}
+						&:hover,
+						&:active,
+						&.checked {
+							background-color: var(--purple-color);
+							.btn-content {
+								color: var(--white-color);
+							}
+						}
+					}
+					.pm-explanation {
+						font-size: var(--tiny-font);
+						color: var(--gray-color);
+						margin-top: 2px;
+					}
+				}
+			}
+		}
 		.cd-meet-date {
 			margin-bottom: 22px;
 			.md-title {
 				font-weight: var(--bold);
-				margin-bottom: 6px;
+				margin-bottom: 8px;
 			}
 			.md-row {
 				// margin-left: 8px;

@@ -10,8 +10,9 @@ import axios from 'axios';
 
 export default function CreateDetail() {
 	const [category, setCategory] = useState(0);
-	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
+	const [limitPeople, setLimitPeople] = useState(1); // 4 or 6
 	const [limitGender, setLimitGender] = useState(0); // 0 or 1 or 2
+	const [participate, setParticipate] = useState(0);
 	const [location, setLocation] = useState('');
 	const [meetingDate, setMeetingDate] = useState('');
 	const [meetingTime, setMeetingTime] = useState('');
@@ -171,49 +172,49 @@ export default function CreateDetail() {
 						<div className="ca-title">카테고리</div>
 						<div className="ca-btns">
 							<Button
-								type={'small'}
+								type={category === 0 ? 'small checked' : 'small'}
 								content={'우주공강'}
 								onClick={() => {
 									setCategory(0);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 1 ? 'small checked' : 'small'}
 								content={'스펙쌓기'}
 								onClick={() => {
 									setCategory(1);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 2 ? 'small checked' : 'small'}
 								content={'취미/문화'}
 								onClick={() => {
 									setCategory(2);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 3 ? 'small checked' : 'small'}
 								content={'습관형성'}
 								onClick={() => {
 									setCategory(3);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 4 ? 'small checked' : 'small'}
 								content={'맛집탐방'}
 								onClick={() => {
 									setCategory(4);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 5 ? 'small checked' : 'small'}
 								content={'취업활동'}
 								onClick={() => {
 									setCategory(5);
 								}}
 							/>
 							<Button
-								type={'small'}
+								type={category === 6 ? 'small checked' : 'small'}
 								content={'기타모임'}
 								onClick={() => {
 									setCategory(6);
@@ -230,20 +231,10 @@ export default function CreateDetail() {
 						<input type="radio" name="gender" id="female" onClick={handleClickFemaleInput} />
 						<label htmlFor="female">여자만</label>
 					</div>
-					{/* <div
-						style={{
-							marginTop: '8px',
-							fontSize: 'var(--tiny-font)',
-							color: 'var(--orange-color)',
-							fontWeight: 'var(--semi-bold)',
-						}}
-					>
-						모집하고 싶은 상대방의 성별을 선택하세요!
-					</div> */}
 					<div className="cd-person-number">
 						<div className="pn-btn-group">
 							<div
-								className="pn-btn"
+								className={limitPeople === 1 ? 'pn-btn checked' : 'pn-btn'}
 								onClick={() => {
 									setLimitPeople(1);
 								}}
@@ -251,7 +242,7 @@ export default function CreateDetail() {
 								1
 							</div>
 							<div
-								className="pn-btn"
+								className={limitPeople === 2 ? 'pn-btn checked' : 'pn-btn'}
 								onClick={() => {
 									setLimitPeople(2);
 								}}
@@ -259,7 +250,7 @@ export default function CreateDetail() {
 								2
 							</div>
 							<div
-								className="pn-btn"
+								className={limitPeople === 3 ? 'pn-btn checked' : 'pn-btn'}
 								onClick={() => {
 									setLimitPeople(3);
 								}}
@@ -267,7 +258,7 @@ export default function CreateDetail() {
 								3
 							</div>
 							<div
-								className="pn-btn"
+								className={limitPeople === 4 ? 'pn-btn checked' : 'pn-btn'}
 								onClick={() => {
 									setLimitPeople(4);
 								}}
@@ -275,12 +266,37 @@ export default function CreateDetail() {
 								4
 							</div>
 							<div
-								className="pn-btn"
+								className={limitPeople === 5 ? 'pn-btn checked' : 'pn-btn'}
 								onClick={() => {
 									setLimitPeople(5);
 								}}
 							>
 								5
+							</div>
+						</div>
+					</div>
+					<div className="cd-participate-method">
+						<div className="pm-title">참여 방식</div>
+						<div className="pm-btn-group">
+							<div className="pm-btns">
+								<Button
+									type={participate === 0 ? 'checked' : ''}
+									content={'자동승인'}
+									onClick={() => {
+										setParticipate(0);
+									}}
+								/>
+								<span className="pm-explanation">승인 없이 참여 완료됩니다.</span>
+							</div>
+							<div className="pm-btns">
+								<Button
+									type={participate === 1 ? 'checked' : ''}
+									content={'수동승인'}
+									onClick={() => {
+										setParticipate(1);
+									}}
+								/>
+								<span className="pm-explanation">참여 승인 후 참여 완료됩니다.</span>
 							</div>
 						</div>
 					</div>
