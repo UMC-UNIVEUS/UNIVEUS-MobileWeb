@@ -13,12 +13,12 @@ export default function CreateDetail() {
 	const [limitPeople, setLimitPeople] = useState(4); // 4 or 6
 	const [limitGender, setLimitGender] = useState(0); // 0 or 1 or 2
 	const [location, setLocation] = useState('');
-	// const [meetingDate, setMeetingDate] = useState('');
+	const [meetingDate, setMeetingDate] = useState('');
 	const [meetingTime, setMeetingTime] = useState('');
 	// const [endDate, setEndDate] = useState('');
-	const [endTime, setEndTime] = useState('');
-	const [openChat, setOpenChat] = useState('');
-	const [openChatMessage, setOpenChatMessage] = useState('');
+	// const [endTime, setEndTime] = useState('');
+	// const [openChat, setOpenChat] = useState('');
+	// const [openChatMessage, setOpenChatMessage] = useState('');
 
 	const navigate = useNavigate();
 
@@ -34,17 +34,17 @@ export default function CreateDetail() {
 		setLimitGender(2);
 	};
 
-	const handleClickPeopleMinus = () => {
-		setLimitPeople(4);
-	};
-
-	const handleClickPeoplePlus = () => {
-		setLimitPeople(6);
-	};
-
-	// const handleMeetingDate = (e) => {
-	// 	setMeetingDate(e.target.value);
+	// const handleClickPeopleMinus = () => {
+	// 	setLimitPeople(4);
 	// };
+
+	// const handleClickPeoplePlus = () => {
+	// 	setLimitPeople(6);
+	// };
+
+	const handleMeetingDate = (e) => {
+		setMeetingDate(e.target.value);
+	};
 
 	const handleMeetingTime = (e) => {
 		setMeetingTime(e.target.value);
@@ -54,47 +54,47 @@ export default function CreateDetail() {
 	// 	setEndDate(e.target.value);
 	// };
 
-	const handleEndTime = (e) => {
-		setEndTime(e.target.value);
-	};
+	// const handleEndTime = (e) => {
+	// 	setEndTime(e.target.value);
+	// };
 
 	const handleLocation = (e) => {
 		setLocation(e.target.value);
 	};
 
-	const handleOpenChat = (e) => {
-		setOpenChat(e.target.value);
-	};
+	// const handleOpenChat = (e) => {
+	// 	setOpenChat(e.target.value);
+	// };
 
-	const today = new Date();
-	// 현재 시간
-	const presentHours = today.getHours();
-	// 년.월.일.
-	// const presentDate = today.toLocaleDateString();
-	// 년
-	const presentYear = today.getFullYear();
-	// 월
-	const presentMonth = today.getMonth() + 1;
-	//일
-	const [presentDay, setpresentDay] = useState(today.getDate());
+	// const today = new Date();
+	// // 현재 시간
+	// const presentHours = today.getHours();
+	// // 년.월.일.
+	// // const presentDate = today.toLocaleDateString();
+	// // 년
+	// const presentYear = today.getFullYear();
+	// // 월
+	// const presentMonth = today.getMonth() + 1;
+	// //일
+	// const [presentDay, setpresentDay] = useState(today.getDate());
 
-	useEffect(() => {
-		function changeDay() {
-			let day = today.getDate();
-			new Promise((resolve, reject) => {
-				if (presentHours === 22 || presentHours === 23) {
-					resolve((day += 1));
-				} else {
-					resolve(day);
-				}
-			}).then((result) => {
-				setpresentDay(result);
-			});
-		}
-		changeDay();
-	}, []);
+	// useEffect(() => {
+	// 	function changeDay() {
+	// 		let day = today.getDate();
+	// 		new Promise((resolve, reject) => {
+	// 			if (presentHours === 22 || presentHours === 23) {
+	// 				resolve((day += 1));
+	// 			} else {
+	// 				resolve(day);
+	// 			}
+	// 		}).then((result) => {
+	// 			setpresentDay(result);
+	// 		});
+	// 	}
+	// 	changeDay();
+	// }, []);
 
-	const date = presentYear + '-' + presentMonth + '-' + presentDay;
+	// const date = presentYear + '-' + presentMonth + '-' + presentDay;
 
 	const jwtToken = sessionStorage.getItem('accessToken');
 
@@ -104,32 +104,38 @@ export default function CreateDetail() {
 		limit_gender: limitGender,
 		location: location,
 		// meeting_date: meetingDate + ' ' + meetingTime,
-		meeting_date: date + ' ' + meetingTime,
-		openchat: openChat,
+		meeting_date: meetingDate + ' ' + meetingTime,
+		// openchat: openChat,
 		// end_date: endDate + ' ' + endTime,
-		end_date: date + ' ' + endTime,
+		// end_date: date + ' ' + endTime,
 	};
 
 	// localStorage에 저장하기
+
 	const handleClickNextPage = () => {
-		axios({
-			headers: {
-				'x-access-token': jwtToken,
-			},
-			method: 'post',
-			url: 'https://univeus.site/post/validate/chat-link',
-			data: {
-				openChaturi: openChat,
-			},
-		}).then((res) => {
-			if (res.data.code === 3024) {
-				setOpenChatMessage(res.data.message);
-			} else {
-				localStorage.setItem('create', JSON.stringify(CreateDetailData));
-				navigate('/create/intro');
-			}
-		});
+		localStorage.setItem('create', JSON.stringify(CreateDetailData));
+		navigate('/create/intro');
 	};
+
+	// const handleClickNextPage = () => {
+	// 	axios({
+	// 		headers: {
+	// 			'x-access-token': jwtToken,
+	// 		},
+	// 		method: 'post',
+	// 		url: 'https://univeus.site/post/validate/chat-link',
+	// 		data: {
+	// 			openChaturi: openChat,
+	// 		},
+	// 	}).then((res) => {
+	// 		if (res.data.code === 3024) {
+	// 			setOpenChatMessage(res.data.message);
+	// 		} else {
+	// 			localStorage.setItem('create', JSON.stringify(CreateDetailData));
+	// 			navigate('/create/intro');
+	// 		}
+	// 	});
+	// };
 
 	// const localStorageData = JSON.parse(localStorage.getItem('create'));
 	// console.log(localStorageData);
@@ -146,12 +152,12 @@ export default function CreateDetail() {
 					<div
 						className="page-tap"
 						onClick={
-							// meetingDate !== '' &&
+							meetingDate !== '' &&
 							meetingTime !== '' &&
 							// endDate !== '' &&
-							endTime !== '' &&
-							location !== '' &&
-							openChat !== ''
+							// endTime !== '' &&
+							// openChat !== '' &&
+							location !== ''
 								? handleClickNextPage
 								: () => {}
 						}
@@ -278,36 +284,21 @@ export default function CreateDetail() {
 							</div>
 						</div>
 					</div>
-					{/* <div className="cd-person-number">
-						<img className="pn-minus" src={Minus} alt="마이너스 버튼" onClick={handleClickPeopleMinus} />
-						<div className="pn-input">{limitPeople}</div>
-						<img className="pn-plus" src={Plus} alt="플러스 버튼" onClick={handleClickPeoplePlus} />
-					</div> */}
-					{/* <div
-						style={{
-							marginBottom: '10px',
-							fontSize: 'var(--tiny-font)',
-							color: 'var(--orange-color)',
-							fontWeight: 'var(--semi-bold)',
-						}}
-					>
-						2:2는 4명선택, 3:3은 6명을 선택해주세요!
-					</div> */}
 					<div className="cd-meet-date">
 						<div className="md-title">모임 날짜</div>
 						<div className="md-row">
 							<label className="md-date-label" htmlFor="md-start-date">
 								모임일자
 							</label>
-							{/* <input
+							<input
 								className="md-date-input"
 								type="date"
 								id="md-start-date"
 								date-placeholder="yyyy/mm/dd"
 								required
 								onChange={handleMeetingDate}
-							/> */}
-							<div className="md-date-input">{date}</div>
+							/>
+							{/* <div className="md-date-input">{date}</div> */}
 							<label className="md-time-label" htmlFor="md-start-time">
 								시간
 							</label>
@@ -318,31 +309,6 @@ export default function CreateDetail() {
 								date-placeholder="00:00"
 								required
 								onChange={handleMeetingTime}
-							/>
-						</div>
-						<div className="md-row">
-							<label className="md-date-label" htmlFor="md-end-date">
-								마감일자
-							</label>
-							{/* <input
-								className="md-date-input"
-								type="date"
-								id="md-end-date"
-								date-placeholder="yyyy/mm/dd"
-								required
-								onChange={handleEndDate}
-							/> */}
-							<div className="md-date-input">{date}</div>
-							<label className="md-time-label" htmlFor="md-end-time">
-								시간
-							</label>
-							<input
-								className="md-time-input"
-								type="time"
-								id="md-end-time"
-								date-placeholder="00:00"
-								required
-								onChange={handleEndTime}
 							/>
 						</div>
 					</div>
@@ -358,7 +324,7 @@ export default function CreateDetail() {
 							required
 						/>
 					</div>
-					<div className="cd-contact">
+					{/* <div className="cd-contact">
 						<div className="cc-title">연락 수단</div>
 						<input
 							type="text"
@@ -368,21 +334,19 @@ export default function CreateDetail() {
 							required
 						/>
 						<div className="cc-error-message">{openChatMessage}</div>
-					</div>
+					</div> */}
 				</div>
 				<div className="next-btn">
-					{
-						// meetingDate !== '' &&
-						meetingTime !== '' &&
-						// endDate !== '' &&
-						endTime !== '' &&
-						location !== '' &&
-						openChat !== '' ? (
-							<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
-						) : (
-							<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
-						)
-					}
+					{meetingDate !== '' &&
+					meetingTime !== '' &&
+					// endDate !== '' &&
+					// endTime !== '' &&
+					// openChat !== '' &&
+					location !== '' ? (
+						<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
+					) : (
+						<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
+					)}
 				</div>
 			</div>
 			<NavBar />
