@@ -8,10 +8,12 @@
 		justify-content: center;
 	}
 	.landingpagebody {
-		margin: 0 20px;
+		// margin: 0 20px;
+		width: 100%;
+		height: 100%;
 		padding-top: 52px;
 		.bannercontainer {
-			width: 100%;
+			width: 95%;
 			margin-top: 73px;
 			display: flex;
 			align-items: center;
@@ -60,23 +62,28 @@
 			font-weight: var(--bold);
 			color: var(--orange-color);
 		}
-		.loginbutton {
-			width: 100%;
-			height: 47px;
-			border-radius: 30px;
-			// 축제동안 임시 주석
-			// margin-top: 126px;
-			box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25);
+		.login-btn-group {
 			display: flex;
-			justify-content: center;
+			flex-direction: column;
 			align-items: center;
-			font-size: var(--medium-font);
-			font-weight: var(--regular-bold);
-			position: relative;
-			.googleicon {
-				position: absolute;
-				z-index: 999;
-				left: 15px;
+			.loginbutton {
+				width: 90%;
+				height: 47px;
+				border-radius: 30px;
+				// 축제동안 임시 주석
+				// margin-top: 126px;
+				box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.25);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: var(--medium-font);
+				font-weight: var(--regular-bold);
+				position: relative;
+				.googleicon {
+					position: absolute;
+					z-index: 999;
+					left: 15px;
+				}
 			}
 		}
 	}
