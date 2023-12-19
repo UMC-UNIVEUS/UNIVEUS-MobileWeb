@@ -1,11 +1,13 @@
 .ci-body {
-	margin: 0 20px;
 	margin-top: 74px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100%;
 	.ci-page {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
 		margin-bottom: 23px;
+		width: 90%;
 		.page-tap {
 			display: inline-flex;
 			height: 27px;
@@ -26,6 +28,7 @@
 		width: 90%;
 		.ci-title {
 			margin-bottom: 27px;
+			width: 90%;
 			.ct-title {
 				font-weight: var(--bold);
 				margin-bottom: 6px;
@@ -44,6 +47,7 @@
 		}
 		.ci-img-upload {
 			margin-bottom: 27px;
+			width: 90%;
 			.ciu-title {
 				font-weight: var(--bold);
 				margin-bottom: 8px;
@@ -54,6 +58,7 @@
 			}
 		}
 		.ci-content {
+			width: 90%;
 			.cct-title {
 				font-weight: var(--bold);
 				margin-bottom: 8px;
@@ -73,8 +78,7 @@
 			}
 		}
 		.ci-friend-invite {
-			display: flex;
-			flex-direction: column;
+			width: 90%;
 			margin-top: 21px;
 			.cfi-title {
 				font-weight: var(--bold);
