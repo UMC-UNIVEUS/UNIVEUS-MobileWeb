@@ -14,7 +14,7 @@ export default function Test() {
 	return (
 		<div>
 			{/* <MainHeader /> */}
-			<SubHeader headertext={'상세정보 입력'} />
+			<SubHeader headertext={'상세정보 입력'} textBtn={'완료'} />
 			{/* <ModalTest />
 			<Button type={'floating'} content={'스터디'} /> */}
 			{/* <CreateDetail /> */}

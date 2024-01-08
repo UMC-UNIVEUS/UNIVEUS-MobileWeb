@@ -58,6 +58,7 @@
 	background-color: var(--white-color);
 	display: flex;
 	align-items: center;
+	font-size: var(--medium-font);
 	.back-btn {
 		position: relative;
 		left: 20px;
@@ -65,7 +66,15 @@
 	.headertext {
 		margin: 0 auto;
 		padding-right: 10px;
-		font-size: var(--medium-font);
 		font-weight: var(--medium-bold);
+	}
+	.header-text-btn {
+		position: relative;
+		right: 28px;
+		font-weight: var(--bold);
+		color: var(--light-gray-color);
+		// &.disabled {
+		// 	color: var(--deep-blue-color);
+		// }
 	}
 }
