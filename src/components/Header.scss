@@ -57,9 +57,14 @@
 	z-index: 9999;
 	background-color: var(--white-color);
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	.back-btn {
+		position: relative;
+		left: 20px;
+	}
 	.headertext {
+		margin: 0 auto;
+		padding-right: 10px;
 		font-size: var(--medium-font);
 		font-weight: var(--medium-bold);
 	}

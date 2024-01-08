@@ -4,6 +4,7 @@ import { ReactComponent as Bell } from '../assets/images/bell.svg';
 import { ReactComponent as BadgedBell } from '../assets/images/bell-badged.svg';
 import { ReactComponent as Search } from '../assets/images/search.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
+import { ReactComponent as Arrow } from '../assets/images/arrow.svg';
 import { useNavigate } from 'react-router-dom';
 
 export const MainHeader = () => {
@@ -29,8 +30,10 @@ export const MainHeader = () => {
 };
 
 export const SubHeader = ({ headertext }) => {
+	const navigate = useNavigate();
 	return (
 		<div className="SubHeader">
+			<Arrow className="back-btn" onClick={() => navigate(-1)} />
 			<div className="headertext">{headertext}</div>
 		</div>
 	);
