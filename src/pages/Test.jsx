@@ -6,6 +6,7 @@ import MyFeed from './MyFeed';
 import Modal from '../components/Modal';
 import { useState } from 'react';
 import { MainHeader, SubHeader } from '../components/Header';
+import NavBar from '../components/NavBar';
 
 export default function Test() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +16,7 @@ export default function Test() {
 		<div>
 			{/* <MainHeader /> */}
 			<SubHeader headertext={'상세정보 입력'} textBtn={'완료'} />
+			<NavBar present={'home'} />
 			{/* <ModalTest />
 			<Button type={'floating'} content={'스터디'} /> */}
 			{/* <CreateDetail /> */}

@@ -31,6 +31,7 @@ function App() {
 					<Route path="/create/intro" element={<CreateIntro />} />
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
 					<Route path="/modify/intro/:id" element={<ModifyIntro />} />
+					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>
 			<Reset />

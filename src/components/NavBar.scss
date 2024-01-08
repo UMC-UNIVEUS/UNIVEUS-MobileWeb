@@ -1,7 +1,7 @@
 .nav-bar {
 	position: fixed;
 	width: 100%;
-	height: 61px;
+	height: 60px;
 	bottom: 0;
 	background-color: var(--white-color);
 	font-weight: 400;
@@ -9,74 +9,67 @@
 	flex-direction: row;
 	z-index: 9999;
 	padding-bottom: 10px;
-	// justify-content: space-evenly;
-	justify-content: center;
+	justify-content: space-evenly;
+	// justify-content: center;
 	.nb-link {
 		text-decoration: none;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		&.nb-home {
-			// margin-right: 96px;
-			.nb-btn-img {
-				path {
-					fill: #334155;
-				}
-			}
-			.nb-btn-text {
-				color: #334155;
+		width: 20%;
+		height: 100%;
+		&.chat {
+			svg {
+				height: 25px;
+				width: 25px;
 			}
 		}
-		&.nb-search {
-			// margin-right: 80px;
-			.nb-btn-img {
-				path {
-					fill: #334155;
-				}
-			}
-			.nb-btn-text {
-				color: #334155;
-			}
-		}
-		&.nb-mypage {
-			.nb-btn-img {
-				path {
-					fill: #334155;
-				}
-			}
-			.nb-btn-text {
-				color: #334155;
-			}
-		}
-		&:visited {
-			.nb-btn-text {
-				color: var(--light-gray-color);
-			}
-		}
-		&:hover,
-		:active,
-		&.present {
-			.nb-btn-img {
-				path {
-					fill: #334155;
-				}
-			}
-			.nb-btn-text {
-				color: #334155;
+		&.person {
+			svg {
+				height: 30px;
+				width: 30px;
 			}
 		}
 		.nb-btn-img {
-			// filter: invert(89%) sepia(18%) saturate(147%) hue-rotate(173deg) brightness(95%) contrast(88%);
+			margin-bottom: 4px;
 			path {
 				fill: var(--light-gray-color);
 			}
-			width: 26px;
-			height: 26px;
+			&.chat {
+				path {
+					fill: var(--white-color);
+					stroke: var(--light-gray-color);
+				}
+			}
+			&.person {
+				margin-bottom: 0px;
+			}
 		}
 		.nb-btn-text {
 			color: var(--light-gray-color);
 			font-size: var(--small-font);
+		}
+
+		&:hover,
+		&:active,
+		&.nb-home,
+		&.nb-mypage,
+		&.nb-chat {
+			.nb-btn-img {
+				path {
+					fill: var(--deep-gray-color);
+				}
+				&.chat {
+					path {
+						fill: var(--white-color);
+						stroke: var(--deep-gray-color);
+					}
+				}
+			}
+			.nb-btn-text {
+				color: var(--deep-gray-color);
+			}
 		}
 	}
 }
