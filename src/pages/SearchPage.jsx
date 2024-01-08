@@ -48,6 +48,7 @@ const SearchPage = () => {
 					<p className="maintext bold">유니버스를 찾고 계신가요?</p>
 				</div>
 				<div className="searchinputcontainer">
+					<Search className="search-img-btn" onClick={handleSearch} />
 					<input
 						type="text"
 						className="searchinput"
@@ -55,7 +56,6 @@ const SearchPage = () => {
 						value={searchWord}
 						onChange={handleChange}
 					/>
-					<Search onClick={handleSearch} />
 				</div>
 				<div className="horizontalbar"></div>
 				{searchedData ? (
