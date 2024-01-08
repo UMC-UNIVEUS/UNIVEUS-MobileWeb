@@ -7,7 +7,7 @@ import ProfileRegister from './pages/ProfileRegister';
 import LandingPage from './pages/LandingPage';
 import SearchPage from './pages/SearchPage';
 import PostPage from './pages/PostPage';
-import Test from './pages/Test';
+import TestPage from './pages/Test';
 import MyFeed from './pages/MyFeed';
 import CreateDetail from './pages/CreateDetail';
 import ModifyDetail from './pages/ModifyDetail';
@@ -19,6 +19,7 @@ function App() {
 		<div className="App">
 			<BrowserRouter>
 				<Routes>
+					<Route path="/test" element={<TestPage />} />
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/verification" element={<Verification />} />
 					<Route path="/register" element={<ProfileRegister />} />
