@@ -16,14 +16,17 @@ export default function Test() {
 		<div>
 			{/* <MainHeader /> */}
 			<SubHeader headertext={'상세정보 입력'} textBtn={'완료'} />
+			<div style={{ marginTop: '60px' }}>
+				<button onClick={openModal}>Open Modal</button>
+				<Button onClick={openModal} content={'승인하기'} />
+			</div>
 			<NavBar present={'home'} />
 			{/* <ModalTest />
 			<Button type={'floating'} content={'스터디'} /> */}
 			{/* <CreateDetail /> */}
 			{/* <CreateIntro /> */}
 			{/* <MyFeed /> */}
-			{/* <button onClick={openModal}>Open Modal</button>
-			<Modal isOpen={isModalOpen} title={'gd'}>
+			{/* <Modal isOpen={isModalOpen} title={'gd'}>
 				<h1>안녕?</h1>
 				<p>안녕하세요</p>
 			</Modal> */}
