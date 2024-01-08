@@ -16,20 +16,23 @@ export default function Test() {
 		<div>
 			{/* <MainHeader /> */}
 			<SubHeader headertext={'상세정보 입력'} textBtn={'완료'} />
-			<div style={{ marginTop: '60px' }}>
-				<button onClick={openModal}>Open Modal</button>
+			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
+				{/* Modal 사용 예시 */}
 				<Button onClick={openModal} content={'승인하기'} />
+				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}>
+					{/* 내용과 버튼은 매번 만들기 */}
+					<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 제대로 생성되었어요!</p>
+					<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모임정보를 꼭 기억해주세요!</p>
+					{/* 버튼 1개일 때, 해당 내용 복붙 */}
+					<Button type={'floating'} content={'확인'} onClick={closeModal} />
+					{/* 버튼 2개일 때, 해당 내용 복붙후 content만 수정 */}
+					<div className="modal-btn-group">
+						<Button content={'수정하기'} type={'modal-btn other-color'} />
+						<Button content={'삭제하기'} type={'modal-btn'} />
+					</div>
+				</Modal>
 			</div>
 			<NavBar present={'home'} />
-			{/* <ModalTest />
-			<Button type={'floating'} content={'스터디'} /> */}
-			{/* <CreateDetail /> */}
-			{/* <CreateIntro /> */}
-			{/* <MyFeed /> */}
-			{/* <Modal isOpen={isModalOpen} title={'gd'}>
-				<h1>안녕?</h1>
-				<p>안녕하세요</p>
-			</Modal> */}
 		</div>
 	);
 }
