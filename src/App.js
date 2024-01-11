@@ -13,6 +13,7 @@ import CreateDetail from './pages/CreateDetail';
 import ModifyDetail from './pages/ModifyDetail';
 import ModifyIntro from './pages/ModifyIntro';
 import CreateIntro from './pages/CreateIntro';
+import IdentityVerification from './pages/IdentityVerification';
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 					<Route path="/test" element={<TestPage />} />
 					<Route path="/" element={<LandingPage />} />
 					<Route path="/verification" element={<Verification />} />
+					<Route path="/signup/verification/identity" element={<IdentityVerification />} />
 					<Route path="/register" element={<ProfileRegister />} />
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />

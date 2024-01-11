@@ -16,10 +16,10 @@ export default function Test() {
 	return (
 		<div>
 			{/* MainHeader에 rightNonDisplay props를 추가하면 오른쪽 아이콘들이 사라짐 */}
-			<MainHeader rightNonDisplay />
+			{/* <MainHeader rightNonDisplay /> */}
 			{/* SubHeader에 headerText는 필수. iconBtn에는 사용할 아이콘 작성 및 navLink에는 모달 오픈 작성. textBtn에는 문구 작성, 기본 글 색상 비활성화 색상, 버튼 활성화 할 시에 navLink에 이동할 링크 작성 및 style에 글자 색상 딥블루 입력  */}
-			{/* <SubHeader headertext={'상세정보 입력'} iconBtn={Icon} navLink={openModal} /> */}
-			{/* <SubHeader headertext={'상세정보 입력'} textBtn={'완료'} /> */}
+			{/* <SubHeader headertext={'상세정보 입력'} iconBtn={Icon} onClick={openModal} /> */}
+			<SubHeader headertext={'입력'} textBtn={'완료'} />
 			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
 				{/* Modal 사용 예시 */}
 				<Button onClick={openModal} content={'승인하기'} />
