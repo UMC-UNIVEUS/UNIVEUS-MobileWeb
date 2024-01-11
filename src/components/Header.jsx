@@ -7,7 +7,7 @@ import { ReactComponent as Search } from '../assets/images/search.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import { ReactComponent as Arrow } from '../assets/images/arrow.svg';
 
-export const MainHeader = () => {
+export const MainHeader = ({ rightNonDisplay }) => {
 	const [isNewAlarm, setIsNewAlarm] = useState(false); // 새 알람 여부 State
 
 	const navigate = useNavigate();
@@ -21,7 +21,7 @@ export const MainHeader = () => {
 					<p className="kgu">KGU</p>
 				</div>
 			</div>
-			<div className="header-right">
+			<div className="header-right" style={{ display: rightNonDisplay ? 'none' : 'block' }}>
 				<Search className="search-img" onClick={() => navigate('/search')} />
 				{isNewAlarm === false ? <Bell className="bell-img" /> : <BadgedBell className="badged-bell-img" />}
 			</div>
@@ -29,19 +29,19 @@ export const MainHeader = () => {
 	);
 };
 
-export const SubHeader = ({ headertext, textBtn, navLink }) => {
+export const SubHeader = ({ headertext, textBtn, navLink, iconBtn }) => {
 	const navigate = useNavigate();
+
 	return (
 		<div className="SubHeader">
 			<Arrow className="back-btn" onClick={() => navigate(-1)} />
 			<div className="headertext">{headertext}</div>
 
-			<div
-				className="header-text-btn"
-				style={{ display: textBtn ? 'block' : 'none' }}
-				onClick={() => (navLink ? navigate(`/${navLink}`) : '')}
-			>
-				{textBtn}
+			<div className="header-text-btn">
+				<div style={{ display: textBtn ? 'block' : 'none' }} onClick={() => (navLink ? navigate(`/${navLink}`) : '')}>
+					{textBtn}
+				</div>
+				<img src={iconBtn} alt="헤더 우측 버튼" style={{ display: iconBtn ? 'block' : 'none' }} onClick={navLink} />
 			</div>
 		</div>
 	);
