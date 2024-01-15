@@ -6,7 +6,7 @@ import Button from '../components/Button';
 export default function RegistrationOfAffiliation() {
 	<div className="registration-of-affiliation">
 		<SubHeader headertext={'소속등록'} />
-		<div className="roa-body"></div>
+		<div className="roa-body">test</div>
 		<NavBar />
 	</div>;
 }
