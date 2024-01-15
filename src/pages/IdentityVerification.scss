@@ -47,6 +47,9 @@
 					&:focus {
 						outline: none;
 					}
+					&::placeholder {
+						color: var(--light-gray-color);
+					}
 				}
 				.ivf-img {
 					position: absolute;
