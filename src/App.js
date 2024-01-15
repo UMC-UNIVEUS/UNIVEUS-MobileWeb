@@ -15,6 +15,7 @@ import ModifyIntro from './pages/ModifyIntro';
 import CreateIntro from './pages/CreateIntro';
 import IdentityVerification from './pages/IdentityVerification';
 import TermsOfUse from './pages/TermsOfUse';
+import RegistrationOfAffiliation from './pages/RegistrationOfAffiliation';
 
 function App() {
 	return (
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/verification" element={<Verification />} />
 					<Route path="/signup/identity" element={<IdentityVerification />} />
 					<Route path="/signup/terms-of-use" element={<TermsOfUse />} />
+					<Route path="/signup/registration-of-affiliation" element={<RegistrationOfAffiliation />} />
 					<Route path="/register" element={<ProfileRegister />} />
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
