@@ -44,6 +44,9 @@
 					letter-spacing: 2px;
 					padding: 10px 0;
 					text-align: center;
+					&:focus {
+						outline: none;
+					}
 				}
 				.ivf-img {
 					position: absolute;

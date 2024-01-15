@@ -1,0 +1,58 @@
+.registration-of-affiliation {
+	.roa-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+	}
+	.roa-title {
+		margin-top: 40px;
+		margin-bottom: 23px;
+		.roa-main {
+			font-size: var(--large-font);
+			font-weight: var(--semi-bold);
+			padding-bottom: 5px;
+		}
+		.roa-sub {
+			color: var(--gray-color);
+			margin-top: 5px;
+		}
+	}
+	.roa-form {
+		margin: 0 auto;
+		width: 85%;
+		padding-bottom: 72px;
+		.roa-input-group {
+			display: flex;
+			flex-direction: column;
+			row-gap: 10px;
+			margin-top: 24px;
+			border-bottom: solid 1px var(--light-gray-color);
+			label {
+				font-weight: var(--semi-bold);
+			}
+			.roa-input {
+				height: 25px;
+				border: none;
+				background: url('https://i.ibb.co/GdzYcdf/Vector.png') calc(100% - 5px) center no-repeat;
+				background-size: 10px;
+				font-size: 18px;
+				padding-bottom: 4px;
+				&::placeholder {
+					color: var(--light-gray-color);
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+		.roa-error-message {
+			margin-top: 5px;
+			color: var(--orange-color);
+			font-size: var(--small-font);
+		}
+	}
+}
