@@ -15,7 +15,7 @@ export default function RegistrationOfAffiliation() {
 
 	const handleSelectMajor = (e) => {
 		setMajor(e.target.value);
-		setMajorFontColor('--black-color');
+		setMajorFontColor('--gray-color');
 	};
 
 	const handleStudentID = (e) => {

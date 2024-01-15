@@ -37,10 +37,13 @@
 			.roa-input {
 				height: 25px;
 				border: none;
-				background: url('https://i.ibb.co/GdzYcdf/Vector.png') calc(100% - 5px) center no-repeat;
-				background-size: 10px;
 				font-size: 18px;
 				padding-bottom: 4px;
+				color: var(--gray-color);
+				&:first-child {
+					background: url('https://i.ibb.co/GdzYcdf/Vector.png') calc(100% - 5px) center no-repeat;
+					background-size: 10px;
+				}
 				&::placeholder {
 					color: var(--light-gray-color);
 				}

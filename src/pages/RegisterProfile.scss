@@ -1,5 +1,4 @@
 .register-profile {
-	color: var(--gray-color);
 	.rp-body {
 		padding-top: 102px;
 		padding-bottom: 71px;
@@ -74,6 +73,7 @@
 					}
 				}
 				label {
+					color: var(--gray-color);
 					font-size: 18px;
 				}
 			}
