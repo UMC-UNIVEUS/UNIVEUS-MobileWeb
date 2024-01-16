@@ -17,6 +17,7 @@ import IdentityVerification from './pages/IdentityVerification';
 import TermsOfUse from './pages/TermsOfUse';
 import RegistrationOfAffiliation from './pages/RegistrationOfAffiliation';
 import RegisterProfile from './pages/RegisterProfile';
+import CreatePostLevel1 from './pages/CreatePostLevel1';
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/post/:id" element={<PostPage />} />
 					<Route path="/myunive" element={<MyFeed />} />
+					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/detail" element={<CreateDetail />} />
 					<Route path="/create/intro" element={<CreateIntro />} />
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
