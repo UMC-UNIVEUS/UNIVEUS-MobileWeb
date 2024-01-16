@@ -18,6 +18,7 @@ import TermsOfUse from './pages/TermsOfUse';
 import RegistrationOfAffiliation from './pages/RegistrationOfAffiliation';
 import RegisterProfile from './pages/RegisterProfile';
 import CreatePostLevel1 from './pages/CreatePostLevel1';
+import CreatePostLevel2 from './pages/CreatePostLevel2';
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 					<Route path="/post/:id" element={<PostPage />} />
 					<Route path="/myunive" element={<MyFeed />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
+					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
 					<Route path="/create/detail" element={<CreateDetail />} />
 					<Route path="/create/intro" element={<CreateIntro />} />
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
