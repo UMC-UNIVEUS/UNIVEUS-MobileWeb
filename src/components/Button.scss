@@ -34,7 +34,8 @@
 			color: var(--black-color);
 		}
 		&:hover,
-		&:active {
+		&:active,
+		&.checked {
 			border-radius: 20px;
 			background: var(--purple-color);
 			font-weight: var(--semi-bold);
