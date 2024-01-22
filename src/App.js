@@ -19,6 +19,7 @@ import RegistrationOfAffiliation from './pages/RegistrationOfAffiliation';
 import RegisterProfile from './pages/RegisterProfile';
 import CreatePostLevel1 from './pages/CreatePostLevel1';
 import CreatePostLevel2 from './pages/CreatePostLevel2';
+import ProfileChange from './pages/ProfileChange';
 
 function App() {
 	return (
@@ -43,6 +44,7 @@ function App() {
 					<Route path="/create/intro" element={<CreateIntro />} />
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
 					<Route path="/modify/intro/:id" element={<ModifyIntro />} />
+					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>
