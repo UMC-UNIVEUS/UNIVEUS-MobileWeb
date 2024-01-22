@@ -34,13 +34,6 @@ export default function SelfIntroduction() {
 							</div>
 						);
 					})}
-					<div className="si-qa-box">
-						<div className="si-question-group">
-							<div className="si-dot">&#183;</div>
-							<div className="si-question">ddd dsafkdsf </div>
-						</div>
-						<div className="si-answer">fdd</div>
-					</div>
 				</div>
 			</div>
 			<NavBar />

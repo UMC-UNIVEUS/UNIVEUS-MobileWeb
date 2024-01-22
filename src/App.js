@@ -22,6 +22,7 @@ import CreatePostLevel2 from './pages/CreatePostLevel2';
 import ProfileChange from './pages/ProfileChange';
 import SelfIntroduction from './pages/SelfIntroduction';
 import SelfIntroductionEdit from './pages/SelfIntroductionEdit';
+import OtherUserProfile from './pages/OtherUserProfile';
 
 function App() {
 	return (
@@ -49,6 +50,7 @@ function App() {
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />
+					<Route path="/profile/other-user-profile" element={<OtherUserProfile />} />
 					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>
