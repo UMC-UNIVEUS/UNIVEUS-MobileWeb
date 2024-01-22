@@ -38,7 +38,10 @@ export const SubHeader = ({ headertext, textBtn, onClick, iconBtn }) => {
 			<div className="headertext">{headertext}</div>
 
 			<div className="header-text-btn">
-				<div style={{ display: textBtn ? 'block' : 'none' }} onClick={onClick}>
+				<div
+					style={{ display: textBtn ? 'block' : 'none', color: onClick ? 'var(--deep-blue-color)' : '' }}
+					onClick={onClick}
+				>
 					{textBtn}
 				</div>
 				<img src={iconBtn} alt="헤더 우측 버튼" style={{ display: iconBtn ? 'block' : 'none' }} onClick={onClick} />

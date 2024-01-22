@@ -20,6 +20,7 @@ import RegisterProfile from './pages/RegisterProfile';
 import CreatePostLevel1 from './pages/CreatePostLevel1';
 import CreatePostLevel2 from './pages/CreatePostLevel2';
 import ProfileChange from './pages/ProfileChange';
+import SelfIntroduction from './pages/SelfIntroduction';
 
 function App() {
 	return (
@@ -45,6 +46,7 @@ function App() {
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
 					<Route path="/modify/intro/:id" element={<ModifyIntro />} />
 					<Route path="/profile/change" element={<ProfileChange />} />
+					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>
