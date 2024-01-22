@@ -21,6 +21,7 @@ import CreatePostLevel1 from './pages/CreatePostLevel1';
 import CreatePostLevel2 from './pages/CreatePostLevel2';
 import ProfileChange from './pages/ProfileChange';
 import SelfIntroduction from './pages/SelfIntroduction';
+import SelfIntroductionEdit from './pages/SelfIntroductionEdit';
 
 function App() {
 	return (
@@ -47,6 +48,7 @@ function App() {
 					<Route path="/modify/intro/:id" element={<ModifyIntro />} />
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
+					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />
 					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>
