@@ -15,8 +15,8 @@ export default function Profile({ profileImg, gender }) {
 					src={profileImg ? profileImg : Person}
 					alt="프로필 이미지"
 					style={{
-						width: profileImg ? '' : '27px',
-						height: profileImg ? '' : '27px',
+						width: profileImg ? '' : '50%',
+						height: profileImg ? '' : '50%',
 						borderRadius: profileImg ? '' : '0px',
 					}}
 				/>

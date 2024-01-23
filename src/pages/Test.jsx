@@ -9,6 +9,7 @@ import { MainHeader, SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Icon from '../assets/images/Insta.svg';
 import Profile from '../components/Profile';
+import Card from '../components/Card';
 
 export default function Test() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function Test() {
 			<SubHeader headertext={'입력'} textBtn={'완료'} />
 			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
 				<Profile gender={'male'} />
+				<Card />
 				{/* Modal 사용 예시 */}
 				<Button onClick={openModal} content={'승인하기'} />
 				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}>
