@@ -1,5 +1,6 @@
-import './RegisterProfile.scss';
+import './ProfileChange.scss';
 import { SubHeader } from '../components/Header';
+import DeleteBtn from '../assets/images/delete.svg';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
 import CheckBtn from '../assets/images/arrow_circle.svg';
@@ -43,7 +44,6 @@ export default function ProfileChange() {
 							}}
 						/>
 						{profileImg ? <></> : <Pencil className="rpi-pencil-img" />}
-						{/* <Pencil className="rpi-pencil-img" /> */}
 					</label>
 					<input
 						type="file"
@@ -53,6 +53,20 @@ export default function ProfileChange() {
 						ref={imgRef}
 						style={{ display: 'none' }}
 					/>
+					<div className="rpi-delete">
+						{profileImg ? (
+							<img
+								className="rpi-delete-img"
+								src={DeleteBtn}
+								alt="이미지 삭제 버튼"
+								onClick={() => {
+									setProfileImg('');
+								}}
+							/>
+						) : (
+							<></>
+						)}
+					</div>
 				</div>
 				<div className="rp-form">
 					<div className="rp-input-group">
