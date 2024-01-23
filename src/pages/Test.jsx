@@ -24,7 +24,10 @@ export default function Test() {
 			<SubHeader headertext={'입력'} textBtn={'완료'} />
 			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
 				<Profile gender={'male'} />
-				<Card />
+				<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+					<Card />
+					<Card />
+				</div>
 				{/* Modal 사용 예시 */}
 				<Button onClick={openModal} content={'승인하기'} />
 				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}>
