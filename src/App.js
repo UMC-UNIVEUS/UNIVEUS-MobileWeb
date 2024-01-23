@@ -23,6 +23,7 @@ import ProfileChange from './pages/ProfileChange';
 import SelfIntroduction from './pages/SelfIntroduction';
 import SelfIntroductionEdit from './pages/SelfIntroductionEdit';
 import OtherUserProfile from './pages/OtherUserProfile';
+import CreatePostLevel3 from './pages/CreatePostLevel3';
 
 function App() {
 	return (
@@ -43,6 +44,7 @@ function App() {
 					<Route path="/myunive" element={<MyFeed />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
+					<Route path="/create/post-level3" element={<CreatePostLevel3 />} />
 					<Route path="/create/detail" element={<CreateDetail />} />
 					<Route path="/create/intro" element={<CreateIntro />} />
 					<Route path="/modify/detail/:id" element={<ModifyDetail />} />

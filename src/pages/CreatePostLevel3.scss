@@ -1,0 +1,114 @@
+.create-post-level3 {
+	.cpl3-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.cpl-tap {
+			position: relative;
+			.cplt-hr {
+				position: fixed;
+				width: 90%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--white-purple-color);
+			}
+			.cplt-hr-check {
+				position: fixed;
+				top: 52px;
+				z-index: 9;
+				width: 90%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--purple-color);
+			}
+			.cplt-hr-text {
+				position: absolute;
+				right: 0;
+				font-size: var(--small-font);
+				color: var(--gray-color);
+				top: 10px;
+			}
+		}
+		.cpl3-form {
+			position: relative;
+			margin-top: 48px;
+			.cpl3-title-group {
+				margin-bottom: 20px;
+				.cpl3t-title {
+					font-weight: var(--bold);
+					margin-bottom: 9px;
+				}
+				.cpl3t-input {
+					border: none;
+					width: 98%;
+					font-size: var(--defaul-font);
+					border-bottom: 1px solid var(--light-gray-color);
+					padding: 5px 0 10px 3px;
+					outline: none;
+					&::placeholder {
+						color: #bfc3d4;
+					}
+				}
+			}
+			.cpl3-img-upload {
+				label {
+					position: absolute;
+					right: 0;
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					.cpl3-label-text {
+						color: var(--purple-color);
+						font-size: var(--small-font);
+						margin-right: 3px;
+					}
+				}
+			}
+			.cpl3-content {
+				display: flex;
+				flex-direction: column;
+				padding-top: 5px;
+				margin-bottom: 17px;
+				.cpl3c-title {
+					font-weight: var(--bold);
+					margin-bottom: 24px;
+				}
+				.cpl3c-textarea {
+					width: 100%;
+					border: none;
+					outline: none;
+				}
+			}
+			.cpl3-img-group {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				width: 100%;
+				height: 210px;
+				overflow: auto;
+				.cpl3-img {
+					position: relative;
+					width: max-content;
+					margin-right: 10px;
+					.cpl3-img-delete {
+						position: absolute;
+						top: -8px;
+						right: -5px;
+						width: 24px;
+						z-index: 1;
+					}
+					.cpl3-img-box {
+						width: 160px;
+						height: 188px;
+						border-radius: 20px;
+						object-fit: cover;
+					}
+				}
+			}
+		}
+	}
+}
