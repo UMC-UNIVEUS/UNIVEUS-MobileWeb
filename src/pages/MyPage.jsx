@@ -32,7 +32,7 @@ export default function MyPage() {
 						<Setting
 							className="mu-setting-img"
 							onClick={() => {
-								navigate('/search');
+								navigate('/mypage/setting');
 							}}
 						/>
 					</div>
