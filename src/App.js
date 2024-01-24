@@ -24,6 +24,7 @@ import SelfIntroduction from './pages/SelfIntroduction';
 import SelfIntroductionEdit from './pages/SelfIntroductionEdit';
 import OtherUserProfile from './pages/OtherUserProfile';
 import CreatePostLevel3 from './pages/CreatePostLevel3';
+import MyPage from './pages/MyPage';
 
 function App() {
 	return (
@@ -41,7 +42,7 @@ function App() {
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/post/:id" element={<PostPage />} />
-					<Route path="/myunive" element={<MyFeed />} />
+					<Route path="/mypage" element={<MyPage />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
 					<Route path="/create/post-level3" element={<CreatePostLevel3 />} />
