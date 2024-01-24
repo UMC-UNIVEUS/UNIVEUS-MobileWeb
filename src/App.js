@@ -25,6 +25,7 @@ import SelfIntroductionEdit from './pages/SelfIntroductionEdit';
 import OtherUserProfile from './pages/OtherUserProfile';
 import CreatePostLevel3 from './pages/CreatePostLevel3';
 import MyPage from './pages/MyPage';
+import Setting from './pages/Setting';
 
 function App() {
 	return (
@@ -33,23 +34,24 @@ function App() {
 				<Routes>
 					<Route path="/test" element={<TestPage />} />
 					<Route path="/" element={<LandingPage />} />
-					<Route path="/verification" element={<Verification />} />
+					{/* <Route path="/verification" element={<Verification />} /> */}
 					<Route path="/signup/identity" element={<IdentityVerification />} />
 					<Route path="/signup/terms-of-use" element={<TermsOfUse />} />
 					<Route path="/signup/registration-of-affiliation" element={<RegistrationOfAffiliation />} />
 					<Route path="/signup/register-profile" element={<RegisterProfile />} />
-					<Route path="/register" element={<ProfileRegister />} />
+					{/* <Route path="/register" element={<ProfileRegister />} /> */}
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
 					<Route path="/post/:id" element={<PostPage />} />
 					<Route path="/mypage" element={<MyPage />} />
+					<Route path="/mypage/setting" element={<Setting />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
 					<Route path="/create/post-level3" element={<CreatePostLevel3 />} />
-					<Route path="/create/detail" element={<CreateDetail />} />
-					<Route path="/create/intro" element={<CreateIntro />} />
-					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
-					<Route path="/modify/intro/:id" element={<ModifyIntro />} />
+					{/* <Route path="/create/detail" element={<CreateDetail />} /> */}
+					{/* <Route path="/create/intro" element={<CreateIntro />} /> */}
+					{/* <Route path="/modify/detail/:id" element={<ModifyDetail />} /> */}
+					{/* <Route path="/modify/intro/:id" element={<ModifyIntro />} /> */}
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />
