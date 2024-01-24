@@ -1,0 +1,217 @@
+.unive-post {
+	.up-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.up-top {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 14px;
+			.upt-user-info {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				.upt-ui-group {
+					margin-left: 8px;
+					.upt-name-group {
+						margin-bottom: 6px;
+						.upt-name {
+							margin-right: 4px;
+							font-weight: var(--semi-bold);
+						}
+					}
+					.upt-department {
+						font-size: var(--tiny-font);
+					}
+				}
+			}
+			.upt-post-info {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				.upt-pi-people-group {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 4px;
+					.upt-pi-people-img {
+						width: 16px;
+						height: 16px;
+						margin-right: 2px;
+						path {
+							fill: var(--black-color);
+						}
+					}
+					.upt-pi-people {
+						font-size: var(--tiny-font);
+					}
+				}
+				.upt-pi-gender {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					background-color: var(--purple-color);
+					padding: 3px 8px;
+					border-radius: 10px;
+					.upt-pi-gender-img {
+						width: 14px;
+						height: 14px;
+					}
+					.upt-pi-gender-text {
+						font-size: var(--small-font);
+						font-weight: var(--semi-bold);
+						color: var(--white-color);
+						margin-left: 2px;
+					}
+				}
+			}
+		}
+		.up-meeting-box {
+			display: flex;
+			flex-direction: column;
+			border: 1px solid var(--light-gray-color);
+			border-radius: 10px;
+			padding: 8px 13px;
+			margin-top: 8px;
+			.up-mb-deadline-group {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-bottom: 4px;
+				.up-mb-deadline-date {
+					color: #f00;
+					font-size: var(--tiny-font);
+					font-weight: var(--medium-bold);
+					margin-left: 4px;
+				}
+			}
+			.up-mb-metting-group {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				color: var(--deep-gray-color);
+				margin-bottom: 5px;
+				.up-mb-title {
+					font-weight: var(--bold);
+					margin-right: 9px;
+				}
+			}
+		}
+		.up-content-box {
+			display: flex;
+			flex-direction: column;
+			margin-top: 16px;
+			color: var(--Dark-Gray, #334155);
+			.up-cb-title {
+				font-size: 18px;
+				font-weight: var(--bold);
+				margin-bottom: 24px;
+			}
+			.up-cb-textarea {
+				line-height: 150%;
+				margin-bottom: 25px;
+			}
+		}
+		.up-image-box {
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			margin-bottom: 32px;
+			.up-img {
+				margin-right: 10px;
+				border-radius: 20px;
+				width: 43vw;
+				height: 30vh;
+				object-fit: cover;
+			}
+		}
+		.up-hr {
+			width: 100%;
+			height: 1px;
+			background-color: var(--white-gray-color);
+			margin-bottom: 19px;
+		}
+		.up-participant-box {
+			.up-pb-text {
+				font-weight: var(--semi-bold);
+				margin-bottom: 18px;
+			}
+			.up-pb-group {
+				display: flex;
+				flex-direction: column;
+				margin-bottom: 17px;
+				.up-pb-bundle {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+					background-color: var(--white-color);
+					border-radius: 10px;
+					box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.1);
+					padding: 9px 11px;
+					margin-bottom: 6px;
+					.up-pb-user-info {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						.up-pb-user-name-group {
+							margin-left: 10px;
+							.up-pb-name {
+								font-weight: var(--semi-bold);
+							}
+							.up-pb-department {
+								font-size: var(--tiny-font);
+								margin-top: 3px;
+							}
+						}
+					}
+					.up-pb-situation {
+						color: var(--gray-color);
+						font-weight: var(--semi-bold);
+						margin-right: 9px;
+					}
+					.up-pb-situation-btn {
+						background-color: var(--purple-color);
+						border-radius: 5px;
+						padding: 8px;
+						font-weight: var(--semi-bold);
+						color: var(--white-color);
+					}
+				}
+			}
+		}
+	}
+
+	.modal {
+		.modal-body {
+			.oup-radio-box {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				width: 70%;
+				margin: 0 auto;
+				margin-top: 32px;
+				.oup-radio-group {
+					display: flex;
+					margin-bottom: 26px;
+					font-size: var(--medium-font);
+					.oup-radio {
+						margin-right: 10px;
+						width: 15px;
+						&:checked {
+							accent-color: var(--deep-blue-color);
+						}
+					}
+				}
+			}
+		}
+	}
+}

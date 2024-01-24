@@ -26,6 +26,7 @@ import OtherUserProfile from './pages/OtherUserProfile';
 import CreatePostLevel3 from './pages/CreatePostLevel3';
 import MyPage from './pages/MyPage';
 import Setting from './pages/Setting';
+import UnivePost from './pages/UnivePost';
 
 function App() {
 	return (
@@ -42,7 +43,8 @@ function App() {
 					{/* <Route path="/register" element={<ProfileRegister />} /> */}
 					<Route path="/home" element={<HomePage />} />
 					<Route path="/search" element={<SearchPage />} />
-					<Route path="/post/:id" element={<PostPage />} />
+					{/* <Route path="/post/:id" element={<PostPage />} /> */}
+					<Route path="/post" element={<UnivePost />} />
 					<Route path="/mypage" element={<MyPage />} />
 					<Route path="/mypage/setting" element={<Setting />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
