@@ -11,8 +11,6 @@ export default function Toggel({ toggle }) {
 		isOn ? setisOn(false) : setisOn(true);
 	};
 
-	console.log(isOn);
-
 	return (
 		<div className="toggle">
 			<div className="toggle-body" onClick={toggleHandler}>

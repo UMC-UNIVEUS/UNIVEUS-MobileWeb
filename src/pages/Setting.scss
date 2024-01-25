@@ -41,14 +41,14 @@
 					font-weight: var(--bold);
 				}
 				.sbs-btn {
-					margin-bottom: 20px;
-					.sbs-btn-text {
-						font-size: var(--medium-font);
-					}
 					display: flex;
 					flex-direction: row;
 					justify-content: space-between;
 					align-items: center;
+					margin-bottom: 20px;
+					.sbs-btn-text {
+						font-size: var(--medium-font);
+					}
 				}
 			}
 			.sbs-hr {
