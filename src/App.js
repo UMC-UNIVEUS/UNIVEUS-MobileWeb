@@ -27,6 +27,7 @@ import CreatePostLevel3 from './pages/CreatePostLevel3';
 import MyPage from './pages/MyPage';
 import Setting from './pages/Setting';
 import UnivePost from './pages/UnivePost';
+import Home from './pages/Home';
 
 function App() {
 	return (
@@ -41,7 +42,8 @@ function App() {
 					<Route path="/signup/registration-of-affiliation" element={<RegistrationOfAffiliation />} />
 					<Route path="/signup/register-profile" element={<RegisterProfile />} />
 					{/* <Route path="/register" element={<ProfileRegister />} /> */}
-					<Route path="/home" element={<HomePage />} />
+					{/* <Route path="/home" element={<HomePage />} /> */}
+					<Route path="/home" element={<Home />} />
 					<Route path="/search" element={<SearchPage />} />
 					{/* <Route path="/post/:id" element={<PostPage />} /> */}
 					<Route path="/post" element={<UnivePost />} />
