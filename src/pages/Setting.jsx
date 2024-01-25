@@ -3,6 +3,7 @@ import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Profile from '../components/Profile';
 import Footer from '../components/Footer';
+import Toggle from '../components/Toggle';
 import { ReactComponent as Arrow } from '../assets/images/arrow-thin.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -65,15 +66,11 @@ export default function Setting() {
 							<span className="sbs-btn-text">개인정보 이용동의 및 활용 약관</span>
 							<Arrow />
 						</div>
-						<div
-							className="sbs-btn"
-							onClick={() => {
-								navigate('/profile/change');
-							}}
-						>
+						<div className="sbs-btn">
 							<span className="sbs-btn-text">문자 및 마케팅 수신동의</span>
 							{/* 토글로 변경하기 */}
-							<Arrow />
+							{/* 문자 및 마케팅 수신동의 데이터 받기 */}
+							<Toggle toggle={true} />
 						</div>
 					</div>
 					<div className="sbs-group">

@@ -10,6 +10,7 @@ import NavBar from '../components/NavBar';
 import Icon from '../assets/images/Insta.svg';
 import Profile from '../components/Profile';
 import Card from '../components/Card';
+import Toggle from '../components/Toggle';
 
 export default function Test() {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +25,7 @@ export default function Test() {
 			<SubHeader headertext={'입력'} textBtn={'완료'} />
 			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
 				<Profile gender={'male'} />
+				<Toggle />
 				<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
 					<Card />
 					<Card />
