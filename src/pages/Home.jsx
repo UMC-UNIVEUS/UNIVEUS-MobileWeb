@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import Profile from '../components/Profile';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 import { ReactComponent as Memebership } from '../assets/images/membership.svg';
 import { ReactComponent as People } from '../assets/images/people.svg';
 import Logo from '../assets/images/univeus.svg';
@@ -14,8 +15,11 @@ import Fire from '../assets/images/fire.svg';
 import Flag from '../assets/images/flag.svg';
 import Money from '../assets/images/money.svg';
 import NeckTie from '../assets/images/necktie.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+	const navigate = useNavigate();
+
 	return (
 		<div className="home">
 			<MainHeader />
@@ -103,7 +107,40 @@ export default function Home() {
 					</div>
 				</div>
 				<div className="hb-hr"></div>
-				<div className="hb-main-card-list"></div>
+				<div className="hb-main-card-list">
+					<div className="hb-mcl-title">어떤 행성을 찾아볼까요?</div>
+					<div className="hb-mcl-btn-group">
+						{['전체보기', '우주공강', '스펙쌓기', '취미문화'].map((title) => {
+							return (
+								<div className="hb-mcl-btn top" onClick={() => {}}>
+									{title}
+								</div>
+							);
+						})}
+					</div>
+					<div className="hb-mcl-btn-group">
+						{['맛집탐방', '습관형성', '취업활동', '수업친구'].map((title) => {
+							return (
+								<div className="hb-mcl-btn bottom" onClick={() => {}}>
+									{title}
+								</div>
+							);
+						})}
+					</div>
+					<div className="hb-mcl-card-group">
+						<Card />
+						<Card />
+						<Card />
+					</div>
+				</div>
+				<Button
+					type={'floating'}
+					content={'유니버스 생성하기'}
+					onClick={() => {
+						navigate('/create/post-level1');
+					}}
+				/>
+				<Footer />
 			</div>
 			<NavBar present={'home'} />
 		</div>

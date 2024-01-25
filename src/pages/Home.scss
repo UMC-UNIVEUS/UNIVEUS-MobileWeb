@@ -147,5 +147,61 @@
 				}
 			}
 		}
+		.hb-main-card-list {
+			display: flex;
+			flex-direction: column;
+			margin-top: 8px;
+			.hb-mcl-title {
+				font-weight: var(--semi-bold);
+				margin-bottom: 16px;
+			}
+			.hb-mcl-btn-group {
+				display: flex;
+				flex-direction: row;
+				.hb-mcl-btn {
+					padding: 12px 19px;
+					text-align: center;
+					border: 0.5px solid #e2e2e2;
+					background: rgba(255, 255, 255, 0.1);
+					width: 100%;
+					&:hover,
+					:active {
+						background-color: var(--purple-color);
+						color: var(--white-color);
+					}
+					&.top {
+						&:first-child {
+							border-radius: 5px 0px 0px 0px;
+						}
+						&:last-child {
+							border-radius: 0px 5px 0px 0px;
+						}
+					}
+					&.bottom {
+						&:first-child {
+							border-radius: 0px 0px 0px 5px;
+						}
+						&:last-child {
+							border-radius: 0px 0px 5px 0px;
+						}
+					}
+				}
+			}
+			.hb-mcl-card-group {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 20px;
+				column-gap: 8.5%;
+				row-gap: 20px;
+				margin-top: 32px;
+			}
+		}
+		.button-body.floating {
+			position: fixed;
+			z-index: 99;
+			bottom: 60px;
+			width: 90%;
+		}
 	}
 }
