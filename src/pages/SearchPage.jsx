@@ -68,7 +68,7 @@ const SearchPage = () => {
 					<p className="nodatatext">찾으시는 검색 결과가 없습니다.</p>
 				)}
 			</div>
-			<NavBar present={'search'} />
+			<NavBar />
 		</div>
 	);
 };

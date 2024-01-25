@@ -76,7 +76,7 @@ export default function MyPage() {
 					<Card />
 				</div>
 			</div>
-			<NavBar />
+			<NavBar present={'mypage'} />
 		</div>
 	);
 }

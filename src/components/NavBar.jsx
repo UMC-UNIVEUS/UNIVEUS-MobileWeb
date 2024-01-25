@@ -28,7 +28,7 @@ export default function NavBar(present) {
 				<Chat className="nb-btn-img chat" />
 				<span className="nb-btn-text">모임채팅</span>
 			</a>
-			<a className={`nb-link person ${classMypage}`} href="/myunive">
+			<a className={`nb-link person ${classMypage}`} href="/mypage">
 				<MyPage className="nb-btn-img person" />
 				<span className="nb-btn-text">마이페이지</span>
 			</a>
