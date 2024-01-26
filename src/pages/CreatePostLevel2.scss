@@ -1,0 +1,183 @@
+.create-post-level2 {
+	.cpl2-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.cpl-tap {
+			position: relative;
+			.cplt-hr {
+				position: fixed;
+				width: 90%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--white-purple-color);
+			}
+			.cplt-hr-check {
+				position: fixed;
+				top: 52px;
+				z-index: 9;
+				width: 60%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--purple-color);
+			}
+			.cplt-hr-text {
+				position: absolute;
+				right: 0;
+				font-size: var(--small-font);
+				color: var(--gray-color);
+				top: 10px;
+			}
+		}
+		.cpl-title {
+			margin-top: 46px;
+			margin-bottom: 27px;
+			font-size: var(--large-font);
+			font-weight: var(--semi-bold);
+			line-height: 30px;
+		}
+		.cpl2-form {
+			.cpl-meet-date {
+				margin-bottom: 27px;
+				.cpl-md-row {
+					display: flex;
+					align-items: center;
+					.cpl-md-title {
+						font-weight: var(--bold);
+						margin-right: 9px;
+					}
+					.cpl-md-date-input {
+						position: relative;
+						width: 100px;
+						height: 35px;
+						border-radius: 5px;
+						border: 2px solid var(--light-gray-color);
+						background: var(--white-color);
+						font-family: Pretendard;
+						font-size: 14px;
+						font-weight: 400;
+						color: var(--black-color);
+						outline-color: var(--deep-blue-color);
+						&::-webkit-calendar-picker-indicator {
+							position: absolute; // 이를 설정하기 위해 사전에 relative를 설정한 것이다.
+							left: 0;
+							top: 0;
+							width: 100%;
+							height: 100%;
+							background: transparent; // 배경은 투명하게,
+							color: transparent; // 글자도 투명하게! 이 두 설정을 통해 캘린더 아이콘을 사라지게 만든다.
+							cursor: pointer;
+						}
+						&::before {
+							content: attr(date-placeholder);
+							color: #bfc3d4;
+							width: 100%;
+							padding: 9px;
+						}
+						&:focus {
+							width: 100px;
+							height: 35px;
+							padding-left: 9px;
+						}
+						&:valid {
+							width: 105px;
+							height: 39px;
+							padding-left: 5px;
+							box-sizing: border-box;
+						}
+						&:focus::before,
+						&:valid::before {
+							display: none;
+						}
+					}
+					.cpl-md-time-label {
+						margin-left: 17px;
+						margin-right: 9px;
+					}
+					.cpl-md-time-input {
+						position: relative;
+						width: 55px;
+						height: 35px;
+						border-radius: 5px;
+						border: 2px solid var(--light-gray-color);
+						background: var(--white-color);
+						color: var(--black-color);
+						font-family: Pretendard;
+						font-size: 14px;
+						font-weight: 400;
+						outline-color: var(--deep-blue-color);
+						&::-webkit-calendar-picker-indicator {
+							position: absolute; // 이를 설정하기 위해 사전에 relative를 설정한 것이다.
+							left: 0;
+							top: 0;
+							width: 100%;
+							height: 100%;
+							background: transparent; // 배경은 투명하게,
+							color: transparent; // 글자도 투명하게! 이 두 설정을 통해 캘린더 아이콘을 사라지게 만든다.
+							cursor: pointer;
+						}
+						&::before {
+							content: attr(date-placeholder);
+							color: #bfc3d4;
+							width: 100%;
+							padding: 9px;
+						}
+						&:focus {
+							width: max-content;
+							padding-left: 9px;
+							height: 35px;
+						}
+						&:valid {
+							width: max-content;
+							// width: 55px;
+							height: 35px;
+							padding: 0 5px;
+						}
+						&:focus::before,
+						&:valid::before {
+							display: none;
+						}
+					}
+				}
+				.cpl-exclamation-text {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					.cpl-et-text {
+						font-size: var(--tiny-font);
+						color: var(--red-color);
+						font-weight: var(--medium-bold);
+						margin-left: 4px;
+					}
+				}
+			}
+			.cpl-meet-location {
+				border-bottom: solid 1px var(--light-gray-color);
+				.cpl-ml-title {
+					font-weight: var(--bold);
+					margin-bottom: 5px;
+				}
+				.cpl-ml-input {
+					font-size: var(--default-size);
+					border: none;
+					width: 90%;
+					padding: 13px 0 10px 0;
+					outline: none;
+					&::placeholder {
+						color: #bfc3d4;
+					}
+				}
+			}
+			.cpl-ml-ex {
+				font-size: var(--small-font);
+				color: var(--gray-color);
+				margin-top: 5px;
+				margin-bottom: 72px;
+			}
+		}
+	}
+}

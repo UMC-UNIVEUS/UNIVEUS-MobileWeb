@@ -1,0 +1,111 @@
+.other-user-profile {
+	.modal {
+		.modal-body {
+			.oup-radio-box {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				width: 70%;
+				margin: 0 auto;
+				margin-top: 32px;
+				.oup-radio-group {
+					display: flex;
+					margin-bottom: 26px;
+					font-size: var(--medium-font);
+					.oup-radio {
+						margin-right: 10px;
+						width: 15px;
+						&:checked {
+							accent-color: var(--deep-blue-color);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.oup-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.oup-profile-box {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			border-radius: 10px;
+			background: #fff;
+			box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.25);
+			margin-top: 16px;
+			padding: 19px 18px;
+			.profile {
+				margin: 11px;
+			}
+			.oup-info-group {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				.oup-info-name {
+					font-size: var(--medium-font);
+					font-weight: var(--semi-bold);
+				}
+				.oup-info-department {
+					font-size: var(--small-font);
+					font-weight: var(--medium-bold);
+				}
+			}
+			.oup-number-group {
+				display: flex;
+				flex-direction: row;
+				position: absolute;
+				right: 26px;
+				.oup-number {
+					margin-left: 29px;
+					text-align: center;
+					.oup-number-title {
+						font-size: var(--tiny-font);
+						color: #8692ff;
+						margin-bottom: 4px;
+					}
+					.oup-number-result {
+						font-size: var(--medium-font);
+						font-weight: var(--medium-bold);
+						color: var(--deep-blue-color);
+					}
+				}
+			}
+		}
+		.oup-introduction-box {
+			font-size: var(--medium-font);
+			margin-top: 35px;
+			.oup-qa-box {
+				margin-left: 10px;
+				margin-bottom: 24px;
+				.oup-question-group {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 10px;
+					.oup-dot {
+						font-size: 20px;
+						font-weight: 900;
+						margin-right: 11px;
+					}
+					.oup-question {
+						font-weight: 300;
+					}
+				}
+				.oup-answer {
+					margin-left: 19px;
+					font-weight: var(--semi-bold);
+					color: var(--purple-color);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,43 @@
+.self-introduction {
+	.si-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.si-title {
+			margin-top: 46px;
+			margin-bottom: 27px;
+			font-size: var(--large-font);
+			line-height: 30px;
+		}
+		.si-content {
+			font-size: var(--medium-font);
+			.si-qa-box {
+				margin-left: 10px;
+				margin-bottom: 24px;
+				.si-question-group {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 10px;
+					.si-dot {
+						font-size: 20px;
+						font-weight: 900;
+						margin-right: 11px;
+					}
+					.si-question {
+						font-weight: 300;
+					}
+				}
+				.si-answer {
+					margin-left: 19px;
+					font-weight: var(--semi-bold);
+					color: var(--purple-color);
+				}
+			}
+		}
+	}
+}

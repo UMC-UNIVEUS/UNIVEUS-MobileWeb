@@ -1,0 +1,153 @@
+.create-post-level1 {
+	.cpl1-body {
+		padding-top: 52px;
+		padding-bottom: 71px;
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		.cpl-tap {
+			position: relative;
+			.cplt-hr {
+				position: fixed;
+				width: 90%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--white-purple-color);
+			}
+			.cplt-hr-check {
+				position: fixed;
+				top: 52px;
+				z-index: 9;
+				width: 30%;
+				height: 3px;
+				border-radius: 2px;
+				background-color: var(--purple-color);
+			}
+			.cplt-hr-text {
+				position: absolute;
+				right: 0;
+				font-size: var(--small-font);
+				color: var(--gray-color);
+				top: 10px;
+			}
+		}
+		.cpl-title {
+			margin-top: 46px;
+			margin-bottom: 27px;
+			font-size: var(--large-font);
+			font-weight: var(--semi-bold);
+			line-height: 30px;
+		}
+		.cpl1-form {
+			.cpl-category {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				row-gap: 14px;
+				column-gap: 8px;
+			}
+		}
+		.cpl-participation-method {
+			margin-top: 27px;
+			.cpl-pm-title {
+				font-weight: var(--bold);
+				margin-bottom: 8px;
+			}
+			.cpl-pm-group {
+				display: flex;
+				flex-direction: row;
+				gap: 18px;
+				.cpl-pm-btns {
+					display: flex;
+					flex-direction: column;
+					width: 50%;
+					.button-body {
+						background-color: var(--white-purple-color);
+						.btn-content {
+							color: var(--black-color);
+							font-weight: var(--medium-bold);
+						}
+						&:hover,
+						&:active,
+						&.checked {
+							background-color: var(--purple-color);
+							.btn-content {
+								color: var(--white-color);
+							}
+						}
+					}
+					.cpl-pm-explanation {
+						font-size: var(--small-font);
+						color: var(--gray-color);
+						margin-top: 4px;
+					}
+				}
+			}
+		}
+		.cpl-person-choice {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			font-size: var(--small-font);
+			font-weight: var(--semi-bold);
+			margin-top: 29px;
+			.cpl-pc-title {
+				font-size: var(--default-font);
+				font-weight: var(--bold);
+				margin-right: 10px;
+			}
+			input {
+				margin-right: 5px;
+				&:checked {
+					accent-color: var(--deep-blue-color);
+				}
+				&:checked + label {
+					color: var(--deep-blue-color);
+				}
+			}
+			label {
+				margin-right: 10px;
+			}
+		}
+		.cpl-person-number {
+			display: flex;
+			flex-direction: row;
+			margin-top: 16px;
+			// 축제 한정 주석
+			// margin-bottom: 23px;
+			margin-bottom: 10px;
+			margin-left: 8px;
+			.cpl-pn-btn-group {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				.pn-btn {
+					width: 10px;
+					height: 22px;
+					padding: 10px 16px;
+					border-radius: 100px;
+					border: 3px solid var(--white-purple-color);
+					background: var(--white-color);
+					font-size: var(--medium-font);
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					&:hover,
+					&:active,
+					&.checked {
+						border: 3px solid var(--purple-color);
+					}
+				}
+			}
+			img {
+				cursor: pointer;
+			}
+		}
+		.next-btn {
+			margin-top: 40px;
+		}
+	}
+}

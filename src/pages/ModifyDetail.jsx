@@ -296,16 +296,18 @@ export default function ModifyDetail() {
 						<div className="cc-error-message">{openChatMessage}</div>
 					</div>
 				</div>
-				{meetingDate !== '' &&
-				meetingTime !== '' &&
-				endDate !== '' &&
-				endTime !== '' &&
-				location !== '' &&
-				openChat !== '' ? (
-					<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
-				) : (
-					<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
-				)}
+				<div className="next-btn">
+					{meetingDate !== '' &&
+					meetingTime !== '' &&
+					endDate !== '' &&
+					endTime !== '' &&
+					location !== '' &&
+					openChat !== '' ? (
+						<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
+					) : (
+						<Button type={'floating disabled'} content={'미입력 된 항목이 있습니다'} />
+					)}
+				</div>
 			</div>
 			<NavBar />
 		</div>
