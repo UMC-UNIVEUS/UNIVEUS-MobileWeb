@@ -14,11 +14,43 @@ import School from '../assets/images/school.svg';
 import Fire from '../assets/images/fire.svg';
 import Flag from '../assets/images/flag.svg';
 import Money from '../assets/images/money.svg';
+
 import NeckTie from '../assets/images/necktie.svg';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
 	const navigate = useNavigate();
+
+	// const jwtToken = sessionStorage.getItem('accessToken');
+	// const jwtToken =
+	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+
+	// useEffect(() => {
+	// 	axios({
+	// 		headers: {
+	// 			'x-access-token': jwtToken,
+	// 		},
+	// 		method: 'post',
+	// 		url: '/user/register/affiliation',
+	// 		data: {
+	// 			major: '컴퓨터공학부',
+	// 			studentId: '202015239',
+	// 		},
+	// 	})
+	// 		.then((response) => {
+	// 			// if (response.data.code === 5000 || response.data.code === 5001) {
+	// 			// 	navigate('/');
+	// 			// } else {
+	// 			// 	console.log(response);
+	// 			// }
+	// 			console.log(response);
+	// 		})
+	// 		.catch(function (error) {
+	// 			console.log(error);
+	// 		});
+	// }, []);
 
 	return (
 		<div className="home">
