@@ -26,42 +26,41 @@ const LandingPage = () => {
 		const access_Token = parsedHash.get('access_token');
 		setAccessToken(access_Token);
 
-		if (accessToken !== null && accessToken !== '') {
-			axios({
-				method: 'post',
-				url: '/user/login',
-				data: {
-					accessToken: accessToken,
-				},
-			})
-				.then((response) => {
-					console.log(response);
-					if (response.data.code === 1000) {
-						sessionStorage.setItem('accessToken', response.data.result.accessToken);
-						navigate('/home');
-					} else if (response.data.code === 2004) {
-						navigate('/');
-						openModal5();
-					} else if (response.data.code === 2019) {
-						sessionStorage.setItem('accessToken', response.data.result.accessToken);
-						navigate('/verification');
-					} else if (response.data.code === 2020) {
-						sessionStorage.setItem('accessToken', response.data.result.accessToken);
-						navigate('/register');
-					}
-				})
-				.catch((error) => {
-					console.error('axios error:', error);
-				});
-		}
+		// if (accessToken !== null && accessToken !== '') {
+		// 	axios({
+		// 		method: 'post',
+		// 		url: '/user/login',
+		// 		data: {
+		// 			accessToken: accessToken,
+		// 		},
+		// 	})
+		// 		.then((response) => {
+		// 			console.log(response);
+		// 			if (response.data.code === 1000) {
+		// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
+		// 				navigate('/home');
+		// 			} else if (response.data.code === 2004) {
+		// 				navigate('/');
+		// 				openModal5();
+		// 			} else if (response.data.code === 2019) {
+		// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
+		// 				navigate('/verification');
+		// 			} else if (response.data.code === 2020) {
+		// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
+		// 				navigate('/register');
+		// 			}
+		// 		})
+		// 		.catch((error) => {
+		// 			console.error('axios error:', error);
+		// 		});
+		// }
 	}, [accessToken]);
 
 	const googleSocialLogin = () => {
 		window.location.href =
 			'https://accounts.google.com/o/oauth2/auth?' +
 			'client_id=528413916638-pnl1ikrothaaj7in3dmeug8f0aa2abqb.apps.googleusercontent.com&' +
-			'redirect_uri=https://univeus.com& https://www.univeus.com&' +
-			'response_type=token&' +
+			'redirect_uri=https://univeus.com/loading&' +
 			'scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 	};
 

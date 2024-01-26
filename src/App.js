@@ -28,6 +28,7 @@ import MyPage from './pages/MyPage';
 import Setting from './pages/Setting';
 import UnivePost from './pages/UnivePost';
 import Home from './pages/Home';
+import Loading from './pages/Loading';
 
 function App() {
 	return (
@@ -35,6 +36,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/test" element={<TestPage />} />
+					<Route path="/loading" element={<Loading />} />
 					<Route path="/" element={<LandingPage />} />
 					{/* <Route path="/verification" element={<Verification />} /> */}
 					<Route path="/signup/identity" element={<IdentityVerification />} />
