@@ -29,13 +29,13 @@ const LandingPage = () => {
 		if (accessToken !== null && accessToken !== '') {
 			axios({
 				method: 'post',
-				url: 'https://univeus.site/user/login',
+				url: '/user/login',
 				data: {
 					accessToken: accessToken,
 				},
 			})
 				.then((response) => {
-					// console.log(response);
+					console.log(response);
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');
