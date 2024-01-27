@@ -10,6 +10,8 @@ export default function Loading() {
 	const access_Token = parsedHash.get('access_token');
 	setAccessToken(access_Token);
 
+	console.log('accessToken', accessToken);
+
 	useEffect(() => {
 		if (accessToken !== null && accessToken !== '') {
 			axios({
@@ -23,27 +25,33 @@ export default function Loading() {
 					console.log(response);
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						console.log('1000');
 						navigate('/home');
 					} else if (response.data.code === 2004) {
 						// 경기대 이메일 x
+						console.log('2004');
 						navigate('/');
 						// openModal5();
 					} else if (response.data.code === 'USER0011' || response.data.code === 'USER0012') {
 						// 본인인증 x -> 번호인증
 						// 번호인증 x -> 번호인증
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						console.log('번호인증');
 						navigate('/signup/identity');
 					} else if (response.data.code === 'USER0013') {
 						// 약관동의 x -> 약관동의
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						console.log('약관동의');
 						navigate('/signup/terms-of-use');
 					} else if (response.data.code === 'USER0014') {
 						// 소속인증 x -> 소속인증
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						console.log('소속인증');
 						navigate('/signup/registration-of-affiliation');
 					} else if (response.data.code === 'USER0015') {
 						// 프로필 등록 x -> 프로필 등록
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						console.log('프로필 등록');
 						navigate('/signup/register-profile');
 					}
 				})
