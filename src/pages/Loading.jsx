@@ -24,6 +24,7 @@ export default function Loading() {
 			})
 				.then((response) => {
 					console.log(response);
+					console.log('data.code', response.data.code);
 					if (response.data.code === 1000) {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						console.log('1000');
