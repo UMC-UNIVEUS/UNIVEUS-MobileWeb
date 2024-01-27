@@ -6,14 +6,14 @@ export default function Loading() {
 	const navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState('');
 
-	const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-	const access_Token = parsedHash.get('access_token');
-	setAccessToken(access_Token);
-
 	console.log('accessToken1', accessToken);
 
 	useEffect(() => {
+		const parsedHash = new URLSearchParams(window.location.hash.substring(1));
+		const access_Token = parsedHash.get('access_token');
+		setAccessToken(access_Token);
 		console.log('accessToken2', accessToken);
+
 		if (accessToken !== null && accessToken !== '') {
 			axios({
 				method: 'post',
