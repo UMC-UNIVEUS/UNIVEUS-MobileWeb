@@ -3,12 +3,30 @@ import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePostLevel1() {
-	const [category, setCategory] = useState(0);
-	const [participate, setParticipate] = useState(0);
-	const [limitGender, setLimitGender] = useState(0); // 0 or 1 or 2
-	const [limitPeople, setLimitPeople] = useState(1); // 4 or 6
+	const navigate = useNavigate();
+	const [category, setCategory] = useState(''); // string
+	const [participate, setParticipate] = useState(''); // 자동승인 or 수동승인
+	const [limitGender, setLimitGender] = useState(''); // string
+	const [limitPeople, setLimitPeople] = useState(''); // number
+
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+
+	const CreatePost = {
+		category: category,
+		participation_method: participate,
+		limit_gender: limitGender,
+		limit_people: limitPeople,
+	};
+
+	// localStorage에 저장하기
+	const handleClickNextPage = () => {
+		localStorage.setItem('createPost', JSON.stringify(CreatePost));
+		navigate('/create/post-level2');
+	};
 
 	return (
 		<div className="create-post-level1">
@@ -25,21 +43,13 @@ export default function CreatePostLevel1() {
 				</div>
 				<div className="cpl1-form">
 					<div className="cpl-category">
-						{[
-							[0, '우주공강'],
-							[1, '스펙쌓기'],
-							[2, '취미/문화'],
-							[3, '습관형성'],
-							[4, '맛집탐방'],
-							[5, '취업활동'],
-							[6, '기타모임'],
-						].map((data) => {
+						{['우주공강', '스펙쌓기', '취미/문화', '습관형성', '맛집탐방', '취업활동', '기타모임'].map((data) => {
 							return (
 								<Button
-									type={category === data[0] ? 'small checked' : 'small'}
-									content={data[1]}
+									type={category === data ? 'small checked' : 'small'}
+									content={data}
 									onClick={() => {
-										setCategory(data[0]);
+										setCategory(data);
 									}}
 								/>
 							);
@@ -50,20 +60,20 @@ export default function CreatePostLevel1() {
 						<div className="cpl-pm-group">
 							<div className="cpl-pm-btns">
 								<Button
-									type={participate === 0 ? 'checked' : ''}
+									type={participate === '자동승인' ? 'checked' : ''}
 									content={'자동승인'}
 									onClick={() => {
-										setParticipate(0);
+										setParticipate('자동승인');
 									}}
 								/>
 								<span className="cpl-pm-explanation">참여자가 있을시 무조건 승인이에요</span>
 							</div>
 							<div className="cpl-pm-btns">
 								<Button
-									type={participate === 1 ? 'checked' : ''}
+									type={participate === '수동승인' ? 'checked' : ''}
 									content={'수동승인'}
 									onClick={() => {
-										setParticipate(1);
+										setParticipate('수동승인');
 									}}
 								/>
 								<span className="cpl-pm-explanation">참여자가 있다면 승인해야해요</span>
@@ -77,9 +87,8 @@ export default function CreatePostLevel1() {
 							name="gender"
 							id="nogender"
 							onClick={() => {
-								setLimitGender(0);
+								setLimitGender('all');
 							}}
-							defaultChecked
 						/>
 						<label htmlFor="nogender">성별무관</label>
 						<input
@@ -87,7 +96,7 @@ export default function CreatePostLevel1() {
 							name="gender"
 							id="male"
 							onClick={() => {
-								setLimitGender(1);
+								setLimitGender('man');
 							}}
 						/>
 						<label htmlFor="male">남자만</label>
@@ -96,7 +105,7 @@ export default function CreatePostLevel1() {
 							name="gender"
 							id="female"
 							onClick={() => {
-								setLimitGender(2);
+								setLimitGender('woman');
 							}}
 						/>
 						<label htmlFor="female">여자만</label>
@@ -118,7 +127,11 @@ export default function CreatePostLevel1() {
 						</div>
 					</div>
 				</div>
-				<Button type={'floating next-btn'} content={'다음'} />
+				{category !== '' && participate !== '' && limitGender !== '' && limitPeople !== '' ? (
+					<Button type={'floating next-btn'} content={'다음'} onClick={handleClickNextPage} />
+				) : (
+					<Button type={'floating disabled next-btn'} content={'다음'} />
+				)}
 			</div>
 			<NavBar />
 		</div>
