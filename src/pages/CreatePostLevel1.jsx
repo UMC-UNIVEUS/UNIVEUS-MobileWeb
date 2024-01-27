@@ -2,7 +2,7 @@ import './CreatePostLevel1.scss';
 import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreatePostLevel1() {
@@ -15,7 +15,19 @@ export default function CreatePostLevel1() {
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
-	const CreatePost = {
+	// 뒤로가기 버튼 사용시 입력했던 데이터를 반영하기 위한 코드
+	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
+
+	useEffect(() => {
+		if (localStorage.getItem('createPost') !== null) {
+			setCategory(LocalStorageCreatePost['category']);
+			setParticipate(LocalStorageCreatePost['participation_method']);
+			setLimitGender(LocalStorageCreatePost['limit_gender']);
+			setLimitPeople(LocalStorageCreatePost['limit_people']);
+		}
+	}, []);
+
+	const CreatePost1 = {
 		category: category,
 		participation_method: participate,
 		limit_gender: limitGender,
@@ -24,7 +36,7 @@ export default function CreatePostLevel1() {
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('createPost', JSON.stringify(CreatePost));
+		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, ...CreatePost1 }));
 		navigate('/create/post-level2');
 	};
 
@@ -89,6 +101,7 @@ export default function CreatePostLevel1() {
 							onClick={() => {
 								setLimitGender('all');
 							}}
+							{...(limitGender === 'all' ? { defaultChecked: true } : {})}
 						/>
 						<label htmlFor="nogender">성별무관</label>
 						<input
@@ -98,6 +111,7 @@ export default function CreatePostLevel1() {
 							onClick={() => {
 								setLimitGender('man');
 							}}
+							{...(limitGender === 'man' ? { defaultChecked: true } : {})}
 						/>
 						<label htmlFor="male">남자만</label>
 						<input
@@ -107,6 +121,7 @@ export default function CreatePostLevel1() {
 							onClick={() => {
 								setLimitGender('woman');
 							}}
+							{...(limitGender === 'woman' ? { defaultChecked: true } : {})}
 						/>
 						<label htmlFor="female">여자만</label>
 					</div>

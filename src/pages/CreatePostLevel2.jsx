@@ -3,9 +3,11 @@ import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
 import { ReactComponent as Icon } from '../assets/images/exclamation-mark.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreatePostLevel2() {
+	const navigate = useNavigate();
 	const [meetingDate, setMeetingDate] = useState('');
 	const [meetingTime, setMeetingTime] = useState('');
 	const [location, setLocation] = useState('');
@@ -19,6 +21,30 @@ export default function CreatePostLevel2() {
 	};
 	const handleLocation = (e) => {
 		setLocation(e.target.value);
+	};
+
+	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
+
+	useEffect(() => {
+		if (Object.keys(LocalStorageCreatePost).length > 4) {
+			setMeetingDate(
+				LocalStorageCreatePost['meeting_datetime'].substr(0, LocalStorageCreatePost['meeting_datetime'].indexOf(' '))
+			);
+			setMeetingTime(
+				LocalStorageCreatePost['meeting_datetime'].substr(LocalStorageCreatePost['meeting_datetime'].indexOf(' ') + 1)
+			);
+			setLocation(LocalStorageCreatePost['location']);
+		}
+	}, []);
+
+	const CreatePost2 = {
+		meeting_datetime: meetingDate + ' ' + meetingTime,
+		location: location,
+	};
+
+	const handleClickNextPage = () => {
+		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, ...CreatePost2 }));
+		navigate('/create/post-level3');
 	};
 
 	return (
@@ -44,6 +70,7 @@ export default function CreatePostLevel2() {
 								id="md-start-date"
 								date-placeholder="yyyy/mm/dd"
 								required
+								value={meetingDate}
 								onChange={handleMeetingDate}
 							/>
 						</div>
@@ -55,6 +82,7 @@ export default function CreatePostLevel2() {
 								id="md-start-time"
 								date-placeholder="00:00"
 								required
+								value={meetingTime}
 								onChange={handleMeetingTime}
 							/>
 						</div>
@@ -71,12 +99,17 @@ export default function CreatePostLevel2() {
 							placeholder="모임 할 장소를 정해 주세요"
 							maxLength="24"
 							onChange={handleLocation}
+							value={location}
 							required
 						/>
 					</div>
 					<div className="cpl-ml-ex">ex) 이스퀘어 앞, 5강의동 벤치 앞</div>
 				</div>
-				<Button type={'floating'} content={'다음'} />
+				{meetingDate !== '' && meetingTime !== '' && location !== '' ? (
+					<Button type={'floating'} content={'다음'} onClick={handleClickNextPage} />
+				) : (
+					<Button type={'floating  disabled'} content={'다음'} />
+				)}
 			</div>
 			<NavBar />
 		</div>
