@@ -6,11 +6,11 @@ export default function Loading() {
 	const navigate = useNavigate();
 	const [accessToken, setAccessToken] = useState('');
 
-	useEffect(() => {
-		const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-		const access_Token = parsedHash.get('access_token');
-		setAccessToken(access_Token);
+	const parsedHash = new URLSearchParams(window.location.hash.substring(1));
+	const access_Token = parsedHash.get('access_token');
+	setAccessToken(access_Token);
 
+	useEffect(() => {
 		if (accessToken !== null && accessToken !== '') {
 			axios({
 				method: 'post',
@@ -25,20 +25,32 @@ export default function Loading() {
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
 						navigate('/home');
 					} else if (response.data.code === 2004) {
+						// 경기대 이메일 x
 						navigate('/');
 						// openModal5();
-					} else if (response.data.code === 2019) {
+					} else if (response.data.code === 'USER0011' || response.data.code === 'USER0012') {
+						// 본인인증 x -> 번호인증
+						// 번호인증 x -> 번호인증
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
-						navigate('/verification');
-					} else if (response.data.code === 2020) {
+						navigate('/signup/identity');
+					} else if (response.data.code === 'USER0013') {
+						// 약관동의 x -> 약관동의
 						sessionStorage.setItem('accessToken', response.data.result.accessToken);
-						navigate('/register');
+						navigate('/signup/terms-of-use');
+					} else if (response.data.code === 'USER0014') {
+						// 소속인증 x -> 소속인증
+						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						navigate('/signup/registration-of-affiliation');
+					} else if (response.data.code === 'USER0015') {
+						// 프로필 등록 x -> 프로필 등록
+						sessionStorage.setItem('accessToken', response.data.result.accessToken);
+						navigate('/signup/register-profile');
 					}
 				})
 				.catch((error) => {
 					console.error('axios error:', error);
 				});
 		}
-	}, [accessToken]);
+	}, []);
 	return <h1>Redirect Page</h1>;
 }
