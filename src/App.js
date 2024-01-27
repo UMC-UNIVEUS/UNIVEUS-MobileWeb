@@ -29,6 +29,9 @@ import Setting from './pages/Setting';
 import UnivePost from './pages/UnivePost';
 import Home from './pages/Home';
 import Loading from './pages/Loading';
+import ModifyPostLevel1 from './pages/ModifyPostLevel1';
+import ModifyPostLevel2 from './pages/ModifyPostLevel2';
+import ModifyPostLevel3 from './pages/ModifyPostLevel3';
 
 function App() {
 	return (
@@ -48,16 +51,19 @@ function App() {
 					<Route path="/home" element={<Home />} />
 					<Route path="/search" element={<SearchPage />} />
 					{/* <Route path="/post/:id" element={<PostPage />} /> */}
-					<Route path="/post" element={<UnivePost />} />
+					<Route path="/post/:id" element={<UnivePost />} />
 					<Route path="/mypage" element={<MyPage />} />
 					<Route path="/mypage/setting" element={<Setting />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
 					<Route path="/create/post-level3" element={<CreatePostLevel3 />} />
-					{/* <Route path="/create/detail" element={<CreateDetail />} /> */}
-					{/* <Route path="/create/intro" element={<CreateIntro />} /> */}
-					{/* <Route path="/modify/detail/:id" element={<ModifyDetail />} /> */}
-					{/* <Route path="/modify/intro/:id" element={<ModifyIntro />} /> */}
+					<Route path="/modify/post-level1/:id" element={<ModifyPostLevel1 />} />
+					<Route path="/modify/post-level2/:id" element={<ModifyPostLevel2 />} />
+					<Route path="/modify/post-level3/:id" element={<ModifyPostLevel3 />} />
+					{/* <Route path="/create/detail" element={<CreateDetail />} /> 
+					<Route path="/create/intro" element={<CreateIntro />} />
+					<Route path="/modify/detail/:id" element={<ModifyDetail />} />
+					<Route path="/modify/intro/:id" element={<ModifyIntro />} /> */}
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />

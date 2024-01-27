@@ -7,26 +7,26 @@ import DeleteBtn from '../assets/images/delete.svg';
 import InputImg from '../assets/images/input-img.svg';
 import { useState, useRef, useEffect } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function CreatePostLevel3() {
+export default function ModifyPostLevel3() {
+	const imgRef = useRef();
+	const navigate = useNavigate();
+	const { id } = useParams();
+
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [imgFile, setImgFile] = useState([]);
-	const [postId, setPostId] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
 	const closeModal = () => {
 		setIsModalOpen(false);
-		localStorage.removeItem('createPost');
-		navigate(`/post/${postId}`);
+		localStorage.removeItem('modifyPost');
+		navigate(`/post/${id}`);
 	};
-
-	const imgRef = useRef();
-	const navigate = useNavigate();
 
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
@@ -35,17 +35,6 @@ export default function CreatePostLevel3() {
 	const handleContent = (e) => {
 		setContent(e.target.value);
 	};
-
-	// API 통신후 수정
-	// const saveImgFile = () => {
-	// 	const file = imgRef.current.files[0];
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(file);
-	// 	reader.onloadend = () => {
-	// 		// setImg(...reader.result);
-	// 		setImg({ ...[reader.result] });
-	// 	};
-	// };
 
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
@@ -83,17 +72,17 @@ export default function CreatePostLevel3() {
 			});
 	};
 
-	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
+	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));
 
 	useEffect(() => {
-		if (Object.keys(LocalStorageCreatePost).length > 6) {
-			setTitle(LocalStorageCreatePost['title']);
-			setContent(LocalStorageCreatePost['contents']);
-			setImgFile(LocalStorageCreatePost['images']);
+		if (Object.keys(LocalStorageModifyPost).length > 6) {
+			setTitle(LocalStorageModifyPost['title']);
+			setContent(LocalStorageModifyPost['contents']);
+			setImgFile(LocalStorageModifyPost['images']);
 		}
 	}, []);
 
-	const CreatePost3 = {
+	const ModifyPost3 = {
 		title: title,
 		contents: content,
 		images: imgFile,
@@ -104,29 +93,28 @@ export default function CreatePostLevel3() {
 			headers: {
 				'x-access-token': jwtToken,
 			},
-			method: 'post',
-			url: '/post',
+			method: 'patch',
+			url: `/post/${id}`,
 			data: {
-				category: LocalStorageCreatePost['category'],
-				limit_gender: LocalStorageCreatePost['limit_gender'],
-				limit_people: LocalStorageCreatePost['limit_people'],
-				participation_method: LocalStorageCreatePost['participation_method'],
-				meeting_datetime: LocalStorageCreatePost['meeting_datetime'],
-				location: LocalStorageCreatePost['location'],
-				title: LocalStorageCreatePost['title'],
-				contents: LocalStorageCreatePost['contents'],
-				images: LocalStorageCreatePost['images'],
+				category: LocalStorageModifyPost['category'],
+				limit_gender: LocalStorageModifyPost['limit_gender'],
+				limit_people: LocalStorageModifyPost['limit_people'],
+				participation_method: LocalStorageModifyPost['participation_method'],
+				meeting_datetime: LocalStorageModifyPost['meeting_datetime'],
+				location: LocalStorageModifyPost['location'],
+				title: LocalStorageModifyPost['title'],
+				contents: LocalStorageModifyPost['contents'],
+				images: LocalStorageModifyPost['images'],
 			},
 		}).then((res) => {
 			if (res.data.code === 'COMMON200') {
-				setPostId(res.data.result['생성된 post_id']);
 				openModal();
 			}
 		});
 	};
 
 	const handleFocus = (e) => {
-		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, ...CreatePost3 }));
+		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
 	};
 
 	return (
@@ -211,9 +199,8 @@ export default function CreatePostLevel3() {
 				</div>
 			</div>
 			<NavBar />
-			<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}>
-				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 제대로 생성되었어요!</p>
-				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모임정보를 꼭 기억해주세요!</p>
+			<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 수정완료!'}>
+				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 수정되었어요!</p>
 				<Button type={'floating'} content={'확인'} onClick={closeModal} />
 			</Modal>
 		</div>

@@ -3,28 +3,70 @@ import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
-export default function CreatePostLevel1() {
+export default function ModifyPostLevel1() {
 	const navigate = useNavigate();
+	const { id } = useParams();
 	const [category, setCategory] = useState(''); // string
 	const [participate, setParticipate] = useState(''); // 자동승인 or 수동승인
 	const [limitGender, setLimitGender] = useState(''); // string
 	const [limitPeople, setLimitPeople] = useState(''); // number
 
-	// 뒤로가기 버튼 사용시 입력했던 데이터를 반영하기 위한 코드
-	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	useEffect(() => {
-		if (localStorage.getItem('createPost') !== null) {
-			setCategory(LocalStorageCreatePost['category']);
-			setParticipate(LocalStorageCreatePost['participation_method']);
-			setLimitGender(LocalStorageCreatePost['limit_gender']);
-			setLimitPeople(LocalStorageCreatePost['limit_people']);
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'get',
+			url: `/post/${id}`,
+		}).then((res) => {
+			// console.log(res);
+			if (res.data.code === 'COMMON200') {
+				// console.log(res.data.result.Post);
+				const resData = res.data.result.Post;
+
+				const imgUrlList = [];
+				for (let i = 0; i < res.data.result.PostImages.length; i++) {
+					imgUrlList.push(res.data.result.PostImages[i]['img_url']);
+				}
+
+				const GetData = {
+					category: resData['category'],
+					limit_gender: resData['limit_gender'],
+					limit_people: resData['limit_people'],
+					participation_method: resData['participation_method'],
+					meeting_datetime:
+						resData['meeting_datetime'].substr(0, resData['meeting_datetime'].indexOf('T')) +
+						' ' +
+						resData['meeting_datetime'].substr(resData['meeting_datetime'].indexOf('T') + 1, 5),
+					location: resData['location'],
+					title: resData['title'],
+					contents: resData['contents'],
+					images: imgUrlList,
+				};
+
+				localStorage.setItem('modifyPost', JSON.stringify(GetData));
+			}
+		});
+	}, []);
+
+	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));
+
+	useEffect(() => {
+		if (localStorage.getItem('modifyPost') !== undefined) {
+			setCategory(LocalStorageModifyPost['category']);
+			setParticipate(LocalStorageModifyPost['participation_method']);
+			setLimitGender(LocalStorageModifyPost['limit_gender']);
+			setLimitPeople(LocalStorageModifyPost['limit_people']);
 		}
 	}, []);
 
-	const CreatePost1 = {
+	const ModifyPost1 = {
 		category: category,
 		participation_method: participate,
 		limit_gender: limitGender,
@@ -33,8 +75,8 @@ export default function CreatePostLevel1() {
 
 	// localStorage에 저장하기
 	const handleClickNextPage = () => {
-		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, ...CreatePost1 }));
-		navigate('/create/post-level2');
+		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost1 }));
+		navigate(`/modify/post-level2/${id}`);
 	};
 
 	return (
