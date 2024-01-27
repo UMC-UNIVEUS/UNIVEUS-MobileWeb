@@ -10,9 +10,10 @@ export default function Loading() {
 	const access_Token = parsedHash.get('access_token');
 	setAccessToken(access_Token);
 
-	console.log('accessToken', accessToken);
+	console.log('accessToken1', accessToken);
 
 	useEffect(() => {
+		console.log('accessToken2', accessToken);
 		if (accessToken !== null && accessToken !== '') {
 			axios({
 				method: 'post',
@@ -59,6 +60,6 @@ export default function Loading() {
 					console.error('axios error:', error);
 				});
 		}
-	}, []);
+	}, [accessToken]);
 	return <h1>Redirect Page</h1>;
 }
