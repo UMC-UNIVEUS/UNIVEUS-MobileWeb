@@ -27,13 +27,13 @@ export default function ModifyPostLevel1() {
 		}).then((res) => {
 			// console.log(res);
 			if (res.data.code === 'COMMON200') {
-				// console.log(res.data.result.Post);
 				const resData = res.data.result.Post;
 
 				const imgUrlList = [];
 				for (let i = 0; i < res.data.result.PostImages.length; i++) {
-					imgUrlList.push(res.data.result.PostImages[i]['img_url']);
+					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
 				}
+				console.log('image1', imgUrlList);
 
 				const GetData = {
 					category: resData['category'],

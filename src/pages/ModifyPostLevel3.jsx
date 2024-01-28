@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ModifyPostLevel3() {
+	const MAXSIZE = 1 * 1024 * 1024;
 	const imgRef = useRef();
 	const navigate = useNavigate();
 	const { id } = useParams();
@@ -18,14 +19,25 @@ export default function ModifyPostLevel3() {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [imgFile, setImgFile] = useState([]);
+	const [errorImg, setErrorImg] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
+
 	const closeModal = () => {
 		setIsModalOpen(false);
 		localStorage.removeItem('modifyPost');
 		navigate(`/post/${id}`);
+	};
+
+	const openErrorModal = () => {
+		setErrorImg(true);
+	};
+
+	const closeErrorModal = () => {
+		setErrorImg(false);
 	};
 
 	const handleTitle = (e) => {
@@ -39,40 +51,36 @@ export default function ModifyPostLevel3() {
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
-	// 이미지 업로드 input의 onChange
+	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));
+
 	const saveImgFile = (e) => {
-		console.log('saveImgFile e:', e);
 		const file = imgRef.current.files[0];
-
 		e.preventDefault();
-		//FormData 객체선언
 		const formData = new FormData();
-
-		//File 추가
-		//객체를 Json타입으로 파싱하여 Blob객체 생성, type에 json 타입 지정
 		formData.append('image', file);
 
-		console.log('file :', file);
-
-		axios({
-			headers: {
-				'x-access-token': jwtToken,
-				'Content-Type': 'multipart/form-data',
-			},
-			method: 'post',
-			url: 'https://univeus.site/post/image/upload',
-			data: formData,
-		})
-			.then((res) => {
-				console.log('img 전송 res:', res);
-				// setImgFile(JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, ''));
+		if (file.size >= MAXSIZE) {
+			openErrorModal();
+		} else {
+			axios({
+				headers: {
+					'x-access-token': jwtToken,
+					'Content-Type': 'multipart/form-data',
+				},
+				method: 'post',
+				url: '/post/image/upload?directory=post',
+				data: formData,
 			})
-			.catch((err) => {
-				console.log('err : ', err);
-			});
+				.then((res) => {
+					const updatedImgFile = [...imgFile, res.data.result[0]['pic_url']];
+					setImgFile(updatedImgFile);
+					localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, images: updatedImgFile }));
+				})
+				.catch((err) => {
+					console.log('err : ', err);
+				});
+		}
 	};
-
-	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));
 
 	useEffect(() => {
 		if (Object.keys(LocalStorageModifyPost).length > 6) {
@@ -82,6 +90,14 @@ export default function ModifyPostLevel3() {
 		}
 	}, []);
 
+	const handleFocus = (e) => {
+		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
+	};
+
+	useEffect(() => {
+		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, images: imgFile }));
+	}, [imgFile]);
+
 	const ModifyPost3 = {
 		title: title,
 		contents: content,
@@ -89,6 +105,7 @@ export default function ModifyPostLevel3() {
 	};
 
 	const handlePosting = () => {
+		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
@@ -111,10 +128,6 @@ export default function ModifyPostLevel3() {
 				openModal();
 			}
 		});
-	};
-
-	const handleFocus = (e) => {
-		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
 	};
 
 	return (
@@ -177,24 +190,28 @@ export default function ModifyPostLevel3() {
 							value={content}
 							onBlur={handleFocus}
 						/>
-						<div className="cpl3u-img-group">{/* 이미지 넣는 박스 */}</div>
 					</div>
 					<div className="cpl3-img-group">
-						<div className="cpl3-img">
-							<img
-								className="cpl3-img-delete"
-								src={DeleteBtn}
-								alt="이미지 삭제 버튼"
-								onClick={() => {
-									setImgFile('');
-								}}
-							/>
-							<img
-								className="cpl3-img-box"
-								src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201901/20/28017477-0365-4a43-b546-008b603da621.jpg"
-								alt=""
-							/>
-						</div>
+						{imgFile.map((img) => {
+							return (
+								<div className="cpl3-img">
+									<img
+										className="cpl3-img-delete"
+										src={DeleteBtn}
+										alt="이미지 삭제 버튼"
+										onClick={() => {
+											const updatedImgFile = imgFile.filter((file) => file !== img);
+											setImgFile(updatedImgFile);
+											localStorage.setItem(
+												'modifyPost',
+												JSON.stringify({ ...LocalStorageModifyPost, images: updatedImgFile })
+											);
+										}}
+									/>
+									<img className="cpl3-img-box" src={img} alt={`이미지${img.indexOf(img) + 1}`} />
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>
@@ -202,6 +219,12 @@ export default function ModifyPostLevel3() {
 			<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 수정완료!'}>
 				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 수정되었어요!</p>
 				<Button type={'floating'} content={'확인'} onClick={closeModal} />
+			</Modal>
+			<Modal isOpen={errorImg} closeModal={closeErrorModal} title={'이미지 업로드 실패!'}>
+				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>업로드가 불가능한 이미지입니다.</p>
+				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>다른 이미지를 선택해주세요!</p>
+				<p style={{ color: 'rgba(241, 52, 52, 0.935)' }}>업로드 불가 사유: 업로드 불가 확장자 혹은 용량</p>
+				<Button type={'floating'} content={'확인'} onClick={closeErrorModal} />
 			</Modal>
 		</div>
 	);
