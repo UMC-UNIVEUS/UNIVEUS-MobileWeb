@@ -16,9 +16,11 @@ export default function CreatePostLevel3() {
 	const [imgFile, setImgFile] = useState([]);
 	const [postId, setPostId] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
+
 	const closeModal = () => {
 		setIsModalOpen(false);
 		localStorage.removeItem('createPost');
@@ -36,23 +38,11 @@ export default function CreatePostLevel3() {
 		setContent(e.target.value);
 	};
 
-	// API 통신후 수정
-	// const saveImgFile = () => {
-	// 	const file = imgRef.current.files[0];
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(file);
-	// 	reader.onloadend = () => {
-	// 		// setImg(...reader.result);
-	// 		setImg({ ...[reader.result] });
-	// 	};
-	// };
-
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
-		console.log('saveImgFile e:', e);
 		const file = imgRef.current.files[0];
 
 		e.preventDefault();
@@ -63,25 +53,28 @@ export default function CreatePostLevel3() {
 		//객체를 Json타입으로 파싱하여 Blob객체 생성, type에 json 타입 지정
 		formData.append('image', file);
 
-		console.log('file :', file);
-
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
 				'Content-Type': 'multipart/form-data',
 			},
 			method: 'post',
-			url: 'https://univeus.site/post/image/upload',
+			url: '/post/image/upload?directory=post',
 			data: formData,
 		})
 			.then((res) => {
 				console.log('img 전송 res:', res);
-				// setImgFile(JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, ''));
+				// console.log('res.data.result:', res.data.result[0]['pic_url'].replace(/"/g, ''));
+				// setImgFile({...imgFile, [JSON.stringify(res.data.result[0]['pic_url']).replace(/"/g, '')] });
+				setImgFile([...imgFile, res.data.result[0]['pic_url']]);
+				console.log(imgFile);
 			})
 			.catch((err) => {
 				console.log('err : ', err);
 			});
 	};
+
+	console.log('imgFile 들어왔으려나 ', imgFile);
 
 	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
 
@@ -189,24 +182,23 @@ export default function CreatePostLevel3() {
 							value={content}
 							onBlur={handleFocus}
 						/>
-						<div className="cpl3u-img-group">{/* 이미지 넣는 박스 */}</div>
 					</div>
 					<div className="cpl3-img-group">
-						<div className="cpl3-img">
-							<img
-								className="cpl3-img-delete"
-								src={DeleteBtn}
-								alt="이미지 삭제 버튼"
-								onClick={() => {
-									setImgFile('');
-								}}
-							/>
-							<img
-								className="cpl3-img-box"
-								src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201901/20/28017477-0365-4a43-b546-008b603da621.jpg"
-								alt=""
-							/>
-						</div>
+						{imgFile.map((img) => {
+							return (
+								<div className="cpl3-img">
+									<img
+										className="cpl3-img-delete"
+										src={DeleteBtn}
+										alt="이미지 삭제 버튼"
+										onClick={() => {
+											setImgFile(imgFile.filter((file) => file !== img));
+										}}
+									/>
+									<img className="cpl3-img-box" src={img} alt="" />
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>
