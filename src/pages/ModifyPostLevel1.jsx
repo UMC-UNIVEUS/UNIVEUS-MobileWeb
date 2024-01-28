@@ -25,7 +25,6 @@ export default function ModifyPostLevel1() {
 			method: 'get',
 			url: `/post/${id}`,
 		}).then((res) => {
-			// console.log(res);
 			if (res.data.code === 'COMMON200') {
 				const resData = res.data.result.Post;
 
@@ -33,8 +32,6 @@ export default function ModifyPostLevel1() {
 				for (let i = 0; i < res.data.result.PostImages.length; i++) {
 					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
 				}
-				console.log('image1', imgUrlList);
-
 				const GetData = {
 					category: resData['category'],
 					limit_gender: resData['limit_gender'],
