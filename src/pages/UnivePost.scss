@@ -157,7 +157,10 @@
 					border-radius: 10px;
 					box-shadow: 0px 2px 11px 0px rgba(0, 0, 0, 0.1);
 					padding: 9px 11px;
-					margin-bottom: 6px;
+					margin-bottom: 10px;
+					&:last-child {
+						margin-bottom: 60px;
+					}
 					.up-pb-user-info {
 						display: flex;
 						flex-direction: row;
@@ -213,5 +216,11 @@
 				}
 			}
 		}
+	}
+	.button-body.floating {
+		position: fixed;
+		z-index: 99;
+		bottom: 60px;
+		width: 90%;
 	}
 }

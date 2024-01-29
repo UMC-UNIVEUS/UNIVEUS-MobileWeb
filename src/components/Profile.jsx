@@ -7,7 +7,7 @@ export default function Profile({ profileImg, gender }) {
 			<div
 				className="profile-img-box"
 				style={{
-					borderColor: gender === 'male' ? 'var(--purple-color)' : 'var(--orange-color)',
+					borderColor: gender === 'MAN' ? 'var(--purple-color)' : 'var(--orange-color)',
 				}}
 			>
 				<img

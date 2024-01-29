@@ -192,7 +192,7 @@ export default function ModifyPostLevel3() {
 						/>
 					</div>
 					<div className="cpl3-img-group">
-						{imgFile.map((img) => {
+						{imgFile.map((img, idx) => {
 							return (
 								<div className="cpl3-img">
 									<img
@@ -208,7 +208,7 @@ export default function ModifyPostLevel3() {
 											);
 										}}
 									/>
-									<img className="cpl3-img-box" src={img} alt={`이미지${img.indexOf(img) + 1}`} />
+									<img className="cpl3-img-box" src={img} alt={`이미지${idx}`} />
 								</div>
 							);
 						})}
