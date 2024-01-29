@@ -148,6 +148,12 @@
 				display: flex;
 				flex-direction: column;
 				margin-bottom: 17px;
+				.up-pb-none-text {
+					color: var(--light-gray-color);
+					text-align: center;
+					font-weight: var(--semi-bold);
+					margin-top: 20px;
+				}
 				.up-pb-bundle {
 					display: flex;
 					flex-direction: row;

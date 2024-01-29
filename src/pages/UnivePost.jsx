@@ -86,8 +86,9 @@ export default function UnivePost() {
 		axiosPost();
 	}, []);
 
-	console.log(postData);
+	// console.log(postData);
 
+	console.log(isModalOpenPerson);
 	return (
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
@@ -181,42 +182,46 @@ export default function UnivePost() {
 				<div className="up-participant-box">
 					<div className="up-pb-text">이런 친구들이 함께해요 !</div>
 					<div className="up-pb-group">
-						{postData.ParticipantList.map((part) => {
-							const participation = part.status === 'PARTICIPATING';
-							return (
-								<div
-									className="up-pb-bundle"
-									style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
-								>
-									<div className="up-pb-user-info">
-										<Profile gender={part.gender} />
-										<div className="up-pb-user-name-group">
-											<div className="up-pb-name">{part.nickname}</div>
-											<div className="up-pb-department">
-												{part.student_id} / {part.major}
+						{postData.ParticipantList.length === 0 ? (
+							<div className="up-pb-none-text">아직 참여중인 친구가 없어요!</div>
+						) : (
+							postData.ParticipantList.map((part) => {
+								const participation = part.status === 'PARTICIPATING';
+								return (
+									<div
+										className="up-pb-bundle"
+										style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
+									>
+										<div className="up-pb-user-info">
+											<Profile gender={part.gender} />
+											<div className="up-pb-user-name-group">
+												<div className="up-pb-name">{part.nickname}</div>
+												<div className="up-pb-department">
+													{part.student_id} / {part.major}
+												</div>
 											</div>
 										</div>
-									</div>
-									{isWriter ? (
-										participation ? (
-											<div className="up-pb-situation">참여중</div>
+										{isWriter ? (
+											participation ? (
+												<div className="up-pb-situation">참여중</div>
+											) : (
+												<div
+													className="up-pb-situation-btn"
+													onClick={() => {
+														setWriterClickBtn('approval');
+														openModalWriter();
+													}}
+												>
+													대기중
+												</div>
+											)
 										) : (
-											<div
-												className="up-pb-situation-btn"
-												onClick={() => {
-													setWriterClickBtn('approval');
-													openModalWriter();
-												}}
-											>
-												대기중
-											</div>
-										)
-									) : (
-										<div className="up-pb-situation">{participation ? '참여중' : '대기중'}</div>
-									)}
-								</div>
-							);
-						})}
+											<div className="up-pb-situation">{participation ? '참여중' : '대기중'}</div>
+										)}
+									</div>
+								);
+							})
+						)}
 					</div>
 				</div>
 				{/* 상태에 따라 버튼 여부와 문구가 변경 */}
@@ -262,30 +267,32 @@ export default function UnivePost() {
 			</div>
 			{isWriter ? (
 				<Modal
-					isOpen={openModalWriter}
+					isOpen={isModalOpenWriter}
 					closeModal={closeModalWriter}
 					title={
 						writerClickBtn === 'status'
 							? '유니버스 상태 변경'
 							: writerClickBtn === 'manage'
 							? '유니버스 관리하기'
-							: '참여자 승인완료!'
+							: writerClickBtn === 'approval'
+							? '참여자 승인완료!'
+							: ''
 					}
 				>
 					{writerClickBtn === 'status' ? (
 						// 상태 변경 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								마감일 보다 일찍 유니버스 모집을 종료하고 싶다면 마감하기를 눌러 상태를 변경할 수 있어요
 							</p>
 							<div className="modal-btn-group">
-								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalPerson} />
+								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalWriter} />
 								<Button content={'마감하기'} type={'modal-btn'} onClick={() => {}} />
 							</div>
-						</>
+						</div>
 					) : writerClickBtn === 'manage' ? (
 						// 관리하기 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>내 유니버스를 수정하거나 삭제할 수 있어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모집 상태 변경은 게시글 우상단을 확인해주세요.</p>
 							<div className="modal-btn-group">
@@ -298,19 +305,21 @@ export default function UnivePost() {
 								/>
 								<Button content={'삭제하기'} type={'modal-btn'} onClick={() => {}} />
 							</div>
-						</>
-					) : (
+						</div>
+					) : writerClickBtn === 'approval' ? (
 						// 참여승인 완료 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>해당 친구의 유니버스 참여가 승인되었어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>친구들과 즐거운 모임이 되길 바랄게요!</p>
-							<Button content={'확인'} type={'floating'} onClick={closeModalPerson} />
-						</>
+							<Button content={'확인'} type={'floating'} onClick={closeModalWriter} />
+						</div>
+					) : (
+						''
 					)}
 				</Modal>
-			) : (
+			) : !isWriter ? (
 				<Modal
-					isOpen={openModalPerson}
+					isOpen={isModalOpenPerson}
 					closeModal={closeModalPerson}
 					title={
 						personClickBtn === 'partWait'
@@ -321,19 +330,21 @@ export default function UnivePost() {
 							? '참여를 취소하시겠어요?'
 							: personClickBtn === 'partCancelComplete'
 							? '참여 취소가 완료되었습니다.'
-							: '게시글을 신고하시겠어요?'
+							: personClickBtn === 'declaration'
+							? '게시글을 신고하시겠어요?'
+							: ''
 					}
 				>
 					{personClickBtn === 'partWait' ? (
 						// 참여대기 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>해당 유니버스는 방장의 승인이 필요해요 :)</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>승인 시 알림을 보내드릴게요.</p>
 							<Button content={'확인'} type={'floating'} onClick={closeModalPerson} />
-						</>
+						</div>
 					) : personClickBtn === 'partSuccess' ? (
 						// 참여완료 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스에 참여가 완료되었어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>채팅방에 입장하여 인사로 시작해 볼까요?</p>
 							<div className="modal-btn-group">
@@ -346,10 +357,10 @@ export default function UnivePost() {
 									}}
 								/>
 							</div>
-						</>
+						</div>
 					) : personClickBtn === 'partCancel' ? (
 						// 참여 취소 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								취소 즉시 채팅방에서 퇴장되며 잦은 취소는 패널티가 부여 될 수 있습니다.
 							</p>
@@ -364,18 +375,18 @@ export default function UnivePost() {
 									}}
 								/>
 							</div>
-						</>
+						</div>
 					) : personClickBtn === 'partCancelComplete' ? (
 						// 참여 취소 완료 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								다른 유니버스를 찾아보거나 내가 하고 싶은 유니버스를 생성해도 좋아요
 							</p>
 							<Button content={'확인'} type={'floating'} onClick={closeModalPerson} />
-						</>
-					) : (
+						</div>
+					) : personClickBtn === 'declaration' ? (
 						// 게시글 신고 모달
-						<>
+						<div className="mb-content">
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>신고 사유를 선택해 주시면 확인 후 조치가 취해집니다.</p>
 							<div className="oup-radio-box">
 								{[
@@ -405,9 +416,13 @@ export default function UnivePost() {
 								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalPerson} />
 								<Button content={'신고하기'} type={'modal-btn'} />
 							</div>
-						</>
+						</div>
+					) : (
+						''
 					)}
 				</Modal>
+			) : (
+				<></>
 			)}
 			<NavBar />
 		</div>
