@@ -1,9 +1,16 @@
 import './Profile.scss';
 import Person from '../assets/images/person_fill.svg';
+import { useNavigate } from 'react-router-dom';
 
-export default function Profile({ profileImg, gender }) {
+export default function Profile({ profileImg, gender, moveProfileId, myProfile }) {
+	const navigate = useNavigate();
 	return (
-		<div className="profile">
+		<div
+			className="profile"
+			onClick={() => {
+				myProfile ? navigate('/mypage') : navigate(`/profile/other-user-profile/${moveProfileId}`);
+			}}
+		>
 			<div
 				className="profile-img-box"
 				style={{

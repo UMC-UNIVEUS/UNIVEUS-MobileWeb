@@ -210,12 +210,19 @@ export default function UnivePost() {
 			<div className="up-body">
 				<div className="up-top">
 					<div className="upt-user-info">
-						<Profile gender={postData.Writer.gender} profileImg={postData.Writer.user_img} />
+						{postData.Writer.user_id === postData.connectedUser.user_id ? (
+							<Profile gender={postData.Writer.gender} profileImg={postData.Writer.user_img} myProfile />
+						) : (
+							<Profile
+								gender={postData.Writer.gender}
+								profileImg={postData.Writer.user_img}
+								moveProfileId={postData.Writer.user_id}
+							/>
+						)}
 						<div className="upt-ui-group">
 							<div className="upt-name-group">
 								<span className="upt-name">{postData.Writer['nickname']}</span>
 								{postData.Writer.mebership ? <Memebership /> : ''}
-								{/* <Memebership /> */}
 							</div>
 							<div className="upt-department">
 								{postData.Writer['student_id']} / {postData.Writer['major']}
@@ -290,7 +297,11 @@ export default function UnivePost() {
 										style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
 									>
 										<div className="up-pb-user-info">
-											<Profile gender={part.gender} profileImg={part.user_img} />
+											{part.user_id === postData.connectedUser.user_id ? (
+												<Profile gender={part.gender} profileImg={part.user_img} myProfile />
+											) : (
+												<Profile gender={part.gender} profileImg={part.user_img} moveProfileId={part.user_id} />
+											)}
 											<div className="up-pb-user-name-group">
 												<div className="up-pb-name">{part.nickname}</div>
 												<div className="up-pb-department">
@@ -539,9 +550,8 @@ export default function UnivePost() {
 					) : personClickBtn === 'partCancel' ? (
 						// 참여 취소 모달
 						<>
-							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
-								취소 즉시 채팅방에서 퇴장되며 잦은 취소는 패널티가 부여 될 수 있습니다.
-							</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>취소 즉시 채팅방에서 퇴장되며</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>잦은 취소는 패널티가 부여 될 수 있습니다.</p>
 							<div className="modal-btn-group">
 								<Button content={'참여유지'} type={'modal-btn other-color'} onClick={closeModalPerson} />
 								<Button
@@ -558,9 +568,8 @@ export default function UnivePost() {
 					) : personClickBtn === 'partCancelComplete' ? (
 						// 참여 취소 완료 모달
 						<>
-							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
-								다른 유니버스를 찾아보거나 내가 하고 싶은 유니버스를 생성해도 좋아요
-							</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>다른 유니버스를 찾아보거나</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>내가 하고 싶은 유니버스를 생성해도 좋아요</p>
 							<Button
 								content={'확인'}
 								type={'floating'}
