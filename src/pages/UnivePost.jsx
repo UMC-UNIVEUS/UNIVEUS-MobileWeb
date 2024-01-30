@@ -20,7 +20,7 @@ export default function UnivePost() {
 	const navigate = useNavigate();
 	const [isModalOpenWriter, setIsModalOpenWriter] = useState(false);
 	const [isModalOpenPerson, setIsModalOpenPerson] = useState(false);
-	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval,deadlineComplete
+	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval,deadlineComplete,postDeleteComplete
 	const [personClickBtn, setPersonClickBtn] = useState(''); // partWait, partSuccess, partCancel, partCancelComplete, declaration
 	const [declaration, setDeclaration] = useState();
 	const [postData, setPostData] = useState({
@@ -120,8 +120,7 @@ export default function UnivePost() {
 	// 유니버스 참여 신청
 	const applyParticipation = async () => {
 		try {
-			console.log('te');
-			const res = await axios.post(
+			await axios.post(
 				`/post/${id}/participant/request`,
 				{},
 				{
@@ -130,7 +129,6 @@ export default function UnivePost() {
 					},
 				}
 			);
-			console.log(res);
 		} catch (err) {
 			console.log(err);
 		}
@@ -157,16 +155,29 @@ export default function UnivePost() {
 
 	// 유니버스 참여 취소
 	const participationCancel = async () => {
+		console.log('참여취소');
 		try {
-			await axios.delete(
-				`/post/${id}/participant/cancel`,
-				{},
-				{
-					headers: {
-						'x-access-token': jwtToken,
-					},
-				}
-			);
+			const res = await axios.delete(`/post/${id}/participant/cancel`, {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			});
+			console.log(res);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// 유니버스 게시글 삭제
+	const postDelete = async () => {
+		try {
+			console.log('삭제');
+			const res = await axios.delete(`/post/${id}`, {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			});
+			console.log(res);
 		} catch (err) {
 			console.log(err);
 		}
@@ -369,6 +380,8 @@ export default function UnivePost() {
 							? '참여자 승인완료!'
 							: writerClickBtn === 'deadlineComplete'
 							? '모집 마감이 완료되었습니다.'
+							: writerClickBtn === 'postDeleteComplete'
+							? '게시글이 삭제되었습니다.'
 							: ''
 					}
 				>
@@ -411,7 +424,15 @@ export default function UnivePost() {
 										navigate(`/modify/post-level1/${postData.Post.id}`);
 									}}
 								/>
-								<Button content={'삭제하기'} type={'modal-btn'} onClick={() => {}} />
+								<Button
+									content={'삭제하기'}
+									type={'modal-btn'}
+									onClick={() => {
+										postDelete();
+										setWriterClickBtn('postDeleteComplete');
+										openModalWriter();
+									}}
+								/>
 							</div>
 						</>
 					) : writerClickBtn === 'approval' ? (
@@ -430,6 +451,20 @@ export default function UnivePost() {
 						</>
 					) : writerClickBtn === 'deadlineComplete' ? (
 						// 마감 완료 모달
+						<>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>다시 모집하고 싶으시다면</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>새로운 게시글을 작성해주세요.</p>
+							<Button
+								content={'확인'}
+								type={'floating'}
+								onClick={() => {
+									closeModalWriter();
+									pageReload();
+								}}
+							/>
+						</>
+					) : writerClickBtn === 'postDeleteComplete' ? (
+						// 게시글 삭제 완료
 						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>다시 모집하고 싶으시다면</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>새로운 게시글을 작성해주세요.</p>
