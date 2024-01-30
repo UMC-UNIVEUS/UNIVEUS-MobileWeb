@@ -18,42 +18,45 @@ export default function ModifyPostLevel1() {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	useEffect(() => {
-		const axiosGet = async () => {
-			await axios({
-				headers: {
-					'x-access-token': jwtToken,
-				},
-				method: 'get',
-				url: `/post/${id}`,
-			}).then((res) => {
-				console.log(res);
-				if (res.data.code === 'COMMON200') {
-					const resData = res.data.result.Post;
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'get',
+			url: `/post/${id}`,
+		}).then((res) => {
+			console.log(res);
+			if (res.data.code === 'COMMON200') {
+				const resData = res.data.result.Post;
 
-					const imgUrlList = [];
-					for (let i = 0; i < res.data.result.PostImages.length; i++) {
-						imgUrlList.push(res.data.result.PostImages[i]['image_url']);
-					}
-					const GetData = {
-						category: resData['category'],
-						limit_gender: resData['limit_gender'],
-						limit_people: resData['limit_people'],
-						participation_method: resData['participation_method'],
-						meeting_datetime:
-							resData['meeting_datetime'].substr(0, resData['meeting_datetime'].indexOf('T')) +
-							' ' +
-							resData['meeting_datetime'].substr(resData['meeting_datetime'].indexOf('T') + 1, 5),
-						location: resData['location'],
-						title: resData['title'],
-						contents: resData['contents'],
-						images: imgUrlList,
-					};
-
-					localStorage.setItem('modifyPost', JSON.stringify(GetData));
+				// 추가: null 체크 -> 수정 페이지 첫 접근시 Uncaught TypeError 해결
+				if (!resData || !res.data.result.PostImages) {
+					console.error('서버 응답에 필요한 데이터가 없습니다.');
+					return;
 				}
-			});
-		};
-		axiosGet();
+
+				const imgUrlList = [];
+				for (let i = 0; i < res.data.result.PostImages.length; i++) {
+					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
+				}
+				const GetData = {
+					category: resData['category'],
+					limit_gender: resData['limit_gender'],
+					limit_people: resData['limit_people'],
+					participation_method: resData['participation_method'],
+					meeting_datetime:
+						resData['meeting_datetime'].substr(0, resData['meeting_datetime'].indexOf('T')) +
+						' ' +
+						resData['meeting_datetime'].substr(resData['meeting_datetime'].indexOf('T') + 1, 5),
+					location: resData['location'],
+					title: resData['title'],
+					contents: resData['contents'],
+					images: imgUrlList,
+				};
+
+				localStorage.setItem('modifyPost', JSON.stringify(GetData));
+			}
+		});
 	}, []);
 
 	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));

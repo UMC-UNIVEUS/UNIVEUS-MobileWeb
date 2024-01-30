@@ -224,9 +224,11 @@
 		}
 	}
 	.button-body.floating {
-		position: fixed;
-		z-index: 99;
-		bottom: 60px;
-		width: 90%;
+		&.fix {
+			position: fixed;
+			z-index: 99;
+			bottom: 60px;
+			width: 90%;
+		}
 	}
 }

@@ -20,13 +20,14 @@ export default function UnivePost() {
 	const navigate = useNavigate();
 	const [isModalOpenWriter, setIsModalOpenWriter] = useState(false);
 	const [isModalOpenPerson, setIsModalOpenPerson] = useState(false);
-	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval
+	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval,deadlineComplete
 	const [personClickBtn, setPersonClickBtn] = useState(''); // partWait, partSuccess, partCancel, partCancelComplete, declaration
 	const [declaration, setDeclaration] = useState();
 	const [postData, setPostData] = useState({
 		connectedUser: {
 			user_id: '',
 			status: '',
+			gender: '',
 		},
 		Writer: {
 			user_id: '',
@@ -68,6 +69,8 @@ export default function UnivePost() {
 		setIsModalOpenPerson(false);
 	};
 
+	// const jwtToken =
+	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNTMzMTU2MiwiZXhwIjoxNzEzOTcxNTYyLCJpc3MiOiJ1bml2ZXVzIn0.Heqp8oHlO5I5c-1l1NMod3zZT2HN5IzPmuJWixbgN3E';
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
@@ -89,18 +92,77 @@ export default function UnivePost() {
 	}, []);
 
 	// 유니버스 모집 마감
-	const recruitmentDeadline = () => {
+	const recruitmentDeadline = async () => {
 		try {
-			axios.patch(`/post/${id}/end`, {
-				headers: {
-					'x-access-token': jwtToken,
-				},
-			});
+			await axios.patch(
+				`/post/${id}/end`,
+				{},
+				{
+					headers: {
+						'x-access-token': jwtToken,
+					},
+				}
+			);
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	// 유니버스 참여 신청
+	const applyParticipation = async () => {
+		try {
+			await axios.post(
+				`/post/${id}/participant/request`,
+				{},
+				{
+					headers: {
+						'x-access-token': jwtToken,
+					},
+				}
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// 유니버스 참여 승인
+	const participationApproved = async (user_id) => {
+		try {
+			await axios.patch(
+				`/post/${id}/participant/agree`,
+				{
+					user_id: user_id,
+				},
+				{
+					headers: {
+						'x-access-token': jwtToken,
+					},
+				}
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// 유니버스 참여 취소
+	const participationCancel = async () => {
+		try {
+			await axios.delete(
+				`/post/${id}/participant/cancel`,
+				{},
+				{
+					headers: {
+						'x-access-token': jwtToken,
+					},
+				}
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	console.log(postData);
+
 	return (
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
@@ -221,11 +283,12 @@ export default function UnivePost() {
 												<div
 													className="up-pb-situation-btn"
 													onClick={() => {
+														participationApproved(part.user_id);
 														setWriterClickBtn('approval');
 														openModalWriter();
 													}}
 												>
-													대기중
+													승인하기
 												</div>
 											)
 										) : (
@@ -241,33 +304,37 @@ export default function UnivePost() {
 				{postData.Post.post_status === 'RECRUITING' ? (
 					isWriter ? (
 						<Button
-							type={'floating'}
+							type={'floating fix'}
 							content={'유니버스 관리하기'}
 							onClick={() => {
 								setWriterClickBtn('manage');
 								openModalWriter();
 							}}
 						/>
-					) : postData.connectedUser.status === 'PARTICIPATING' ? (
+					) : postData.connectedUser.status === 'PARTICIPATING' || postData.connectedUser.status === 'WAITING' ? (
 						<Button
-							type={'floating'}
+							type={'floating fix'}
 							content={'참여 취소하기'}
 							onClick={() => {
 								setPersonClickBtn('partCancel');
 								openModalPerson();
 							}}
 						/>
+					) : postData.Post.limit_gender !== 'ALL' && postData.Post.limit_gender !== postData.connectedUser.gender ? (
+						<Button type={'floating fix disabled'} content={'참여 불가능한 성별입니다'} />
 					) : (
 						<Button
-							type={'floating'}
+							type={'floating fix'}
 							content={'유니버스 참여하기'}
 							onClick={
 								postData.Post.participation_method === '자동승인'
 									? () => {
+											applyParticipation();
 											setPersonClickBtn('partSuccess');
 											openModalPerson();
 									  }
 									: () => {
+											applyParticipation();
 											setPersonClickBtn('partWait');
 											openModalPerson();
 									  }
@@ -275,7 +342,7 @@ export default function UnivePost() {
 						/>
 					)
 				) : (
-					<Button type={'floating disabled'} content={'유니버스 모집 종료'} />
+					<Button type={'floating fix disabled'} content={'유니버스 모집 종료'} />
 				)}
 			</div>
 			{isWriter ? (
@@ -289,23 +356,40 @@ export default function UnivePost() {
 							? '유니버스 관리하기'
 							: writerClickBtn === 'approval'
 							? '참여자 승인완료!'
+							: writerClickBtn === 'deadlineComplete'
+							? '모집 마감이 완료되었습니다.'
 							: ''
 					}
 				>
 					{writerClickBtn === 'status' ? (
 						// 상태 변경 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								마감일 보다 일찍 유니버스 모집을 종료하고 싶다면 마감하기를 눌러 상태를 변경할 수 있어요
 							</p>
 							<div className="modal-btn-group">
-								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalWriter} />
-								<Button content={'마감하기'} type={'modal-btn'} onClick={recruitmentDeadline} />
+								<Button
+									content={'취소하기'}
+									type={'modal-btn other-color'}
+									onClick={() => {
+										closeModalWriter();
+										navigate(`/post/${id}`);
+									}}
+								/>
+								<Button
+									content={'마감하기'}
+									type={'modal-btn'}
+									onClick={() => {
+										recruitmentDeadline();
+										setWriterClickBtn('deadlineComplete');
+										openModalWriter();
+									}}
+								/>
 							</div>
-						</div>
+						</>
 					) : writerClickBtn === 'manage' ? (
 						// 관리하기 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>내 유니버스를 수정하거나 삭제할 수 있어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모집 상태 변경은 게시글 우상단을 확인해주세요.</p>
 							<div className="modal-btn-group">
@@ -318,14 +402,35 @@ export default function UnivePost() {
 								/>
 								<Button content={'삭제하기'} type={'modal-btn'} onClick={() => {}} />
 							</div>
-						</div>
+						</>
 					) : writerClickBtn === 'approval' ? (
 						// 참여승인 완료 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>해당 친구의 유니버스 참여가 승인되었어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>친구들과 즐거운 모임이 되길 바랄게요!</p>
-							<Button content={'확인'} type={'floating'} onClick={closeModalWriter} />
-						</div>
+							<Button
+								content={'확인'}
+								type={'floating'}
+								onClick={() => {
+									closeModalWriter();
+									navigate(`/post/${id}`);
+								}}
+							/>
+						</>
+					) : writerClickBtn === 'deadlineComplete' ? (
+						// 마감 완료 모달
+						<>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>다시 모집하고 싶으시다면</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>새로운 게시글을 작성해주세요.</p>
+							<Button
+								content={'확인'}
+								type={'floating'}
+								onClick={() => {
+									closeModalWriter();
+									navigate(`/post/${id}`);
+								}}
+							/>
+						</>
 					) : (
 						''
 					)}
@@ -350,18 +455,32 @@ export default function UnivePost() {
 				>
 					{personClickBtn === 'partWait' ? (
 						// 참여대기 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>해당 유니버스는 방장의 승인이 필요해요 :)</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>승인 시 알림을 보내드릴게요.</p>
-							<Button content={'확인'} type={'floating'} onClick={closeModalPerson} />
-						</div>
+							<Button
+								content={'확인'}
+								type={'floating'}
+								onClick={() => {
+									closeModalPerson();
+									navigate(`/post/${id}`);
+								}}
+							/>
+						</>
 					) : personClickBtn === 'partSuccess' ? (
 						// 참여완료 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스에 참여가 완료되었어요.</p>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>채팅방에 입장하여 인사로 시작해 볼까요?</p>
 							<div className="modal-btn-group">
-								<Button content={'나중에 할래요'} type={'modal-btn other-color'} onClick={closeModalPerson} />
+								<Button
+									content={'나중에 할래요'}
+									type={'modal-btn other-color'}
+									onClick={() => {
+										closeModalPerson();
+										navigate(`/post/${id}`);
+									}}
+								/>
 								<Button
 									content={'채팅방 입장'}
 									type={'modal-btn'}
@@ -370,10 +489,10 @@ export default function UnivePost() {
 									}}
 								/>
 							</div>
-						</div>
+						</>
 					) : personClickBtn === 'partCancel' ? (
 						// 참여 취소 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								취소 즉시 채팅방에서 퇴장되며 잦은 취소는 패널티가 부여 될 수 있습니다.
 							</p>
@@ -388,18 +507,25 @@ export default function UnivePost() {
 									}}
 								/>
 							</div>
-						</div>
+						</>
 					) : personClickBtn === 'partCancelComplete' ? (
 						// 참여 취소 완료 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
 								다른 유니버스를 찾아보거나 내가 하고 싶은 유니버스를 생성해도 좋아요
 							</p>
-							<Button content={'확인'} type={'floating'} onClick={closeModalPerson} />
-						</div>
+							<Button
+								content={'확인'}
+								type={'floating'}
+								onClick={() => {
+									closeModalPerson();
+									navigate(`/post/${id}`);
+								}}
+							/>
+						</>
 					) : personClickBtn === 'declaration' ? (
 						// 게시글 신고 모달
-						<div className="mb-content">
+						<>
 							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>신고 사유를 선택해 주시면 확인 후 조치가 취해집니다.</p>
 							<div className="oup-radio-box">
 								{[
@@ -426,10 +552,17 @@ export default function UnivePost() {
 								})}
 							</div>
 							<div className="modal-btn-group">
-								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalPerson} />
+								<Button
+									content={'취소하기'}
+									type={'modal-btn other-color'}
+									onClick={() => {
+										closeModalPerson();
+										navigate(`/post/${id}`);
+									}}
+								/>
 								<Button content={'신고하기'} type={'modal-btn'} />
 							</div>
-						</div>
+						</>
 					) : (
 						''
 					)}
