@@ -41,11 +41,17 @@ export default function CreatePostLevel3() {
 	};
 
 	const handleTitle = (e) => {
-		setTitle(e.target.value);
+		// setTitle(e.target.value);
+		const updatedTitle = e.target.value;
+		setTitle(updatedTitle);
+		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, title: updatedTitle }));
 	};
 
 	const handleContent = (e) => {
-		setContent(e.target.value);
+		// setContent(e.target.value);
+		const updatedContent = e.target.value;
+		setContent(updatedContent);
+		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, contents: updatedContent }));
 	};
 
 	const jwtToken =

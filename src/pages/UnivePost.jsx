@@ -98,6 +98,7 @@ export default function UnivePost() {
 			console.log(err);
 		}
 	};
+
 	return (
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
