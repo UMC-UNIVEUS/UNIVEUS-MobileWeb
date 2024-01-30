@@ -69,27 +69,36 @@ export default function UnivePost() {
 		setIsModalOpenPerson(false);
 	};
 
+	// 진형 토큰
 	// const jwtToken =
 	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNTMzMTU2MiwiZXhwIjoxNzEzOTcxNTYyLCJpc3MiOiJ1bml2ZXVzIn0.Heqp8oHlO5I5c-1l1NMod3zZT2HN5IzPmuJWixbgN3E';
+
+	// 채연 토큰
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
-	useEffect(() => {
-		const axiosPost = async () => {
-			try {
-				const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
-				const imgUrlList = [];
-				for (let i = 0; i < res.data.result.PostImages.length; i++) {
-					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
-				}
-				setPostData(res.data.result);
-				setPostData({ ...res.data.result, PostImages: imgUrlList });
-			} catch (error) {
-				console.log(error);
+	const axiosPost = async () => {
+		try {
+			const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
+			const imgUrlList = [];
+			for (let i = 0; i < res.data.result.PostImages.length; i++) {
+				imgUrlList.push(res.data.result.PostImages[i]['image_url']);
 			}
-		};
+			setPostData(res.data.result);
+			setPostData({ ...res.data.result, PostImages: imgUrlList });
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
 		axiosPost();
 	}, []);
+
+	// 상태가 변경된 것을 바로 반영하기 위한 새로고침
+	const pageReload = () => {
+		window.location.reload();
+	};
 
 	// 유니버스 모집 마감
 	const recruitmentDeadline = async () => {
@@ -111,7 +120,8 @@ export default function UnivePost() {
 	// 유니버스 참여 신청
 	const applyParticipation = async () => {
 		try {
-			await axios.post(
+			console.log('te');
+			const res = await axios.post(
 				`/post/${id}/participant/request`,
 				{},
 				{
@@ -120,6 +130,7 @@ export default function UnivePost() {
 					},
 				}
 			);
+			console.log(res);
 		} catch (err) {
 			console.log(err);
 		}
@@ -373,7 +384,7 @@ export default function UnivePost() {
 									type={'modal-btn other-color'}
 									onClick={() => {
 										closeModalWriter();
-										navigate(`/post/${id}`);
+										pageReload();
 									}}
 								/>
 								<Button
@@ -413,7 +424,7 @@ export default function UnivePost() {
 								type={'floating'}
 								onClick={() => {
 									closeModalWriter();
-									navigate(`/post/${id}`);
+									pageReload();
 								}}
 							/>
 						</>
@@ -427,7 +438,7 @@ export default function UnivePost() {
 								type={'floating'}
 								onClick={() => {
 									closeModalWriter();
-									navigate(`/post/${id}`);
+									pageReload();
 								}}
 							/>
 						</>
@@ -463,7 +474,7 @@ export default function UnivePost() {
 								type={'floating'}
 								onClick={() => {
 									closeModalPerson();
-									navigate(`/post/${id}`);
+									pageReload();
 								}}
 							/>
 						</>
@@ -478,7 +489,7 @@ export default function UnivePost() {
 									type={'modal-btn other-color'}
 									onClick={() => {
 										closeModalPerson();
-										navigate(`/post/${id}`);
+										pageReload();
 									}}
 								/>
 								<Button
@@ -502,6 +513,7 @@ export default function UnivePost() {
 									content={'참여 취소'}
 									type={'modal-btn'}
 									onClick={() => {
+										participationCancel();
 										setPersonClickBtn('partCancelComplete');
 										openModalPerson();
 									}}
@@ -519,7 +531,7 @@ export default function UnivePost() {
 								type={'floating'}
 								onClick={() => {
 									closeModalPerson();
-									navigate(`/post/${id}`);
+									pageReload();
 								}}
 							/>
 						</>
@@ -557,7 +569,7 @@ export default function UnivePost() {
 									type={'modal-btn other-color'}
 									onClick={() => {
 										closeModalPerson();
-										navigate(`/post/${id}`);
+										pageReload();
 									}}
 								/>
 								<Button content={'신고하기'} type={'modal-btn'} />
