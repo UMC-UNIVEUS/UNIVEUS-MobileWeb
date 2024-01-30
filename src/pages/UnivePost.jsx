@@ -35,6 +35,8 @@ export default function UnivePost() {
 			student_id: '',
 			major: '',
 			status: '',
+			mebership: '',
+			user_img: '',
 		},
 		Post: {
 			category: '',
@@ -98,7 +100,7 @@ export default function UnivePost() {
 			console.log(err);
 		}
 	};
-
+	console.log(postData);
 	return (
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
@@ -124,11 +126,12 @@ export default function UnivePost() {
 			<div className="up-body">
 				<div className="up-top">
 					<div className="upt-user-info">
-						<Profile gender={postData.Writer.gender} />
+						<Profile gender={postData.Writer.gender} profileImg={postData.Writer.user_img} />
 						<div className="upt-ui-group">
 							<div className="upt-name-group">
 								<span className="upt-name">{postData.Writer['nickname']}</span>
-								<Memebership />
+								{postData.Writer.mebership ? <Memebership /> : ''}
+								{/* <Memebership /> */}
 							</div>
 							<div className="upt-department">
 								{postData.Writer['student_id']} / {postData.Writer['major']}
@@ -203,7 +206,7 @@ export default function UnivePost() {
 										style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
 									>
 										<div className="up-pb-user-info">
-											<Profile gender={part.gender} />
+											<Profile gender={part.gender} profileImg={part.user_img} />
 											<div className="up-pb-user-name-group">
 												<div className="up-pb-name">{part.nickname}</div>
 												<div className="up-pb-department">

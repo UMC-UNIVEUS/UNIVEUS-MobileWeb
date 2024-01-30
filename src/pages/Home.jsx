@@ -9,7 +9,7 @@ import Button from '../components/Button';
 import Footer from '../components/Footer';
 import { ReactComponent as Memebership } from '../assets/images/membership.svg';
 import { ReactComponent as People } from '../assets/images/people.svg';
-import Logo from '../assets/images/univeus.svg';
+import Logo from '../assets/images/logo3.png';
 import School from '../assets/images/school.svg';
 import Fire from '../assets/images/fire.svg';
 import Flag from '../assets/images/flag.svg';
