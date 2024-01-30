@@ -42,10 +42,16 @@ export default function ModifyPostLevel3() {
 
 	const handleTitle = (e) => {
 		setTitle(e.target.value);
+		// const updatedTitle = e.target.value;
+		// setTitle(updatedTitle);
+		// localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, title: updatedTitle }));
 	};
 
 	const handleContent = (e) => {
 		setContent(e.target.value);
+		// const updatedContent = e.target.value;
+		// setContent(updatedContent);
+		// localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, contents: updatedContent }));
 	};
 
 	const jwtToken =
@@ -90,6 +96,12 @@ export default function ModifyPostLevel3() {
 		}
 	}, []);
 
+	const ModifyPost3 = {
+		title: title,
+		contents: content,
+		images: imgFile,
+	};
+
 	const handleFocus = (e) => {
 		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
 	};
@@ -97,12 +109,6 @@ export default function ModifyPostLevel3() {
 	useEffect(() => {
 		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, images: imgFile }));
 	}, [imgFile]);
-
-	const ModifyPost3 = {
-		title: title,
-		contents: content,
-		images: imgFile,
-	};
 
 	const handlePosting = () => {
 		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, ...ModifyPost3 }));
@@ -155,7 +161,7 @@ export default function ModifyPostLevel3() {
 							required
 							onChange={handleTitle}
 							value={title}
-							onBlur={handleFocus}
+							// onBlur={handleFocus}
 						/>
 					</div>
 					<div className="cpl3-img-upload">
@@ -188,7 +194,7 @@ export default function ModifyPostLevel3() {
               - 모임의 목표&#13;&#10;"
 							onChange={handleContent}
 							value={content}
-							onBlur={handleFocus}
+							// onBlur={handleFocus}
 						/>
 					</div>
 					<div className="cpl3-img-group">

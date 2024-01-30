@@ -72,7 +72,7 @@ export default function UnivePost() {
 	useEffect(() => {
 		const axiosPost = async () => {
 			try {
-				let res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
+				const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
 				const imgUrlList = [];
 				for (let i = 0; i < res.data.result.PostImages.length; i++) {
 					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
@@ -86,9 +86,18 @@ export default function UnivePost() {
 		axiosPost();
 	}, []);
 
-	// console.log(postData);
-
-	console.log(isModalOpenPerson);
+	// 유니버스 모집 마감
+	const recruitmentDeadline = () => {
+		try {
+			axios.patch(`/post/${id}/end`, {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	return (
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
@@ -287,7 +296,7 @@ export default function UnivePost() {
 							</p>
 							<div className="modal-btn-group">
 								<Button content={'취소하기'} type={'modal-btn other-color'} onClick={closeModalWriter} />
-								<Button content={'마감하기'} type={'modal-btn'} onClick={() => {}} />
+								<Button content={'마감하기'} type={'modal-btn'} onClick={recruitmentDeadline} />
 							</div>
 						</div>
 					) : writerClickBtn === 'manage' ? (
@@ -300,7 +309,7 @@ export default function UnivePost() {
 									content={'수정하기'}
 									type={'modal-btn other-color'}
 									onClick={() => {
-										navigate(`/post/${id}`);
+										navigate(`/modify/post-level1/${postData.Post.id}`);
 									}}
 								/>
 								<Button content={'삭제하기'} type={'modal-btn'} onClick={() => {}} />

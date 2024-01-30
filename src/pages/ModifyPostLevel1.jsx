@@ -25,6 +25,7 @@ export default function ModifyPostLevel1() {
 			method: 'get',
 			url: `/post/${id}`,
 		}).then((res) => {
+			console.log(res);
 			if (res.data.code === 'COMMON200') {
 				const resData = res.data.result.Post;
 
