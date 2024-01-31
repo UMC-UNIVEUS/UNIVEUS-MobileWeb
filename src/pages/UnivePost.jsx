@@ -81,7 +81,7 @@ export default function UnivePost() {
 	const axiosPost = async () => {
 		try {
 			const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
-			if (res.code === 3000) {
+			if (res.data.code === 3000) {
 				setNotFindPost(true);
 			} else {
 				const imgUrlList = [];

@@ -11,8 +11,42 @@ import { useParams } from 'react-router-dom';
 
 export default function OtherUserProfile() {
 	const { id } = useParams();
+	const QUESTION = [
+		'나의 MBTI는',
+		'나의 최애 음식은',
+		'내가 요새 듣는노래는',
+		'나의 관심사는',
+		'이런 사람이랑 잘 맞아요',
+		'대학생활동안 제일 해보고 싶은건',
+	];
 	const [declaration, setDeclaration] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [userData, setUserData] = useState({
+		userInfo: [
+			{
+				nickname: '',
+				gender: '',
+				major: '',
+				student_id: '',
+				mebership: '',
+				user_img: '',
+				making: '',
+				participating: '',
+				introductionExist: '',
+			},
+		],
+		userIntroduction: [
+			{
+				q1: '',
+				q2: '',
+				q3: '',
+				q4: '',
+				q5: '',
+				q6: '',
+			},
+		],
+	});
+
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => {
 		setIsModalOpen(false);
@@ -22,20 +56,17 @@ export default function OtherUserProfile() {
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
-	useEffect(() => {
-		axios({
+	const axiosUserInfo = async () => {
+		const res = await axios.get(`/profile/introduction/${id}`, {
 			headers: {
 				'x-access-token': jwtToken,
 			},
-			method: 'GET',
-			url: `/profile/introduction/${id}`,
-		})
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		});
+		setUserData(res.data.result);
+	};
+
+	useEffect(() => {
+		axiosUserInfo();
 	}, []);
 
 	return (
@@ -76,36 +107,31 @@ export default function OtherUserProfile() {
 				<div className="oup-profile-box">
 					<Profile />
 					<div className="oup-info-group">
-						<div className="oup-info-name">소하</div>
-						<div className="oup-info-department">19학번/소프트웨어경영대학</div>
+						<div className="oup-info-name">{userData.userInfo.nickname}</div>
+						<div className="oup-info-department">
+							{userData.userInfo.student_id}/{userData.userInfo.major}
+						</div>
 					</div>
 					<div className="oup-number-group">
 						<div className="oup-number">
 							<div className="oup-number-title">생성</div>
-							<div className="oup-number-result">1회</div>
+							<div className="oup-number-result">{userData.userInfo.making}회</div>
 						</div>
 						<div className="oup-number">
 							<div className="oup-number-title">참여</div>
-							<div className="oup-number-result">2회</div>
+							<div className="oup-number-result">{userData.userInfo.participating}회</div>
 						</div>
 					</div>
 				</div>
 				<div className="oup-introduction-box">
-					{[
-						['나의 MBTI는', 'ISFP'],
-						['나의 최애 음식은', '치킨'],
-						['내가 요새 듣는노래는', '치킨'],
-						['나의 관심사는', '치킨'],
-						['이런 사람이랑 잘 맞아요', '치킨'],
-						['이런 사람이랑 잘 맞아요', '치킨'],
-					].map((li) => {
+					{Object.values(userData.userIntroduction[0]).map((answer, idx) => {
 						return (
 							<div className="oup-qa-box">
 								<div className="oup-question-group">
 									<div className="oup-dot">&#183;</div>
-									<div className="oup-question">{li[0]}</div>
+									<div className="oup-question">{QUESTION[idx]}</div>
 								</div>
-								<div className="oup-answer">{li[1]}</div>
+								<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
 							</div>
 						);
 					})}

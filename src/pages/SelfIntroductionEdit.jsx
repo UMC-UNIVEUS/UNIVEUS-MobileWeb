@@ -1,17 +1,104 @@
 import './SelfIntroductionEdit.scss';
 import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function SelfIntroductionEdit() {
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const [answer, setAnswer] = useState(['', '', '', '', '', '']);
+	const [isAnswer, setIsAnswer] = useState(false);
+	const QUESTION = [
+		'나의 MBTI는',
+		'나의 최애 음식은',
+		'내가 요새 듣는노래는',
+		'나의 관심사는',
+		'이런 사람이랑 잘 맞아요',
+		'대학생활동안 제일 해보고 싶은건',
+	];
+
+	const handleInputChange = (idx, e) => {
+		const newInputs = [...answer];
+		newInputs[idx] = e.target.value;
+		setAnswer(newInputs);
+	};
+
+	// 채연 토큰
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+
+	// 유저가 작성한 답변 불러오기
+	const axiosGet = async () => {
+		const res = await axios.get(`/profile/introduction/${id}`, {
+			headers: {
+				'x-access-token': jwtToken,
+			},
+		});
+		setIsAnswer(res.data.userInfo.introductionExist);
+		setAnswer(Object.values(res.data.result.userIntroduction[0]));
+	};
+
+	// 작성한 답변 보내기
+	const axiosPost = async () => {
+		try {
+			const res = await axios.post(
+				'/profile/introduction',
+				{
+					q1: answer[0],
+					q2: answer[1],
+					q3: answer[2],
+					q4: answer[3],
+					q5: answer[4],
+					q6: answer[5],
+				},
+				{
+					headers: { 'x-access-token': jwtToken },
+				}
+			);
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	// 답변 수정사항 보내기
+	const axiosPut = async () => {
+		try {
+			const res = await axios.put(
+				'/profile/introduction',
+				{
+					q1: answer[0],
+					q2: answer[1],
+					q3: answer[2],
+					q4: answer[3],
+					q5: answer[4],
+					q6: answer[5],
+				},
+				{
+					headers: { 'x-access-token': jwtToken },
+				}
+			);
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		axiosGet();
+	});
 
 	return (
 		<div className="self-introduction-edit">
 			<SubHeader
 				headertext={'나의 자기소개 작성'}
 				textBtn={'완료'}
-				onClick={() => navigate('/profile/self-introduction')}
+				onClick={() => {
+					isAnswer ? axiosPut() : axiosPost();
+					navigate('/profile/self-introduction');
+				}}
 			/>
 			<div className="sie-body">
 				<div className="sie-title">
@@ -19,17 +106,24 @@ export default function SelfIntroductionEdit() {
 					<div className="sie-main">간단하게 나를 소개해요 :)</div>
 				</div>
 				<div className="sie-content">
-					{[
-						['나의 MBTI는', 'ISFP'],
-						['나의 최애 음식은', '치킨'],
-					].map((li) => {
+					{QUESTION.map((q, idx) => {
 						return (
 							<div className="sie-qa-box">
 								<div className="sie-question-group">
 									<div className="sie-dot">&#183;</div>
-									<div className="sie-question">{li[0]}</div>
+									<div className="sie-question">{q}</div>
 								</div>
-								<input type="text" placeholder="답변을 입력해주세요." className="sie-answer" maxLength={30} />
+								<input
+									type="text"
+									placeholder="답변을 입력해주세요."
+									className="sie-answer"
+									maxLength={30}
+									key={idx}
+									value={answer[idx]}
+									onChange={(e) => {
+										handleInputChange(idx, e);
+									}}
+								/>
 							</div>
 						);
 					})}
