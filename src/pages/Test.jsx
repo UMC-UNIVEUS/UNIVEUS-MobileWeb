@@ -24,26 +24,27 @@ export default function Test() {
 			{/* <SubHeader headertext={'상세정보 입력'} iconBtn={Icon} onClick={openModal} /> */}
 			<SubHeader headertext={'입력'} textBtn={'완료'} />
 			<div style={{ width: '90%', height: '100%', margin: '0 auto', paddingTop: '52px' }}>
-				<Profile gender={'male'} />
+				<div>존재하지 않는 유니버스입니다!</div>
+				{/* <Profile gender={'male'} />
 				<Toggle />
 				<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
 					<Card />
 					<Card />
-				</div>
+				</div> */}
 				{/* Modal 사용 예시 */}
-				<Button onClick={openModal} content={'승인하기'} />
-				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}>
-					{/* 내용과 버튼은 매번 만들기 */}
-					<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 제대로 생성되었어요!</p>
-					<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모임정보를 꼭 기억해주세요!</p>
-					{/* 버튼 1개일 때, 해당 내용 복붙 */}
-					<Button type={'floating'} content={'확인'} onClick={closeModal} />
-					{/* 버튼 2개일 때, 해당 내용 복붙후 content만 수정 */}
-					<div className="modal-btn-group">
+				{/* <Button onClick={openModal} content={'승인하기'} />
+				<Modal isOpen={isModalOpen} closeModal={closeModal} title={'유니버스 생성완료!'}> */}
+				{/* 내용과 버튼은 매번 만들기 */}
+				{/* <p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스가 제대로 생성되었어요!</p>
+					<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>모임정보를 꼭 기억해주세요!</p> */}
+				{/* 버튼 1개일 때, 해당 내용 복붙 */}
+				{/* <Button type={'floating'} content={'확인'} onClick={closeModal} /> */}
+				{/* 버튼 2개일 때, 해당 내용 복붙후 content만 수정 */}
+				{/* <div className="modal-btn-group">
 						<Button content={'수정하기'} type={'modal-btn other-color'} />
 						<Button content={'삭제하기'} type={'modal-btn'} />
 					</div>
-				</Modal>
+				</Modal> */}
 			</div>
 			<NavBar present={'home'} />
 		</div>

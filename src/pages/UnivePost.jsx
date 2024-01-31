@@ -18,9 +18,10 @@ import axios from 'axios';
 export default function UnivePost() {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const [notFindPost, setNotFindPost] = useState(false);
 	const [isModalOpenWriter, setIsModalOpenWriter] = useState(false);
 	const [isModalOpenPerson, setIsModalOpenPerson] = useState(false);
-	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval,deadlineComplete,postDeleteComplete
+	const [writerClickBtn, setWriterClickBtn] = useState(''); // status, manage,approval,deadlineComplete,postDelete,postDeleteComplete
 	const [personClickBtn, setPersonClickBtn] = useState(''); // partWait, partSuccess, partCancel, partCancelComplete, declaration
 	const [declaration, setDeclaration] = useState();
 	const [postData, setPostData] = useState({
@@ -80,12 +81,16 @@ export default function UnivePost() {
 	const axiosPost = async () => {
 		try {
 			const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
-			const imgUrlList = [];
-			for (let i = 0; i < res.data.result.PostImages.length; i++) {
-				imgUrlList.push(res.data.result.PostImages[i]['image_url']);
+			if (res.code === 3000) {
+				setNotFindPost(true);
+			} else {
+				const imgUrlList = [];
+				for (let i = 0; i < res.data.result.PostImages.length; i++) {
+					imgUrlList.push(res.data.result.PostImages[i]['image_url']);
+				}
+				setPostData(res.data.result);
+				setPostData({ ...res.data.result, PostImages: imgUrlList });
 			}
-			setPostData(res.data.result);
-			setPostData({ ...res.data.result, PostImages: imgUrlList });
 		} catch (error) {
 			console.log(error);
 		}
@@ -208,174 +213,182 @@ export default function UnivePost() {
 				/>
 			)}
 			<div className="up-body">
-				<div className="up-top">
-					<div className="upt-user-info">
-						{postData.Writer.user_id === postData.connectedUser.user_id ? (
-							<Profile gender={postData.Writer.gender} profileImg={postData.Writer.user_img} myProfile />
-						) : (
-							<Profile
-								gender={postData.Writer.gender}
-								profileImg={postData.Writer.user_img}
-								moveProfileId={postData.Writer.user_id}
-							/>
-						)}
-						<div className="upt-ui-group">
-							<div className="upt-name-group">
-								<span className="upt-name">{postData.Writer['nickname']}</span>
-								{postData.Writer.mebership ? <Memebership /> : ''}
-							</div>
-							<div className="upt-department">
-								{postData.Writer['student_id']} / {postData.Writer['major']}
-							</div>
-						</div>
-					</div>
-					<div className="upt-post-info">
-						<div className="upt-pi-people-group">
-							<People className="upt-pi-people-img" />
-							<span className="upt-pi-people">
-								{postData.Post['current_people']}/{postData.Post['limit_people']}
-							</span>
-						</div>
-						{/* 성별 제한에 따라 색상 및 문구 변경하기 */}
-						{/* <div className="upt-pi-gender"></div> */}
-						{postData.Post['limit_gender'] === 'MAN' ? (
-							<div className="upt-pi-gender">
-								<MaleIcon className="upt-pi-gender-img" />
-								<span className="upt-pi-gender-text">ONLY</span>
-							</div>
-						) : postData.Post['limit_gender'] === 'WOMAN' ? (
-							<div className="upt-pi-gender" style={{ backgroundColor: 'var(--orange-color)' }}>
-								<FemaleIcon className="upt-pi-gender-img" />
-								<span className="upt-pi-gender-text">ONLY</span>
-							</div>
-						) : (
-							<div className="upt-pi-gender" style={{ backgroundColor: 'transparent' }}></div>
-						)}
-					</div>
-				</div>
-				<div className="up-meeting-box">
-					<div className="up-mb-deadline-group">
-						<Exclamation />
-						<span className="up-mb-deadline-date">
-							{postData.Post.end_datetime.substring(0, 4)}년 {postData.Post.end_datetime.substring(5, 7)}월{' '}
-							{postData.Post.end_datetime.substring(8, 10)}일 마감
-						</span>
-					</div>
-					<div className="up-mb-metting-group">
-						<div className="up-mb-title">모임 일시</div>
-						<div className="up-mb-data">
-							{postData.Post.meeting_datetime.substring(0, 4)}년 {postData.Post.meeting_datetime.substring(5, 7)}월{' '}
-							{postData.Post.meeting_datetime.substring(8, 10)}일 / {postData.Post.meeting_datetime.substring(11, 16)}
-						</div>
-					</div>
-					<div className="up-mb-metting-group">
-						<div className="up-mb-title">모임 장소</div>
-						<div className="up-mb-data">{postData.Post.location}</div>
-					</div>
-				</div>
-				<div className="up-content-box">
-					<div className="up-cb-title">{postData.Post.title}</div>
-					<div className="up-cb-textarea">{postData.Post.contents}</div>
-				</div>
-				<div className="up-image-box">
-					{postData.PostImages.map((img, idx) => {
-						return <img src={img} alt={`이미지${idx}`} className="up-img" />;
-					})}
-				</div>
-				<div className="up-hr"></div>
-				<div className="up-participant-box">
-					<div className="up-pb-text">이런 친구들이 함께해요 !</div>
-					<div className="up-pb-group">
-						{postData.ParticipantList.length === 0 ? (
-							<div className="up-pb-none-text">아직 참여중인 친구가 없어요!</div>
-						) : (
-							postData.ParticipantList.map((part) => {
-								const participation = part.status === 'PARTICIPATING';
-								return (
-									<div
-										className="up-pb-bundle"
-										style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
-									>
-										<div className="up-pb-user-info">
-											{part.user_id === postData.connectedUser.user_id ? (
-												<Profile gender={part.gender} profileImg={part.user_img} myProfile />
-											) : (
-												<Profile gender={part.gender} profileImg={part.user_img} moveProfileId={part.user_id} />
-											)}
-											<div className="up-pb-user-name-group">
-												<div className="up-pb-name">{part.nickname}</div>
-												<div className="up-pb-department">
-													{part.student_id} / {part.major}
-												</div>
-											</div>
-										</div>
-										{isWriter ? (
-											participation ? (
-												<div className="up-pb-situation">참여중</div>
-											) : (
-												<div
-													className="up-pb-situation-btn"
-													onClick={() => {
-														participationApproved(part.user_id);
-														setWriterClickBtn('approval');
-														openModalWriter();
-													}}
-												>
-													승인하기
-												</div>
-											)
-										) : (
-											<div className="up-pb-situation">{participation ? '참여중' : '대기중'}</div>
-										)}
-									</div>
-								);
-							})
-						)}
-					</div>
-				</div>
-				{/* 상태에 따라 버튼 여부와 문구가 변경 */}
-				{postData.Post.post_status === 'RECRUITING' ? (
-					isWriter ? (
-						<Button
-							type={'floating fix'}
-							content={'유니버스 관리하기'}
-							onClick={() => {
-								setWriterClickBtn('manage');
-								openModalWriter();
-							}}
-						/>
-					) : postData.connectedUser.status === 'PARTICIPATING' || postData.connectedUser.status === 'WAITING' ? (
-						<Button
-							type={'floating fix'}
-							content={'참여 취소하기'}
-							onClick={() => {
-								setPersonClickBtn('partCancel');
-								openModalPerson();
-							}}
-						/>
-					) : postData.Post.limit_gender !== 'ALL' && postData.Post.limit_gender !== postData.connectedUser.gender ? (
-						<Button type={'floating fix disabled'} content={'참여 불가능한 성별입니다'} />
-					) : (
-						<Button
-							type={'floating fix'}
-							content={'유니버스 참여하기'}
-							onClick={
-								postData.Post.participation_method === '자동승인'
-									? () => {
-											applyParticipation();
-											setPersonClickBtn('partSuccess');
-											openModalPerson();
-									  }
-									: () => {
-											applyParticipation();
-											setPersonClickBtn('partWait');
-											openModalPerson();
-									  }
-							}
-						/>
-					)
+				{notFindPost ? (
+					<div className="up-not-find-post">존재하지 않는 유니버스입니다!</div>
 				) : (
-					<Button type={'floating fix disabled'} content={'유니버스 모집 종료'} />
+					<>
+						<div className="up-top">
+							<div className="upt-user-info">
+								{postData.Writer.user_id === postData.connectedUser.user_id ? (
+									<Profile gender={postData.Writer.gender} profileImg={postData.Writer.user_img} myProfile />
+								) : (
+									<Profile
+										gender={postData.Writer.gender}
+										profileImg={postData.Writer.user_img}
+										moveProfileId={postData.Writer.user_id}
+									/>
+								)}
+								<div className="upt-ui-group">
+									<div className="upt-name-group">
+										<span className="upt-name">{postData.Writer['nickname']}</span>
+										{postData.Writer.mebership ? <Memebership /> : ''}
+									</div>
+									<div className="upt-department">
+										{postData.Writer['student_id']} / {postData.Writer['major']}
+									</div>
+								</div>
+							</div>
+							<div className="upt-post-info">
+								<div className="upt-pi-people-group">
+									<People className="upt-pi-people-img" />
+									<span className="upt-pi-people">
+										{postData.Post['current_people']}/{postData.Post['limit_people']}
+									</span>
+								</div>
+								{/* 성별 제한에 따라 색상 및 문구 변경하기 */}
+								{/* <div className="upt-pi-gender"></div> */}
+								{postData.Post['limit_gender'] === 'MAN' ? (
+									<div className="upt-pi-gender">
+										<MaleIcon className="upt-pi-gender-img" />
+										<span className="upt-pi-gender-text">ONLY</span>
+									</div>
+								) : postData.Post['limit_gender'] === 'WOMAN' ? (
+									<div className="upt-pi-gender" style={{ backgroundColor: 'var(--orange-color)' }}>
+										<FemaleIcon className="upt-pi-gender-img" />
+										<span className="upt-pi-gender-text">ONLY</span>
+									</div>
+								) : (
+									<div className="upt-pi-gender" style={{ backgroundColor: 'transparent' }}></div>
+								)}
+							</div>
+						</div>
+						<div className="up-meeting-box">
+							<div className="up-mb-deadline-group">
+								<Exclamation />
+								<span className="up-mb-deadline-date">
+									{postData.Post.end_datetime.substring(0, 4)}년 {postData.Post.end_datetime.substring(5, 7)}월{' '}
+									{postData.Post.end_datetime.substring(8, 10)}일 마감
+								</span>
+							</div>
+							<div className="up-mb-metting-group">
+								<div className="up-mb-title">모임 일시</div>
+								<div className="up-mb-data">
+									{postData.Post.meeting_datetime.substring(0, 4)}년 {postData.Post.meeting_datetime.substring(5, 7)}월{' '}
+									{postData.Post.meeting_datetime.substring(8, 10)}일 /{' '}
+									{postData.Post.meeting_datetime.substring(11, 16)}
+								</div>
+							</div>
+							<div className="up-mb-metting-group">
+								<div className="up-mb-title">모임 장소</div>
+								<div className="up-mb-data">{postData.Post.location}</div>
+							</div>
+						</div>
+						<div className="up-content-box">
+							<div className="up-cb-title">{postData.Post.title}</div>
+							<div className="up-cb-textarea">{postData.Post.contents}</div>
+						</div>
+						<div className="up-image-box">
+							{postData.PostImages.map((img, idx) => {
+								return <img src={img} alt={`이미지${idx}`} className="up-img" />;
+							})}
+						</div>
+						<div className="up-hr"></div>
+						<div className="up-participant-box">
+							<div className="up-pb-text">이런 친구들이 함께해요 !</div>
+							<div className="up-pb-group">
+								{postData.ParticipantList.length === 0 ? (
+									<div className="up-pb-none-text">아직 참여중인 친구가 없어요!</div>
+								) : (
+									postData.ParticipantList.map((part) => {
+										const participation = part.status === 'PARTICIPATING';
+										return (
+											<div
+												className="up-pb-bundle"
+												style={{ backgroundColor: participation ? '' : 'var(--white-gray-color)' }}
+											>
+												<div className="up-pb-user-info">
+													{part.user_id === postData.connectedUser.user_id ? (
+														<Profile gender={part.gender} profileImg={part.user_img} myProfile />
+													) : (
+														<Profile gender={part.gender} profileImg={part.user_img} moveProfileId={part.user_id} />
+													)}
+													<div className="up-pb-user-name-group">
+														<div className="up-pb-name">{part.nickname}</div>
+														<div className="up-pb-department">
+															{part.student_id} / {part.major}
+														</div>
+													</div>
+												</div>
+												{isWriter ? (
+													participation ? (
+														<div className="up-pb-situation">참여중</div>
+													) : (
+														<div
+															className="up-pb-situation-btn"
+															onClick={() => {
+																participationApproved(part.user_id);
+																setWriterClickBtn('approval');
+																openModalWriter();
+															}}
+														>
+															승인하기
+														</div>
+													)
+												) : (
+													<div className="up-pb-situation">{participation ? '참여중' : '대기중'}</div>
+												)}
+											</div>
+										);
+									})
+								)}
+							</div>
+						</div>
+						{/* 상태에 따라 버튼 여부와 문구가 변경 */}
+						{postData.Post.post_status === 'RECRUITING' ? (
+							isWriter ? (
+								<Button
+									type={'floating fix'}
+									content={'유니버스 관리하기'}
+									onClick={() => {
+										setWriterClickBtn('manage');
+										openModalWriter();
+									}}
+								/>
+							) : postData.connectedUser.status === 'PARTICIPATING' || postData.connectedUser.status === 'WAITING' ? (
+								<Button
+									type={'floating fix'}
+									content={'참여 취소하기'}
+									onClick={() => {
+										setPersonClickBtn('partCancel');
+										openModalPerson();
+									}}
+								/>
+							) : postData.Post.limit_gender !== 'ALL' &&
+							  postData.Post.limit_gender !== postData.connectedUser.gender ? (
+								<Button type={'floating fix disabled'} content={'참여 불가능한 성별입니다'} />
+							) : (
+								<Button
+									type={'floating fix'}
+									content={'유니버스 참여하기'}
+									onClick={
+										postData.Post.participation_method === '자동승인'
+											? () => {
+													applyParticipation();
+													setPersonClickBtn('partSuccess');
+													openModalPerson();
+											  }
+											: () => {
+													applyParticipation();
+													setPersonClickBtn('partWait');
+													openModalPerson();
+											  }
+									}
+								/>
+							)
+						) : (
+							<Button type={'floating fix disabled'} content={'유니버스 모집 종료'} />
+						)}
+					</>
 				)}
 			</div>
 			{isWriter ? (
@@ -393,6 +406,8 @@ export default function UnivePost() {
 							? '모집 마감이 완료되었습니다.'
 							: writerClickBtn === 'postDeleteComplete'
 							? '게시글이 삭제되었습니다.'
+							: writerClickBtn === 'postDelete'
+							? '유니버스 삭제확인'
 							: ''
 					}
 				>
@@ -439,8 +454,7 @@ export default function UnivePost() {
 									content={'삭제하기'}
 									type={'modal-btn'}
 									onClick={() => {
-										postDelete();
-										setWriterClickBtn('postDeleteComplete');
+										setWriterClickBtn('postDelete');
 										openModalWriter();
 									}}
 								/>
@@ -484,9 +498,33 @@ export default function UnivePost() {
 								type={'floating'}
 								onClick={() => {
 									closeModalWriter();
-									pageReload();
+									navigate('/home');
 								}}
 							/>
+						</>
+					) : writerClickBtn === 'postDelete' ? (
+						// 게시글 삭제 확인 여부
+						<>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>유니버스를 정말 삭제하시겠습니까?</p>
+							<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>복원은 불가능합니다.</p>
+							<div className="modal-btn-group">
+								<Button
+									content={'취소하기'}
+									type={'modal-btn other-color'}
+									onClick={() => {
+										closeModalWriter();
+									}}
+								/>
+								<Button
+									content={'삭제하기'}
+									type={'modal-btn'}
+									onClick={() => {
+										postDelete();
+										setWriterClickBtn('postDeleteComplete');
+										openModalWriter();
+									}}
+								/>
+							</div>
 						</>
 					) : (
 						''

@@ -67,7 +67,7 @@ function App() {
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />
-					<Route path="/profile/other-user-profile" element={<OtherUserProfile />} />
+					<Route path="/profile/other-user-profile/:id" element={<OtherUserProfile />} />
 					<Route path="/chat" />
 				</Routes>
 			</BrowserRouter>

@@ -7,6 +7,13 @@
 		width: 90%;
 		height: 100%;
 		margin: 0 auto;
+		.up-not-find-post {
+			position: absolute;
+			left: 25%;
+			top: 50%;
+			font-size: var(--medium-font);
+			font-weight: var(--semi-bold);
+		}
 		.up-top {
 			display: flex;
 			flex-direction: row;

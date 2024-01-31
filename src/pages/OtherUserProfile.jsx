@@ -5,9 +5,12 @@ import Modal from '../components/Modal';
 import Button from '../components/Button';
 import Declaration from '../assets/images/declaration.svg';
 import Profile from '../components/Profile';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 export default function OtherUserProfile() {
+	const { id } = useParams();
 	const [declaration, setDeclaration] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const openModal = () => setIsModalOpen(true);
@@ -15,7 +18,25 @@ export default function OtherUserProfile() {
 		setIsModalOpen(false);
 		setDeclaration();
 	};
-	console.log(declaration);
+
+	const jwtToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+
+	useEffect(() => {
+		axios({
+			headers: {
+				'x-access-token': jwtToken,
+			},
+			method: 'GET',
+			url: `/profile/introduction/${id}`,
+		})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
 	return (
 		<div className="other-user-profile">
@@ -73,6 +94,10 @@ export default function OtherUserProfile() {
 					{[
 						['나의 MBTI는', 'ISFP'],
 						['나의 최애 음식은', '치킨'],
+						['내가 요새 듣는노래는', '치킨'],
+						['나의 관심사는', '치킨'],
+						['이런 사람이랑 잘 맞아요', '치킨'],
+						['이런 사람이랑 잘 맞아요', '치킨'],
 					].map((li) => {
 						return (
 							<div className="oup-qa-box">
