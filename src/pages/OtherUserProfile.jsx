@@ -19,33 +19,33 @@ export default function OtherUserProfile() {
 		'이런 사람이랑 잘 맞아요',
 		'대학생활동안 제일 해보고 싶은건',
 	];
+	const [notUserIntro, setNotUserIntro] = useState(false);
 	const [declaration, setDeclaration] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [userData, setUserData] = useState({
-		userInfo: [
-			{
-				nickname: '',
-				gender: '',
-				major: '',
-				student_id: '',
-				mebership: '',
-				user_img: '',
-				making: '',
-				participating: '',
-				introductionExist: '',
-			},
-		],
-		userIntroduction: [
-			{
-				q1: '',
-				q2: '',
-				q3: '',
-				q4: '',
-				q5: '',
-				q6: '',
-			},
-		],
+		userInfo: {
+			nickname: '',
+			gender: '',
+			major: '',
+			student_id: '',
+			mebership: '',
+			user_img: '',
+			making: '',
+			participating: '',
+			introductionExist: '',
+		},
+
+		userIntroduction: {
+			q1: '',
+			q2: '',
+			q3: '',
+			q4: '',
+			q5: '',
+			q6: '',
+		},
 	});
+
+	const userAnswer = Object.values(userData.userIntroduction);
 
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = () => {
@@ -57,12 +57,21 @@ export default function OtherUserProfile() {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	const axiosUserInfo = async () => {
-		const res = await axios.get(`/profile/introduction/${id}`, {
-			headers: {
-				'x-access-token': jwtToken,
-			},
-		});
-		setUserData(res.data.result);
+		try {
+			const res = await axios.get(`/profile/introduction/${id}`, {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			});
+			console.log(res);
+			if (res.data.result.userIntroduction.code === 'PROFILE0001') {
+				setNotUserIntro(true);
+			} else {
+				setUserData(res.data.result);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	useEffect(() => {
@@ -123,19 +132,23 @@ export default function OtherUserProfile() {
 						</div>
 					</div>
 				</div>
-				<div className="oup-introduction-box">
-					{Object.values(userData.userIntroduction[0]).map((answer, idx) => {
-						return (
-							<div className="oup-qa-box">
-								<div className="oup-question-group">
-									<div className="oup-dot">&#183;</div>
-									<div className="oup-question">{QUESTION[idx]}</div>
+				{notUserIntro ? (
+					<div className="oup-not-user-intro">작성한 내용이 없어요!</div>
+				) : (
+					<div className="oup-introduction-box">
+						{userAnswer.map((answer, idx) => {
+							return (
+								<div className="oup-qa-box">
+									<div className="oup-question-group">
+										<div className="oup-dot">&#183;</div>
+										<div className="oup-question">{QUESTION[idx]}</div>
+									</div>
+									<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
 								</div>
-								<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
-							</div>
-						);
-					})}
-				</div>
+							);
+						})}
+					</div>
+				)}
 			</div>
 			<NavBar />
 		</div>
