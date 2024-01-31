@@ -67,9 +67,11 @@ export default function Home() {
 						[NeckTie, '멘토찾기'],
 					].map((element) => {
 						return (
-							<div className="hb-tap">
+							<div className="hb-tap" style={{ border: element[0] === Logo ? '1px solid var(--purple-color)' : '' }}>
 								<img src={element[0]} alt={`${element[1]} 아이콘`} className="hp-tap-icon" />
-								<span className="hb-tap-text">{element[1]}</span>
+								<span className="hb-tap-text" style={{ color: element[0] === Logo ? 'var(--purple-color)' : '' }}>
+									{element[1]}
+								</span>
 							</div>
 						);
 					})}
