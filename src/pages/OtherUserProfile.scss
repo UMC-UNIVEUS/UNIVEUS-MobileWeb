@@ -32,6 +32,14 @@
 		width: 90%;
 		height: 100%;
 		margin: 0 auto;
+		.oup-not-exist-user {
+			position: absolute;
+			left: 30%;
+			top: 50%;
+			font-size: var(--medium-font);
+			font-weight: var(--semi-bold);
+			color: var(--gray-color);
+		}
 		.oup-profile-box {
 			position: relative;
 			display: flex;

@@ -20,6 +20,7 @@ export default function OtherUserProfile() {
 		'대학생활동안 제일 해보고 싶은건',
 	];
 	const [notUserIntro, setNotUserIntro] = useState(false);
+	const [notExistUser, setNotExistUser] = useState(false);
 	const [declaration, setDeclaration] = useState();
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [userData, setUserData] = useState({
@@ -64,7 +65,10 @@ export default function OtherUserProfile() {
 				},
 			});
 			console.log(res);
-			if (res.data.result.userIntroduction.code === 'PROFILE0001') {
+			// console.log(res.data.result.userIntroduction.code);
+			if (res.data.result.userInfo.code === 'PROFILE0004') {
+				setNotExistUser(true);
+			} else if (res.data.result.userIntroduction.code === 'PROFILE0001') {
 				setNotUserIntro(true);
 			} else {
 				setUserData(res.data.result);
@@ -113,41 +117,47 @@ export default function OtherUserProfile() {
 				</div>
 			</Modal>
 			<div className="oup-body">
-				<div className="oup-profile-box">
-					<Profile />
-					<div className="oup-info-group">
-						<div className="oup-info-name">{userData.userInfo.nickname}</div>
-						<div className="oup-info-department">
-							{userData.userInfo.student_id}/{userData.userInfo.major}
-						</div>
-					</div>
-					<div className="oup-number-group">
-						<div className="oup-number">
-							<div className="oup-number-title">생성</div>
-							<div className="oup-number-result">{userData.userInfo.making}회</div>
-						</div>
-						<div className="oup-number">
-							<div className="oup-number-title">참여</div>
-							<div className="oup-number-result">{userData.userInfo.participating}회</div>
-						</div>
-					</div>
-				</div>
-				{notUserIntro ? (
-					<div className="oup-not-user-intro">작성한 내용이 없어요!</div>
+				{notExistUser ? (
+					<div className="oup-not-exist-user">존재하지 않는 유저입니다.</div>
 				) : (
-					<div className="oup-introduction-box">
-						{userAnswer.map((answer, idx) => {
-							return (
-								<div className="oup-qa-box">
-									<div className="oup-question-group">
-										<div className="oup-dot">&#183;</div>
-										<div className="oup-question">{QUESTION[idx]}</div>
-									</div>
-									<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
+					<>
+						<div className="oup-profile-box">
+							<Profile />
+							<div className="oup-info-group">
+								<div className="oup-info-name">{userData.userInfo.nickname}</div>
+								<div className="oup-info-department">
+									{userData.userInfo.student_id}/{userData.userInfo.major}
 								</div>
-							);
-						})}
-					</div>
+							</div>
+							<div className="oup-number-group">
+								<div className="oup-number">
+									<div className="oup-number-title">생성</div>
+									<div className="oup-number-result">{userData.userInfo.making}회</div>
+								</div>
+								<div className="oup-number">
+									<div className="oup-number-title">참여</div>
+									<div className="oup-number-result">{userData.userInfo.participating}회</div>
+								</div>
+							</div>
+						</div>
+						{notUserIntro ? (
+							<div className="oup-not-user-intro">작성한 내용이 없어요!</div>
+						) : (
+							<div className="oup-introduction-box">
+								{userAnswer.map((answer, idx) => {
+									return (
+										<div className="oup-qa-box">
+											<div className="oup-question-group">
+												<div className="oup-dot">&#183;</div>
+												<div className="oup-question">{QUESTION[idx]}</div>
+											</div>
+											<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
+										</div>
+									);
+								})}
+							</div>
+						)}
+					</>
 				)}
 			</div>
 			<NavBar />
