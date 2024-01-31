@@ -151,7 +151,7 @@ export default function OtherUserProfile() {
 												<div className="oup-dot">&#183;</div>
 												<div className="oup-question">{QUESTION[idx]}</div>
 											</div>
-											<div className="oup-answer">{answer ? answer : '입력하지 않은 답변입니다.'}</div>
+											<div className="oup-answer">{answer ? answer : '답변을 입력하지 않았습니다.'}</div>
 										</div>
 									);
 								})}
