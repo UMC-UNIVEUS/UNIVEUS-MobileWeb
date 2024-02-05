@@ -68,6 +68,9 @@
 						width: 32px;
 						height: 32px;
 						border: 1px solid;
+						.profile-img {
+							height: 100%;
+						}
 					}
 				}
 				.cardi-pg-membership {
@@ -97,6 +100,9 @@
 							fill: var(--white-color);
 						}
 					}
+          .cardi-sg-date{
+            margin-right: 3px;
+          }
 				}
 				.cardi-people-group {
 					display: flex;

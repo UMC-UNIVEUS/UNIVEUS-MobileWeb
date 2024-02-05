@@ -23,11 +23,13 @@ export default function MyPage() {
 		participating: '',
 		introductionExist: '',
 	});
-	const [clicked, setClicked] = useState('create');
+	const [createInfo, setCreateInfo] = useState({
+		userInfo: {},
+		createInfo: [],
+	});
+	const [participantInfo, setParticipantInfo] = useState([]);
+	const [clicked, setClicked] = useState('create'); // create, participant
 	const navigate = useNavigate();
-
-	const handleMyUniv = () => {};
-	const handleParticipate = () => {};
 
 	// 채연 토큰
 	const jwtToken =
@@ -41,7 +43,7 @@ export default function MyPage() {
 					'x-access-token': jwtToken,
 				},
 			});
-			console.log(res);
+			// console.log(res);
 			setUserInfo(res.data.result.userInfo);
 		} catch (error) {
 			console.log(error);
@@ -57,6 +59,7 @@ export default function MyPage() {
 				},
 			});
 			console.log(res);
+			setCreateInfo(res.data.result);
 		} catch (error) {
 			console.log(error);
 		}
@@ -65,12 +68,13 @@ export default function MyPage() {
 	// 참여 정보 조회
 	const participantInfoGet = async () => {
 		try {
-			const res = await axios.get('/profile/participant', {
+			const res = await axios.get('/profile/participantInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},
 			});
 			console.log(res);
+			setParticipantInfo(Object.values(res.data.result.participantInfo));
 		} catch (error) {
 			console.log(error);
 		}
@@ -78,6 +82,8 @@ export default function MyPage() {
 
 	useEffect(() => {
 		userInfoGet();
+		createInfoGet();
+		participantInfoGet();
 	}, []);
 
 	return (
@@ -134,20 +140,41 @@ export default function MyPage() {
 					</div>
 				</div>
 				<div className="mp-page">
-					<div className={clicked === 'create' ? 'page-tap clicked' : 'page-tap'} onClick={handleMyUniv}>
-						<span>생성 유니버스(1)</span>
+					<div
+						className={clicked === 'create' ? 'page-tap clicked' : 'page-tap'}
+						onClick={() => {
+							setClicked('create');
+						}}
+					>
+						<span>생성 유니버스({createInfo.createInfo.length})</span>
 						<div className="page-hr"></div>
 					</div>
-					<div className={clicked === 'participate' ? 'page-tap clicked' : 'page-tap'} onClick={handleParticipate}>
-						<span>참여 유니버스(0)</span>
+					<div
+						className={clicked === 'participant' ? 'page-tap clicked' : 'page-tap'}
+						onClick={() => {
+							setClicked('participant');
+						}}
+					>
+						<span>참여 유니버스({participantInfo.length})</span>
 						<div className="page-hr"></div>
 					</div>
 				</div>
 				{/* <div className="mp-card-list">{cardList.length && cardList.map((meeting) => <Card />)}</div> */}
 				<div className="mp-card-list">
-					<Card />
-					<Card />
-					<Card />
+					{clicked === 'create'
+						? createInfo.createInfo.map((data) => {
+								return (
+									<Card
+										gender={createInfo.userInfo.gender}
+										membership={createInfo.userInfo.membership}
+										user_img={createInfo.userInfo.user_img}
+										{...data}
+									/>
+								);
+						  })
+						: participantInfo.map((data) => {
+								return <Card {...data} />;
+						  })}
 				</div>
 			</div>
 			<NavBar present={'mypage'} />
