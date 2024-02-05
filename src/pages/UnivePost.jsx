@@ -194,14 +194,18 @@ export default function UnivePost() {
 		<div className="unive-post">
 			{/* 본인 포스트인지 여부에 따라 헤더 변경 */}
 			{isWriter ? (
-				<SubHeader
-					headertext={postData.Post.category}
-					iconBtn={Calendar}
-					onClick={() => {
-						setWriterClickBtn('status');
-						openModalWriter();
-					}}
-				/>
+				postData.Post.post_status === 'RECRUITING' ? (
+					<SubHeader
+						headertext={postData.Post.category}
+						iconBtn={Calendar}
+						onClick={() => {
+							setWriterClickBtn('status');
+							openModalWriter();
+						}}
+					/>
+				) : (
+					<SubHeader headertext={postData.Post.category} />
+				)
 			) : (
 				<SubHeader
 					headertext={postData.Post.category}
