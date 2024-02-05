@@ -8,8 +8,7 @@ import axios from 'axios';
 
 export default function SelfIntroduction() {
 	const navigate = useNavigate();
-	const { id } = useParams();
-	const [answer, setAnswer] = useState(['', '', '', '', '', '']);
+	const [answer, setAnswer] = useState([]);
 
 	const QUESTION = [
 		'나의 MBTI는',
@@ -24,21 +23,16 @@ export default function SelfIntroduction() {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 유저가 작성한 답변 불러오기
-	// 본인 n문n답 조회 api 추가될 예정 => 추후 수정 필요
 	const axiosGet = async () => {
 		try {
-			const res = await axios.get(`/profile/introduction/${id}`, {
+			const res = await axios.get(`/profile/mypage/introduction`, {
 				headers: {
 					'x-access-token': jwtToken,
 				},
 			});
 
-			// 데이터가 존재하는지 확인 후 사용
-			if (res.data.result.userIntroduction && res.data.result.userIntroduction.length > 0) {
-				setAnswer(Object.values(res.data.result.userIntroduction[0]));
-			} else {
-				console.error('서버 응답에 유효한 데이터가 없습니다.');
-			}
+			console.log(res);
+			setAnswer(Object.values(res.data.result.userIntroduction));
 		} catch (error) {
 			console.error('데이터 불러오기에 실패했습니다:', error.message);
 		}

@@ -7,9 +7,8 @@ import { useEffect, useState } from 'react';
 
 export default function SelfIntroductionEdit() {
 	const navigate = useNavigate();
-	const { id } = useParams();
-	const [answer, setAnswer] = useState(['', '', '', '', '', '']);
-	const [isAnswer, setIsAnswer] = useState(false);
+	const [answer, setAnswer] = useState([]);
+	const [isAnswer, setIsAnswer] = useState(true);
 	const QUESTION = [
 		'나의 MBTI는',
 		'나의 최애 음식은',
@@ -30,24 +29,19 @@ export default function SelfIntroductionEdit() {
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 유저가 작성한 답변 불러오기
-	// 본인 n문n답 조회 api 추가될 예정 => 추후 수정 필요
 	const axiosGet = async () => {
-		const res = await axios.get(`/profile/introduction/${id}`, {
+		const res = await axios.get(`/profile/mypage/introduction`, {
 			headers: {
 				'x-access-token': jwtToken,
 			},
 		});
-		// setIsAnswer(res.data.result.userInfo.introductionExist);
-		// setAnswer(Object.values(res.data.result.userIntroduction[0]));
-		const userIntroduction = res.data.result.userIntroduction;
-
-		if (userIntroduction && userIntroduction.length > 0) {
-			setIsAnswer(res.data.result.userInfo.introductionExist);
-			setAnswer(Object.values(userIntroduction[0]));
-		} else {
-			// userIntroduction이 정의되지 않았거나 비어있는 경우 처리
+		console.log(res);
+		if (res.data.result.userIntroduction.code === 'PROFILE0001') {
 			setIsAnswer(false);
 			setAnswer(['', '', '', '', '', '']);
+		} else {
+			setIsAnswer(true);
+			setAnswer(Object.values(res.data.result.userIntroduction));
 		}
 	};
 
@@ -68,7 +62,7 @@ export default function SelfIntroductionEdit() {
 					headers: { 'x-access-token': jwtToken },
 				}
 			);
-			console.log(res);
+			console.log('작성한 답변 전송', res);
 		} catch (error) {
 			console.log(error);
 		}
@@ -91,7 +85,7 @@ export default function SelfIntroductionEdit() {
 					headers: { 'x-access-token': jwtToken },
 				}
 			);
-			console.log(res);
+			console.log('수정사항 전송', res);
 		} catch (error) {
 			console.log(error);
 		}
