@@ -9,11 +9,10 @@ export default function Loading() {
 	console.log('accessCode1', accessCode);
 
 	useEffect(() => {
-		const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-		console.log('hash', parsedHash);
+		const parsedHash = new URLSearchParams(window.location.search);
 		const code = parsedHash.get('code');
 		setAccessCode(code);
-		console.log('code', code);
+		// console.log('code', code);
 		console.log('accessCode2', accessCode);
 
 		if (accessCode !== null && accessCode !== '') {
@@ -24,10 +23,10 @@ export default function Loading() {
 					code: accessCode,
 				},
 			})
-				.then((response) => {
-					console.log(response);
-					console.log('data', response.data);
-					console.log('data.code', response.data.code);
+				.then((res) => {
+					console.log(res);
+					// console.log('data', response.data);
+					// console.log('data.code', response.data.code);
 				})
 				.catch((error) => {
 					console.error('axios error:', error);

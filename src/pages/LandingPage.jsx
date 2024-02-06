@@ -60,7 +60,7 @@ const LandingPage = () => {
 		window.location.href =
 			'https://accounts.google.com/o/oauth2/auth?' +
 			'client_id=528413916638-pnl1ikrothaaj7in3dmeug8f0aa2abqb.apps.googleusercontent.com&' +
-			'redirect_uri=https://univeus.com/loading&' +
+			'redirect_uri=http://localhost:3000/loading&' +
 			'response_type=code&' +
 			'scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 	};
