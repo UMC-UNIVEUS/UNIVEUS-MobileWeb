@@ -41,27 +41,27 @@ export default function Loading() {
 	// };
 
 	useEffect(() => {
-		// const parsedHash = new URLSearchParams(window.location.search);
-		// const code = parsedHash.get('code');
-		setAccessCode('4/0AfJohXkf4ri4ZPGsfgHCNTWfQFz8suSnQMeZU2L8LTDPRDjOy6vwRtF1Ghp0J0xgo8jHiw');
+		const parsedHash = new URLSearchParams(window.location.search);
+		const code = parsedHash.get('code');
+		setAccessCode(code);
 		console.log('accessCode2', accessCode);
 
-		loginAxios();
-		// if (accessCode !== null && accessCode !== '') {
-		// 	axios({
-		// 		method: 'post',
-		// 		url: '/user/login',
-		// 		data: {
-		// 			code: accessCode,
-		// 		},
-		// 	})
-		// 		.then((res) => {
-		// 			console.log(res);
-		// 		})
-		// 		.catch((err) => {
-		// 			console.log(err);
-		// 		});
-		// }
+		if (accessCode !== null && accessCode !== '') {
+			loginAxios();
+			// 	axios({
+			// 		method: 'post',
+			// 		url: '/user/login',
+			// 		data: {
+			// 			code: accessCode,
+			// 		},
+			// 	})
+			// 		.then((res) => {
+			// 			console.log(res);
+			// 		})
+			// 		.catch((err) => {
+			// 			console.log(err);
+			// 		});
+		}
 	}, []);
 	return <h1>Redirect Page</h1>;
 }
