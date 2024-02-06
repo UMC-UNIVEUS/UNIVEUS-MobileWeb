@@ -62,6 +62,6 @@ export default function Loading() {
 			// 			console.log(err);
 			// 		});
 		}
-	}, []);
+	}, [accessCode]);
 	return <h1>Redirect Page</h1>;
 }
