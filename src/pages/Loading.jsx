@@ -46,22 +46,22 @@ export default function Loading() {
 		setAccessCode('4/0AfJohXkf4ri4ZPGsfgHCNTWfQFz8suSnQMeZU2L8LTDPRDjOy6vwRtF1Ghp0J0xgo8jHiw');
 		console.log('accessCode2', accessCode);
 
-		if (accessCode !== null && accessCode !== '') {
-			// loginAxios();
-			axios({
-				method: 'post',
-				url: '/user/login',
-				data: {
-					code: accessCode,
-				},
-			})
-				.then((res) => {
-					console.log(res);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-		}
+		loginAxios();
+		// if (accessCode !== null && accessCode !== '') {
+		// 	axios({
+		// 		method: 'post',
+		// 		url: '/user/login',
+		// 		data: {
+		// 			code: accessCode,
+		// 		},
+		// 	})
+		// 		.then((res) => {
+		// 			console.log(res);
+		// 		})
+		// 		.catch((err) => {
+		// 			console.log(err);
+		// 		});
+		// }
 	}, []);
 	return <h1>Redirect Page</h1>;
 }
