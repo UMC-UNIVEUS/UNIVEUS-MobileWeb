@@ -8,29 +8,23 @@ export default function Loading() {
 
 	console.log('accessCode1', accessCode);
 
+	const loginAxios = async () => {
+		try {
+			const res = await axios.post('/user/login', { code: accessCode });
+			console.log(res);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	useEffect(() => {
 		const parsedHash = new URLSearchParams(window.location.search);
 		const code = parsedHash.get('code');
 		setAccessCode(code);
-		// console.log('code', code);
 		console.log('accessCode2', accessCode);
 
 		if (accessCode !== null && accessCode !== '') {
-			axios({
-				method: 'post',
-				url: '/user/login',
-				data: {
-					code: accessCode,
-				},
-			})
-				.then((res) => {
-					console.log(res);
-					// console.log('data', response.data);
-					// console.log('data.code', response.data.code);
-				})
-				.catch((error) => {
-					console.error('axios error:', error);
-				});
+			loginAxios();
 		}
 	}, [accessCode]);
 	return <h1>Redirect Page</h1>;
