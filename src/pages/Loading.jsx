@@ -47,7 +47,16 @@ export default function Loading() {
 		console.log('accessCode2', accessCode);
 
 		if (accessCode !== null && accessCode !== '') {
-			loginAxios();
+			// loginAxios();
+			axios({
+				method: 'post',
+				url: '/user/login',
+				data: {
+					code: accessCode,
+				},
+			}).then((res) => {
+				console.log(res);
+			});
 		}
 	}, [accessCode]);
 	return <h1>Redirect Page</h1>;
