@@ -41,9 +41,9 @@ export default function Loading() {
 	// };
 
 	useEffect(() => {
-		const parsedHash = new URLSearchParams(window.location.search);
-		const code = parsedHash.get('code');
-		setAccessCode(code);
+		// const parsedHash = new URLSearchParams(window.location.search);
+		// const code = parsedHash.get('code');
+		setAccessCode('4/0AfJohXkf4ri4ZPGsfgHCNTWfQFz8suSnQMeZU2L8LTDPRDjOy6vwRtF1Ghp0J0xgo8jHiw');
 		console.log('accessCode2', accessCode);
 
 		if (accessCode !== null && accessCode !== '') {
@@ -54,10 +54,14 @@ export default function Loading() {
 				data: {
 					code: accessCode,
 				},
-			}).then((res) => {
-				console.log(res);
-			});
+			})
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 		}
-	}, [accessCode]);
+	}, []);
 	return <h1>Redirect Page</h1>;
 }
