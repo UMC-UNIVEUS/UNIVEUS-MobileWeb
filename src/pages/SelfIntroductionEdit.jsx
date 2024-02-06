@@ -24,9 +24,13 @@ export default function SelfIntroductionEdit() {
 		setAnswer(newInputs);
 	};
 
-	// 채연 토큰
+	// 진형 토큰
 	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNTMzMTU2MiwiZXhwIjoxNzEzOTcxNTYyLCJpc3MiOiJ1bml2ZXVzIn0.Heqp8oHlO5I5c-1l1NMod3zZT2HN5IzPmuJWixbgN3E';
+
+	// 채연 토큰
+	// const jwtToken =
+	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 유저가 작성한 답변 불러오기
 	const axiosGet = async () => {
@@ -102,7 +106,7 @@ export default function SelfIntroductionEdit() {
 				textBtn={'완료'}
 				onClick={() => {
 					isAnswer ? axiosPut() : axiosPost();
-					// navigate('/profile/self-introduction');
+					navigate('/profile/self-introduction');
 				}}
 			/>
 			<div className="sie-body">
