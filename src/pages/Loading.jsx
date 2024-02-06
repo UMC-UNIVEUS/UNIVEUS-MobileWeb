@@ -19,7 +19,14 @@ export default function Loading() {
 
 	const loginAxios = async () => {
 		try {
-			const res = await axios.post('/user/login', { code: accessCode });
+			const res = await axios.post(
+				'/user/login',
+				{ code: accessCode },
+				{
+					// 헤더 없음
+					data: { code: accessCode },
+				}
+			);
 			console.log(res);
 		} catch (error) {
 			if (error.response && error.response.status === 200 && error.response.data) {
