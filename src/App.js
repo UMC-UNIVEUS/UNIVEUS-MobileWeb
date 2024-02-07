@@ -30,23 +30,26 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/test" element={<TestPage />} />
-					<Route path="/loading" element={<Loading />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/search" element={<SearchPage />} />
+					{/* 로그인 및 회원가입 */}
 					<Route path="/" element={<LandingPage />} />
+					<Route path="/loading" element={<Loading />} />
 					<Route path="/signup/identity" element={<IdentityVerification />} />
 					<Route path="/signup/terms-of-use" element={<TermsOfUse />} />
 					<Route path="/signup/registration-of-affiliation" element={<RegistrationOfAffiliation />} />
 					<Route path="/signup/register-profile" element={<RegisterProfile />} />
-					<Route path="/home" element={<Home />} />
-					<Route path="/search" element={<SearchPage />} />
+					{/* 게시글 작성 및 수정, 게시글 */}
 					<Route path="/post/:id" element={<UnivePost />} />
-					<Route path="/mypage" element={<MyPage />} />
-					<Route path="/mypage/setting" element={<Setting />} />
 					<Route path="/create/post-level1" element={<CreatePostLevel1 />} />
 					<Route path="/create/post-level2" element={<CreatePostLevel2 />} />
 					<Route path="/create/post-level3" element={<CreatePostLevel3 />} />
 					<Route path="/modify/post-level1/:id" element={<ModifyPostLevel1 />} />
 					<Route path="/modify/post-level2/:id" element={<ModifyPostLevel2 />} />
 					<Route path="/modify/post-level3/:id" element={<ModifyPostLevel3 />} />
+					{/* 마이 페이지 관련 */}
+					<Route path="/mypage" element={<MyPage />} />
+					<Route path="/mypage/setting" element={<Setting />} />
 					<Route path="/profile/change" element={<ProfileChange />} />
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />

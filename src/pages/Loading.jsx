@@ -4,49 +4,26 @@ import { useEffect, useState } from 'react';
 
 export default function Loading() {
 	const navigate = useNavigate();
-	const [accessCode, setAccessCode] = useState('');
+	const [accessToken, setAccessToken] = useState('');
 
-	console.log('accessCode1', accessCode);
+	console.log('accessCode1', accessToken);
 
 	const loginAxios = async () => {
 		try {
-			const res = await axios.post('/user/login', { code: accessCode });
+			const res = await axios.post('/user/login', { token: accessToken });
 			console.log(res);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	// const loginAxios = async () => {
-	// 	try {
-	// 		const res = await axios.post(
-	// 			'/user/login',
-	// 			{ code: accessCode },
-	// 			{
-	// 				// 헤더 없음
-	// 				data: { code: accessCode },
-	// 			}
-	// 		);
-	// 		console.log(res);
-	// 	} catch (error) {
-	// 		if (error.response && error.response.status === 200 && error.response.data) {
-	// 			// 만약 서버가 HTML 응답을 반환하면 이를 처리
-	// 			console.log('서버에서 HTML 응답을 받았습니다.');
-	// 			// 적절한 에러 처리 로직을 구현
-	// 		} else {
-	// 			// 일반적인 네트워크 에러 처리
-	// 			console.log('네트워크 에러:', error.message);
-	// 		}
-	// 	}
-	// };
-
 	useEffect(() => {
-		const parsedHash = new URLSearchParams(window.location.search);
-		const code = parsedHash.get('code');
-		setAccessCode(code);
-		console.log('accessCode2', accessCode);
+		const parsedHash = new URLSearchParams(window.location.hash.substring(1));
+		const token = parsedHash.get('access_token');
+		setAccessToken(token);
+		console.log('accessCode2', accessToken);
 
-		if (accessCode !== null && accessCode !== '') {
+		if (accessToken !== null && accessToken !== '') {
 			loginAxios();
 			// 	axios({
 			// 		method: 'post',
@@ -62,6 +39,6 @@ export default function Loading() {
 			// 			console.log(err);
 			// 		});
 		}
-	}, [accessCode]);
+	}, [accessToken]);
 	return <h1>Redirect Page</h1>;
 }
