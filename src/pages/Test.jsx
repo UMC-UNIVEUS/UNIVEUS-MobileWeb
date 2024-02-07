@@ -1,8 +1,4 @@
-import ModalTest from '../components/ModalTest';
 import Button from '../components/Button';
-import CreateDetail from './CreateDetail';
-import CreateIntro from './CreateIntro';
-import MyFeed from './MyFeed';
 import Modal from '../components/Modal';
 import { useState } from 'react';
 import { MainHeader, SubHeader } from '../components/Header';

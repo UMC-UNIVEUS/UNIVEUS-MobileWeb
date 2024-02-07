@@ -4,7 +4,6 @@ import { MainHeader } from '../components/Header';
 import { ReactComponent as Search } from '../assets/images/search.svg';
 import axios from 'axios';
 import { useState } from 'react';
-import MeetingCard from '../components/MeetingCard';
 import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -59,11 +58,7 @@ const SearchPage = () => {
 				</div>
 				<div className="horizontalbar"></div>
 				{searchedData ? (
-					<div className="searcheddatacontainer">
-						{searchedData.map((it) => (
-							<MeetingCard {...it} />
-						))}
-					</div>
+					<div className="searcheddatacontainer">{/* 카드 뿌리기 */}</div>
 				) : (
 					<p className="nodatatext">찾으시는 검색 결과가 없습니다.</p>
 				)}
