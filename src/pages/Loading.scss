@@ -1,0 +1,34 @@
+.loading {
+	.ld-body {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 90vw;
+		height: 70vh;
+		margin: 0 auto;
+		padding-top: 52px;
+		padding-bottom: 71px;
+		.ld-contents {
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 90vw;
+			// height: 50vh;
+			top: 40%;
+			// right: 42%;
+			.ld-logo {
+				width: 40%;
+				height: 40%;
+			}
+			.ld-text {
+				font-size: 20px;
+				font-weight: var(--bold);
+				color: var(--purple-color);
+			}
+		}
+	}
+	.modal-parent .modal .modal-body .mb-content .modal-btn-group .button-body.modal-btn {
+		width: 90%;
+	}
+}

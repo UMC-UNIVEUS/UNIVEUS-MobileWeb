@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import './Loading.scss';
 import Modal from '../components/Modal';
+import Button from '../components/Button';
 import { MainHeader, SubHeader } from '../components/Header';
 import { ReactComponent as Logo } from '../assets/images/logo2.svg';
 
@@ -51,7 +53,32 @@ export default function Loading() {
 	return (
 		<div className="loading">
 			<MainHeader rightNonDisplay />
-			<Logo style={{ marginTop: '100px', width: '100%' }} />
+			<div className="ld-body">
+				<div className="ld-contents">
+					<Logo className="ld-logo" />
+					<span className="ld-text">로딩중!</span>
+				</div>
+			</div>
+			<Modal
+				isOpen={openModal}
+				closeModal={() => {
+					navigate('/');
+				}}
+				title={'경기대 e-mail이 아닙니다!'}
+			>
+				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>경기대 e-mail만 이용이 가능합니다.</p>
+				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>경기대 e-mail로 접속해주세요.</p>
+				<div className="modal-btn-group">
+					<Button
+						content={'확인'}
+						type={'modal-btn'}
+						onClick={() => {
+							setOpenModal(true);
+							navigate('/');
+						}}
+					/>
+				</div>
+			</Modal>
 		</div>
 	);
 }

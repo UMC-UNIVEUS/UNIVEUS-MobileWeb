@@ -19,43 +19,6 @@ const LandingPage = () => {
 	const openModal5 = () => setIsModalOpen5(true);
 	const closeModal5 = () => setIsModalOpen5(false);
 
-	// 소셜로그인 코드
-
-	// useEffect(() => {
-	// 	const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-	// 	const access_Token = parsedHash.get('access_token');
-	// 	setAccessToken(access_Token);
-
-	// if (accessToken !== null && accessToken !== '') {
-	// 	axios({
-	// 		method: 'post',
-	// 		url: '/user/login',
-	// 		data: {
-	// 			accessToken: accessToken,
-	// 		},
-	// 	})
-	// 		.then((response) => {
-	// 			console.log(response);
-	// 			if (response.data.code === 1000) {
-	// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
-	// 				navigate('/home');
-	// 			} else if (response.data.code === 2004) {
-	// 				navigate('/');
-	// 				openModal5();
-	// 			} else if (response.data.code === 2019) {
-	// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
-	// 				navigate('/verification');
-	// 			} else if (response.data.code === 2020) {
-	// 				sessionStorage.setItem('accessToken', response.data.result.accessToken);
-	// 				navigate('/register');
-	// 			}
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error('axios error:', error);
-	// 		});
-	// }
-	// }, [accessToken]);
-
 	const googleSocialLogin = () => {
 		window.location.href =
 			'https://accounts.google.com/o/oauth2/auth?' +
