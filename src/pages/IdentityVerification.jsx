@@ -28,7 +28,7 @@ export default function IdentityVerification() {
 	// 서버에게 token 전송
 	const loginAxios = async () => {
 		try {
-			const res = await axios.post('/user/login', { token: accessToken });
+			const res = await axios.post('https://univeus.site/user/login', { token: accessToken });
 			console.log(res);
 			console.log(accessToken);
 		} catch (error) {
