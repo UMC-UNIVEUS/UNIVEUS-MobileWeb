@@ -7,8 +7,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function IdentityVerification() {
-	const [accessToken, setAccessToken] = useState('');
-
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [verifyNumber, setVerifyNumber] = useState('');
 
@@ -24,27 +22,6 @@ export default function IdentityVerification() {
 	const handleVerifyNumber = (e) => {
 		setVerifyNumber(e.target.value.replace(/[^0-9]/g, ''));
 	};
-
-	// 서버에게 token 전송
-	const loginAxios = async () => {
-		try {
-			const res = await axios.post('https://univeus.site/user/login', { token: accessToken });
-			console.log(res);
-			console.log(accessToken);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	useEffect(() => {
-		const parsedHash = new URLSearchParams(window.location.hash.substring(1));
-		const token = parsedHash.get('access_token');
-		setAccessToken(token);
-
-		if (accessToken !== null && accessToken !== '') {
-			loginAxios();
-		}
-	}, [accessToken]);
 
 	return (
 		<div className="identity-verification">
