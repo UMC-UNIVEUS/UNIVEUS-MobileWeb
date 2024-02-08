@@ -30,6 +30,7 @@ export default function IdentityVerification() {
 		try {
 			const res = await axios.post('/user/login', { token: accessToken });
 			console.log(res);
+			console.log(accessToken);
 		} catch (error) {
 			console.log(error);
 		}
