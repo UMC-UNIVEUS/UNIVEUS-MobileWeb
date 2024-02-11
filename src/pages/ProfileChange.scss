@@ -1,5 +1,5 @@
 .register-profile {
-	.rp-body {
+	.pc-body {
 		padding-top: 102px;
 		padding-bottom: 71px;
 		display: flex;
@@ -7,7 +7,7 @@
 		width: 90%;
 		height: 100%;
 		margin: 0 auto;
-		.rp-img-form {
+		.pc-img-form {
 			position: relative;
 			margin: 0 auto;
 			background-color: var(--white-purple-color);
@@ -18,36 +18,42 @@
 			width: 100px;
 			height: 100px;
 			border-radius: 50px;
-			.rpi-profile-img {
+			.pci-profile-img {
 				width: 100px;
 				height: 102px;
 				object-fit: cover;
 				border-radius: 50px;
 			}
-			.rpi-pencil-img {
+			.pci-pencil-img {
 				position: absolute;
 				bottom: 0;
 			}
-			.rpi-delete {
+			.pci-delete {
 				position: absolute;
 				top: 0;
 				right: 2px;
-				.rpi-delete-img {
+				.pci-delete-img {
 					width: 25px;
 				}
 			}
 		}
-		.rp-form {
+		.pc-form {
 			display: flex;
 			flex-direction: column;
 			width: 90%;
 			margin: 0 auto;
 			padding-bottom: 78px;
-			.rp-input-group {
+			.pc-message-text {
+				font-size: var(--small-font);
+				font-weight: var(--medium-bold);
+				color: var(--red-color);
+				margin-bottom: 18px;
+			}
+			.pc-input-group {
 				position: relative;
 				border-bottom: solid 1px var(--light-gray-color);
-				margin: 22px 0 18px 0;
-				.rp-input {
+				margin: 22px 0 8px 0;
+				.pc-input {
 					border: none;
 					font-size: 18px;
 					padding: 0 0 10px 5px;
@@ -59,14 +65,14 @@
 						color: var(--light-gray-color);
 					}
 				}
-				.rp-img {
+				.pc-img {
 					position: absolute;
 					right: 0;
 					bottom: 8px;
 					filter: drop-shadow(0px 2px 11px rgba(0, 0, 0, 0.25));
 				}
 			}
-			.rp-radio-group {
+			.pc-radio-group {
 				display: flex;
 				align-items: center;
 				margin-bottom: 26px;
