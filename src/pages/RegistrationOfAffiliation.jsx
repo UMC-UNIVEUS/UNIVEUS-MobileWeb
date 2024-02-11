@@ -3,10 +3,14 @@ import './RegistrationOfAffiliation.scss';
 import { SubHeader } from '../components/Header';
 import NavBar from '../components/NavBar';
 import Button from '../components/Button';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegistrationOfAffiliation() {
+	const jwtToken = sessionStorage.getItem('accessToken');
+	const navigate = useNavigate();
 	const [major, setMajor] = useState('');
-	const [studentID, setStudentID] = useState();
+	const [studentID, setStudentID] = useState('');
 	const [majorFontColor, setMajorFontColor] = useState('--select-default-color');
 
 	useEffect(() => {
@@ -20,6 +24,23 @@ export default function RegistrationOfAffiliation() {
 
 	const handleStudentID = (e) => {
 		setStudentID(e.target.value.replace(/[^0-9]/g, ''));
+	};
+
+	const affiliationPost = async () => {
+		const res = await axios.post(
+			'/user/register/affiliation',
+			{
+				major: major,
+				studentId: studentID,
+			},
+			{
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			}
+		);
+		console.log(res);
+		navigate('/signup/register-profile');
 	};
 
 	return (
@@ -60,6 +81,7 @@ export default function RegistrationOfAffiliation() {
 						<input
 							type="text"
 							id="stuedentID"
+							required
 							onChange={handleStudentID}
 							maxLength="9"
 							placeholder="전체 학번을 입력해 주세요"
@@ -69,7 +91,17 @@ export default function RegistrationOfAffiliation() {
 					</div>
 					<div className="roa-error-message">허위 학번을 입력 할 시 서비스 이용에 제제가 있을 수 있습니다.</div>
 				</div>
-				<Button type={'floating'} content={'다음'} />
+				{major !== '' && studentID !== '' && studentID.length === 9 ? (
+					<Button
+						type={'floating'}
+						content={'다음'}
+						onClick={() => {
+							affiliationPost();
+						}}
+					/>
+				) : (
+					<Button type={'floating disabled'} content={'다음'} />
+				)}
 			</div>
 			<NavBar />
 		</div>
