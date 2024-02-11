@@ -18,7 +18,7 @@ export default function Loading() {
 		try {
 			const res = await axios.post('https://univeus.site/user/login', { token: accessToken });
 			console.log(res);
-
+			console.log(accessToken);
 			sessionStorage.setItem('accessToken', res.data.result.accessToken);
 
 			const code = res.data.code;
