@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function MyPage() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const [cardList, setCardList] = useState([]);
 	const [userInfo, setUserInfo] = useState({
 		nickname: '',
@@ -30,14 +31,6 @@ export default function MyPage() {
 	const [participantInfo, setParticipantInfo] = useState([]);
 	const [clicked, setClicked] = useState('create'); // create, participant
 	const navigate = useNavigate();
-
-	// 진형 토큰
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNTMzMTU2MiwiZXhwIjoxNzEzOTcxNTYyLCJpc3MiOiJ1bml2ZXVzIn0.Heqp8oHlO5I5c-1l1NMod3zZT2HN5IzPmuJWixbgN3E';
-
-	// 채연 토큰
-	// const jwtToken =
-	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 유저 정보 조회
 	const userInfoGet = async () => {
@@ -63,7 +56,14 @@ export default function MyPage() {
 				},
 			});
 			console.log(res);
-			setCreateInfo(res.data.result);
+			if (res.data.result.createInfo.code === 'PROFILE0006') {
+				setCreateInfo({
+					userInfo: {},
+					createInfo: [],
+				});
+			} else {
+				setCreateInfo(res.data.result);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -78,7 +78,11 @@ export default function MyPage() {
 				},
 			});
 			console.log(res);
-			setParticipantInfo(Object.values(res.data.result.participantInfo));
+			if (res.data.result.participantInfo.code === 'PROFILE0007') {
+				setParticipantInfo([]);
+			} else {
+				setParticipantInfo(Object.values(res.data.result.participantInfo));
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -163,10 +167,11 @@ export default function MyPage() {
 						<div className="page-hr"></div>
 					</div>
 				</div>
-				{/* <div className="mp-card-list">{cardList.length && cardList.map((meeting) => <Card />)}</div> */}
 				<div className="mp-card-list">
 					{clicked === 'create' ? (
-						createInfo.createInfo.length !== 0 ? (
+						createInfo.createInfo.length === 0 ? (
+							<span className="mp-nothing-card">생성한 유니버스가 없습니다!</span>
+						) : (
 							createInfo.createInfo.map((data) => {
 								return (
 									<Card
@@ -177,15 +182,13 @@ export default function MyPage() {
 									/>
 								);
 							})
-						) : (
-							<span>생성한 유니버스가 없습니다.</span>
 						)
-					) : participantInfo.length !== 0 ? (
+					) : participantInfo.length === 0 ? (
+						<span className="mp-nothing-card">참여한 유니버스가 없습니다!</span>
+					) : (
 						participantInfo.map((data) => {
 							return <Card {...data} />;
 						})
-					) : (
-						<span>참여한 유니버스가 없습니다.</span>
 					)}
 				</div>
 			</div>
