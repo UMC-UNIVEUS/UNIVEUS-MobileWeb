@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './Loading.scss';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
-import { MainHeader, SubHeader } from '../components/Header';
+import { MainHeader } from '../components/Header';
 import { ReactComponent as Logo } from '../assets/images/logo2.svg';
 
 export default function Loading() {
@@ -50,6 +50,7 @@ export default function Loading() {
 			loginAxios();
 		}
 	}, [accessToken]);
+
 	return (
 		<div className="loading">
 			<MainHeader rightNonDisplay />

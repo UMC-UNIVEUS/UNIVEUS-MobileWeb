@@ -165,8 +165,9 @@ export default function MyPage() {
 				</div>
 				{/* <div className="mp-card-list">{cardList.length && cardList.map((meeting) => <Card />)}</div> */}
 				<div className="mp-card-list">
-					{clicked === 'create'
-						? createInfo.createInfo.map((data) => {
+					{clicked === 'create' ? (
+						createInfo.createInfo.length !== 0 ? (
+							createInfo.createInfo.map((data) => {
 								return (
 									<Card
 										gender={createInfo.userInfo.gender}
@@ -175,10 +176,17 @@ export default function MyPage() {
 										{...data}
 									/>
 								);
-						  })
-						: participantInfo.map((data) => {
-								return <Card {...data} />;
-						  })}
+							})
+						) : (
+							<span>생성한 유니버스가 없습니다.</span>
+						)
+					) : participantInfo.length !== 0 ? (
+						participantInfo.map((data) => {
+							return <Card {...data} />;
+						})
+					) : (
+						<span>참여한 유니버스가 없습니다.</span>
+					)}
 				</div>
 			</div>
 			<NavBar present={'mypage'} />
