@@ -5,12 +5,14 @@ import Button from '../components/Button';
 import CheckBtn from '../assets/images/arrow_circle.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function IdentityVerification() {
 	const jwtToken = sessionStorage.getItem('accessToken');
+	const navigate = useNavigate();
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [verifyNumber, setVerifyNumber] = useState('');
-	const [message, setMessage] = useState(''); // notPhoneNumber, notAccessNumber, successAccess, inconsistency, postAccessNumber
+	const [message, setMessage] = useState(''); // notPhoneNumber, notAccessNumber, successAccess, inconsistency, postAccessNumber, incorrectPhoneNumber
 
 	const handlePhoneNumber = (e) => {
 		setPhoneNumber(
@@ -25,21 +27,29 @@ export default function IdentityVerification() {
 		setVerifyNumber(e.target.value.replace(/[^0-9]/g, ''));
 	};
 
+	// 본인인증번호 요청
 	const phoneRequestPost = async () => {
 		const phone = phoneNumber.replace(/-/g, '');
-		const res = await axios.post('/user/send/number', {
-			phoneNumber: phone,
-		});
-		console.log(res);
+		if (phone.length === 11) {
+			// 올바른 휴대폰 번호 형식일때
+			const res = await axios.post('/user/send/number', {
+				phoneNumber: phone,
+			});
+			console.log(res);
 
-		const code = res.data.code;
-		if (code === 'COMMON200') {
-			setMessage('postAccessNumber');
-		} else if (code === 'USER0003' || code === 'USER0005') {
-			setMessage('notPhoneNumber');
+			const code = res.data.code;
+			if (code === 'COMMON200') {
+				setMessage('postAccessNumber');
+			} else if (code === 'USER0003' || code === 'USER0005') {
+				setMessage('notPhoneNumber');
+			}
+		} else {
+			// 휴대폰 번호가 올바르지 않은 형식일때
+			setMessage('incorrectPhoneNumber');
 		}
 	};
 
+	// 휴대폰 본인인증 확인
 	const phoneCheckPost = async () => {
 		const phone = phoneNumber.replace(/-/g, '');
 		const res = await axios.post(
@@ -57,12 +67,9 @@ export default function IdentityVerification() {
 		console.log(res);
 
 		const code = res.data.code;
-		if (code === 'COMMON200') {
+		if (code === 'COMMON200' || code === 'USER0006') {
 			// 인증 성공
 			setMessage('successAccess');
-		} else if (code === 'USER0006') {
-			// 이미 인증 완료
-			navigator('/signup/terms-of-use');
 		} else if (code === 'USER0003') {
 			// 핸드폰 번호 입력 X
 			setMessage('notPhoneNumber');
@@ -74,10 +81,10 @@ export default function IdentityVerification() {
 			setMessage('inconsistency');
 		} else if (code === 5000) {
 			// 토큰 headers에 없음
-			// navigator();
+			//  navigate();
 		} else if (code === 5001) {
 			// 토큰 만료
-			// navigator();
+			//  navigate();
 		}
 	};
 
@@ -114,6 +121,8 @@ export default function IdentityVerification() {
 							<div className="ivf-error-message" style={{ color: 'var(--deep-blue-color)' }}>
 								인증번호가 전송되었습니다.
 							</div>
+						) : message === 'incorrectPhoneNumber' ? (
+							<div className="ivf-error-message">올바른 휴대폰 번호 형식을 입력해주세요.</div>
 						) : (
 							''
 						)}
@@ -149,7 +158,17 @@ export default function IdentityVerification() {
 						)}
 					</div>
 				</div>
-				<Button content={'다음'} type={'floating'} />
+				{message === 'successAccess' ? (
+					<Button
+						content={'다음'}
+						type={'floating'}
+						onClick={() => {
+							navigate('/signup/terms-of-use');
+						}}
+					/>
+				) : (
+					<Button content={'다음'} type={'floating disabled'} />
+				)}
 			</div>
 			<NavBar />
 		</div>
