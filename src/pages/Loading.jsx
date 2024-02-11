@@ -19,6 +19,8 @@ export default function Loading() {
 			const res = await axios.post('https://univeus.site/user/login', { token: accessToken });
 			console.log(res);
 
+			sessionStorage.setItem('accessToken', res.data.result.accessToken);
+
 			const code = res.data.code;
 			if (code === 2004) {
 				// 경기대 이메일 X
