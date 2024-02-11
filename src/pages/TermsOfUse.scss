@@ -41,8 +41,14 @@
 					color: #2d2d2d;
 				}
 				.eachchecktext {
+					display: flex;
 					font-size: 13px;
 					font-weight: var(--medium-bold);
+					span {
+						margin-left: 3px;
+						color: var(--red-color);
+						font-size: 20px;
+					}
 				}
 			}
 			.horizontal_bar {
