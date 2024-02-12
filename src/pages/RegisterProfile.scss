@@ -28,6 +28,14 @@
 				position: absolute;
 				bottom: 0;
 			}
+			.rpi-delete {
+				position: absolute;
+				top: 0;
+				right: 2px;
+				.rpi-delete-img {
+					width: 25px;
+				}
+			}
 		}
 		.rp-form {
 			display: flex;
@@ -35,10 +43,16 @@
 			width: 90%;
 			margin: 0 auto;
 			padding-bottom: 78px;
+			.rp-message-text {
+				font-size: var(--small-font);
+				font-weight: var(--medium-bold);
+				color: var(--red-color);
+				margin-bottom: 18px;
+			}
 			.rp-input-group {
 				position: relative;
 				border-bottom: solid 1px var(--light-gray-color);
-				margin: 22px 0 18px 0;
+				margin: 22px 0 8px 0;
 				.rp-input {
 					border: none;
 					font-size: 18px;

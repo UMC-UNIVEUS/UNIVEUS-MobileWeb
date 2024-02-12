@@ -21,36 +21,28 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const navigate = useNavigate();
+	const [categoryTap, setCategoryTap] = useState('전체보기'); // 전체보기, 우주공강,스펙쌓기,취미문화,맛집탐방,습관형성,취업활동,수업친구
+	const [card, setCard] = useState([]);
 
-	// const jwtToken = sessionStorage.getItem('accessToken');
-	// const jwtToken =
-	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
+	// 카테고리에 따른 카드 불러오기
+	// 페이징 반영 X
+	const postCardGet = async () => {
+		const category = categoryTap === '전체보기' ? '전체' : categoryTap;
+		const res = await axios.get(`https://univeus.site?category=${category}`, {
+			headers: {
+				'x-access-token': jwtToken,
+			},
+		});
 
-	// useEffect(() => {
-	// 	axios({
-	// 		headers: {
-	// 			'x-access-token': jwtToken,
-	// 		},
-	// 		method: 'post',
-	// 		url: '/user/register/affiliation',
-	// 		data: {
-	// 			major: '컴퓨터공학부',
-	// 			studentId: '202015239',
-	// 		},
-	// 	})
-	// 		.then((response) => {
-	// 			// if (response.data.code === 5000 || response.data.code === 5001) {
-	// 			// 	navigate('/');
-	// 			// } else {
-	// 			// 	console.log(response);
-	// 			// }
-	// 			console.log(response);
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.log(error);
-	// 		});
-	// }, []);
+		console.log(res);
+		setCard(res.data.result);
+	};
+
+	useEffect(() => {
+		postCardGet();
+	}, [categoryTap]);
 
 	return (
 		<div className="home">
@@ -146,7 +138,16 @@ export default function Home() {
 					<div className="hb-mcl-btn-group">
 						{['전체보기', '우주공강', '스펙쌓기', '취미문화'].map((title) => {
 							return (
-								<div className="hb-mcl-btn top" onClick={() => {}}>
+								<div
+									className="hb-mcl-btn top"
+									style={{
+										color: title === categoryTap ? 'var(--white-color)' : '',
+										backgroundColor: title === categoryTap ? 'var(--purple-color)' : '',
+									}}
+									onClick={() => {
+										setCategoryTap(title);
+									}}
+								>
 									{title}
 								</div>
 							);
@@ -155,16 +156,29 @@ export default function Home() {
 					<div className="hb-mcl-btn-group">
 						{['맛집탐방', '습관형성', '취업활동', '수업친구'].map((title) => {
 							return (
-								<div className="hb-mcl-btn bottom" onClick={() => {}}>
+								<div
+									className="hb-mcl-btn bottom"
+									style={{
+										color: title === categoryTap ? 'var(--white-color)' : '',
+										backgroundColor: title === categoryTap ? 'var(--purple-color)' : '',
+									}}
+									onClick={() => {
+										setCategoryTap(title);
+									}}
+								>
 									{title}
 								</div>
 							);
 						})}
 					</div>
 					<div className="hb-mcl-card-group">
-						<Card />
-						<Card />
-						<Card />
+						{card.length === 0 ? (
+							<span className="hb-mcl-card-nothing">일치하는 항목이 없습니다.</span>
+						) : (
+							card.map((data) => {
+								return <Card {...data} />;
+							})
+						)}
 					</div>
 				</div>
 				<Button

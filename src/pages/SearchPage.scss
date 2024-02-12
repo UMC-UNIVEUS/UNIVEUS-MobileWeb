@@ -52,12 +52,13 @@
 			border-top: 1px solid var(--white-gray-color);
 		}
 		.searcheddatacontainer {
-			width: 90%;
-			margin-top: 26px;
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			justify-items: center;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 20px;
+			column-gap: 8.5%;
 			row-gap: 20px;
+			margin-top: 32px;
 		}
 		.nodatatext {
 			font-size: var(--default-font);

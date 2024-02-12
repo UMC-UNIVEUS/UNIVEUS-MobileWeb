@@ -5,8 +5,12 @@ import NavBar from '../components/NavBar';
 import Button from '../components/Button';
 import { ReactComponent as Check } from '../assets/images/check.svg';
 import { ReactComponent as RedCheck } from '../assets/images/redcheck.svg';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function TermsOfUse() {
+	const jwtToken = sessionStorage.getItem('accessToken');
+	const navigate = useNavigate();
 	const [isCheckedAll, setIsCheckedAll] = useState(false);
 	const [isChecked1, setIsChecked1] = useState(false);
 	const [isChecked2, setIsChecked2] = useState(false);
@@ -54,6 +58,26 @@ export default function TermsOfUse() {
 			setIsCheckedAll(false);
 		}
 	};
+
+	const agreementPost = async () => {
+		let agreeList = ['checked', 'checked', 'unchecked'];
+		if (isChecked3) {
+			agreeList[2] = 'checked';
+		}
+
+		const res = await axios.post(
+			'/user/agreement',
+			{ userAgreement: agreeList },
+			{
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			}
+		);
+		console.log(res);
+		navigate('/signup/registration-of-affiliation');
+	};
+
 	return (
 		<div className="terms-of-use">
 			<SubHeader headertext={'약관동의'} />
@@ -77,7 +101,9 @@ export default function TermsOfUse() {
 								<button onClick={handleCheck1} className="checkbutton">
 									{isChecked1 ? <RedCheck /> : <Check />}
 								</button>
-								<p className="eachchecktext">이용약관 동의</p>
+								<p className="eachchecktext">
+									이용약관 동의<span>*</span>
+								</p>
 							</div>
 							<a
 								href="https://univeus.oopy.io/c9401d02-7c38-41f5-ba28-8bcf1d857d8a"
@@ -93,7 +119,9 @@ export default function TermsOfUse() {
 								<button onClick={handleCheck2} className="checkbutton">
 									{isChecked2 ? <RedCheck /> : <Check />}
 								</button>
-								<p className="eachchecktext">개인정보 제공 및 활용 동의</p>
+								<p className="eachchecktext">
+									개인정보 제공 및 활용 동의<span>*</span>
+								</p>
 							</div>
 							<a
 								href="https://univeus.oopy.io/4f621393-467a-4e61-b8f8-76ada7cc9b99"
@@ -122,7 +150,17 @@ export default function TermsOfUse() {
 						</div>
 					</div>
 				</div>
-				<Button content={'다음'} type={'floating'} />
+				{isChecked1 && isChecked2 ? (
+					<Button
+						content={'다음'}
+						type={'floating'}
+						onClick={() => {
+							agreementPost();
+						}}
+					/>
+				) : (
+					<Button content={'다음'} type={'floating disabled'} />
+				)}
 			</div>
 			<NavBar />
 		</div>

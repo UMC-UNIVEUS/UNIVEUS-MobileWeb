@@ -164,11 +164,6 @@
 					border: 0.5px solid #e2e2e2;
 					background: rgba(255, 255, 255, 0.1);
 					width: 100%;
-					&:hover,
-					:active {
-						background-color: var(--purple-color);
-						color: var(--white-color);
-					}
 					&.top {
 						&:first-child {
 							border-radius: 5px 0px 0px 0px;
@@ -195,6 +190,15 @@
 				column-gap: 8.5%;
 				row-gap: 20px;
 				margin-top: 32px;
+				.hb-mcl-card-nothing {
+					display: flex;
+					align-items: center;
+					color: var(--gray-color);
+					font-weight: var(--semi-bold);
+					font-size: var(--medium-font);
+					margin: 0 auto;
+					height: 20vh;
+				}
 			}
 		}
 		.button-body.floating {

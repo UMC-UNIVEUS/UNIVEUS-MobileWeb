@@ -118,6 +118,13 @@
 			grid-template-columns: 1fr 1fr;
 			justify-items: center;
 			row-gap: 20px;
+			position: relative;
+			.mp-nothing-card {
+				color: var(--light-gray-color);
+				font-weight: var(--semi-bold);
+				font-size: var(--medium-font);
+				position: absolute;
+			}
 		}
 	}
 }

@@ -1,7 +1,7 @@
 import '../pages/SearchPage.scss';
-
 import { MainHeader } from '../components/Header';
 import { ReactComponent as Search } from '../assets/images/search.svg';
+import Card from '../components/Card';
 import axios from 'axios';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -9,8 +9,10 @@ import NavBar from '../components/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const [searchedData, setSearchedData] = useState([]);
 	const [searchWord, setSearchWord] = useState([]);
+	const [isSearch, setIsSearch] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -18,23 +20,17 @@ const SearchPage = () => {
 		setSearchWord(event.target.value);
 	};
 
-	const jwtToken = sessionStorage.getItem('accessToken');
-
 	const handleSearch = () => {
 		axios({
 			headers: {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: `https://univeus.site/search?keyword=${searchWord}`,
-		}).then((response) => {
-			if (response.data.code === 5000 || response.data.code === 5001) {
-				navigate('/');
-			} else if (response.data.code === 7000) {
-				navigate('/search');
-			} else {
-				setSearchedData(response.data.result);
-			}
+			url: `/search?searchWord=${searchWord}`,
+		}).then((res) => {
+			console.log(res);
+			setSearchedData(res.data.result);
+			setIsSearch(true);
 		});
 	};
 
@@ -54,13 +50,24 @@ const SearchPage = () => {
 						placeholder="검색어를 입력하세요"
 						value={searchWord}
 						onChange={handleChange}
+						onKeyUp={() => {
+							if (window.event.keyCode === 13) {
+								handleSearch();
+							}
+						}}
 					/>
 				</div>
 				<div className="horizontalbar"></div>
-				{searchedData ? (
-					<div className="searcheddatacontainer">{/* 카드 뿌리기 */}</div>
-				) : (
+				{searchedData.length === 0 && !isSearch ? (
+					''
+				) : searchedData.length === 0 ? (
 					<p className="nodatatext">찾으시는 검색 결과가 없습니다.</p>
+				) : (
+					<div className="searcheddatacontainer">
+						{searchedData.map((data) => {
+							return <Card {...data} />;
+						})}
+					</div>
 				)}
 			</div>
 			<NavBar />

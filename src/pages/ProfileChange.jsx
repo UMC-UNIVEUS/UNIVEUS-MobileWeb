@@ -6,16 +6,20 @@ import Button from '../components/Button';
 import Modal from '../components/Modal';
 import CheckBtn from '../assets/images/arrow_circle.svg';
 import Person from '../assets/images/person_fill.svg';
+import ContainsSpecialCharacter from '../utils/ContainsSpecialCharacter.jsx';
 import { ReactComponent as Pencil } from '../assets/images/write.svg';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProfileChange() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const MAXSIZE = 1 * 1024 * 1024;
+	const [isNickname, setIsNickname] = useState('');
 	const [nickName, setNickName] = useState('');
 	const [imgFile, setImgFile] = useState('');
 	const [errorImg, setErrorImg] = useState(false);
+	const [message, setMessage] = useState(''); // nicknameDuplicate, nicknameAvailable, nicknameUnavailable
 
 	const navigate = useNavigate();
 	const imgRef = useRef();
@@ -31,10 +35,6 @@ export default function ProfileChange() {
 	const closeErrorModal = () => {
 		setErrorImg(false);
 	};
-
-	// 채연 토큰
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	// 이미지 업로드 input의 onChange
 	const saveImgFile = (e) => {
@@ -66,6 +66,33 @@ export default function ProfileChange() {
 		}
 	};
 
+	// 닉네임 중복확인
+	const checkNickname = async () => {
+		const specialCharacter = ContainsSpecialCharacter(nickName);
+		if (nickName.length > 1 && !specialCharacter) {
+			const res = await axios.post(
+				'/user/nickname/check',
+				{
+					nickname: nickName,
+				},
+				{
+					headers: {
+						'x-access-token': jwtToken,
+					},
+				}
+			);
+			console.log(res);
+			if (res.data.code === 'COMMON200') {
+				setMessage('nicknameAvailable');
+				setIsNickname(nickName);
+			} else if (res.data.code === 2014) {
+				setMessage('nicknameDuplicate');
+			}
+		} else {
+			setMessage('nicknameUnavailable');
+		}
+	};
+
 	// 내 프로필 조회
 	const myProfileGet = async () => {
 		try {
@@ -75,6 +102,7 @@ export default function ProfileChange() {
 				},
 			});
 			console.log(res);
+			setIsNickname(res.data.result.userInfo['nickname']);
 			setNickName(res.data.result.userInfo['nickname']);
 			setImgFile(res.data.result.userInfo['user_img']);
 		} catch (error) {
@@ -104,9 +132,6 @@ export default function ProfileChange() {
 		}
 	};
 
-	console.log('img', imgFile);
-	console.log('nickname', nickName);
-
 	useEffect(() => {
 		myProfileGet();
 	}, []);
@@ -114,11 +139,11 @@ export default function ProfileChange() {
 	return (
 		<div className="register-profile">
 			<SubHeader headertext={'프로필 등록'} />
-			<div className="rp-body">
-				<div className="rp-img-form">
-					<label htmlFor="rpi-img-input">
+			<div className="pc-body">
+				<div className="pc-img-form">
+					<label htmlFor="pci-img-input">
 						<img
-							className="rpi-profile-img"
+							className="pci-profile-img"
 							src={imgFile ? imgFile : Person}
 							alt="프로필 이미지"
 							style={{
@@ -127,20 +152,20 @@ export default function ProfileChange() {
 								borderRadius: imgFile ? '' : '0px',
 							}}
 						/>
-						{imgFile ? <></> : <Pencil className="rpi-pencil-img" />}
+						{imgFile ? <></> : <Pencil className="pci-pencil-img" />}
 					</label>
 					<input
 						type="file"
 						accept="image/*"
-						id="rpi-img-input"
+						id="pci-img-input"
 						onChange={saveImgFile}
 						ref={imgRef}
 						style={{ display: 'none' }}
 					/>
-					<div className="rpi-delete">
+					<div className="pci-delete">
 						{imgFile ? (
 							<img
-								className="rpi-delete-img"
+								className="pci-delete-img"
 								src={DeleteBtn}
 								alt="이미지 삭제 버튼"
 								onClick={() => {
@@ -152,26 +177,49 @@ export default function ProfileChange() {
 						)}
 					</div>
 				</div>
-				<div className="rp-form">
-					<div className="rp-input-group">
+				<div className="pc-form">
+					<div className="pc-input-group">
 						<input
 							type="text"
 							onChange={handleNickName}
 							maxLength="13"
 							placeholder="닉네임을 입력해주세요"
 							value={nickName}
-							className="rp-input"
+							className="pc-input"
 						/>
-						<img src={CheckBtn} alt="닉네임 중복 확인 버튼" className="rp-img" />
+						<img
+							src={CheckBtn}
+							alt="닉네임 중복 확인 버튼"
+							className="pc-img"
+							onClick={() => {
+								checkNickname();
+							}}
+						/>
 					</div>
+					<span
+						className="pc-message-text"
+						style={{ color: message === 'nicknameAvailable' ? 'var(--deep-blue-color)' : '' }}
+					>
+						{message === 'nicknameAvailable'
+							? '사용 가능한 닉네임입니다.'
+							: message === 'nicknameDuplicate'
+							? '중복된 닉네임입니다.'
+							: message === 'nicknameUnavailable'
+							? '올바르지 않은 형식입니다. (글자수 2~13자, 특수문자 미포함)'
+							: ''}
+					</span>
 				</div>
-				<Button
-					type={'floating'}
-					content={'완료'}
-					onClick={() => {
-						myProfileChange();
-					}}
-				/>
+				{isNickname !== nickName ? (
+					<Button type={'floating disabled'} content={'완료'} />
+				) : (
+					<Button
+						type={'floating'}
+						content={'완료'}
+						onClick={() => {
+							myProfileChange();
+						}}
+					/>
+				)}
 			</div>
 			<Modal isOpen={errorImg} closeModal={closeErrorModal} title={'이미지 업로드 실패!'}>
 				<p style={{ color: 'rgba(0, 0, 0, 0.60)' }}>업로드가 불가능한 이미지입니다.</p>
