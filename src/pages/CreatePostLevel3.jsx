@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function CreatePostLevel3() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const MAXSIZE = 1 * 1024 * 1024;
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
@@ -53,12 +54,6 @@ export default function CreatePostLevel3() {
 		setContent(updatedContent);
 		localStorage.setItem('createPost', JSON.stringify({ ...LocalStorageCreatePost, contents: updatedContent }));
 	};
-
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNTMzMTU2MiwiZXhwIjoxNzEzOTcxNTYyLCJpc3MiOiJ1bml2ZXVzIn0.Heqp8oHlO5I5c-1l1NMod3zZT2HN5IzPmuJWixbgN3E';
-
-	// const jwtToken =
-	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	const LocalStorageCreatePost = JSON.parse(localStorage.getItem('createPost'));
 
