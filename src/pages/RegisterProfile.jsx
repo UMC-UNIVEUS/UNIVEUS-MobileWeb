@@ -95,13 +95,13 @@ export default function RegisterProfile() {
 	};
 
 	// 프로필 등록
-	// 프로필 이미지 데이터 없음 -> 백엔드에서 추가해야함
 	const profilePost = async () => {
 		const res = await axios.post(
 			'/user/register/profile',
 			{
 				nickname: nickName,
 				gender: gender,
+				profile_img: imgFile,
 			},
 			{
 				headers: {
