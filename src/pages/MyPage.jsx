@@ -100,7 +100,7 @@ export default function MyPage() {
 			<div className="mp-body">
 				<div className="mp-user">
 					<div className="mpu-top">
-						<Profile gender={userInfo.gender} profileImg={userInfo.user_img} />
+						<Profile gender={userInfo.gender} profileImg={userInfo.user_img} myProfile />
 						<div className="mu-text">
 							<div className="mu-name">{userInfo.nickname}</div>
 							<div className="mu-classof">

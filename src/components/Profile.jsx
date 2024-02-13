@@ -2,7 +2,7 @@ import './Profile.scss';
 import Person from '../assets/images/person_fill.svg';
 import { useNavigate } from 'react-router-dom';
 
-export default function Profile({ profileImg, gender, moveProfileId, myProfile }) {
+export default function Profile({ profileImg, gender, moveProfileId, myProfile, notMove }) {
 	const navigate = useNavigate();
 	return (
 		<div
