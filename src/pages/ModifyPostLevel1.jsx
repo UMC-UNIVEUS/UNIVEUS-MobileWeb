@@ -7,15 +7,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ModifyPostLevel1() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const [category, setCategory] = useState(''); // string
 	const [participate, setParticipate] = useState(''); // 자동승인 or 수동승인
 	const [limitGender, setLimitGender] = useState(''); // string
 	const [limitPeople, setLimitPeople] = useState(''); // number
-
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	useEffect(() => {
 		axios({

@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ModifyPostLevel3() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const MAXSIZE = 1 * 1024 * 1024;
 	const imgRef = useRef();
 	const navigate = useNavigate();
@@ -53,9 +54,6 @@ export default function ModifyPostLevel3() {
 		setContent(updatedContent);
 		localStorage.setItem('modifyPost', JSON.stringify({ ...LocalStorageModifyPost, contents: updatedContent }));
 	};
-
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	const LocalStorageModifyPost = JSON.parse(localStorage.getItem('modifyPost'));
 

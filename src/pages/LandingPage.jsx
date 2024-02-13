@@ -12,8 +12,6 @@ import Button from '../components/Button';
 
 const LandingPage = () => {
 	const navigate = useNavigate();
-
-	const [accessToken, setAccessToken] = useState('');
 	const [isModalOpen5, setIsModalOpen5] = useState(false);
 
 	const openModal5 = () => setIsModalOpen5(true);

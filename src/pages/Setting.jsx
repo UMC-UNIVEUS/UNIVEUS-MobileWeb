@@ -7,18 +7,48 @@ import Toggle from '../components/Toggle';
 import { ReactComponent as Arrow } from '../assets/images/arrow-thin.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Setting() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const navigate = useNavigate();
+	const [userInfo, setUserInfo] = useState({
+		nickname: '',
+		gender: '',
+		major: '',
+		student_id: '',
+		user_img: '',
+	});
+
+	// 유저 정보 조회
+	const userInfoGet = async () => {
+		try {
+			const res = await axios.get('/profile/userInfo', {
+				headers: {
+					'x-access-token': jwtToken,
+				},
+			});
+			console.log(res);
+			setUserInfo(res.data.result.userInfo);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		userInfoGet();
+	}, []);
 	return (
 		<div className="setting">
 			<SubHeader headertext={'설정'} />
 			<div className="setting-body">
 				<div className="sb-user-profile">
-					<Profile />
+					<Profile gender={userInfo.gender} profileImg={userInfo.user_img} myProfile />
 					<div className="sbu-text">
-						<div className="sbu-name">유니버스 관리자</div>
-						<div className="sbu-classof">19학번 / 소프트웨어경영대학</div>
+						<div className="sbu-name">{userInfo.nickname}</div>
+						<div className="sbu-classof">
+							{userInfo.student_id} / {userInfo.major}
+						</div>
 					</div>
 				</div>
 				<div className="sb-setting-box">

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 export default function OtherUserProfile() {
+	const jwtToken = sessionStorage.getItem('accessToken');
 	const { id } = useParams();
 	const QUESTION = [
 		'나의 MBTI는',
@@ -53,9 +54,6 @@ export default function OtherUserProfile() {
 		setIsModalOpen(false);
 		setDeclaration();
 	};
-
-	const jwtToken =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJpYXQiOjE3MDU0NzE2MjMsImV4cCI6MTcxNDExMTYyMywiaXNzIjoidW5pdmV1cyJ9.FZ5uso5nr375V9N9IIT14KiKAW5GjPLZxWiFYsSdoAQ';
 
 	const axiosUserInfo = async () => {
 		try {
