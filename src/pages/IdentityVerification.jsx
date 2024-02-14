@@ -53,7 +53,7 @@ export default function IdentityVerification() {
 	const phoneCheckPost = async () => {
 		const phone = phoneNumber.replace(/-/g, '');
 		const res = await axios.post(
-			'/user/auth/number',
+			'https://univeus.site/user/auth/number',
 			{
 				phoneNumber: phone,
 				number: verifyNumber,

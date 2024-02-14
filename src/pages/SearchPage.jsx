@@ -26,7 +26,7 @@ const SearchPage = () => {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: `/search?searchWord=${searchWord}`,
+			url: `https://univeus.site/search?searchWord=${searchWord}`,
 		}).then((res) => {
 			console.log(res);
 			setSearchedData(res.data.result);

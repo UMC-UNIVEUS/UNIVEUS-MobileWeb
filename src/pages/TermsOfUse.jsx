@@ -66,7 +66,7 @@ export default function TermsOfUse() {
 		}
 
 		const res = await axios.post(
-			'/user/agreement',
+			'https://univeus.site/user/agreement',
 			{ userAgreement: agreeList },
 			{
 				headers: {

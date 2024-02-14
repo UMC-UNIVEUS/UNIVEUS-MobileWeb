@@ -12,7 +12,6 @@ import axios from 'axios';
 
 export default function MyPage() {
 	const jwtToken = sessionStorage.getItem('accessToken');
-	const [cardList, setCardList] = useState([]);
 	const [userInfo, setUserInfo] = useState({
 		nickname: '',
 		gender: '',
@@ -35,7 +34,7 @@ export default function MyPage() {
 	// 유저 정보 조회
 	const userInfoGet = async () => {
 		try {
-			const res = await axios.get('/profile/userInfo', {
+			const res = await axios.get('https://univeus.site/profile/userInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},
@@ -50,7 +49,7 @@ export default function MyPage() {
 	// 생성 정보 조회
 	const createInfoGet = async () => {
 		try {
-			const res = await axios.get('/profile/createInfo', {
+			const res = await axios.get('https://univeus.site/profile/createInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},
@@ -72,7 +71,7 @@ export default function MyPage() {
 	// 참여 정보 조회
 	const participantInfoGet = async () => {
 		try {
-			const res = await axios.get('/profile/participantInfo', {
+			const res = await axios.get('https://univeus.site/profile/participantInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},

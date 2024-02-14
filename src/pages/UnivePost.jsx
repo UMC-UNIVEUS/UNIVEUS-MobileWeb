@@ -73,7 +73,7 @@ export default function UnivePost() {
 
 	const axiosPost = async () => {
 		try {
-			const res = await axios.get(`/post/${id}`, { headers: { 'x-access-token': jwtToken } });
+			const res = await axios.get(`https://univeus.site/post/${id}`, { headers: { 'x-access-token': jwtToken } });
 			if (res.data.code === 3000) {
 				setNotFindPost(true);
 			} else {
@@ -102,7 +102,7 @@ export default function UnivePost() {
 	const recruitmentDeadline = async () => {
 		try {
 			await axios.patch(
-				`/post/${id}/end`,
+				`https://univeus.site/post/${id}/end`,
 				{},
 				{
 					headers: {
@@ -119,7 +119,7 @@ export default function UnivePost() {
 	const applyParticipation = async () => {
 		try {
 			await axios.post(
-				`/post/${id}/participant/request`,
+				`https://univeus.site/post/${id}/participant/request`,
 				{},
 				{
 					headers: {
@@ -136,7 +136,7 @@ export default function UnivePost() {
 	const participationApproved = async (user_id) => {
 		try {
 			await axios.patch(
-				`/post/${id}/participant/agree`,
+				`https://univeus.site/post/${id}/participant/agree`,
 				{
 					user_id: user_id,
 				},
@@ -155,7 +155,7 @@ export default function UnivePost() {
 	const participationCancel = async () => {
 		console.log('참여취소');
 		try {
-			const res = await axios.delete(`/post/${id}/participant/cancel`, {
+			const res = await axios.delete(`https://univeus.site/post/${id}/participant/cancel`, {
 				headers: {
 					'x-access-token': jwtToken,
 				},
@@ -170,7 +170,7 @@ export default function UnivePost() {
 	const postDelete = async () => {
 		try {
 			console.log('삭제');
-			const res = await axios.delete(`/post/${id}`, {
+			const res = await axios.delete(`https://univeus.site/post/${id}`, {
 				headers: {
 					'x-access-token': jwtToken,
 				},

@@ -57,7 +57,7 @@ export default function OtherUserProfile() {
 
 	const axiosUserInfo = async () => {
 		try {
-			const res = await axios.get(`/profile/introduction/${id}`, {
+			const res = await axios.get(`https://univeus.site/profile/introduction/${id}`, {
 				headers: {
 					'x-access-token': jwtToken,
 				},

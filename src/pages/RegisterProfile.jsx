@@ -54,7 +54,7 @@ export default function RegisterProfile() {
 					'Content-Type': 'multipart/form-data',
 				},
 				method: 'post',
-				url: '/post/image/upload?directory=profile',
+				url: 'https://univeus.site/post/image/upload?directory=profile',
 				data: formData,
 			})
 				.then((res) => {
@@ -72,7 +72,7 @@ export default function RegisterProfile() {
 		const specialCharacter = ContainsSpecialCharacter(nickName);
 		if (nickName.length > 1 && !specialCharacter) {
 			const res = await axios.post(
-				'/user/nickname/check',
+				'https://univeus.site/user/nickname/check',
 				{
 					nickname: nickName,
 				},
@@ -97,7 +97,7 @@ export default function RegisterProfile() {
 	// 프로필 등록
 	const profilePost = async () => {
 		const res = await axios.post(
-			'/user/register/profile',
+			'https://univeus.site/user/register/profile',
 			{
 				nickname: nickName,
 				gender: gender,

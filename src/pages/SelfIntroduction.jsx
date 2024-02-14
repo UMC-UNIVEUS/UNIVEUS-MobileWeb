@@ -23,7 +23,7 @@ export default function SelfIntroduction() {
 	// 유저가 작성한 답변 불러오기
 	const axiosGet = async () => {
 		try {
-			const res = await axios.get(`/profile/mypage/introduction`, {
+			const res = await axios.get(`https://univeus.site/profile/mypage/introduction`, {
 				headers: {
 					'x-access-token': jwtToken,
 				},

@@ -23,7 +23,7 @@ export default function Setting() {
 	// 유저 정보 조회
 	const userInfoGet = async () => {
 		try {
-			const res = await axios.get('/profile/userInfo', {
+			const res = await axios.get('https://univeus.site/profile/userInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},

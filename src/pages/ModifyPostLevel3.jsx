@@ -72,7 +72,7 @@ export default function ModifyPostLevel3() {
 					'Content-Type': 'multipart/form-data',
 				},
 				method: 'post',
-				url: '/post/image/upload?directory=post',
+				url: 'https://univeus.site/post/image/upload?directory=post',
 				data: formData,
 			})
 				.then((res) => {
@@ -115,7 +115,7 @@ export default function ModifyPostLevel3() {
 				'x-access-token': jwtToken,
 			},
 			method: 'patch',
-			url: `/post/${id}`,
+			url: `https://univeus.site/post/${id}`,
 			data: {
 				category: LocalStorageModifyPost['category'],
 				limit_gender: LocalStorageModifyPost['limit_gender'],

@@ -27,7 +27,7 @@ export default function SelfIntroductionEdit() {
 
 	// 유저가 작성한 답변 불러오기
 	const axiosGet = async () => {
-		const res = await axios.get(`/profile/mypage/introduction`, {
+		const res = await axios.get(`https://univeus.site/profile/mypage/introduction`, {
 			headers: {
 				'x-access-token': jwtToken,
 			},
@@ -46,7 +46,7 @@ export default function SelfIntroductionEdit() {
 	const axiosPost = async () => {
 		try {
 			const res = await axios.post(
-				'/profile/introduction',
+				'https://univeus.site/profile/introduction',
 				{
 					q1: answer[0],
 					q2: answer[1],
@@ -69,7 +69,7 @@ export default function SelfIntroductionEdit() {
 	const axiosPut = async () => {
 		try {
 			const res = await axios.put(
-				'/profile/introduction',
+				'https://univeus.site/profile/introduction',
 				{
 					q1: answer[0],
 					q2: answer[1],

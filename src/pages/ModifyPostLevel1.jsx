@@ -21,7 +21,7 @@ export default function ModifyPostLevel1() {
 				'x-access-token': jwtToken,
 			},
 			method: 'get',
-			url: `/post/${id}`,
+			url: `https://univeus.site/post/${id}`,
 		}).then((res) => {
 			console.log(res);
 			if (res.data.code === 'COMMON200') {

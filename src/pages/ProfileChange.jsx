@@ -53,7 +53,7 @@ export default function ProfileChange() {
 					'Content-Type': 'multipart/form-data',
 				},
 				method: 'post',
-				url: '/post/image/upload?directory=profile',
+				url: 'https://univeus.site/post/image/upload?directory=profile',
 				data: formData,
 			})
 				.then((res) => {
@@ -71,7 +71,7 @@ export default function ProfileChange() {
 		const specialCharacter = ContainsSpecialCharacter(nickName);
 		if (nickName.length > 1 && !specialCharacter) {
 			const res = await axios.post(
-				'/user/nickname/check',
+				'https://univeus.site/user/nickname/check',
 				{
 					nickname: nickName,
 				},
@@ -96,7 +96,7 @@ export default function ProfileChange() {
 	// 내 프로필 조회
 	const myProfileGet = async () => {
 		try {
-			const res = await axios.get('/profile/userInfo', {
+			const res = await axios.get('https://univeus.site/profile/userInfo', {
 				headers: {
 					'x-access-token': jwtToken,
 				},
@@ -114,7 +114,7 @@ export default function ProfileChange() {
 	const myProfileChange = async () => {
 		try {
 			const res = await axios.put(
-				'/profile/mypage',
+				'https://univeus.site/profile/mypage',
 				{
 					nickname: nickName,
 					user_img: imgFile,

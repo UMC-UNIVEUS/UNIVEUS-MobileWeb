@@ -28,7 +28,7 @@ export default function RegistrationOfAffiliation() {
 
 	const affiliationPost = async () => {
 		const res = await axios.post(
-			'/user/register/affiliation',
+			'https://univeus.site/user/register/affiliation',
 			{
 				major: major,
 				studentId: studentID,
