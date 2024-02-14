@@ -32,7 +32,7 @@ export default function IdentityVerification() {
 		const phone = phoneNumber.replace(/-/g, '');
 		if (phone.length === 11) {
 			// 올바른 휴대폰 번호 형식일때
-			const res = await axios.post('/user/send/number', {
+			const res = await axios.post('https://univeus.site/user/send/number', {
 				phoneNumber: phone,
 			});
 			console.log(res);
