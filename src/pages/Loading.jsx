@@ -38,6 +38,7 @@ export default function Loading() {
 				// 프로필 등록 X
 				navigate('/signup/register-profile');
 			}
+			navigate('/home');
 		} catch (error) {
 			console.log(error);
 		}
