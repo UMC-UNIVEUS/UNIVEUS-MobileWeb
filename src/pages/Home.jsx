@@ -37,7 +37,9 @@ export default function Home() {
 		});
 
 		console.log(res);
-		setCard(res.data.result);
+		if (res.data.result === true) {
+			setCard(res.data.result);
+		}
 	};
 
 	useEffect(() => {
