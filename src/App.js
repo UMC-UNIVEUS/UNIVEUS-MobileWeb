@@ -23,8 +23,12 @@ import Loading from './pages/Loading';
 import ModifyPostLevel1 from './pages/ModifyPostLevel1';
 import ModifyPostLevel2 from './pages/ModifyPostLevel2';
 import ModifyPostLevel3 from './pages/ModifyPostLevel3';
+import {useDispatch} from "react-redux";
+import {checkDevMode} from "./feature/auth/authSlice";
 
 function App() {
+	const dispatch = useDispatch();
+	dispatch(checkDevMode())
 	return (
 		<div className="App">
 			<BrowserRouter>
