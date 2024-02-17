@@ -1,17 +1,28 @@
 import '../components/Header.scss';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import { ReactComponent as Bell } from '../assets/images/bell.svg';
 import { ReactComponent as BadgedBell } from '../assets/images/bell-badged.svg';
 import { ReactComponent as Search } from '../assets/images/search.svg';
 import { ReactComponent as Logo } from '../assets/images/logo.svg';
 import { ReactComponent as Arrow } from '../assets/images/arrow.svg';
+import styled from "styled-components";
 
-export const MainHeader = ({ rightNonDisplay }) => {
+const HeaderCenter = styled.h1`
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: -40px;
+`
+
+export const MainHeader = ({displayAlarm, rightNonDisplay, displaySearchIcon, headerTitle, displayMenu }) => {
 	const [isNewAlarm, setIsNewAlarm] = useState(false); // 새 알람 여부 State
 
 	const navigate = useNavigate();
-
+	let displaySearchIconVal = true;
+	if (displaySearchIcon) {
+		displaySearchIconVal = JSON.parse(displaySearchIcon)
+	}
+	console.log(displaySearchIcon ? 'block': 'none')
 	return (
 		<div className="MainHeader">
 			<div className="header-left" onClick={() => navigate('/home')}>
@@ -21,9 +32,12 @@ export const MainHeader = ({ rightNonDisplay }) => {
 					<p className="kgu">KGU</p>
 				</div>
 			</div>
-			<div className="header-right" style={{ display: rightNonDisplay ? 'none' : 'block' }}>
-				<Search className="search-img" onClick={() => navigate('/search')} />
-				{isNewAlarm === false ? <Bell className="bell-img" /> : <BadgedBell className="badged-bell-img" />}
+			<HeaderCenter>
+				{headerTitle}
+			</HeaderCenter>
+			<div className="header-right" style={{ display: rightNonDisplay ? 'none' : 'block'}}>
+				<Search style={{ display: displaySearchIconVal ? 'block': 'none' }} className="search-img" onClick={() => navigate('/search')} />
+				{isNewAlarm === false ? <Bell style={{ display: displayAlarm ? 'block' : 'none' }} className="bell-img" /> : <BadgedBell style={{ display: displayAlarm ? 'block' : 'none' }} className="badged-bell-img" />}
 			</div>
 		</div>
 	);
