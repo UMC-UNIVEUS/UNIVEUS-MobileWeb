@@ -25,6 +25,7 @@ import ModifyPostLevel2 from './pages/ModifyPostLevel2';
 import ModifyPostLevel3 from './pages/ModifyPostLevel3';
 import {useDispatch} from "react-redux";
 import {checkDevMode} from "./feature/auth/authSlice";
+import ChatPage from "./pages/chat/ChatPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function App() {
 					<Route path="/profile/self-introduction" element={<SelfIntroduction />} />
 					<Route path="/profile/self-introduction-edit" element={<SelfIntroductionEdit />} />
 					<Route path="/profile/other-user-profile/:id" element={<OtherUserProfile />} />
-					<Route path="/chat" />
+					<Route path="/chat" element={<ChatPage />} />
 				</Routes>
 			</BrowserRouter>
 			<Reset />
