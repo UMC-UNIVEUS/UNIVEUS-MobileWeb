@@ -1,0 +1,12 @@
+.center-banner-side {
+    padding-top: 2px;
+}
+.center-banner-side h2 {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.center-banner-side > p > span {
+    font-weight: 500;
+}
