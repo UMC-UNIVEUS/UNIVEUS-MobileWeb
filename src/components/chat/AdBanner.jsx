@@ -14,12 +14,12 @@ const Banner = styled.div`
 
 const SmallBtn = styled.button`
     background-color: #6E7DFF;
-    border-radius: 15px;
+    border-radius: 10px;
     color: white;
     border: none;
     padding: 0 10px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     width: 90px;
     height: 32px;
     margin-top: 3px;

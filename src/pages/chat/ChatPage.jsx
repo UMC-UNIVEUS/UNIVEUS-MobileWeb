@@ -28,7 +28,23 @@ const Notice = styled.div`
 `
 
 export default function ChatPage() {
-    const [roomList, setRoomList] = useState([]);
+    const [roomList, setRoomList] = useState([
+        {
+            idx: 1,
+            chatUrl: "",
+            roomTitle: "바른 문제해결 프로젝트 팀원 모집",
+            roomImg: "url",
+            lastText: "토요일에 후문 탐엔탐스에서 만나는거 맞나요?"
+        },
+        {
+            idx: 2,
+            chatUrl: "",
+            roomTitle: "바른 문제해결 프로젝트 팀원 모집",
+            roomImg: "url",
+            lastText: "토요일에 후문 탐엔탐스에서 만나는거 맞나요?asdfsdfasdfsdafasdf"
+        }
+    ]);
+    console.log(roomList);
     useEffect(() => {
         // TODO : Fetch chat list data and update state
     }, []);
