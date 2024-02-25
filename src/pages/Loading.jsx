@@ -16,7 +16,9 @@ export default function Loading() {
 	// 서버에게 token 전송
 	const loginAxios = async () => {
 		try {
-			const res = await axios.post('https://univeus.site/user/login', { token: accessToken });
+			const res = await axios.post('https://univeus.site/user/login', { token: accessToken },{
+				withCredentials: true
+			});
 			console.log(res);
 			console.log(accessToken);
 			sessionStorage.setItem('accessToken', res.data.result.accessToken);
